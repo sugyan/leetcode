@@ -4,27 +4,25 @@ using namespace std;
 
 class Solution {
 public:
-    // TODO: improve
+    string palindrome(string s, int c, bool odd) {
+        int i = 0, length = s.length();
+        int l = c + (odd ? 1 : 0), r = c;
+        while ((l - (i + 1) >= 0 && r + (i + 1) <= length - 1) &&
+               (s[l - (i + 1)] == s[r + (i + 1)])) {
+            ++i;
+        }
+        return s.substr(l - i, 2 * i + (odd ? 0 : 1));
+    }
     string longestPalindrome(string s) {
-        string answer = "";
+        string answer = "", substr;
         for (int i = 0, l = s.length(); i < l; ++i) {
-            {
-                int j = 0;
-                while (i - j - 1 >= 0 && i + j + 1 <= l - 1 && s[i - (j + 1)] == s[i + (j + 1)]) {
-                    ++j;
-                }
-                if (2 * j + 1 > answer.length()) {
-                    answer = s.substr(i - j, 2 * j + 1);
-                }
+            substr = palindrome(s, i, true);
+            if (substr.length() > answer.length()) {
+                answer = substr;
             }
-            {
-                int j = 0;
-                while (i - j >= 0 && i + j + 1 <= l - 1 && s[i + 1 - (j + 1)] == s[i + (j + 1)]) {
-                    ++j;
-                }
-                if (2 * j > answer.length()) {
-                    answer = s.substr(i + 1 - j, 2 * j);
-                }
+            substr = palindrome(s, i, false);
+            if (substr.length() > answer.length()) {
+                answer = substr;
             }
         }
         return answer;
