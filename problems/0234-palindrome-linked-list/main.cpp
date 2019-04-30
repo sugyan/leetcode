@@ -23,7 +23,6 @@ public:
         }
         if (size % 2 == 1) node = node->next;
         while (prev != nullptr && node != nullptr) {
-            // cout << prev->val << " " << node->val << endl;
             if (prev->val != node->val) return false;
             prev = prev->next;
             node = node->next;
