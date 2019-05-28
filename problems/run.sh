@@ -1,7 +1,7 @@
 #/bin/sh
 
 export CXX="/usr/local/bin/g++-8"
-export CXXFLAGS="${CXXFLAGS} -std=c++1z"
+export CXXFLAGS="${CXXFLAGS} -std=c++1z -fsanitize=address"
 
 if [ $# -lt 1 ]; then
     echo "usage: ${0} <directory>"
