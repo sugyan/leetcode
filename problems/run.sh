@@ -1,6 +1,6 @@
 #/bin/sh
 
-export CXX="/usr/local/bin/g++-8"
+export CXX="/usr/local/bin/g++-9"
 export CXXFLAGS="${CXXFLAGS} -std=c++1z -fsanitize=address"
 
 if [ $# -lt 1 ]; then
