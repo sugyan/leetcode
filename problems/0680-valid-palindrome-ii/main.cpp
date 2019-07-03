@@ -11,18 +11,6 @@ public:
             ++l, --r;
         }
         if (l == r) return true;
-        // for (int i = 0; i < 2; ++i) {
-        //     int ll = l + 1 - i, rr = r - i;
-        //     bool ok = true;
-        //     while (ll < rr) {
-        //         if (s[ll] != s[rr]) {
-        //             ok = false;
-        //             break;
-        //         }
-        //         ++ll, --rr;
-        //     }
-        //     if (ok) return true;
-        // }
         return isPalindromeRange(s, l + 1, r) || isPalindromeRange(s, l, r - 1);
     }
 private:
