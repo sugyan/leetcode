@@ -10,13 +10,10 @@ public:
             --v[t[0] - 1];
             ++v[t[1] - 1];
         }
-        int answer = -1;
         for (int i = 0; i < N; ++i) {
-            if (v[i] == N - 1) {
-                answer = i + 1;
-            }
+            if (v[i] == N - 1) return i + 1;
         }
-        return answer;
+        return -1;
     }
 };
 
