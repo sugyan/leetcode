@@ -7,17 +7,11 @@ public:
     string removeOuterParentheses(string S) {
         int depth = 0;
         string answer = "";
-        for (int i = 0, l = S.length(); i < l; ++i) {
-            if (S[i] == '(') {
-                ++depth;
-                if (depth > 1) {
-                    answer += S[i];
-                }
+        for (char c : S) {
+            if (c == '(') {
+                if (++depth > 1) answer += c;
             } else {
-                --depth;
-                if (depth >= 1) {
-                    answer += S[i];
-                }
+                if (--depth >= 1) answer += c;
             }
         }
         return answer;
