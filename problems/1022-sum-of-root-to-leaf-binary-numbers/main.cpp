@@ -2,8 +2,6 @@
 
 using namespace std;
 
-#define DIV 1000000007
-
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -13,18 +11,17 @@ struct TreeNode {
 
 class Solution {
 public:
-    int dfs(TreeNode* node, long value) {
-        if (node == NULL) {
-            return 0;
-        }
-        value = (value * 2 + node->val) % DIV;
+    int sumRootToLeaf(TreeNode* root) {
+        return dfs(root, 0);
+    }
+private:
+    int dfs(TreeNode* node, int value) {
+        if (node == NULL) return 0;
+        value = value * 2 + node->val;
         if (node->left || node->right) {
             return dfs(node->left, value) + dfs(node->right, value);
         }
         return value;
-    }
-    int sumRootToLeaf(TreeNode* root) {
-        return dfs(root, 0);
     }
 };
 
