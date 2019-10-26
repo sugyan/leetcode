@@ -11,14 +11,11 @@ public:
             for (char& c : words[i]) ++m[c];
             w[i] = m.begin()->second;
         }
-        // copy(w.begin(), w.end(), ostream_iterator<int>(cout, " - "));
-        // cout << endl;
         sort(w.begin(), w.end());
         vector<int> answer(queries.size());
         for (int i = 0; i < answer.size(); ++i) {
             map<char, int> m;
             for (char& c : queries[i]) ++m[c];
-            // cout << m.begin()->second << endl;
             answer[i] = w.end() - upper_bound(w.begin(), w.end(), m.begin()->second);
         }
         return answer;
