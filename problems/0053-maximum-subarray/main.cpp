@@ -3,11 +3,11 @@
 using namespace std;
 
 class Solution {
-public:
-    int maxSubArray(vector<int>& nums) {
+   public:
+    int maxSubArray(vector<int> &nums) {
         int answer = numeric_limits<int>::min(), sum = 0;
-        for (int i = 0, l = nums.size(); i < l; ++i) {
-            sum += nums[i];
+        for (int &num : nums) {
+            sum += num;
             answer = max(answer, sum);
             if (sum < 0) {
                 sum = 0;
@@ -18,15 +18,15 @@ public:
 };
 
 void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
+    input.erase(input.begin(), find_if(input.begin(), input.end(),
+                                       [](int ch) { return !isspace(ch); }));
 }
 
 void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
+    input.erase(find_if(input.rbegin(), input.rend(),
+                        [](int ch) { return !isspace(ch); })
+                    .base(),
+                input.end());
 }
 
 vector<int> stringToIntegerVector(string input) {
@@ -48,7 +48,7 @@ int main() {
     string line;
     while (getline(cin, line)) {
         vector<int> nums = stringToIntegerVector(line);
-        
+
         int ret = Solution().maxSubArray(nums);
 
         string out = to_string(ret);
