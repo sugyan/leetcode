@@ -4,12 +4,13 @@ using namespace std;
 
 struct ListNode {
     int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {
+    }
 };
 
 class Solution {
-public:
+   public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode *root = new ListNode(0), *tail = root;
         int val;
@@ -32,22 +33,22 @@ public:
         if (carry) {
             tail = tail->next = new ListNode(1);
         }
-        ListNode *answer = root->next;
+        ListNode* answer = root->next;
         delete root;
         return answer;
     }
 };
 
-void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
+void trimLeftTrailingSpaces(string& input) {
+    input.erase(input.begin(), find_if(input.begin(), input.end(),
+                                       [](int ch) { return !isspace(ch); }));
 }
 
-void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
+void trimRightTrailingSpaces(string& input) {
+    input.erase(find_if(input.rbegin(), input.rend(),
+                        [](int ch) { return !isspace(ch); })
+                    .base(),
+                input.end());
 }
 
 vector<int> stringToIntegerVector(string input) {
@@ -72,7 +73,7 @@ ListNode* stringToListNode(string input) {
     // Now convert that list into linked list
     ListNode* dummyRoot = new ListNode(0);
     ListNode* ptr = dummyRoot;
-    for(int item : list) {
+    for (int item : list) {
         ptr->next = new ListNode(item);
         ptr = ptr->next;
     }
@@ -100,7 +101,7 @@ int main() {
         ListNode* l1 = stringToListNode(line);
         getline(cin, line);
         ListNode* l2 = stringToListNode(line);
-        
+
         ListNode* ret = Solution().addTwoNumbers(l1, l2);
 
         string out = listNodeToString(ret);

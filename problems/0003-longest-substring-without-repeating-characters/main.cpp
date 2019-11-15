@@ -4,25 +4,18 @@ using namespace std;
 
 class Solution {
    public:
-    string longestPalindrome(string s) {
-        if (s.length() < 2) return s;
-        int j, l = 0, r = 0;
-        for (int i = 0; i < s.length(); ++i) {
-            j = 0;
-            while (i - j >= 0 && i + 1 + j < s.length() &&
-                   s[i - j] == s[i + 1 + j])
-                ++j;
-            if (j * 2 > r - l) {
-                l = i - j + 1, r = i + j + 1;
+    int lengthOfLongestSubstring(string s) {
+        int m[256] = {0};
+        int l = s.size();
+        int answer = 0;
+        for (int i = 0, j = 0; i < l; ++i) {
+            if (m[s[i]] > 0) {
+                j = max(j, m[s[i]]);
             }
-            j = 0;
-            while (i - j >= 0 && i + j < s.length() && s[i - j] == s[i + j])
-                ++j;
-            if (j * 2 - 1 > r - l) {
-                l = i - j + 1, r = i + j;
-            }
+            answer = max(answer, i - j + 1);
+            m[s[i]] = i + 1;
         }
-        return s.substr(l, r - l);
+        return answer;
     }
 };
 
@@ -74,9 +67,9 @@ int main() {
     while (getline(cin, line)) {
         string s = stringToString(line);
 
-        string ret = Solution().longestPalindrome(s);
+        int ret = Solution().lengthOfLongestSubstring(s);
 
-        string out = (ret);
+        string out = to_string(ret);
         cout << out << endl;
     }
     return 0;
