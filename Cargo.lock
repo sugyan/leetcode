@@ -8,6 +8,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "container-with-most-water"
+version = "0.1.0"
+
+[[package]]
 name = "longest-palindromic-substring"
 version = "0.1.0"
 
