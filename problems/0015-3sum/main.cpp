@@ -3,7 +3,7 @@
 using namespace std;
 
 class Solution {
-public:
+   public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> answer;
@@ -16,7 +16,7 @@ public:
                 } else if (sum > 0) {
                     --r;
                 } else {
-                    vector<int> v { nums[i], nums[l], nums[r] };
+                    vector<int> v{nums[i], nums[l], nums[r]};
                     answer.push_back(v);
                     while (l < r && nums[l] == v[1]) ++l;
                     while (l < r && nums[r] == v[2]) --r;
@@ -27,3 +27,19 @@ public:
         return answer;
     }
 };
+
+int main() {
+    vector<int> nums{-1, 0, 1, 2, -1, -4};
+    vector<vector<int>> ret = Solution().threeSum(nums);
+    vector<string> out;
+    transform(ret.begin(), ret.end(), back_inserter(out), [](vector<int> v) {
+        ostringstream oss;
+        for (auto it = v.begin(); it != v.end(); ++it) {
+            oss << *it;
+            if (it + 1 != v.end()) oss << ", ";
+        }
+        return "[" + oss.str() + "]";
+    });
+    copy(out.begin(), out.end(), ostream_iterator<string>(cout, " "));
+    cout << endl;
+}
