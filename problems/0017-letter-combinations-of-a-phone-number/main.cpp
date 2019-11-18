@@ -3,11 +3,12 @@
 using namespace std;
 
 class Solution {
-public:
+   public:
     vector<string> letterCombinations(string digits) {
         if (digits.empty()) return vector<string>();
-        vector<string> v { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
-        deque<string> q { "" };
+        vector<string> v{"abc", "def",  "ghi", "jkl",
+                         "mno", "pqrs", "tuv", "wxyz"};
+        deque<string> q{""};
         for (int i = 0, length = digits.length(); i < length; ++i) {
             while (q.front().length() == i) {
                 string s = q.front();
@@ -20,3 +21,9 @@ public:
         return vector<string>(q.begin(), q.end());
     }
 };
+
+int main() {
+    vector<string> ret = Solution().letterCombinations("23");
+    copy(ret.begin(), ret.end(), ostream_iterator<string>(cout, " "));
+    cout << endl;
+}

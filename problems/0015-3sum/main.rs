@@ -46,9 +46,13 @@ mod tests {
 
     #[test]
     fn example_1() {
-        let ret = Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]);
-        for out in ret {
-            println!("{:?}", out);
+        let mut ret = Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]);
+        for i in 0..ret.len() {
+            let mut out = ret[i].to_vec();
+            out.sort();
+            ret[i] = out;
         }
+        ret.sort();
+        assert_eq!(vec![vec![-1, -1, 2], vec![-1, 0, 1]], ret);
     }
 }
