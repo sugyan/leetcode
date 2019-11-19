@@ -4,14 +4,15 @@ using namespace std;
 
 struct ListNode {
     int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {
+    }
 };
 
 class Solution {
-public:
+   public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode *dummy = new ListNode(0);
+        ListNode* dummy = new ListNode(0);
         dummy->next = head;
         ListNode *n1 = dummy, *n2 = dummy;
         for (int i = 0; i <= n; ++i) {
@@ -26,16 +27,16 @@ public:
     }
 };
 
-void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
+void trimLeftTrailingSpaces(string& input) {
+    input.erase(input.begin(), find_if(input.begin(), input.end(),
+                                       [](int ch) { return !isspace(ch); }));
 }
 
-void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
+void trimRightTrailingSpaces(string& input) {
+    input.erase(find_if(input.rbegin(), input.rend(),
+                        [](int ch) { return !isspace(ch); })
+                    .base(),
+                input.end());
 }
 
 vector<int> stringToIntegerVector(string input) {
@@ -60,7 +61,7 @@ ListNode* stringToListNode(string input) {
     // Now convert that list into linked list
     ListNode* dummyRoot = new ListNode(0);
     ListNode* ptr = dummyRoot;
-    for(int item : list) {
+    for (int item : list) {
         ptr->next = new ListNode(item);
         ptr = ptr->next;
     }
@@ -92,7 +93,7 @@ int main() {
         ListNode* head = stringToListNode(line);
         getline(cin, line);
         int n = stringToInteger(line);
-        
+
         ListNode* ret = Solution().removeNthFromEnd(head, n);
 
         string out = listNodeToString(ret);
