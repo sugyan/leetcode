@@ -6,26 +6,30 @@ impl Solution {
     pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
         let mut node = ListNode::new(0);
         node.next = head;
-        let dummy = &Some(Box::new(node));
-        let (mut n1, mut n2) = (dummy, dummy);
+        let mut dummy = Some(Box::new(node));
+        let mut n1 = &mut dummy;
+        let mut n2 = n1.clone();
         for _ in 0..n + 1 {
-            if let Some(n) = n1 {
-                n1 = &n.next;
+            if let Some(n) = n2 {
+                n2 = n.next;
             }
         }
-        while n1.is_some() {
+        while n1.is_some() && n2.is_some() {
             if let Some(n) = n1 {
-                n1 = &n.next;
+                n1 = &mut n.next;
             }
             if let Some(n) = n2 {
-                n2 = &n.next;
+                n2 = n.next;
             }
         }
-        if let Some(n) = n2 {
-            // TODO
-            // n.next = None;
+        if let Some(n) = n1 {
+            n.next = if let Some(n) = &n.next {
+                n.next.clone()
+            } else {
+                None
+            };
         }
-        return dummy.to_owned().unwrap().next;
+        return dummy.unwrap().next;
     }
 }
 
