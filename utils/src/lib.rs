@@ -7,7 +7,7 @@ pub struct ListNode {
 impl ListNode {
     #[inline]
     pub fn new(val: i32) -> Self {
-        ListNode { next: None, val }
+        ListNode { val, next: None }
     }
 }
 
@@ -23,8 +23,19 @@ pub fn to_list(v: Vec<i32>) -> Option<Box<ListNode>> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn test_to_list() {
+        assert_eq!(
+            Some(Box::new(ListNode {
+                val: 1,
+                next: Some(Box::new(ListNode {
+                    val: 2,
+                    next: Some(Box::new(ListNode { val: 3, next: None })),
+                })),
+            })),
+            to_list(vec![1, 2, 3])
+        );
     }
 }
