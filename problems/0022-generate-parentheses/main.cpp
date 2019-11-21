@@ -3,7 +3,7 @@
 using namespace std;
 
 class Solution {
-public:
+   public:
     void gen(vector<string> &v, string str, int l, int r) {
         if (l == 0 && r == 0) v.push_back(str);
         if (l > 0) gen(v, str + "(", l - 1, r);
