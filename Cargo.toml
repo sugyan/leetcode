@@ -9,4 +9,5 @@ members = [
     "problems/0017-letter-combinations-of-a-phone-number",
     "problems/0019-remove-nth-node-from-end-of-list",
     "problems/0022-generate-parentheses",
+    "problems/0031-next-permutation",
 ]

@@ -3,8 +3,8 @@
 using namespace std;
 
 class Solution {
-public:
-    void nextPermutation(vector<int>& nums) {
+   public:
+    void nextPermutation(vector<int> &nums) {
         int i = nums.size() - 1;
         while (i > 0 && nums[i - 1] >= nums[i]) --i;
         int l = 0, r = nums.size() - 1;
@@ -21,15 +21,15 @@ public:
 };
 
 void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
+    input.erase(input.begin(), find_if(input.begin(), input.end(),
+                                       [](int ch) { return !isspace(ch); }));
 }
 
 void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
+    input.erase(find_if(input.rbegin(), input.rend(),
+                        [](int ch) { return !isspace(ch); })
+                    .base(),
+                input.end());
 }
 
 vector<int> stringToIntegerVector(string input) {
@@ -57,7 +57,7 @@ string integerVectorToString(vector<int> list, int length = -1) {
     }
 
     string result;
-    for(int index = 0; index < length; index++) {
+    for (int index = 0; index < length; index++) {
         int number = list[index];
         result += to_string(number) + ", ";
     }
@@ -68,7 +68,7 @@ int main() {
     string line;
     while (getline(cin, line)) {
         vector<int> nums = stringToIntegerVector(line);
-        
+
         Solution().nextPermutation(nums);
 
         string out = integerVectorToString(nums);
