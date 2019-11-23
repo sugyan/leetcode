@@ -10,4 +10,5 @@ members = [
     "problems/0019-remove-nth-node-from-end-of-list",
     "problems/0022-generate-parentheses",
     "problems/0031-next-permutation",
+    "problems/0033-search-in-rotated-sorted-array",
 ]
