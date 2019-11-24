@@ -3,9 +3,9 @@
 using namespace std;
 
 class Solution {
-public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-        vector<int> answer { -1, -1 };
+   public:
+    vector<int> searchRange(vector<int> &nums, int target) {
+        vector<int> answer{-1, -1};
         int l = 0, r = nums.size();
         while (l < r) {
             int m = l + (r - l) / 2;
@@ -32,15 +32,15 @@ public:
 };
 
 void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
+    input.erase(input.begin(), find_if(input.begin(), input.end(),
+                                       [](int ch) { return !isspace(ch); }));
 }
 
 void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
+    input.erase(find_if(input.rbegin(), input.rend(),
+                        [](int ch) { return !isspace(ch); })
+                    .base(),
+                input.end());
 }
 
 vector<int> stringToIntegerVector(string input) {
@@ -72,7 +72,7 @@ string integerVectorToString(vector<int> list, int length = -1) {
     }
 
     string result;
-    for(int index = 0; index < length; index++) {
+    for (int index = 0; index < length; index++) {
         int number = list[index];
         result += to_string(number) + ", ";
     }
@@ -85,7 +85,7 @@ int main() {
         vector<int> nums = stringToIntegerVector(line);
         getline(cin, line);
         int target = stringToInteger(line);
-        
+
         vector<int> ret = Solution().searchRange(nums, target);
 
         string out = integerVectorToString(ret);

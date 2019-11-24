@@ -12,6 +12,10 @@ name = "container-with-most-water"
 version = "0.1.0"
 
 [[package]]
+name = "find-first-and-last-position-of-element-in-sorted-array"
+version = "0.1.0"
+
+[[package]]
 name = "generate-parentheses"
 version = "0.1.0"
 
