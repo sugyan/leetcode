@@ -54,6 +54,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "rotate-image"
+version = "0.1.0"
+
+[[package]]
 name = "search-in-rotated-sorted-array"
 version = "0.1.0"
 

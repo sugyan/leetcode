@@ -14,4 +14,5 @@ members = [
     "problems/0034-find-first-and-last-position-of-element-in-sorted-array",
     "problems/0039-combination-sum",
     "problems/0046-permutations",
+    "problems/0048-rotate-image",
 ]
