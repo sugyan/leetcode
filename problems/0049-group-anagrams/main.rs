@@ -3,21 +3,16 @@ pub struct Solution {}
 impl Solution {
     pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         use std::collections::HashMap;
-        let mut hs: HashMap<String, Vec<String>> = HashMap::new();
+        let mut hs: HashMap<[u32; 26], Vec<String>> = HashMap::new();
         for s in strs {
             let mut d = [0; 26];
             for c in s.chars() {
                 d[c as usize - 'a' as usize] += 1;
             }
-            let key = d
-                .iter()
-                .map(|n| n.to_string())
-                .collect::<Vec<String>>()
-                .join(",");
-            if let Some(v) = hs.get_mut(&key) {
+            if let Some(v) = hs.get_mut(&d) {
                 v.push(s);
             } else {
-                hs.insert(key, vec![s]);
+                hs.insert(d, vec![s]);
             }
         }
         return hs.values().map(|v| v.clone()).collect::<Vec<Vec<String>>>();
