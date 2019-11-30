@@ -6,7 +6,7 @@ impl Solution {
         let mut hs: HashMap<[u32; 26], Vec<String>> = HashMap::new();
         for s in strs {
             let mut d = [0; 26];
-            for c in s.chars() {
+            for c in s.bytes() {
                 d[c as usize - 'a' as usize] += 1;
             }
             if let Some(v) = hs.get_mut(&d) {
@@ -15,7 +15,7 @@ impl Solution {
                 hs.insert(d, vec![s]);
             }
         }
-        return hs.values().map(|v| v.clone()).collect::<Vec<Vec<String>>>();
+        return hs.values().map(|v| v.clone()).collect();
     }
 }
 

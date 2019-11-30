@@ -28,6 +28,10 @@ name = "group-anagrams"
 version = "0.1.0"
 
 [[package]]
+name = "jump-game"
+version = "0.1.0"
+
+[[package]]
 name = "letter-combinations-of-a-phone-number"
 version = "0.1.0"
 
