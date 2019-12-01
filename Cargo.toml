@@ -17,4 +17,5 @@ members = [
     "problems/0048-rotate-image",
     "problems/0049-group-anagrams",
     "problems/0055-jump-game",
+    "problems/0056-merge-intervals",
 ]
