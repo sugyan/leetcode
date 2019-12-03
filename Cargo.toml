@@ -19,4 +19,5 @@ members = [
     "problems/0055-jump-game",
     "problems/0056-merge-intervals",
     "problems/0062-unique-paths",
+    "problems/0064-minimum-path-sum",
 ]
