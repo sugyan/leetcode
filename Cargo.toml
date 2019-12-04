@@ -20,4 +20,5 @@ members = [
     "problems/0056-merge-intervals",
     "problems/0062-unique-paths",
     "problems/0064-minimum-path-sum",
+    "problems/0075-sort-colors",
 ]
