@@ -78,6 +78,10 @@ name = "search-in-rotated-sorted-array"
 version = "0.1.0"
 
 [[package]]
+name = "sort-colors"
+version = "0.1.0"
+
+[[package]]
 name = "subsets"
 version = "0.1.0"
 
