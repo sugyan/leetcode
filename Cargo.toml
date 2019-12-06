@@ -22,4 +22,5 @@ members = [
     "problems/0064-minimum-path-sum",
     "problems/0075-sort-colors",
     "problems/0078-subsets",
+    "problems/0079-word-search",
 ]
