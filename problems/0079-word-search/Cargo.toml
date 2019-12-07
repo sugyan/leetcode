@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "word-search"
-path = "main.rs"
+[lib]
+name = "word_search"
+path = "lib.rs"

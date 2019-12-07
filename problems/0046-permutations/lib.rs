@@ -23,11 +23,6 @@ impl Solution {
     }
 }
 
-fn main() {
-    let v = utils::readline_to_i32_vec();
-    println!("{:?}", Solution::permute(v));
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "longest-palindromic-substring"
-path = "main.rs"
+[lib]
+name = "longest_palindromic_substring"
+path = "lib.rs"

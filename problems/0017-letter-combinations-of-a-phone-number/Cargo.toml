@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "letter-combinations-of-a-phone-number"
-path = "main.rs"
+[lib]
+name = "letter_combinations_of_a_phone_number"
+path = "lib.rs"

@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "generate-parentheses"
-path = "main.rs"
+[lib]
+name = "generate_parentheses"
+path = "lib.rs"

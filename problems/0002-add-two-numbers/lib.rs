@@ -42,15 +42,6 @@ impl Solution {
     }
 }
 
-fn main() {
-    let l1 = utils::readline_to_list();
-    let l2 = utils::readline_to_list();
-    println!(
-        "{:?}",
-        utils::list_to_vec(Solution::add_two_numbers(l1, l2))
-    );
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

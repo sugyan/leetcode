@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "sort-colors"
-path = "main.rs"
+[lib]
+name = "sort_colors"
+path = "lib.rs"

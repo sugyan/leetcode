@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "find-first-and-last-position-of-element-in-sorted-array"
-path = "main.rs"
+[lib]
+name = "find_first_and_last_position_of_element_in_sorted_array"
+path = "lib.rs"

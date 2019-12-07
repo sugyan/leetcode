@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
+[lib]
 name = "subsets"
-path = "main.rs"
+path = "lib.rs"

@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "merge-intervals"
-path = "main.rs"
+[lib]
+name = "merge_intervals"
+path = "lib.rs"

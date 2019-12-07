@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "jump-game"
-path = "main.rs"
+[lib]
+name = "jump_game"
+path = "lib.rs"

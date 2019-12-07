@@ -9,6 +9,6 @@ edition = "2018"
 [dependencies]
 utils = { path = "../../utils" }
 
-[[bin]]
-name = "add-two-numbers"
-path = "main.rs"
+[lib]
+name = "add_two_numbers"
+path = "lib.rs"

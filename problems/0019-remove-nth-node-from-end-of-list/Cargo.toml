@@ -9,6 +9,6 @@ edition = "2018"
 [dependencies]
 utils = { path = "../../utils" }
 
-[[bin]]
-name = "remove-nth-node-from-end-of-list"
-path = "main.rs"
+[lib]
+name = "remove_nth_node_from_end_of_list"
+path = "lib.rs"

@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "unique-paths"
-path = "main.rs"
+[lib]
+name = "unique_paths"
+path = "lib.rs"

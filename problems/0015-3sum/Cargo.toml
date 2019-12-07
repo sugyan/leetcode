@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "three-sum"
-path = "main.rs"
+[lib]
+name = "three_sum"
+path = "lib.rs"

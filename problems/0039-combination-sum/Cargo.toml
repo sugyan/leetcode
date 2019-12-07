@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "combination-sum"
-path = "main.rs"
+[lib]
+name = "combination_sum"
+path = "lib.rs"

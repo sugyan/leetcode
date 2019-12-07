@@ -31,10 +31,6 @@ impl Solution {
     }
 }
 
-fn main() {
-    // TODO
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

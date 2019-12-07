@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "rotate-image"
-path = "main.rs"
+[lib]
+name = "rotate_image"
+path = "lib.rs"

@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "search-in-rotated-sorted-array"
-path = "main.rs"
+[lib]
+name = "search_in_rotated_sorted_array"
+path = "lib.rs"

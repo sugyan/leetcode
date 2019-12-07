@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "group-anagrams"
-path = "main.rs"
+[lib]
+name = "group_anagrams"
+path = "lib.rs"

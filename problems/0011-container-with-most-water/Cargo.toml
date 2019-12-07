@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "container-with-most-water"
-path = "main.rs"
+[lib]
+name = "container_with_most_water"
+path = "lib.rs"

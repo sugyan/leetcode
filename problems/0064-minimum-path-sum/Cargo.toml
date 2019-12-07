@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "minimum-path-sum"
-path = "main.rs"
+[lib]
+name = "minimum_path_sum"
+path = "lib.rs"

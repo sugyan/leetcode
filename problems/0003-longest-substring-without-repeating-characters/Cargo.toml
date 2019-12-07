@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "longest-substring-without-repeating-characters"
-path = "main.rs"
+[lib]
+name = "longest_substring_without_repeating_characters"
+path = "lib.rs"

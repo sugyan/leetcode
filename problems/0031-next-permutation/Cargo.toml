@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 
-[[bin]]
-name = "next-permutation"
-path = "main.rs"
+[lib]
+name = "next_permutation"
+path = "lib.rs"

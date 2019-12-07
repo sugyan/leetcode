@@ -9,6 +9,6 @@ edition = "2018"
 [dependencies]
 utils = { path = "../../utils" }
 
-[[bin]]
+[lib]
 name = "permutations"
-path = "main.rs"
+path = "lib.rs"
