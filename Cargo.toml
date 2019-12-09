@@ -15,6 +15,7 @@ members = [
     "problems/0039-combination-sum",
     "problems/0043-multiply-strings",
     "problems/0046-permutations",
+    "problems/0047-permutations-ii",
     "problems/0048-rotate-image",
     "problems/0049-group-anagrams",
     "problems/0055-jump-game",
