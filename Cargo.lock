@@ -60,6 +60,10 @@ name = "next-permutation"
 version = "0.1.0"
 
 [[package]]
+name = "permutation-sequence"
+version = "0.1.0"
+
+[[package]]
 name = "permutations"
 version = "0.1.0"
 dependencies = [
