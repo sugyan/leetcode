@@ -1,10 +1,12 @@
 use std::cell::RefCell;
-use std::collections::{HashMap, VecDeque};
+use std::collections::{BinaryHeap, HashMap};
 
 pub struct LRUCache {
     hm: RefCell<HashMap<i32, i32>>,
-    vd: RefCell<VecDeque<i32>>,
+    lu: RefCell<HashMap<i32, usize>>,
+    bh: RefCell<BinaryHeap<(usize, i32)>>,
     capacity: usize,
+    idx: RefCell<usize>,
 }
 
 /**
@@ -15,35 +17,49 @@ impl LRUCache {
     pub fn new(capacity: i32) -> Self {
         return LRUCache {
             hm: RefCell::new(HashMap::new()),
-            vd: RefCell::new(VecDeque::new()),
+            lu: RefCell::new(HashMap::new()),
+            bh: RefCell::new(BinaryHeap::new()),
             capacity: capacity as usize,
+            idx: RefCell::new(std::usize::MAX),
         };
     }
 
     pub fn get(&self, key: i32) -> i32 {
-        let mut vd = self.vd.borrow_mut();
-        let mut hm = self.hm.borrow_mut();
-        if let Some(val) = hm.get(&key) {
-            if let Some(i) = vd.iter().position(|v| *v == key) {
-                vd.remove(i);
-            } else {
-                hm.remove(&key);
-                return -1;
-            }
-            vd.push_front(key);
-            return *val;
+        if let Some(value) = self.hm.borrow().get(&key) {
+            let mut idx = self.idx.borrow_mut();
+            self.lu.borrow_mut().insert(key, *idx);
+            self.bh.borrow_mut().push((*idx, key));
+            *idx -= 1;
+            return *value;
         }
         return -1;
     }
 
     pub fn put(&self, key: i32, value: i32) {
-        let mut vd = self.vd.borrow_mut();
-        if let Some(i) = vd.iter().position(|v| *v == key) {
-            vd.remove(i);
+        let mut hm = self.hm.borrow_mut();
+        let mut lu = self.lu.borrow_mut();
+        let mut bh = self.bh.borrow_mut();
+        let mut idx = self.idx.borrow_mut();
+        if !hm.contains_key(&key) && hm.len() == self.capacity {
+            loop {
+                if let Some(top) = bh.peek() {
+                    if let Some(v) = lu.get(&top.1) {
+                        if *v == top.0 {
+                            hm.remove(&top.1);
+                            lu.remove(&top.1);
+                            break;
+                        }
+                    }
+                } else {
+                    break;
+                }
+                bh.pop();
+            }
         }
-        vd.push_front(key);
-        vd.truncate(self.capacity);
-        self.hm.borrow_mut().insert(key, value);
+        hm.insert(key, value);
+        lu.insert(key, *idx);
+        bh.push((*idx, key));
+        *idx -= 1;
     }
 }
 
