@@ -24,6 +24,7 @@ members = [
     "problems/0056-merge-intervals",
     "problems/0059-spiral-matrix-ii",
     "problems/0060-permutation-sequence",
+    "problems/0061-rotate-list",
     "problems/0062-unique-paths",
     "problems/0064-minimum-path-sum",
     "problems/0075-sort-colors",
