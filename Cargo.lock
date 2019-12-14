@@ -70,9 +70,6 @@ version = "0.1.0"
 [[package]]
 name = "permutations"
 version = "0.1.0"
-dependencies = [
- "utils 0.1.0",
-]
 
 [[package]]
 name = "permutations-ii"
