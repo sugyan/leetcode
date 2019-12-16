@@ -28,6 +28,7 @@ members = [
     "problems/0062-unique-paths",
     "problems/0063-unique-paths-ii",
     "problems/0064-minimum-path-sum",
+    "problems/0071-simplify-path",
     "problems/0075-sort-colors",
     "problems/0078-subsets",
     "problems/0079-word-search",
