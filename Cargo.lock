@@ -12,6 +12,10 @@ name = "combination-sum"
 version = "0.1.0"
 
 [[package]]
+name = "combinations"
+version = "0.1.0"
+
+[[package]]
 name = "container-with-most-water"
 version = "0.1.0"
 
