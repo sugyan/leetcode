@@ -2,12 +2,11 @@ pub struct Solution {}
 
 impl Solution {
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
-        let (mut idx, mut count, mut prev) = (0, 0, std::i32::MAX);
+        let mut idx = 0;
         for i in 0..nums.len() {
-            count = if nums[i] == prev { count + 1 } else { 1 };
-            prev = nums[i];
-            if count <= 2 {
-                nums.swap(i, idx);
+            let n = nums[i];
+            if idx < 2 || n > nums[idx - 2] {
+                nums[idx] = n;
                 idx += 1;
             }
         }
