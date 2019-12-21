@@ -36,5 +36,6 @@ members = [
     "problems/0078-subsets",
     "problems/0079-word-search",
     "problems/0080-remove-duplicates-from-sorted-array-ii",
+    "problems/0081-search-in-rotated-sorted-array-ii",
     "problems/0146-lru-cache",
 ]

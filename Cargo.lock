@@ -114,6 +114,10 @@ name = "search-in-rotated-sorted-array"
 version = "0.1.0"
 
 [[package]]
+name = "search-in-rotated-sorted-array-ii"
+version = "0.1.0"
+
+[[package]]
 name = "set-matrix-zeroes"
 version = "0.1.0"
 
