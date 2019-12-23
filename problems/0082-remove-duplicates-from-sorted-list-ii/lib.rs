@@ -4,38 +4,22 @@ pub struct Solution {}
 
 impl Solution {
     pub fn delete_duplicates(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut node = ListNode::new(0);
-        node.next = head;
-        let mut dummy = Some(Box::new(node));
-        let mut ptr = &mut dummy;
+        let mut dummy = Some(Box::new(ListNode { val: 0, next: head }));
+        let mut node = &mut dummy.as_mut().unwrap().next;
+        let mut remove: Option<i32> = None;
         loop {
-            let mut repeat = false;
-            if let Some(n) = ptr {
-                if let Some(n1) = &n.next {
-                    if let Some(n2) = &n1.next {
-                        if n1.val == n2.val {
-                            let mut next = &mut Some(n2.clone());
-                            while let Some(node) = next {
-                                if node.val != n1.val {
-                                    n.next = Some(node.clone());
-                                    break;
-                                } else if node.next == None {
-                                    n.next = None;
-                                    break;
-                                }
-                                next = &mut node.next;
-                            }
-                            repeat = true;
-                        }
-                    }
+            match node {
+                Some(n) if remove.is_some() && remove.unwrap() == n.val => {
+                    *node = n.next.take();
                 }
-            } else {
-                break;
-            }
-            if !repeat {
-                if let Some(n) = ptr {
-                    ptr = &mut n.next;
+                Some(n) if n.next.is_some() && n.next.as_ref().unwrap().val == n.val => {
+                    remove = Some(n.val);
                 }
+                Some(n) => {
+                    remove = None;
+                    node = &mut n.next;
+                }
+                None => break,
             }
         }
         return dummy.unwrap().next;
