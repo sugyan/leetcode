@@ -68,6 +68,13 @@ name = "next-permutation"
 version = "0.1.0"
 
 [[package]]
+name = "partition-list"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "permutation-sequence"
 version = "0.1.0"
 

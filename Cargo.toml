@@ -38,5 +38,6 @@ members = [
     "problems/0080-remove-duplicates-from-sorted-array-ii",
     "problems/0081-search-in-rotated-sorted-array-ii",
     "problems/0082-remove-duplicates-from-sorted-list-ii",
+    "problems/0086-partition-list",
     "problems/0146-lru-cache",
 ]
