@@ -2,24 +2,23 @@ pub struct Solution {}
 
 impl Solution {
     pub fn subsets_with_dup(nums: Vec<i32>) -> Vec<Vec<i32>> {
-        let mut hs: std::collections::HashSet<Vec<i32>> = std::collections::HashSet::new();
-        hs.insert(vec![]);
+        let mut answer: Vec<Vec<i32>> = Vec::new();
         let mut nums = nums;
+        let mut v: Vec<i32> = Vec::new();
         nums.sort();
-        for num in nums {
-            let entries: Vec<Vec<i32>> = hs.iter().map(|v| v.clone()).collect();
-            for v in entries {
-                if let Some(last) = v.last() {
-                    if *last > num {
-                        continue;
-                    }
-                }
-                let mut v = v.clone();
-                v.push(num);
-                hs.insert(v);
+        Solution::dfs(&mut answer, &nums, &mut v, 0);
+        return answer;
+    }
+    fn dfs(answer: &mut Vec<Vec<i32>>, nums: &Vec<i32>, v: &mut Vec<i32>, i: usize) {
+        answer.push(v.clone());
+        for j in i..nums.len() {
+            if j != i && j > 0 && nums[j] == nums[j - 1] {
+                continue;
             }
+            v.push(nums[j]);
+            Solution::dfs(answer, nums, v, j + 1);
+            v.pop();
         }
-        return hs.into_iter().collect();
     }
 }
 
