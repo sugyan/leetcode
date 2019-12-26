@@ -160,6 +160,10 @@ name = "subsets"
 version = "0.1.0"
 
 [[package]]
+name = "subsets-ii"
+version = "0.1.0"
+
+[[package]]
 name = "three-sum"
 version = "0.1.0"
 
