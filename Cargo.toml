@@ -41,5 +41,6 @@ members = [
     "problems/0086-partition-list",
     "problems/0089-gray-code",
     "problems/0090-subsets-ii",
+    "problems/0091-decode-ways",
     "problems/0146-lru-cache",
 ]
