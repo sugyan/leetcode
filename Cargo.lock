@@ -117,6 +117,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "reverse-linked-list-ii"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "rotate-image"
 version = "0.1.0"
 

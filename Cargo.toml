@@ -42,5 +42,6 @@ members = [
     "problems/0089-gray-code",
     "problems/0090-subsets-ii",
     "problems/0091-decode-ways",
+    "problems/0092-reverse-linked-list-ii",
     "problems/0146-lru-cache",
 ]
