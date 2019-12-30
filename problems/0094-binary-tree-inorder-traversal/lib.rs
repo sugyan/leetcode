@@ -7,19 +7,20 @@ pub struct Solution {}
 impl Solution {
     pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         let mut answer: Vec<i32> = Vec::new();
-        Solution::dfs(&mut answer, root);
-        return answer;
-    }
-    fn dfs(answer: &mut Vec<i32>, node: Option<Rc<RefCell<TreeNode>>>) {
-        if let Some(node) = node {
-            if node.borrow().left.is_some() {
-                Solution::dfs(answer, Some(node.borrow().left.as_ref().unwrap().clone()));
+        let mut stack: Vec<Rc<RefCell<TreeNode>>> = Vec::new();
+        let mut node: Option<Rc<RefCell<TreeNode>>> = root;
+        while node.is_some() || !stack.is_empty() {
+            while let Some(n) = node {
+                stack.push(n.clone());
+                node = n.borrow().left.clone();
             }
-            answer.push(node.borrow().val);
-            if node.borrow().right.is_some() {
-                Solution::dfs(answer, Some(node.borrow().right.as_ref().unwrap().clone()));
+            node = stack.pop();
+            if let Some(n) = node {
+                answer.push(n.borrow().val);
+                node = n.borrow().right.clone();
             }
         }
+        return answer;
     }
 }
 
