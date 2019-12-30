@@ -8,6 +8,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "binary-tree-inorder-traversal"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "combination-sum"
 version = "0.1.0"
 

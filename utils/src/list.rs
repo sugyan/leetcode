@@ -28,7 +28,7 @@ pub fn list_to_vec(l: Option<Box<ListNode>>) -> Vec<i32> {
         v.push(n.val);
         node = &mut n.next;
     }
-    v
+    return v;
 }
 
 #[cfg(test)]
