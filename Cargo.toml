@@ -45,5 +45,6 @@ members = [
     "problems/0092-reverse-linked-list-ii",
     "problems/0093-restore-ip-addresses",
     "problems/0094-binary-tree-inorder-traversal",
+    "problems/0095-unique-binary-search-trees-ii",
     "problems/0146-lru-cache",
 ]
