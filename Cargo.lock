@@ -190,6 +190,10 @@ name = "three-sum"
 version = "0.1.0"
 
 [[package]]
+name = "unique-binary-search-trees"
+version = "0.1.0"
+
+[[package]]
 name = "unique-binary-search-trees-ii"
 version = "0.1.0"
 dependencies = [
