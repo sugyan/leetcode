@@ -47,5 +47,6 @@ members = [
     "problems/0094-binary-tree-inorder-traversal",
     "problems/0095-unique-binary-search-trees-ii",
     "problems/0096-unique-binary-search-trees",
+    "problems/0098-validate-binary-search-tree",
     "problems/0146-lru-cache",
 ]

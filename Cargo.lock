@@ -213,6 +213,13 @@ name = "utils"
 version = "0.1.0"
 
 [[package]]
+name = "validate-binary-search-tree"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "word-search"
 version = "0.1.0"
 
