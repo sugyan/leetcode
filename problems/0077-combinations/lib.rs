@@ -5,7 +5,7 @@ impl Solution {
         let mut answer = Vec::new();
         let mut v = Vec::new();
         Solution::dfs(&mut answer, n, k, 0, &mut v);
-        return answer;
+        answer
     }
     fn dfs(answer: &mut Vec<Vec<i32>>, n: i32, k: i32, j: i32, v: &mut Vec<i32>) {
         if v.len() == k as usize {

@@ -9,7 +9,7 @@ impl Solution {
                 n = 0;
             }
         }
-        return nums.len() == 1 || n < nums[0];
+        nums.len() == 1 || n < nums[0]
     }
 }
 

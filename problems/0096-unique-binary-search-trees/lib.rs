@@ -7,7 +7,7 @@ impl Solution {
         for i in 1..=n as usize {
             v[i] = (0..i).map(|j| v[j] * v[i - j - 1]).sum();
         }
-        return v[n as usize];
+        v[n as usize]
     }
 }
 

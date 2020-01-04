@@ -3,10 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn set_zeroes(matrix: &mut Vec<Vec<i32>>) {
         let (m, n) = (matrix.len(), matrix[0].len());
-        let mut first_col = false;
-        if (0..m).find(|i| matrix[*i][0] == 0).is_some() {
-            first_col = true;
-        }
+        let first_col = (0..m).any(|i| matrix[i][0] == 0);
         for i in 0..m {
             for j in 1..n {
                 if matrix[i][j] == 0 {
@@ -28,8 +25,8 @@ impl Solution {
             }
         }
         if first_col {
-            for i in 0..m {
-                matrix[i][0] = 0;
+            for row in matrix {
+                row[0] = 0;
             }
         }
     }

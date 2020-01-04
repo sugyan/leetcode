@@ -11,7 +11,7 @@ impl Solution {
                 answer.push(v);
             }
         }
-        return answer;
+        answer
     }
 }
 

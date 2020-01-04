@@ -12,7 +12,7 @@ impl Solution {
             x *= x;
             n >>= 1;
         }
-        return answer;
+        answer
     }
 }
 

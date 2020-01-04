@@ -3,8 +3,8 @@ pub struct Solution {}
 impl Solution {
     pub fn multiply(num1: String, num2: String) -> String {
         let mut answer = vec![0; num1.len() + num2.len()];
-        let v1: Vec<u8> = num1.bytes().rev().map(|b| b as u8 - '0' as u8).collect();
-        let v2: Vec<u8> = num2.bytes().rev().map(|b| b as u8 - '0' as u8).collect();
+        let v1: Vec<u8> = num1.bytes().rev().map(|b| b as u8 - b'0').collect();
+        let v2: Vec<u8> = num2.bytes().rev().map(|b| b as u8 - b'0').collect();
         for (i, d1) in (0..).zip(v1.iter()) {
             let mut carry = 0;
             for (j, d2) in (0..).zip(v2.iter()) {
@@ -24,7 +24,7 @@ impl Solution {
         while answer.len() > 1 && answer[0] == 0 {
             answer.remove(0);
         }
-        return answer.iter().map(|u| ('0' as u8 + u) as char).collect();
+        answer.iter().map(|u| (b'0' + u) as char).collect()
     }
 }
 

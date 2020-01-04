@@ -7,7 +7,7 @@ pub struct Solution {}
 impl Solution {
     pub fn is_valid_bst(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
         let mut prev: Option<i32> = None;
-        return Solution::inorder(root, &mut prev);
+        Solution::inorder(root, &mut prev)
     }
     fn inorder(node: Option<Rc<RefCell<TreeNode>>>, prev: &mut Option<i32>) -> bool {
         if let Some(node) = node {
@@ -28,7 +28,7 @@ impl Solution {
                 }
             }
         }
-        return true;
+        true
     }
 }
 

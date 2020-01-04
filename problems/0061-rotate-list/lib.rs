@@ -29,7 +29,7 @@ impl Solution {
         if let Some(n) = node {
             n.next = None;
         }
-        return answer;
+        answer
     }
 }
 

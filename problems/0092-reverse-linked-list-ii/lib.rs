@@ -12,15 +12,15 @@ impl Solution {
                 if let Some(node) = dup {
                     dup = &mut node.next;
                 }
-                let mut v: Vec<i32> = Vec::new();
-                for _ in 0..n - m + 1 {
+                let mut vec: Vec<i32> = Vec::new();
+                for _ in 0..=n - m {
                     if let Some(node) = dup {
-                        v.push(node.val);
+                        vec.push(node.val);
                         dup = &mut node.next;
                     }
                 }
                 let mut r = dup.clone();
-                for val in v.iter() {
+                for val in vec.iter() {
                     let mut b = ListNode::new(*val);
                     b.next = r;
                     r = Some(Box::new(b));
@@ -39,7 +39,7 @@ impl Solution {
                 break;
             }
         }
-        return dummy.unwrap().next;
+        dummy.unwrap().next
     }
 }
 

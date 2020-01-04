@@ -15,13 +15,13 @@ pub struct LRUCache {
  */
 impl LRUCache {
     pub fn new(capacity: i32) -> Self {
-        return LRUCache {
+        LRUCache {
             hm: RefCell::new(HashMap::new()),
             lu: RefCell::new(HashMap::new()),
             bh: RefCell::new(BinaryHeap::new()),
             capacity: capacity as usize,
             idx: RefCell::new(std::usize::MAX),
-        };
+        }
     }
 
     pub fn get(&self, key: i32) -> i32 {
@@ -32,7 +32,7 @@ impl LRUCache {
             *idx -= 1;
             return *value;
         }
-        return -1;
+        -1
     }
 
     pub fn put(&self, key: i32, value: i32) {
@@ -41,17 +41,13 @@ impl LRUCache {
         let mut bh = self.bh.borrow_mut();
         let mut idx = self.idx.borrow_mut();
         if !hm.contains_key(&key) && hm.len() == self.capacity {
-            loop {
-                if let Some(top) = bh.peek() {
-                    if let Some(v) = lu.get(&top.1) {
-                        if *v == top.0 {
-                            hm.remove(&top.1);
-                            lu.remove(&top.1);
-                            break;
-                        }
+            while let Some(top) = bh.peek() {
+                if let Some(v) = lu.get(&top.1) {
+                    if *v == top.0 {
+                        hm.remove(&top.1);
+                        lu.remove(&top.1);
+                        break;
                     }
-                } else {
-                    break;
                 }
                 bh.pop();
             }

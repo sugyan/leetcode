@@ -10,7 +10,7 @@ impl Solution {
                 answer.push(m | answer[j]);
             }
         }
-        return answer;
+        answer
     }
 }
 

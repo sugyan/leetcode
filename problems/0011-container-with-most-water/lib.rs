@@ -18,7 +18,7 @@ impl Solution {
             }
             answer = std::cmp::max(answer, std::cmp::min(height[l], height[r]) * (r - l) as i32);
         }
-        return answer;
+        answer
     }
 }
 

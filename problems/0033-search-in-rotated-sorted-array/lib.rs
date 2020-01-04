@@ -22,7 +22,7 @@ impl Solution {
                 l = m + 1;
             }
         }
-        return -1;
+        -1
     }
 }
 

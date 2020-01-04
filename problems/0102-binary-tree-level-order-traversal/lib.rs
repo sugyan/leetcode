@@ -21,7 +21,7 @@ impl Solution {
                 q.push_back((node.borrow().right.clone(), front.1 + 1));
             }
         }
-        return answer;
+        answer
     }
 }
 

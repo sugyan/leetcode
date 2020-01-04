@@ -9,7 +9,7 @@ impl Solution {
         if n == 0 {
             return vec![];
         }
-        return Solution::generate((1..=n).collect::<Vec<i32>>());
+        Solution::generate((1..=n).collect::<Vec<i32>>())
     }
     fn generate(v: Vec<i32>) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
         if v.is_empty() {
@@ -28,7 +28,7 @@ impl Solution {
                 }
             }
         }
-        return answer;
+        answer
     }
 }
 
