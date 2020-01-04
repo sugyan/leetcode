@@ -19,7 +19,7 @@ impl Solution {
                 std::cmp::Ordering::Less => l = m,
             }
         }
-        return matrix[i][l] == target;
+        matrix[i][l] == target
     }
 }
 

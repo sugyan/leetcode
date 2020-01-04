@@ -4,7 +4,7 @@ impl Solution {
     pub fn generate_parenthesis(n: i32) -> Vec<String> {
         let mut answer = vec![];
         Solution::gen(&mut answer, "".to_string(), n, n);
-        return answer;
+        answer
     }
 
     fn gen(v: &mut Vec<String>, s: String, l: i32, r: i32) {
@@ -16,7 +16,7 @@ impl Solution {
             Solution::gen(v, s.clone() + "(", l - 1, r);
         }
         if l < r {
-            Solution::gen(v, s.clone() + ")", l, r - 1);
+            Solution::gen(v, s + ")", l, r - 1);
         }
     }
 }

@@ -22,7 +22,7 @@ impl Solution {
                 None => break,
             }
         }
-        return dummy.unwrap().next;
+        dummy.unwrap().next
     }
 }
 

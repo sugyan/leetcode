@@ -26,7 +26,7 @@ impl Solution {
                 i += 1;
             }
         }
-        return answer;
+        answer
     }
 }
 

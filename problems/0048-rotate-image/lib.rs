@@ -4,10 +4,9 @@ impl Solution {
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
         matrix.reverse();
         for i in 0..matrix.len() {
-            for j in 0..i {
-                let tmp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = tmp;
+            let (a, b) = matrix.split_at_mut(i);
+            for (j, c) in (0..).zip(a.iter_mut()) {
+                std::mem::swap(&mut c[i], &mut b[0][j]);
             }
         }
     }

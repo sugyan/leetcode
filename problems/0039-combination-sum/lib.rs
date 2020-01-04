@@ -5,9 +5,9 @@ impl Solution {
         let mut answer: Vec<Vec<i32>> = Vec::new();
         let mut v = Vec::new();
         Solution::helper(&candidates, target, &mut answer, &mut v);
-        return answer;
+        answer
     }
-    fn helper(candidates: &Vec<i32>, target: i32, answer: &mut Vec<Vec<i32>>, v: &mut Vec<i32>) {
+    fn helper(candidates: &[i32], target: i32, answer: &mut Vec<Vec<i32>>, v: &mut Vec<i32>) {
         if target == 0 {
             answer.push(v.clone());
             return;

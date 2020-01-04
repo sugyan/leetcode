@@ -3,7 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn merge(intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut answer: Vec<Vec<i32>> = Vec::new();
-        let mut intervals = intervals.to_owned();
+        let mut intervals = intervals;
         intervals.sort();
         for interval in intervals {
             if match answer.last() {
@@ -11,13 +11,11 @@ impl Solution {
                 None => true,
             } {
                 answer.push(interval.clone());
-            } else {
-                if let Some(last) = answer.last_mut() {
-                    last[1] = std::cmp::max(last[1], interval[1]);
-                }
+            } else if let Some(last) = answer.last_mut() {
+                last[1] = std::cmp::max(last[1], interval[1]);
             }
         }
-        return answer;
+        answer
     }
 }
 

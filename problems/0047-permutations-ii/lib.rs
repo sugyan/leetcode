@@ -6,12 +6,12 @@ impl Solution {
         let mut nums = nums;
         nums.sort();
         Solution::helper(nums, 0, &mut answer);
-        return answer;
+        answer
     }
 
     fn helper(nums: Vec<i32>, i: usize, answer: &mut Vec<Vec<i32>>) {
         if i == nums.len() - 1 {
-            answer.push(nums.clone());
+            answer.push(nums);
         } else {
             let mut nums = nums;
             for j in i..nums.len() {

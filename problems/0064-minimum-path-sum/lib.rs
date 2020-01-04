@@ -2,7 +2,7 @@ pub struct Solution {}
 
 impl Solution {
     pub fn min_path_sum(grid: Vec<Vec<i32>>) -> i32 {
-        let mut grid = grid.to_owned();
+        let mut grid = grid;
         for i in 0..grid.len() {
             for j in 0..grid[0].len() {
                 grid[i][j] += if i > 0 && j > 0 {
@@ -16,7 +16,7 @@ impl Solution {
                 }
             }
         }
-        return *grid.last().unwrap().last().unwrap();
+        *grid.last().unwrap().last().unwrap()
     }
 }
 

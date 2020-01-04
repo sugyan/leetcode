@@ -3,7 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn simplify_path(path: String) -> String {
         let mut v: Vec<&str> = Vec::new();
-        for directory in path.split('/').filter(|s| s.len() > 0) {
+        for directory in path.split('/').filter(|s| !s.is_empty()) {
             match directory {
                 "." => {}
                 ".." => {
@@ -14,7 +14,7 @@ impl Solution {
                 _ => v.push(directory),
             }
         }
-        return "/".to_string() + &v.join("/");
+        "/".to_string() + &v.join("/")
     }
 }
 

@@ -12,27 +12,27 @@ impl Solution {
             if n == target {
                 return true;
             }
-            if n > nums[r] {
-                if target > n || target <= nums[r] {
-                    l = m + 1;
-                } else {
-                    if m > 0 {
+            match n.cmp(&nums[r]) {
+                std::cmp::Ordering::Greater => {
+                    if target > n || target <= nums[r] {
+                        l = m + 1;
+                    } else if m > 0 {
                         r = m - 1;
                     } else {
                         break;
                     }
                 }
-            } else if n == nums[r] {
-                if r > 0 {
-                    r -= 1;
-                } else {
-                    break;
+                std::cmp::Ordering::Equal => {
+                    if r > 0 {
+                        r -= 1;
+                    } else {
+                        break;
+                    }
                 }
-            } else {
-                if target <= nums[r] && target > n {
-                    l = m + 1;
-                } else {
-                    if m > 0 {
+                std::cmp::Ordering::Less => {
+                    if target <= nums[r] && target > n {
+                        l = m + 1;
+                    } else if m > 0 {
                         r = m - 1;
                     } else {
                         break;
@@ -40,7 +40,7 @@ impl Solution {
                 }
             }
         }
-        return false;
+        false
     }
 }
 

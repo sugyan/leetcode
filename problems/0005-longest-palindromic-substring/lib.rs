@@ -5,13 +5,13 @@ impl Solution {
         if s.len() < 2 {
             return s;
         }
-        let v: Vec<u8> = s.bytes().collect();
+        let vec: Vec<u8> = s.bytes().collect();
         let mut j;
         let (mut l, mut r) = (0, 0);
-        for i in 0..v.len() {
+        for i in 0..vec.len() {
             {
                 j = 0;
-                while i >= j && i + 1 + j < v.len() && v[i - j] == v[i + 1 + j] {
+                while i >= j && i + 1 + j < vec.len() && vec[i - j] == vec[i + 1 + j] {
                     j += 1;
                 }
                 if j * 2 > r - l {
@@ -21,7 +21,7 @@ impl Solution {
             }
             {
                 j = 0;
-                while i >= j && i + j < v.len() && v[i - j] == v[i + j] {
+                while i >= j && i + j < vec.len() && vec[i - j] == vec[i + j] {
                     j += 1;
                 }
                 if j * 2 - 1 > r - l {

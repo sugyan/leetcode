@@ -8,7 +8,7 @@ impl Solution {
                 matrix[i][j] = matrix[i - 1][j] + matrix[i][j - 1];
             }
         }
-        return matrix[n as usize - 1][m as usize - 1];
+        matrix[n as usize - 1][m as usize - 1]
     }
 }
 

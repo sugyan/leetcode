@@ -5,7 +5,7 @@ impl Solution {
         let mut answer: Vec<String> = Vec::new();
         let mut v: Vec<String> = Vec::new();
         Solution::helper(&mut answer, &mut v, s.as_str(), 4);
-        return answer;
+        answer
     }
     fn helper(answer: &mut Vec<String>, v: &mut Vec<String>, s: &str, n: usize) {
         if n == 0 {

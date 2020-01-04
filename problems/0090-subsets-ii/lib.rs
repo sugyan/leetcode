@@ -7,9 +7,9 @@ impl Solution {
         let mut v: Vec<i32> = Vec::new();
         nums.sort();
         Solution::dfs(&mut answer, &nums, &mut v, 0);
-        return answer;
+        answer
     }
-    fn dfs(answer: &mut Vec<Vec<i32>>, nums: &Vec<i32>, v: &mut Vec<i32>, i: usize) {
+    fn dfs(answer: &mut Vec<Vec<i32>>, nums: &[i32], v: &mut Vec<i32>, i: usize) {
         answer.push(v.clone());
         for j in i..nums.len() {
             if j != i && j > 0 && nums[j] == nums[j - 1] {

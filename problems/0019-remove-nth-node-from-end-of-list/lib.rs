@@ -9,7 +9,7 @@ impl Solution {
         let mut dummy = Some(Box::new(node));
         let mut n1 = &mut dummy;
         let mut n2 = n1.clone();
-        for _ in 0..n + 1 {
+        for _ in 0..=n {
             if let Some(n) = n2 {
                 n2 = n.next;
             }
@@ -29,7 +29,7 @@ impl Solution {
                 None
             };
         }
-        return dummy.unwrap().next;
+        dummy.unwrap().next
     }
 }
 

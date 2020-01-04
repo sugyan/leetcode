@@ -33,7 +33,7 @@ impl Solution {
                 }
             }
         }
-        return Vec::from(q);
+        Vec::from(q)
     }
 }
 

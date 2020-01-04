@@ -14,7 +14,7 @@ impl Solution {
             }
             d[ord] = i;
         }
-        return answer;
+        answer
     }
 }
 

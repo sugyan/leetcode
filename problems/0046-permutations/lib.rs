@@ -5,10 +5,9 @@ impl Solution {
         let mut answer = Vec::new();
         let mut v = Vec::new();
         Solution::helper(&nums, &mut v, &mut answer);
-        return answer;
+        answer
     }
-
-    fn helper(nums: &Vec<i32>, v: &mut Vec<i32>, answer: &mut Vec<Vec<i32>>) {
+    fn helper(nums: &[i32], v: &mut Vec<i32>, answer: &mut Vec<Vec<i32>>) {
         if v.len() == nums.len() {
             answer.push(v.clone());
         } else {

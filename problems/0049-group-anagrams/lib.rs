@@ -15,7 +15,7 @@ impl Solution {
                 hs.insert(d, vec![s]);
             }
         }
-        return hs.values().map(|v| v.clone()).collect();
+        hs.values().cloned().collect()
     }
 }
 
@@ -28,7 +28,7 @@ mod tests {
         let mut ret = Solution::group_anagrams(
             vec!["eat", "tea", "tan", "ate", "nat", "bat"]
                 .iter()
-                .map(|s| s.to_string())
+                .map(|s| (*s).to_string())
                 .collect(),
         );
         for v in ret.iter_mut() {

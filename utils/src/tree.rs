@@ -36,7 +36,7 @@ pub fn to_tree(v: Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
             }
         }
     }
-    return head;
+    head
 }
 
 #[cfg(test)]

@@ -6,15 +6,15 @@ impl Solution {
         answers[s.len()] = 1;
         let v: Vec<char> = s.chars().collect();
         for i in (0..v.len()).rev() {
-            let n = v[i] as u8 - '0' as u8;
+            let n = v[i] as u8 - b'0';
             if n > 0 {
                 answers[i] = answers[i + 1];
-                if i < v.len() - 1 && n * 10 + v[i + 1] as u8 - '0' as u8 <= 26 {
+                if i < v.len() - 1 && n * 10 + v[i + 1] as u8 - b'0' <= 26 {
                     answers[i] += answers[i + 2];
                 }
             }
         }
-        return answers[0];
+        answers[0]
     }
 }
 

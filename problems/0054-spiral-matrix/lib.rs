@@ -37,7 +37,7 @@ impl Solution {
                 answer[idx] = matrix[i + h - 1][i];
             }
         }
-        return answer;
+        answer
     }
 }
 

@@ -33,7 +33,7 @@ impl Solution {
                 };
             }
         }
-        return matrix[n - 1][m - 1];
+        matrix[n - 1][m - 1]
     }
 }
 

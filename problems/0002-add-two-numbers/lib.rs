@@ -38,7 +38,7 @@ impl Solution {
                 tail = &mut t.next;
             }
         }
-        return answer.unwrap().next;
+        answer.unwrap().next
     }
 }
 

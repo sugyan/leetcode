@@ -20,7 +20,7 @@ impl Solution {
                 node = n.borrow().right.clone();
             }
         }
-        return answer;
+        answer
     }
 }
 

@@ -16,18 +16,16 @@ impl Solution {
                     n1.next = Some(Box::new(ListNode::new(n.val)));
                     node1 = &mut n1.next;
                 }
-            } else {
-                if let Some(n2) = node2 {
-                    n2.next = Some(Box::new(ListNode::new(n.val)));
-                    node2 = &mut n2.next;
-                }
+            } else if let Some(n2) = node2 {
+                n2.next = Some(Box::new(ListNode::new(n.val)));
+                node2 = &mut n2.next;
             }
             node = &mut n.next;
         }
         if let Some(n1) = node1 {
             n1.next = dummy2.unwrap().next
         }
-        return dummy1.unwrap().next;
+        dummy1.unwrap().next
     }
 }
 

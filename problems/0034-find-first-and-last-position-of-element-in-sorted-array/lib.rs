@@ -27,7 +27,7 @@ impl Solution {
             }
         }
         answer.push(l as i32 - 1);
-        return answer;
+        answer
     }
 }
 

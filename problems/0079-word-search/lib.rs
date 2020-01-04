@@ -5,14 +5,14 @@ impl Solution {
         let mut board = board;
         for i in 0..board.len() {
             for j in 0..board[0].len() {
-                if board[i][j] == word.chars().nth(0).unwrap() {
-                    if Solution::dfs(&mut board, i, j, word.as_str()) {
-                        return true;
-                    }
+                if board[i][j] == word.chars().nth(0).unwrap()
+                    && Solution::dfs(&mut board, i, j, word.as_str())
+                {
+                    return true;
                 }
             }
         }
-        return false;
+        false
     }
 
     fn dfs(board: &mut Vec<Vec<char>>, i: usize, j: usize, word: &str) -> bool {
@@ -21,28 +21,26 @@ impl Solution {
         }
         let (c, target) = (board[i][j], word.chars().nth(1).unwrap());
         board[i][j] = '*';
-        if i > 0 && board[i - 1][j] == target {
-            if Solution::dfs(board, i - 1, j, &word[1..]) {
-                return true;
-            }
+        if i > 0 && board[i - 1][j] == target && Solution::dfs(board, i - 1, j, &word[1..]) {
+            return true;
         }
-        if j > 0 && board[i][j - 1] == target {
-            if Solution::dfs(board, i, j - 1, &word[1..]) {
-                return true;
-            }
+        if j > 0 && board[i][j - 1] == target && Solution::dfs(board, i, j - 1, &word[1..]) {
+            return true;
         }
-        if i < board.len() - 1 && board[i + 1][j] == target {
-            if Solution::dfs(board, i + 1, j, &word[1..]) {
-                return true;
-            }
+        if i < board.len() - 1
+            && board[i + 1][j] == target
+            && Solution::dfs(board, i + 1, j, &word[1..])
+        {
+            return true;
         }
-        if j < board[0].len() - 1 && board[i][j + 1] == target {
-            if Solution::dfs(board, i, j + 1, &word[1..]) {
-                return true;
-            }
+        if j < board[0].len() - 1
+            && board[i][j + 1] == target
+            && Solution::dfs(board, i, j + 1, &word[1..])
+        {
+            return true;
         }
         board[i][j] = c;
-        return false;
+        false
     }
 }
 
