@@ -50,5 +50,6 @@ members = [
     "problems/0098-validate-binary-search-tree",
     "problems/0102-binary-tree-level-order-traversal",
     "problems/0103-binary-tree-zigzag-level-order-traversal",
+    "problems/0105-construct-binary-tree-from-preorder-and-inorder-traversal",
     "problems/0146-lru-cache",
 ]
