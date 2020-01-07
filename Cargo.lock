@@ -55,6 +55,13 @@ name = "container-with-most-water"
 version = "0.1.0"
 
 [[package]]
+name = "convert-sorted-list-to-binary-search-tree"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "decode-ways"
 version = "0.1.0"
 
