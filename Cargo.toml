@@ -55,5 +55,6 @@ members = [
     "problems/0109-convert-sorted-list-to-binary-search-tree",
     "problems/0113-path-sum-ii",
     "problems/0114-flatten-binary-tree-to-linked-list",
+    "problems/0120-triangle",
     "problems/0146-lru-cache",
 ]
