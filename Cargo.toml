@@ -56,5 +56,6 @@ members = [
     "problems/0113-path-sum-ii",
     "problems/0114-flatten-binary-tree-to-linked-list",
     "problems/0120-triangle",
+    "problems/0127-word-ladder",
     "problems/0146-lru-cache",
 ]
