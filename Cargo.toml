@@ -57,5 +57,6 @@ members = [
     "problems/0114-flatten-binary-tree-to-linked-list",
     "problems/0120-triangle",
     "problems/0127-word-ladder",
+    "problems/0129-sum-root-to-leaf-numbers",
     "problems/0146-lru-cache",
 ]
