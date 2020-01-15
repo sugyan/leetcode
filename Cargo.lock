@@ -125,6 +125,10 @@ name = "next-permutation"
 version = "0.1.0"
 
 [[package]]
+name = "palindrome-partitioning"
+version = "0.1.0"
+
+[[package]]
 name = "partition-list"
 version = "0.1.0"
 dependencies = [

@@ -59,5 +59,6 @@ members = [
     "problems/0127-word-ladder",
     "problems/0129-sum-root-to-leaf-numbers",
     "problems/0130-surrounded-regions",
+    "problems/0131-palindrome-partitioning",
     "problems/0146-lru-cache",
 ]
