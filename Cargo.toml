@@ -60,5 +60,6 @@ members = [
     "problems/0129-sum-root-to-leaf-numbers",
     "problems/0130-surrounded-regions",
     "problems/0131-palindrome-partitioning",
+    "problems/0134-gas-station",
     "problems/0146-lru-cache",
 ]
