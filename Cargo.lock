@@ -296,6 +296,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "word-break"
+version = "0.1.0"
+
+[[package]]
 name = "word-ladder"
 version = "0.1.0"
 

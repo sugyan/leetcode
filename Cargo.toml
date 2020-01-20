@@ -62,5 +62,6 @@ members = [
     "problems/0131-palindrome-partitioning",
     "problems/0134-gas-station",
     "problems/0137-single-number-ii",
+    "problems/0139-word-break",
     "problems/0146-lru-cache",
 ]
