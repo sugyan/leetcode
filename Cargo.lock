@@ -124,6 +124,10 @@ name = "lru-cache"
 version = "0.1.0"
 
 [[package]]
+name = "maximum-product-subarray"
+version = "0.1.0"
+
+[[package]]
 name = "merge-intervals"
 version = "0.1.0"
 

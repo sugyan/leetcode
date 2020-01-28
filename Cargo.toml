@@ -67,4 +67,5 @@ members = [
     "problems/0146-lru-cache",
     "problems/0150-evaluate-reverse-polish-notation",
     "problems/0151-reverse-words-in-a-string",
+    "problems/0152-maximum-product-subarray",
 ]
