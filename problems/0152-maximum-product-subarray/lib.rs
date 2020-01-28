@@ -2,13 +2,21 @@ pub struct Solution {}
 
 impl Solution {
     pub fn max_product(nums: Vec<i32>) -> i32 {
-        let mut answer = std::i32::MIN;
-        for i in 0..nums.len() {
-            let mut p = 1;
-            for j in nums[i..nums.len()].iter() {
-                p *= j;
-                answer = std::cmp::max(answer, p);
+        let mut minmax = (nums[0], nums[0]);
+        let mut answer = nums[0];
+        for &n in nums[1..nums.len()].iter() {
+            if n > 0 {
+                minmax = (
+                    std::cmp::min(minmax.0 * n, n),
+                    std::cmp::max(minmax.1 * n, n),
+                );
+            } else {
+                minmax = (
+                    std::cmp::min(minmax.1 * n, n),
+                    std::cmp::max(minmax.0 * n, n),
+                );
             }
+            answer = std::cmp::max(answer, minmax.1);
         }
         answer
     }
