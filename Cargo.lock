@@ -81,6 +81,10 @@ name = "find-first-and-last-position-of-element-in-sorted-array"
 version = "0.1.0"
 
 [[package]]
+name = "find-minimum-in-rotated-sorted-array"
+version = "0.1.0"
+
+[[package]]
 name = "flatten-binary-tree-to-linked-list"
 version = "0.1.0"
 dependencies = [
