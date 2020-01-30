@@ -69,4 +69,5 @@ members = [
     "problems/0151-reverse-words-in-a-string",
     "problems/0152-maximum-product-subarray",
     "problems/0153-find-minimum-in-rotated-sorted-array",
+    "problems/0162-find-peak-element",
 ]

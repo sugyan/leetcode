@@ -85,6 +85,10 @@ name = "find-minimum-in-rotated-sorted-array"
 version = "0.1.0"
 
 [[package]]
+name = "find-peak-element"
+version = "0.1.0"
+
+[[package]]
 name = "flatten-binary-tree-to-linked-list"
 version = "0.1.0"
 dependencies = [
