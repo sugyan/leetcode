@@ -44,6 +44,10 @@ name = "combinations"
 version = "0.1.0"
 
 [[package]]
+name = "compare-version-numbers"
+version = "0.1.0"
+
+[[package]]
 name = "construct-binary-tree-from-inorder-and-postorder-traversal"
 version = "0.1.0"
 dependencies = [

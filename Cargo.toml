@@ -70,4 +70,5 @@ members = [
     "problems/0152-maximum-product-subarray",
     "problems/0153-find-minimum-in-rotated-sorted-array",
     "problems/0162-find-peak-element",
+    "problems/0165-compare-version-numbers",
 ]
