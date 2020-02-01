@@ -71,4 +71,5 @@ members = [
     "problems/0153-find-minimum-in-rotated-sorted-array",
     "problems/0162-find-peak-element",
     "problems/0165-compare-version-numbers",
+    "problems/0166-fraction-to-recurring-decimal",
 ]
