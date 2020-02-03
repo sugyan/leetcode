@@ -201,6 +201,10 @@ name = "powx-n"
 version = "0.1.0"
 
 [[package]]
+name = "product-of-array-except-self"
+version = "0.1.0"
+
+[[package]]
 name = "remove-duplicates-from-sorted-array-ii"
 version = "0.1.0"
 

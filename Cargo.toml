@@ -73,4 +73,5 @@ members = [
     "problems/0165-compare-version-numbers",
     "problems/0166-fraction-to-recurring-decimal",
     "problems/0173-binary-search-tree-iterator",
+    "problems/0238-product-of-array-except-self",
 ]
