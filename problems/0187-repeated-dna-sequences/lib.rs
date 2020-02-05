@@ -5,6 +5,7 @@ pub struct Solution {}
 impl Solution {
     pub fn find_repeated_dna_sequences(s: String) -> Vec<String> {
         let mut hm: HashMap<u32, usize> = HashMap::new();
+        let mut answer: Vec<String> = Vec::new();
         if s.len() > 10 {
             let mut k = 0;
             for (i, c) in (0..).zip(s.chars()) {
@@ -21,25 +22,15 @@ impl Solution {
                 }
                 if let Some(n) = hm.get_mut(&k) {
                     *n += 1;
+                    if *n == 2 {
+                        answer.push((&s[i - 9..=i]).to_string());
+                    }
                 } else {
                     hm.insert(k, 1);
                 }
             }
         }
-        hm.iter()
-            .filter(|e| *e.1 > 1)
-            .map(|e| {
-                (0..10)
-                    .map(|i| match (*e.0 >> (i * 2)) & 0b11 {
-                        0b00 => 'A',
-                        0b01 => 'C',
-                        0b10 => 'G',
-                        0b11 => 'T',
-                        _ => ' ',
-                    })
-                    .collect()
-            })
-            .collect()
+        answer
     }
 }
 
@@ -49,9 +40,9 @@ mod tests {
 
     #[test]
     fn example_1() {
-        let mut ret =
-            Solution::find_repeated_dna_sequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT".to_string());
-        ret.sort();
-        assert_eq!(vec!["AAAAACCCCC", "CCCCCAAAAA"], ret);
+        assert_eq!(
+            vec!["AAAAACCCCC", "CCCCCAAAAA"],
+            Solution::find_repeated_dna_sequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT".to_string())
+        );
     }
 }
