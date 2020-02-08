@@ -50,6 +50,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "bitwise-and-of-numbers-range"
+version = "0.1.0"
+
+[[package]]
 name = "combination-sum"
 version = "0.1.0"
 
