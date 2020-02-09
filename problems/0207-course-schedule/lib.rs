@@ -1,51 +1,29 @@
-use std::collections::{HashMap, HashSet};
-
 pub struct Solution {}
 
 impl Solution {
     pub fn can_finish(num_courses: i32, prerequisites: Vec<Vec<i32>>) -> bool {
-        let mut hm: HashMap<i32, Vec<i32>> = HashMap::new();
+        let mut v: Vec<(usize, Vec<usize>)> = vec![(0, vec![]); num_courses as usize];
         for p in prerequisites.iter() {
-            if let Some(v) = hm.get_mut(&p[0]) {
-                v.push(p[1]);
-            } else {
-                hm.insert(p[0], vec![p[1]]);
+            v[p[0] as usize].1.push(p[1] as usize);
+            v[p[1] as usize].0 += 1;
+        }
+        let mut stack: Vec<usize> = Vec::new();
+        for (i, e) in (0..).zip(v.iter()) {
+            if e.0 == 0 {
+                stack.push(i);
             }
         }
-        let mut memo: HashSet<i32> = HashSet::new();
-        for i in 0..num_courses {
-            let mut hs: HashSet<i32> = HashSet::new();
-            hs.insert(i);
-            if !Solution::has_no_cycle(&hm, i, &mut hs, &mut memo) {
-                return false;
-            }
-        }
-        true
-    }
-    fn has_no_cycle(
-        hm: &HashMap<i32, Vec<i32>>,
-        src: i32,
-        hs: &mut HashSet<i32>,
-        memo: &mut HashSet<i32>,
-    ) -> bool {
-        if memo.contains(&src) {
-            return true;
-        }
-        if let Some(v) = hm.get(&src) {
-            for dst in v.iter() {
-                if hs.contains(&dst) {
-                    return false;
+        let mut count = 0;
+        while let Some(last) = stack.pop() {
+            count += 1;
+            for i in v[last].1.clone() {
+                v[i].0 -= 1;
+                if v[i].0 == 0 {
+                    stack.push(i);
                 }
-                hs.insert(*dst);
-                if !Solution::has_no_cycle(hm, *dst, hs, memo) {
-                    return false;
-                }
-                hs.remove(dst);
             }
-        } else {
-            memo.extend(hs.iter());
         }
-        true
+        count == num_courses
     }
 }
 
