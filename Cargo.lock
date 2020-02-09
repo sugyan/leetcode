@@ -91,6 +91,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "course-schedule"
+version = "0.1.0"
+
+[[package]]
 name = "decode-ways"
 version = "0.1.0"
 
