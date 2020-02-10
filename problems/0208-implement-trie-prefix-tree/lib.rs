@@ -1,7 +1,7 @@
-use std::collections::HashSet;
-
+#[derive(Default)]
 pub struct Trie {
-    hs: HashSet<String>,
+    is_end: bool,
+    children: [Option<Box<Trie>>; 26],
 }
 
 /**
@@ -10,25 +10,41 @@ pub struct Trie {
  */
 impl Trie {
     /** Initialize your data structure here. */
-    fn new() -> Self {
-        Trie { hs: HashSet::new() }
+    pub fn new() -> Self {
+        Trie {
+            is_end: false,
+            children: Default::default(),
+        }
     }
     /** Inserts a word into the trie. */
-    fn insert(&mut self, word: String) {
-        self.hs.insert(word);
+    pub fn insert(&mut self, word: String) {
+        let mut node = self;
+        for i in word.chars().map(|c| c as u8 - b'a') {
+            node = node.children[i as usize].get_or_insert(Box::new(Trie::new()));
+        }
+        node.is_end = true;
     }
     /** Returns if the word is in the trie. */
-    fn search(&mut self, word: String) -> bool {
-        self.hs.contains(&word)
-    }
-    /** Returns if there is any word in the trie that starts with the given prefix. */
-    fn starts_with(&mut self, prefix: String) -> bool {
-        for word in self.hs.iter() {
-            if word.starts_with(&prefix) {
-                return true;
+    pub fn search(&self, word: String) -> bool {
+        let mut node = self;
+        for i in word.chars().map(|c| c as u8 - b'a') {
+            node = match node.children[i as usize].as_ref() {
+                Some(n) => n,
+                None => return false,
             }
         }
-        false
+        node.is_end
+    }
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    pub fn starts_with(&self, prefix: String) -> bool {
+        let mut node = self;
+        for i in prefix.chars().map(|c| c as u8 - b'a') {
+            node = match node.children[i as usize].as_ref() {
+                Some(n) => n,
+                None => return false,
+            }
+        }
+        true
     }
 }
 
