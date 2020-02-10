@@ -79,5 +79,6 @@ members = [
     "problems/0200-number-of-islands",
     "problems/0201-bitwise-and-of-numbers-range",
     "problems/0207-course-schedule",
+    "problems/0208-implement-trie-prefix-tree",
     "problems/0238-product-of-array-except-self",
 ]
