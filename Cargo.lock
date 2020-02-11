@@ -182,6 +182,10 @@ name = "minimum-path-sum"
 version = "0.1.0"
 
 [[package]]
+name = "minimum-size-subarray-sum"
+version = "0.1.0"
+
+[[package]]
 name = "multiply-strings"
 version = "0.1.0"
 
