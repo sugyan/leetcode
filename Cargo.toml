@@ -82,5 +82,6 @@ members = [
     "problems/0208-implement-trie-prefix-tree",
     "problems/0209-minimum-size-subarray-sum",
     "problems/0210-course-schedule-ii",
+    "problems/0211-add-and-search-word-data-structure-design",
     "problems/0238-product-of-array-except-self",
 ]
