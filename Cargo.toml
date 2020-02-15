@@ -84,5 +84,6 @@ members = [
     "problems/0210-course-schedule-ii",
     "problems/0211-add-and-search-word-data-structure-design",
     "problems/0213-house-robber-ii",
+    "problems/0215-kth-largest-element-in-an-array",
     "problems/0238-product-of-array-except-self",
 ]
