@@ -62,6 +62,10 @@ name = "combination-sum"
 version = "0.1.0"
 
 [[package]]
+name = "combination-sum-iii"
+version = "0.1.0"
+
+[[package]]
 name = "combinations"
 version = "0.1.0"
 
