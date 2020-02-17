@@ -86,5 +86,6 @@ members = [
     "problems/0213-house-robber-ii",
     "problems/0215-kth-largest-element-in-an-array",
     "problems/0216-combination-sum-iii",
+    "problems/0220-contains-duplicate-iii",
     "problems/0238-product-of-array-except-self",
 ]
