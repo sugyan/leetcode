@@ -88,5 +88,6 @@ members = [
     "problems/0216-combination-sum-iii",
     "problems/0220-contains-duplicate-iii",
     "problems/0221-maximal-square",
+    "problems/0222-count-complete-tree-nodes",
     "problems/0238-product-of-array-except-self",
 ]
