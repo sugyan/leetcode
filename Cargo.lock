@@ -378,6 +378,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "summary-ranges"
+version = "0.1.0"
+
+[[package]]
 name = "surrounded-regions"
 version = "0.1.0"
 

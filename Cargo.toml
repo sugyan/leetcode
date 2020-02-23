@@ -91,5 +91,6 @@ members = [
     "problems/0222-count-complete-tree-nodes",
     "problems/0223-rectangle-area",
     "problems/0227-basic-calculator-ii",
+    "problems/0228-summary-ranges",
     "problems/0238-product-of-array-except-self",
 ]
