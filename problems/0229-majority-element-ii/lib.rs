@@ -1,21 +1,33 @@
-use std::collections::HashMap;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn majority_element(nums: Vec<i32>) -> Vec<i32> {
-        let mut hs: HashMap<i32, usize> = HashMap::new();
+        let mut candidates: (Option<i32>, Option<i32>) = (None, None);
+        let mut counts = (0, 0);
         for num in nums.iter() {
-            if let Some(n) = hs.get_mut(&num) {
-                *n += 1;
+            if Some(*num) == candidates.0 {
+                counts.0 += 1;
+            } else if Some(*num) == candidates.1 {
+                counts.1 += 1;
+            } else if counts.0 == 0 {
+                candidates.0 = Some(*num);
+                counts.0 = 1;
+            } else if counts.1 == 0 {
+                candidates.1 = Some(*num);
+                counts.1 = 1;
             } else {
-                hs.insert(*num, 0);
+                counts = (counts.0 - 1, counts.1 - 1);
             }
         }
-        hs.iter()
-            .filter(|e| *e.1 >= nums.len() / 3)
-            .map(|e| *e.0)
-            .collect()
+        let mut answer: Vec<i32> = Vec::new();
+        for candidate in [candidates.0, candidates.1].iter() {
+            if let Some(c) = candidate {
+                if nums.iter().filter(|&n| n == c).count() > nums.len() / 3 {
+                    answer.push(*c);
+                }
+            }
+        }
+        answer
     }
 }
 
