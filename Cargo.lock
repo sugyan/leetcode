@@ -205,6 +205,10 @@ name = "lru-cache"
 version = "0.1.0"
 
 [[package]]
+name = "majority-element-ii"
+version = "0.1.0"
+
+[[package]]
 name = "maximal-square"
 version = "0.1.0"
 
