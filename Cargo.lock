@@ -185,6 +185,13 @@ name = "kth-largest-element-in-an-array"
 version = "0.1.0"
 
 [[package]]
+name = "kth-smallest-element-in-a-bst"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "largest-number"
 version = "0.1.0"
 
