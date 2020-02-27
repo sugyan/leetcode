@@ -13,29 +13,10 @@ struct TreeNode {
 class Solution {
    public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode*> vp, vq;
-        dfs(root, p, vp);
-        dfs(root, q, vq);
-        TreeNode* answer = root;
-        for (int i = 0; i < min(vp.size(), vq.size()); ++i) {
-            if (vp[i] != vq[i]) return answer;
-            answer = vp[i];
-        }
-        return answer;
-    }
-
-   private:
-    bool dfs(TreeNode* node, TreeNode* target, vector<TreeNode*>& v) {
-        if (node == nullptr) return false;
-        v.push_back(node);
-        if (node == target) return true;
-        if (dfs(node->left, target, v)) {
-            return true;
-        }
-        if (dfs(node->right, target, v)) {
-            return true;
-        }
-        v.pop_back();
-        return false;
+        if (root == nullptr || root == p || root == q) return root;
+        TreeNode* l = lowestCommonAncestor(root->left, p, q);
+        TreeNode* r = lowestCommonAncestor(root->right, p, q);
+        if (l != nullptr && r != nullptr) return root;
+        return l == nullptr ? r : l;
     }
 };
