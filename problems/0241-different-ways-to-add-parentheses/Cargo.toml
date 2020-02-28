@@ -1,0 +1,13 @@
+[package]
+name = "different-ways-to-add-parentheses"
+version = "0.1.0"
+authors = ["sugyan <sugi1982@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "different_ways_to_add_parentheses"
+path = "lib.rs"

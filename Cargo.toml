@@ -95,4 +95,5 @@ members = [
     "problems/0229-majority-element-ii",
     "problems/0230-kth-smallest-element-in-a-bst",
     "problems/0238-product-of-array-except-self",
+    "problems/0241-different-ways-to-add-parentheses",
 ]
