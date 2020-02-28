@@ -6,18 +6,14 @@ class Solution {
    public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         if (matrix.empty() || matrix[0].empty()) return false;
-        vector<int> l, r;
-        for (int i = 0; i < matrix.size(); ++i) {
-            l.push_back(matrix[i].front());
-            r.push_back(matrix[i].back());
-        }
-        int ll = distance(l.begin(), upper_bound(l.begin(), l.end(), target));
-        int rr = distance(r.begin(), lower_bound(r.begin(), r.end(), target));
-        for (int i = 0; i < ll; ++i) {
-            if (i < rr) continue;
-            auto lb = lower_bound(matrix[i].begin(), matrix[i].end(), target);
-            if (*lb == target) {
-                return true;
+        int row = matrix.size(), col = matrix[0].size();
+        int i = 0, j = col - 1;
+        while (i < row && j >= 0) {
+            if (matrix[i][j] == target) return true;
+            if (matrix[i][j] > target) {
+                --j;
+            } else {
+                ++i;
             }
         }
         return false;
