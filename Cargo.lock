@@ -366,6 +366,10 @@ name = "single-number-ii"
 version = "0.1.0"
 
 [[package]]
+name = "single-number-iii"
+version = "0.1.0"
+
+[[package]]
 name = "sort-colors"
 version = "0.1.0"
 
