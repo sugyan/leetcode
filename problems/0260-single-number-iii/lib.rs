@@ -1,18 +1,18 @@
-use std::collections::HashSet;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn single_number(nums: Vec<i32>) -> Vec<i32> {
-        let mut hs: HashSet<i32> = HashSet::new();
+        let xor = nums.iter().fold(0, |acc, x| acc ^ x);
+        let r = xor & !(xor - 1);
+        let mut answer = vec![0, 0];
         for n in nums.iter() {
-            if hs.contains(n) {
-                hs.remove(n);
+            if n & r == 0 {
+                answer[0] ^= *n;
             } else {
-                hs.insert(*n);
+                answer[1] ^= *n;
             }
         }
-        hs.into_iter().collect()
+        answer
     }
 }
 
