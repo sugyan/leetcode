@@ -97,4 +97,5 @@ members = [
     "problems/0238-product-of-array-except-self",
     "problems/0241-different-ways-to-add-parentheses",
     "problems/0260-single-number-iii",
+    "problems/0264-ugly-number-ii",
 ]
