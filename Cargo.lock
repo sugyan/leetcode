@@ -173,6 +173,10 @@ name = "group-anagrams"
 version = "0.1.0"
 
 [[package]]
+name = "h-index"
+version = "0.1.0"
+
+[[package]]
 name = "house-robber-ii"
 version = "0.1.0"
 

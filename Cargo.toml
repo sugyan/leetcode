@@ -98,4 +98,5 @@ members = [
     "problems/0241-different-ways-to-add-parentheses",
     "problems/0260-single-number-iii",
     "problems/0264-ugly-number-ii",
+    "problems/0274-h-index",
 ]
