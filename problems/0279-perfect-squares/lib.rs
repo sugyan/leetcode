@@ -1,28 +1,25 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 pub struct Solution {}
 
 impl Solution {
     pub fn num_squares(n: i32) -> i32 {
-        let mut hm: HashMap<i32, i32> = HashMap::new();
-        fn helper(n: i32, hm: &mut HashMap<i32, i32>) -> i32 {
-            if n == 0 {
-                return 0;
-            }
-            if let Some(v) = hm.get(&n) {
-                return *v;
-            }
-            let mut answer = std::i32::MAX;
-            for i in 1.. {
-                if i * i > n {
-                    break;
+        let mut hs: HashSet<i32> = HashSet::new();
+        hs.insert(0);
+        let v: Vec<i32> = (1..=(n as f32).sqrt() as i32).map(|m| m * m).collect();
+        for i in 1.. {
+            let mut add: Vec<i32> = Vec::new();
+            for e in hs.iter() {
+                for m in v.iter() {
+                    if e + m == n {
+                        return i;
+                    }
+                    add.push(e + m);
                 }
-                answer = std::cmp::min(answer, 1 + helper(n - i * i, hm));
             }
-            hm.insert(n, answer);
-            answer
+            hs.extend(add);
         }
-        helper(n, &mut hm)
+        0
     }
 }
 
