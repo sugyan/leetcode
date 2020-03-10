@@ -146,6 +146,10 @@ name = "find-peak-element"
 version = "0.1.0"
 
 [[package]]
+name = "find-the-duplicate-number"
+version = "0.1.0"
+
+[[package]]
 name = "flatten-binary-tree-to-linked-list"
 version = "0.1.0"
 dependencies = [
