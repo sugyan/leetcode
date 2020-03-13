@@ -161,6 +161,10 @@ name = "fraction-to-recurring-decimal"
 version = "0.1.0"
 
 [[package]]
+name = "game-of-life"
+version = "0.1.0"
+
+[[package]]
 name = "gas-station"
 version = "0.1.0"
 
