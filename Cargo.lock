@@ -220,6 +220,10 @@ name = "letter-combinations-of-a-phone-number"
 version = "0.1.0"
 
 [[package]]
+name = "longest-increasing-subsequence"
+version = "0.1.0"
+
+[[package]]
 name = "longest-palindromic-substring"
 version = "0.1.0"
 

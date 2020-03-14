@@ -103,4 +103,5 @@ members = [
     "problems/0279-perfect-squares",
     "problems/0287-find-the-duplicate-number",
     "problems/0289-game-of-life",
+    "problems/0300-longest-increasing-subsequence",
 ]
