@@ -1,31 +1,18 @@
 pub struct Solution {}
 
 impl Solution {
-    // pub fn length_of_lis(nums: Vec<i32>) -> i32 {
-    //     let mut dp: Vec<i32> = vec![1; nums.len()];
-    //     for i in (0..nums.len()).rev() {
-    //         for j in i + 1..nums.len() {
-    //             if nums[i] < nums[j] {
-    //                 dp[i] = std::cmp::max(dp[i], dp[j] + 1);
-    //             }
-    //         }
-    //     }
-    //     *dp.iter().max().unwrap()
-    // }
     pub fn length_of_lis(nums: Vec<i32>) -> i32 {
-        let mut dp: Vec<i32> = vec![1; nums.len()];
-        for i in (0..nums.len()).rev() {
-            for j in i + 1..nums.len() {
-                if nums[i] < nums[j] {
-                    dp[i] = std::cmp::max(dp[i], dp[j] + 1);
+        let mut v: Vec<i32> = Vec::with_capacity(nums.len());
+        for num in nums.iter() {
+            if let Some(i) = v.binary_search(num).err() {
+                if i == v.len() {
+                    v.push(*num)
+                } else {
+                    v[i] = *num
                 }
             }
         }
-        if let Some(max) = dp.iter().max() {
-            *max
-        } else {
-            0
-        }
+        v.len() as i32
     }
 }
 
