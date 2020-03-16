@@ -314,6 +314,10 @@ name = "product-of-array-except-self"
 version = "0.1.0"
 
 [[package]]
+name = "range-sum-query-2d-immutable"
+version = "0.1.0"
+
+[[package]]
 name = "rectangle-area"
 version = "0.1.0"
 
