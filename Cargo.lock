@@ -12,6 +12,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "additive-number"
+version = "0.1.0"
+
+[[package]]
 name = "basic-calculator-ii"
 version = "0.1.0"
 
