@@ -1,6 +1,5 @@
 pub struct NumArray {
-    nums: Vec<i32>,
-    sum: Vec<i32>,
+    segtree: Vec<i32>,
 }
 
 /**
@@ -9,27 +8,45 @@ pub struct NumArray {
  */
 impl NumArray {
     pub fn new(nums: Vec<i32>) -> Self {
-        let mut sum = nums.clone();
-        for i in 1..sum.len() {
-            sum[i] += sum[i - 1];
+        let mut segtree: Vec<i32> = vec![0; nums.len() * 2];
+        for i in 0..nums.len() {
+            segtree[nums.len() + i] = nums[i];
         }
-        NumArray { nums, sum }
+        for i in (0..nums.len()).rev() {
+            segtree[i] = segtree[i * 2] + segtree[i * 2 + 1];
+        }
+        println!("{:?}", segtree);
+        NumArray { segtree }
     }
 
     pub fn update(&mut self, i: i32, val: i32) {
-        let diff = val - self.nums[i as usize];
-        self.nums[i as usize] = val;
-        for j in i as usize..self.sum.len() {
-            self.sum[j] += diff;
+        let mut i = i as usize + self.segtree.len() / 2;
+        self.segtree[i] = val;
+        while i > 0 {
+            let j = if i % 2 == 0 { i + 1 } else { i - 1 };
+            self.segtree[i / 2] = self.segtree[i] + self.segtree[j];
+            i /= 2;
         }
     }
 
     pub fn sum_range(&self, i: i32, j: i32) -> i32 {
-        let mut ret = self.sum[j as usize];
-        if i > 0 {
-            ret -= self.sum[i as usize - 1];
+        let (mut l, mut r) = (i as usize, j as usize);
+        l += self.segtree.len() / 2;
+        r += self.segtree.len() / 2;
+        let mut sum = 0;
+        while l <= r {
+            if l % 2 == 1 {
+                sum += self.segtree[l];
+                l += 1;
+            }
+            if r % 2 == 0 {
+                sum += self.segtree[r];
+                r -= 1;
+            }
+            l /= 2;
+            r /= 2;
         }
-        ret
+        sum
     }
 }
 
