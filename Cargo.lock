@@ -260,6 +260,10 @@ name = "merge-intervals"
 version = "0.1.0"
 
 [[package]]
+name = "minimum-height-trees"
+version = "0.1.0"
+
+[[package]]
 name = "minimum-path-sum"
 version = "0.1.0"
 

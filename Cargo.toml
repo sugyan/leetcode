@@ -108,4 +108,5 @@ members = [
     "problems/0306-additive-number",
     "problems/0307-range-sum-query-mutable",
     "problems/0309-best-time-to-buy-and-sell-stock-with-cooldown",
+    "problems/0310-minimum-height-trees",
 ]
