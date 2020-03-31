@@ -1,59 +1,26 @@
+use std::collections::HashSet;
+
 pub struct Solution {}
 
 impl Solution {
     pub fn find_min_height_trees(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
-        let mut v: Vec<Vec<usize>> = vec![vec![]; n as usize];
+        let mut v: Vec<HashSet<usize>> = vec![HashSet::new(); n as usize];
         for edge in edges.iter() {
-            v[edge[0] as usize].push(edge[1] as usize);
-            v[edge[1] as usize].push(edge[0] as usize);
+            v[edge[0] as usize].insert(edge[1] as usize);
+            v[edge[1] as usize].insert(edge[0] as usize);
         }
-        let mut longest: Vec<usize> = Vec::new();
-        Solution::dfs(&v, 0, None, &mut longest);
-        if longest.len() % 2 == 0 {
-            vec![
-                longest[longest.len() / 2 - 1] as i32,
-                longest[longest.len() / 2] as i32,
-            ]
-        } else {
-            vec![longest[longest.len() / 2] as i32]
-        }
-    }
-    fn dfs(
-        v: &[Vec<usize>],
-        node: usize,
-        parent: Option<usize>,
-        longest: &mut Vec<usize>,
-    ) -> Vec<usize> {
-        let mut ret = vec![node];
-        let mut children: Vec<Vec<usize>> = Vec::new();
-        for i in v[node].iter() {
-            if let Some(p) = parent {
-                if p == *i {
-                    continue;
+        let mut hs: HashSet<usize> = (0..n as usize).collect();
+        while hs.len() > 2 {
+            let leaves: Vec<usize> = hs.iter().filter(|&i| v[*i].len() == 1).copied().collect();
+            for leaf in leaves.iter() {
+                let nodes: Vec<usize> = v[*leaf].iter().copied().collect();
+                for i in nodes.iter() {
+                    v[*i].remove(leaf);
                 }
+                hs.remove(leaf);
             }
-            children.push(Solution::dfs(v, *i, Some(node), longest));
         }
-        children.sort_by_key(|v| v.len());
-        if let Some(l) = children.last() {
-            ret.extend(l)
-        }
-        if ret.len() > longest.len() {
-            *longest = ret.clone();
-        }
-        if children.len() > 1
-            && children[children.len() - 1].len() + children[children.len() - 2].len() + 1
-                > longest.len()
-        {
-            *longest = children[children.len() - 1]
-                .iter()
-                .rev()
-                .chain([node].iter())
-                .chain(children[children.len() - 2].iter())
-                .copied()
-                .collect::<Vec<usize>>();
-        }
-        ret
+        hs.iter().map(|&i| i as i32).collect()
     }
 }
 
