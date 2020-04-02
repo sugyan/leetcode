@@ -110,4 +110,5 @@ members = [
     "problems/0309-best-time-to-buy-and-sell-stock-with-cooldown",
     "problems/0310-minimum-height-trees",
     "others/30-day-leetcoding-challenge/week-1/3283",
+    "others/30-day-leetcoding-challenge/week-1/3284",
 ]
