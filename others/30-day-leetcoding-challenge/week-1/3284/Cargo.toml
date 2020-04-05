@@ -9,5 +9,5 @@ edition = "2018"
 [dependencies]
 
 [lib]
-name = "is_happy"
+name = "week1_3284"
 path = "lib.rs"

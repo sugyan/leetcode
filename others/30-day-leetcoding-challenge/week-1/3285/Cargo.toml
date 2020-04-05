@@ -9,5 +9,5 @@ edition = "2018"
 [dependencies]
 
 [lib]
-name = "max_sub_array"
+name = "week1_3285"
 path = "lib.rs"
