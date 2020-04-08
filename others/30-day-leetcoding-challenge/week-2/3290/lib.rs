@@ -4,23 +4,19 @@ pub struct Solution {}
 
 impl Solution {
     pub fn middle_node(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut head = head;
-        let mut node = &mut head;
-        let mut len = 0;
-        while let Some(n) = node {
-            len += 1;
-            node = &mut n.next;
-        }
-        len /= 2;
-        node = &mut head;
-        while let Some(n) = node {
-            if len == 0 {
-                return Some(n.clone());
+        let mut fast = &head;
+        let mut slow = &head;
+        let mut flg = true;
+        while let Some(f) = fast {
+            fast = &f.next;
+            flg = !flg;
+            if flg {
+                if let Some(s) = slow {
+                    slow = &s.next;
+                }
             }
-            len -= 1;
-            node = &mut n.next;
         }
-        None
+        slow.clone()
     }
 }
 
