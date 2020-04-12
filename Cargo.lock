@@ -51,6 +51,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "30-day-leetcoding-challenge_week-2_3297"
+version = "0.1.0"
+
+[[package]]
 name = "add-and-search-word-data-structure-design"
 version = "0.1.0"
 
