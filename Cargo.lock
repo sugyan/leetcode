@@ -67,6 +67,10 @@ name = "30-day-leetcoding-challenge_week-3_3300"
 version = "0.1.0"
 
 [[package]]
+name = "30-day-leetcoding-challenge_week-3_3301"
+version = "0.1.0"
+
+[[package]]
 name = "add-and-search-word-data-structure-design"
 version = "0.1.0"
 
