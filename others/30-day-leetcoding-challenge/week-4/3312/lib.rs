@@ -27,6 +27,7 @@ impl Solution {
         (max * max) as i32
     }
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;
