@@ -1,8 +1,8 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, VecDeque};
 
 pub struct FirstUnique {
-    v: Vec<i32>,
-    hs: HashSet<i32>,
+    vd: VecDeque<i32>,
+    hm: HashMap<i32, usize>,
 }
 
 /**
@@ -11,38 +11,30 @@ pub struct FirstUnique {
  */
 impl FirstUnique {
     pub fn new(nums: Vec<i32>) -> Self {
-        let mut hs: HashSet<i32> = HashSet::new();
-        let mut v: Vec<i32> = Vec::new();
+        let mut vd: VecDeque<i32> = VecDeque::with_capacity(nums.len());
+        let mut hm: HashMap<i32, usize> = HashMap::new();
         for num in nums.iter() {
-            if hs.contains(num) {
-                if let Some(i) = v.iter().position(|&x| x == *num) {
-                    v.remove(i);
-                }
-            } else {
-                v.push(*num);
-                hs.insert(*num);
-            }
+            vd.push_back(*num);
+            *hm.entry(*num).or_insert(0) += 1;
         }
-        FirstUnique { v, hs }
+        FirstUnique { vd, hm }
     }
 
-    pub fn show_first_unique(&self) -> i32 {
-        if let Some(f) = self.v.first() {
-            *f
-        } else {
-            -1
+    pub fn show_first_unique(&mut self) -> i32 {
+        while let Some(f) = self.vd.front() {
+            if let Some(v) = self.hm.get(f) {
+                if *v == 1 {
+                    return *f;
+                }
+            }
+            self.vd.pop_front();
         }
+        -1
     }
 
     pub fn add(&mut self, value: i32) {
-        if self.hs.contains(&value) {
-            if let Some(i) = self.v.iter().position(|&e| e == value) {
-                self.v.remove(i);
-            }
-        } else {
-            self.v.push(value);
-            self.hs.insert(value);
-        }
+        self.vd.push_back(value);
+        *self.hm.entry(value).or_insert(0) += 1;
     }
 }
 
