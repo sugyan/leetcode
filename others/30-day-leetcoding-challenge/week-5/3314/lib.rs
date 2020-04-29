@@ -12,17 +12,15 @@ impl Solution {
     }
 
     fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, answer: &mut i32) -> i32 {
-        let mut ret = 0;
         if let Some(n) = node {
             let val = n.borrow().val;
-            let l = Solution::dfs(&n.borrow().left, answer);
-            let r = Solution::dfs(&n.borrow().right, answer);
+            let l = std::cmp::max(0, Solution::dfs(&n.borrow().left, answer));
+            let r = std::cmp::max(0, Solution::dfs(&n.borrow().right, answer));
             *answer = std::cmp::max(*answer, val + l + r);
-            ret = std::cmp::max(ret, val);
-            ret = std::cmp::max(ret, val + l);
-            ret = std::cmp::max(ret, val + r);
+            val + std::cmp::max(l, r)
+        } else {
+            0
         }
-        ret
     }
 }
 
