@@ -387,6 +387,10 @@ name = "maximum-product-subarray"
 version = "0.1.0"
 
 [[package]]
+name = "may-leetcoding-challenge_week-1_3317"
+version = "0.1.0"
+
+[[package]]
 name = "merge-intervals"
 version = "0.1.0"
 
