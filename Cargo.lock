@@ -407,6 +407,13 @@ name = "may-leetcoding-challenge_week-1_3321"
 version = "0.1.0"
 
 [[package]]
+name = "may-leetcoding-challenge_week-1_3322"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "merge-intervals"
 version = "0.1.0"
 
