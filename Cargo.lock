@@ -418,6 +418,10 @@ name = "may-leetcoding-challenge_week-2_3323"
 version = "0.1.0"
 
 [[package]]
+name = "may-leetcoding-challenge_week-2_3324"
+version = "0.1.0"
+
+[[package]]
 name = "merge-intervals"
 version = "0.1.0"
 
