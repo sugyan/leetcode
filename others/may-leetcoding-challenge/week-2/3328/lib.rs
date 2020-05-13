@@ -2,20 +2,29 @@ pub struct Solution {}
 
 impl Solution {
     pub fn remove_kdigits(num: String, k: i32) -> String {
-        let mut v: Vec<char> = (("0".to_string() + &num).chars()).collect();
-        for i in 0..k as usize {
-            for j in 0..v.len() - 1 {
-                if v[j] > v[j + 1] {
-                    v.remove(j);
-                    break;
+        let mut v: Vec<char> = Vec::with_capacity(num.len());
+        let mut k = k;
+        for c in num.chars() {
+            while k > 0 {
+                if let Some(l) = v.last() {
+                    if *l > c {
+                        v.pop();
+                        k -= 1;
+                        continue;
+                    }
                 }
+                break;
             }
-            if v.len() > num.len() - i {
-                v.pop();
+            if !v.is_empty() || c != '0' {
+                v.push(c);
             }
         }
-        while v.len() > 1 && v[0] == '0' {
-            v.remove(0);
+        while k > 0 {
+            v.pop();
+            k -= 1;
+        }
+        if v.is_empty() {
+            v.push('0');
         }
         v.iter().collect()
     }
