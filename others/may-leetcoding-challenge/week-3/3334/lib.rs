@@ -1,5 +1,6 @@
+#[derive(Default)]
 pub struct StockSpanner {
-    v: Vec<i32>,
+    s: Vec<(i32, usize)>,
 }
 
 /**
@@ -12,14 +13,15 @@ impl StockSpanner {
     }
 
     pub fn next(&mut self, price: i32) -> i32 {
-        self.v.push(price);
-        let mut ret = 0;
-        for n in self.v.iter().rev() {
-            if *n > price {
+        let mut ret = 1;
+        while let Some(last) = self.s.last() {
+            if last.0 > price {
                 break;
             }
-            ret += 1;
+            ret += last.1;
+            self.s.pop();
         }
+        self.s.push((price, ret));
         ret as i32
     }
 }
