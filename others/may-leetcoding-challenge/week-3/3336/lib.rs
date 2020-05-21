@@ -2,31 +2,18 @@ pub struct Solution {}
 
 impl Solution {
     pub fn count_squares(matrix: Vec<Vec<i32>>) -> i32 {
-        let mut matrix: Vec<Vec<i32>> = matrix;
+        let mut v: Vec<Vec<i32>> = matrix;
         let mut answer = 0;
-        let mut target = 1;
-        loop {
-            let mut end = true;
-            for i in 0..matrix.len() {
-                for j in 0..matrix[0].len() {
-                    if matrix[i][j] == target {
-                        answer += 1;
-                        end = false;
-                    }
-                    if (i > 0 && j > 0)
-                        && matrix[i][j] == target
-                        && matrix[i - 1][j] >= target
-                        && matrix[i][j - 1] >= target
-                        && matrix[i - 1][j - 1] >= target
-                    {
-                        matrix[i][j] += 1;
-                    }
+        for i in 0..v.len() {
+            for j in 0..v[0].len() {
+                if i > 0 && j > 0 && v[i][j] > 0 {
+                    let mut min = v[i - 1][j - 1];
+                    min = std::cmp::min(min, v[i - 1][j]);
+                    min = std::cmp::min(min, v[i][j - 1]);
+                    v[i][j] = min + 1;
                 }
+                answer += v[i][j];
             }
-            if end {
-                break;
-            }
-            target += 1;
         }
         answer
     }
