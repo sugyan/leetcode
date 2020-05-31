@@ -1,19 +1,44 @@
-use std::cmp::Reverse;
-use std::collections::BinaryHeap;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
-        let mut bh: BinaryHeap<Reverse<(i32, &Vec<i32>)>> = BinaryHeap::with_capacity(points.len());
-        for point in points.iter() {
-            bh.push(Reverse((point[0] * point[0] + point[1] * point[1], point)));
+        let mut v: Vec<(i32, &Vec<i32>)> = points
+            .iter()
+            .map(|e| (e[0] * e[0] + e[1] * e[1], e))
+            .collect();
+        let (mut lo, mut hi) = (0, points.len() - 1);
+        loop {
+            let p = Solution::helper(&mut v, lo, hi);
+            if p == k as usize - 1 {
+                break;
+            }
+            if p < k as usize - 1 {
+                lo = p + 1;
+            } else {
+                hi = p - 1;
+            }
         }
-        let mut answer: Vec<Vec<i32>> = Vec::new();
-        for _ in 0..k {
-            answer.push((bh.pop().unwrap().0).1.clone());
+        v.iter().take(k as usize).map(|e| e.1.clone()).collect()
+    }
+
+    fn helper(v: &mut Vec<(i32, &Vec<i32>)>, lo: usize, hi: usize) -> usize {
+        let (mut l, mut r) = (lo + 1, hi);
+        loop {
+            while l <= r && v[l].0 < v[lo].0 {
+                l += 1;
+            }
+            while l <= r && v[r].0 > v[lo].0 {
+                r -= 1;
+            }
+            if l >= r {
+                break;
+            }
+            v.swap(l, r);
+            l += 1;
+            r -= 1;
         }
-        answer
+        v.swap(lo, r);
+        r
     }
 }
 
