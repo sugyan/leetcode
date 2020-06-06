@@ -3,15 +3,13 @@ pub struct Solution {}
 impl Solution {
     pub fn reconstruct_queue(people: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut v: Vec<Vec<i32>> = people;
-        v.sort_by(|a: &Vec<i32>, b: &Vec<i32>| match a[0].cmp(&b[0]) {
-            std::cmp::Ordering::Equal => b[1].cmp(&a[1]),
+        v.sort_by(|a: &Vec<i32>, b: &Vec<i32>| match b[0].cmp(&a[0]) {
+            std::cmp::Ordering::Equal => a[1].cmp(&b[1]),
             ord => ord,
         });
-        let mut index: Vec<usize> = (0..v.len()).collect();
-        let mut answer: Vec<Vec<i32>> = vec![Vec::new(); v.len()];
+        let mut answer: Vec<Vec<i32>> = Vec::new();
         for p in v.iter() {
-            answer[index[p[1] as usize]] = p.clone();
-            index.remove(p[1] as usize);
+            answer.insert(p[1] as usize, p.clone());
         }
         answer
     }
