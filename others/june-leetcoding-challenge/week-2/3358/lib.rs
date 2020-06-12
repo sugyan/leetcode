@@ -1,8 +1,12 @@
+use rand::rngs::ThreadRng;
 use rand::Rng;
+use std::collections::HashMap;
 
 #[derive(Default)]
 pub struct RandomizedSet {
     v: Vec<i32>,
+    hm: HashMap<i32, usize>,
+    tr: ThreadRng,
 }
 
 /**
@@ -16,44 +20,31 @@ impl RandomizedSet {
     }
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     pub fn insert(&mut self, val: i32) -> bool {
-        let (mut l, mut r) = (0, self.v.len());
-        while l < r {
-            let m = l + (r - l) / 2;
-            if self.v[m] < val {
-                l = m + 1;
-            } else {
-                r = m;
-            }
+        if self.hm.contains_key(&val) {
+            return false;
         }
-        if l < self.v.len() && self.v[l] == val {
-            false
-        } else {
-            self.v.insert(l, val);
-            true
-        }
+        self.hm.insert(val, self.v.len());
+        self.v.push(val);
+        true
     }
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     pub fn remove(&mut self, val: i32) -> bool {
-        let (mut l, mut r) = (0, self.v.len());
-        while l < r {
-            let m = l + (r - l) / 2;
-            if self.v[m] < val {
-                l = m + 1;
-            } else {
-                r = m;
+        if let Some(&mut i) = self.hm.get_mut(&val) {
+            if i < self.v.len() - 1 {
+                let last = self.v[self.v.len() - 1];
+                self.v[i] = last;
+                self.hm.insert(last, i);
             }
-        }
-        if l < self.v.len() && self.v[l] == val {
-            self.v.remove(l);
+            self.v.pop();
+            self.hm.remove(&val);
             true
         } else {
             false
         }
     }
     /** Get a random element from the set. */
-    pub fn get_random(&self) -> i32 {
-        let mut rng = rand::thread_rng();
-        self.v[rng.gen_range(0, self.v.len())]
+    pub fn get_random(&mut self) -> i32 {
+        self.v[self.tr.gen_range(0, self.v.len())]
     }
 }
 
