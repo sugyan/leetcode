@@ -1,28 +1,28 @@
-use std::collections::HashMap;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn largest_divisible_subset(nums: Vec<i32>) -> Vec<i32> {
-        let mut hm: HashMap<i32, Vec<i32>> = HashMap::new();
         let mut nums: Vec<i32> = nums;
         nums.sort();
-        let mut answer: Vec<i32> = Vec::new();
-        for num in nums.iter() {
-            let mut v: Vec<i32> = if let Some(e) = hm
-                .iter()
-                .filter(|&e| num % e.0 == 0)
-                .max_by_key(|&e| e.1.len())
-            {
-                e.1.clone()
-            } else {
-                Vec::new()
-            };
-            v.push(*num);
-            if v.len() > answer.len() {
-                answer = v.clone();
+        let mut dp: Vec<usize> = vec![1; nums.len()];
+        let mut prev: Vec<Option<usize>> = vec![None; nums.len()];
+        let (mut max, mut pos): (usize, Option<usize>) = (0, None);
+        for i in 0..nums.len() {
+            for j in 0..i {
+                if nums[i] % nums[j] == 0 && dp[j] >= dp[i] {
+                    dp[i] = dp[j] + 1;
+                    prev[i] = Some(j);
+                }
             }
-            hm.insert(*num, v);
+            if dp[i] > max {
+                max = dp[i];
+                pos = Some(i);
+            }
+        }
+        let mut answer: Vec<i32> = Vec::new();
+        while let Some(p) = pos {
+            answer.push(nums[p]);
+            pos = prev[p];
         }
         answer
     }
