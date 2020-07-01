@@ -351,6 +351,10 @@ name = "implement-trie-prefix-tree"
 version = "0.1.0"
 
 [[package]]
+name = "july-leetcoding-challenge_week-1_3377"
+version = "0.1.0"
+
+[[package]]
 name = "jump-game"
 version = "0.1.0"
 
