@@ -1,5 +1,4 @@
 use std::cell::RefCell;
-use std::collections::VecDeque;
 use std::rc::Rc;
 use utils::TreeNode;
 
@@ -7,24 +6,20 @@ pub struct Solution {}
 
 impl Solution {
     pub fn level_order_bottom(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
-        let mut vd: VecDeque<(Option<Rc<RefCell<TreeNode>>>, usize)> = VecDeque::new();
-        vd.push_back((root, 0));
         let mut answer: Vec<Vec<i32>> = Vec::new();
-        while let Some(e) = vd.pop_front() {
-            if e.1 >= answer.len() {
-                answer.push(Vec::new());
-            }
-            if let Some(node) = e.0 {
-                answer[e.1].push(node.borrow().val);
-                vd.push_back((node.borrow().left.clone(), e.1 + 1));
-                vd.push_back((node.borrow().right.clone(), e.1 + 1));
-            }
-        }
-        if answer[answer.len() - 1].is_empty() {
-            answer.pop();
-        }
+        Solution::dfs(&root, 0, &mut answer);
         answer.reverse();
         answer
+    }
+    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, depth: usize, answer: &mut Vec<Vec<i32>>) {
+        if let Some(n) = node {
+            if depth == answer.len() {
+                answer.push(Vec::new());
+            }
+            answer[depth].push(n.borrow().val);
+            Solution::dfs(&n.borrow().left, depth + 1, answer);
+            Solution::dfs(&n.borrow().right, depth + 1, answer);
+        }
     }
 }
 
