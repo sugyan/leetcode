@@ -1,31 +1,18 @@
-use std::collections::HashMap;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn prison_after_n_days(cells: Vec<i32>, n: i32) -> Vec<i32> {
-        let mut hm: HashMap<Vec<i32>, usize> = HashMap::new();
         let mut cells: Vec<i32> = cells;
-        for i in 0.. {
-            if i as i32 == n {
-                break;
-            }
-            let mut new_cells = vec![0; cells.len()];
-            for j in 1..cells.len() - 1 {
-                if cells[j - 1] == cells[j + 1] {
-                    new_cells[j] = 1;
-                }
-            }
-            if let Some(j) = hm.get(&cells) {
-                for e in hm.iter() {
-                    if *e.1 == (n as usize - i) % (i - j) + j {
-                        return e.0.clone();
+        for _ in 0..(n - 1) % 14 + 1 {
+            cells = (0..cells.len())
+                .map(|i| {
+                    if i > 0 && i < cells.len() - 1 && cells[i - 1] == cells[i + 1] {
+                        1
+                    } else {
+                        0
                     }
-                }
-            } else {
-                hm.insert(cells, i);
-            }
-            cells = new_cells;
+                })
+                .collect();
         }
         cells
     }
