@@ -362,6 +362,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "july-leetcoding-challenge_week-1_3379"
+version = "0.1.0"
+
+[[package]]
 name = "jump-game"
 version = "0.1.0"
 
