@@ -6,24 +6,28 @@ pub struct Solution {}
 
 impl Solution {
     pub fn width_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        let mut v: Vec<(usize, usize)> = Vec::new();
-        Solution::dfs(&root, 0, 0, &mut v);
-        v.iter().map(|&e| e.1 - e.0 + 1).max().unwrap() as i32
+        let mut v: Vec<usize> = Vec::new();
+        Solution::dfs(&root, 0, 0, &mut v) as i32
     }
     fn dfs(
         node: &Option<Rc<RefCell<TreeNode>>>,
         depth: usize,
         index: usize,
-        v: &mut Vec<(usize, usize)>,
-    ) {
+        v: &mut Vec<usize>,
+    ) -> usize {
         if let Some(n) = node {
             if depth >= v.len() {
-                v.push((index, index));
-            } else {
-                v[depth] = (v[depth].0, index);
+                v.push(index);
             }
-            Solution::dfs(&n.borrow().left, depth + 1, index * 2, v);
-            Solution::dfs(&n.borrow().right, depth + 1, index * 2 + 1, v);
+            std::cmp::max(
+                index - v[depth] + 1,
+                std::cmp::max(
+                    Solution::dfs(&n.borrow().left, depth + 1, index * 2, v),
+                    Solution::dfs(&n.borrow().right, depth + 1, index * 2 + 1, v),
+                ),
+            )
+        } else {
+            0
         }
     }
 }
