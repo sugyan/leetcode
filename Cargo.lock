@@ -386,6 +386,13 @@ name = "july-leetcoding-challenge_week-2_3384"
 version = "0.1.0"
 
 [[package]]
+name = "july-leetcoding-challenge_week-2_3385"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "jump-game"
 version = "0.1.0"
 
