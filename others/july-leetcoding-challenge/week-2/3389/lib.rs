@@ -12,17 +12,15 @@ impl Solution {
         Solution::helper(&p, &q)
     }
     fn helper(p: &Option<Rc<RefCell<TreeNode>>>, q: &Option<Rc<RefCell<TreeNode>>>) -> bool {
-        if p.is_none() && q.is_none() {
-            return true;
-        }
-        if let Some(p) = p {
-            if let Some(q) = q {
-                return p.borrow().val == q.borrow().val
+        match (p, q) {
+            (Some(p), Some(q)) => {
+                p.borrow().val == q.borrow().val
                     && Solution::helper(&p.borrow().left, &q.borrow().left)
-                    && Solution::helper(&p.borrow().right, &q.borrow().right);
+                    && Solution::helper(&p.borrow().right, &q.borrow().right)
             }
+            (None, None) => true,
+            _ => false,
         }
-        false
     }
 }
 
