@@ -3,11 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn angle_clock(hour: i32, minutes: i32) -> f64 {
         let angle = (minutes as f64 * 6.0 - (hour as f64 + minutes as f64 / 60.0) * 30.0).abs();
-        if angle > 180.0 {
-            360.0 - angle
-        } else {
-            angle
-        }
+        angle.min(360.0 - angle)
     }
 }
 
