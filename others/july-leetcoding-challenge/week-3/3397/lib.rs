@@ -8,7 +8,6 @@ impl Solution {
                 if word[0] == board[i][j] {
                     let mut visited: Vec<Vec<bool>> =
                         vec![vec![false; board[0].len()]; board.len()];
-                    visited[i][j] = true;
                     if Solution::dfs(&board, &word[1..], (i, j), &mut visited) {
                         return true;
                     }
@@ -23,31 +22,30 @@ impl Solution {
         pos: (usize, usize),
         visited: &mut Vec<Vec<bool>>,
     ) -> bool {
+        if visited[pos.0][pos.1] {
+            return false;
+        }
         if word.is_empty() {
             return true;
         }
-        let mut v: Vec<(usize, usize)> = Vec::new();
-        if pos.0 > 0 && board[pos.0 - 1][pos.1] == word[0] {
-            v.push((pos.0 - 1, pos.1));
+        visited[pos.0][pos.1] = true;
+        if (false
+            || (pos.0 > 0
+                && board[pos.0 - 1][pos.1] == word[0]
+                && Solution::dfs(board, &word[1..], (pos.0 - 1, pos.1), visited)))
+            || (pos.1 > 0
+                && board[pos.0][pos.1 - 1] == word[0]
+                && Solution::dfs(board, &word[1..], (pos.0, pos.1 - 1), visited))
+            || (pos.0 < board.len() - 1
+                && board[pos.0 + 1][pos.1] == word[0]
+                && Solution::dfs(board, &word[1..], (pos.0 + 1, pos.1), visited))
+            || (pos.1 < board[0].len() - 1
+                && board[pos.0][pos.1 + 1] == word[0]
+                && Solution::dfs(board, &word[1..], (pos.0, pos.1 + 1), visited))
+        {
+            return true;
         }
-        if pos.1 > 0 && board[pos.0][pos.1 - 1] == word[0] {
-            v.push((pos.0, pos.1 - 1));
-        }
-        if pos.0 < board.len() - 1 && board[pos.0 + 1][pos.1] == word[0] {
-            v.push((pos.0 + 1, pos.1));
-        }
-        if pos.1 < board[0].len() - 1 && board[pos.0][pos.1 + 1] == word[0] {
-            v.push((pos.0, pos.1 + 1));
-        }
-        for p in v.iter() {
-            if !visited[p.0][p.1] {
-                visited[p.0][p.1] = true;
-                if Solution::dfs(board, &word[1..], (p.0, p.1), visited) {
-                    return true;
-                }
-                visited[p.0][p.1] = false;
-            }
-        }
+        visited[pos.0][pos.1] = false;
         false
     }
 }
