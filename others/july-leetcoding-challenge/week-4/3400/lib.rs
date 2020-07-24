@@ -2,26 +2,18 @@ pub struct Solution {}
 
 impl Solution {
     pub fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        let mut rev: Vec<Vec<usize>> = vec![Vec::new(); graph.len()];
-        for (src, v) in graph.iter().enumerate() {
-            for &dst in v.iter() {
-                rev[dst as usize].push(src);
-            }
-        }
         let mut answer: Vec<Vec<i32>> = Vec::new();
-        let mut v: Vec<i32> = vec![graph.len() as i32 - 1];
-        Solution::dfs(&rev, &mut v, graph.len() - 1, &mut answer);
+        let mut v: Vec<i32> = vec![0];
+        Solution::dfs(&graph, &mut v, 0, &mut answer);
         answer
     }
-    fn dfs(rev: &[Vec<usize>], v: &mut Vec<i32>, src: usize, answer: &mut Vec<Vec<i32>>) {
-        if src == 0 {
-            let mut v = v.clone();
-            v.reverse();
-            answer.push(v);
+    fn dfs(graph: &[Vec<i32>], v: &mut Vec<i32>, src: usize, answer: &mut Vec<Vec<i32>>) {
+        if src == graph.len() - 1 {
+            answer.push(v.clone());
         }
-        for &dst in rev[src].iter() {
+        for &dst in graph[src].iter() {
             v.push(dst as i32);
-            Solution::dfs(rev, v, dst, answer);
+            Solution::dfs(graph, v, dst as usize, answer);
             v.pop();
         }
     }
