@@ -454,6 +454,10 @@ name = "july-leetcoding-challenge_week-4_3400"
 version = "0.1.0"
 
 [[package]]
+name = "july-leetcoding-challenge_week-4_3401"
+version = "0.1.0"
+
+[[package]]
 name = "jump-game"
 version = "0.1.0"
 
