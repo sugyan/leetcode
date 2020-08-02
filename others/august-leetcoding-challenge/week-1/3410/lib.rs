@@ -1,6 +1,6 @@
 #[derive(Default)]
 pub struct MyHashSet {
-    v: Vec<Vec<i32>>,
+    v: Vec<i32>,
 }
 
 /**
@@ -11,22 +11,18 @@ impl MyHashSet {
     /** Initialize your data structure here. */
     pub fn new() -> Self {
         Self {
-            v: vec![Vec::new(); 1000],
+            v: vec![0; 1000000 / 32 + 1],
         }
     }
     pub fn add(&mut self, key: i32) {
-        if !self.contains(key) {
-            self.v[key as usize % 1000].push(key)
-        }
+        self.v[key as usize / 32] |= 1 << (key % 32)
     }
     pub fn remove(&mut self, key: i32) {
-        if let Some(pos) = self.v[key as usize % 1000].iter().position(|&x| x == key) {
-            self.v[key as usize % 1000].remove(pos);
-        }
+        self.v[key as usize / 32] &= !(1 << (key % 32))
     }
     /** Returns true if this set contains the specified element */
-    fn contains(&self, key: i32) -> bool {
-        self.v[key as usize % 1000].iter().any(|&x| x == key)
+    pub fn contains(&self, key: i32) -> bool {
+        self.v[key as usize / 32] & 1 << (key % 32) != 0
     }
 }
 
