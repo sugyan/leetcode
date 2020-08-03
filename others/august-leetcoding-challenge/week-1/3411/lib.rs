@@ -2,25 +2,21 @@ pub struct Solution {}
 
 impl Solution {
     pub fn is_palindrome(s: String) -> bool {
-        if s.is_empty() {
+        let v: Vec<char> = s
+            .to_lowercase()
+            .chars()
+            .filter(|&c| c.is_alphanumeric())
+            .collect();
+        if v.is_empty() {
             return true;
         }
-        let v: Vec<char> = s.chars().collect();
-        let (mut l, mut r) = (0, s.len() - 1);
+        let (mut l, mut r) = (0, v.len() - 1);
         while l < r {
-            while l < r && !v[l].is_alphanumeric() {
-                l += 1;
-            }
-            while l < r && !v[r].is_alphanumeric() {
-                r -= 1;
-            }
-            if !v[l].eq_ignore_ascii_case(&v[r]) {
+            if v[l] != v[r] {
                 return false;
             }
             l += 1;
-            if l < r {
-                r -= 1;
-            }
+            r -= 1;
         }
         true
     }
