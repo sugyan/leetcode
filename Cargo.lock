@@ -171,6 +171,13 @@ name = "august-leetcoding-challenge_week-1_3414"
 version = "0.1.0"
 
 [[package]]
+name = "august-leetcoding-challenge_week-1_3415"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "basic-calculator-ii"
 version = "0.1.0"
 
