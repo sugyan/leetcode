@@ -1,4 +1,5 @@
 use std::cell::RefCell;
+use std::collections::HashMap;
 use std::rc::Rc;
 use utils::TreeNode;
 
@@ -6,24 +7,26 @@ pub struct Solution {}
 
 impl Solution {
     pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, sum: i32) -> i32 {
-        Solution::helper(&root, sum)
+        let mut hm: HashMap<i32, i32> = HashMap::new();
+        hm.insert(0, 1);
+        Solution::helper(&root, 0, sum, &mut hm)
     }
-    fn helper(root: &Option<Rc<RefCell<TreeNode>>>, sum: i32) -> i32 {
-        let mut answer = Solution::dfs(&root, sum);
-        if let Some(r) = root {
-            answer += Solution::helper(&r.borrow().left, sum);
-            answer += Solution::helper(&r.borrow().right, sum);
-        }
-        answer
-    }
-    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, target: i32) -> i32 {
+    fn helper(
+        node: &Option<Rc<RefCell<TreeNode>>>,
+        current: i32,
+        target: i32,
+        hm: &mut HashMap<i32, i32>,
+    ) -> i32 {
         let mut ret = 0;
         if let Some(n) = node {
-            if n.borrow().val == target {
-                ret += 1;
+            let sum = current + n.borrow().val;
+            if let Some(m) = hm.get(&(sum - target)) {
+                ret += m;
             }
-            ret += Solution::dfs(&n.borrow().left, target - n.borrow().val);
-            ret += Solution::dfs(&n.borrow().right, target - n.borrow().val);
+            *hm.entry(sum).or_default() += 1;
+            ret += Solution::helper(&n.borrow().left, sum, target, hm);
+            ret += Solution::helper(&n.borrow().right, sum, target, hm);
+            *hm.entry(sum).or_default() -= 1;
         }
         ret
     }
