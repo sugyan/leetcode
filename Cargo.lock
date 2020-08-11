@@ -193,6 +193,10 @@ name = "august-leetcoding-challenge_week-2_3419"
 version = "0.1.0"
 
 [[package]]
+name = "august-leetcoding-challenge_week-2_3420"
+version = "0.1.0"
+
+[[package]]
 name = "basic-calculator-ii"
 version = "0.1.0"
 
