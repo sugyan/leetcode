@@ -1,6 +1,7 @@
 pub struct CombinationIterator {
-    combinations: Vec<String>,
-    idx: usize,
+    chars: Vec<char>,
+    idx: i32,
+    cl: u32,
 }
 
 /**
@@ -9,54 +10,29 @@ pub struct CombinationIterator {
  */
 impl CombinationIterator {
     pub fn new(characters: String, combination_length: i32) -> Self {
-        let mut combinations: Vec<String> = Vec::new();
-        let mut v: Vec<usize> = Vec::new();
-        let chars: Vec<char> = characters.chars().collect();
-        CombinationIterator::dfs(
-            &mut combinations,
-            chars.len(),
-            combination_length as usize,
-            0,
-            &mut v,
-            &chars,
-        );
         Self {
-            combinations,
-            idx: 0,
+            chars: characters.chars().collect(),
+            idx: 1 << characters.len(),
+            cl: combination_length as u32,
         }
     }
 
     #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> String {
-        let ret = self.combinations[self.idx].clone();
-        self.idx += 1;
-        ret
+        loop {
+            self.idx -= 1;
+            if self.idx.count_ones() == self.cl {
+                break;
+            }
+        }
+        (0..self.chars.len())
+            .filter(|i| self.idx & 1 << (self.chars.len() - i - 1) > 0)
+            .map(|i| self.chars[i])
+            .collect()
     }
 
     pub fn has_next(&self) -> bool {
-        self.idx < self.combinations.len()
-    }
-
-    fn dfs(
-        combinations: &mut Vec<String>,
-        n: usize,
-        k: usize,
-        i: usize,
-        v: &mut Vec<usize>,
-        chars: &[char],
-    ) {
-        if v.len() == k {
-            combinations.push(v.iter().map(|&i| chars[i]).collect());
-            return;
-        }
-        for j in i..n {
-            if n - j < k - v.len() {
-                break;
-            }
-            v.push(j);
-            CombinationIterator::dfs(combinations, n, k, j + 1, v, chars);
-            v.pop();
-        }
+        self.idx > (1 << self.cl) - 1
     }
 }
 
