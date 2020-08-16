@@ -7,12 +7,10 @@ impl Solution {
         }
         let mut dp: Vec<Vec<i32>> = vec![vec![0; prices.len()]; 3];
         for i in 1..3 {
+            let mut max = std::i32::MIN;
             for j in 1..prices.len() {
-                let mut max = 0;
-                for k in 0..j {
-                    max = std::cmp::max(max, prices[j] - prices[k] + dp[i - 1][k]);
-                }
-                dp[i][j] = std::cmp::max(dp[i][j - 1], max);
+                max = std::cmp::max(max, -prices[j - 1] + dp[i - 1][j - 1]);
+                dp[i][j] = std::cmp::max(dp[i][j - 1], prices[j] + max);
             }
         }
         dp[2][prices.len() - 1]
