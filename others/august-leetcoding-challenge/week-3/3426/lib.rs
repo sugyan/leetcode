@@ -5,15 +5,15 @@ impl Solution {
         if prices.is_empty() {
             return 0;
         }
-        let mut dp: Vec<Vec<i32>> = vec![vec![0; prices.len()]; 3];
-        for i in 1..3 {
-            let mut max = std::i32::MIN;
-            for j in 1..prices.len() {
-                max = std::cmp::max(max, -prices[j - 1] + dp[i - 1][j - 1]);
-                dp[i][j] = std::cmp::max(dp[i][j - 1], prices[j] + max);
+        let mut dp = [0; 3];
+        let mut min = [prices[0]; 3];
+        for price in prices.iter().skip(1) {
+            for i in 1..3 {
+                min[i] = std::cmp::min(min[i], price - dp[i - 1]);
+                dp[i] = std::cmp::max(dp[i], price - min[i]);
             }
         }
-        dp[2][prices.len() - 1]
+        dp[2]
     }
 }
 
