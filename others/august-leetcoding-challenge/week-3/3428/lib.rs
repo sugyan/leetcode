@@ -1,27 +1,24 @@
-use std::collections::VecDeque;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn nums_same_consec_diff(n: i32, k: i32) -> Vec<i32> {
-        let mut vd: VecDeque<i32> = (1..=9).collect();
-        let border = (0..n - 1).fold(1, |acc, _| acc * 10);
-        while let Some(&front) = vd.front() {
-            if front >= border {
-                break;
-            }
-            vd.pop_front();
-            for d in if k == 0 { vec![0] } else { vec![-k, k] }.iter() {
-                let j = (front % 10) + d;
-                if j >= 0 && j < 10 {
-                    vd.push_back(front * 10 + j);
+        let mut answer: Vec<i32> = (1..=9).collect();
+        for _ in 0..n - 1 {
+            let mut v: Vec<i32> = Vec::new();
+            for m in answer.iter() {
+                for d in if k == 0 { vec![0] } else { vec![-k, k] }.iter() {
+                    let j = (m % 10) + d;
+                    if j >= 0 && j < 10 {
+                        v.push(m * 10 + j);
+                    }
                 }
             }
+            answer = v;
         }
         if n == 1 {
-            vd.push_front(0);
+            answer.push(0);
         }
-        Vec::from(vd)
+        answer
     }
 }
 
