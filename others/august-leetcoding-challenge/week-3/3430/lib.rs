@@ -1,28 +1,28 @@
+use std::collections::VecDeque;
 use utils::ListNode;
 
 pub struct Solution {}
 
 impl Solution {
     pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
-        let mut v: Vec<i32> = Vec::new();
+        let mut vd: VecDeque<i32> = VecDeque::new();
         {
             let mut node = head.clone();
             while let Some(n) = node {
-                v.push(n.val);
+                vd.push_back(n.val);
                 node = n.next;
-            }
-        }
-        for i in 0..v.len() {
-            if i % 2 == 1 {
-                if let Some(n) = v.pop() {
-                    v.insert(i, n);
-                }
             }
         }
         {
             let mut node = head;
+            let mut i = 0;
             while let Some(n) = node {
-                n.val = v.remove(0);
+                n.val = if i % 2 == 0 {
+                    vd.pop_front().unwrap()
+                } else {
+                    vd.pop_back().unwrap()
+                };
+                i += 1;
                 node = &mut n.next;
             }
         }
