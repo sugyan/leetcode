@@ -24,7 +24,7 @@ impl StreamChecker {
             maxlen = std::cmp::max(maxlen, word.len());
             let mut node = &mut trie;
             for &c in word.as_bytes().iter().rev() {
-                node = node.nodes[(c - b'a') as usize].get_or_insert(Default::default());
+                node = node.nodes[(c - b'a') as usize].get_or_insert_with(Default::default);
             }
             node.end = true;
         }
