@@ -1,23 +1,47 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 pub struct Solution {}
 
 impl Solution {
     pub fn mincost_tickets(days: Vec<i32>, costs: Vec<i32>) -> i32 {
-        let hs: HashSet<&i32> = days.iter().collect();
-        let mut dp = vec![0; 366];
-        for day in 1..=365 {
-            dp[day as usize] = if hs.contains(&day) {
+        let mut memo: HashMap<i32, i32> = HashMap::new();
+        let last: i32 = *days.last().unwrap();
+        let days: HashSet<&i32> = days.iter().collect();
+        Solution::dp(0, last, &days, &costs, &mut memo)
+    }
+    fn dp(
+        day: i32,
+        last: i32,
+        days: &HashSet<&i32>,
+        costs: &[i32],
+        memo: &mut HashMap<i32, i32>,
+    ) -> i32 {
+        if let Some(&ret) = memo.get(&day) {
+            ret
+        } else {
+            let ret = if day > last {
+                0
+            } else if days.contains(&day) {
                 let mut min = std::i32::MAX;
-                min = std::cmp::min(min, dp[std::cmp::max(0, day - 1) as usize] + costs[0]);
-                min = std::cmp::min(min, dp[std::cmp::max(0, day - 7) as usize] + costs[1]);
-                min = std::cmp::min(min, dp[std::cmp::max(0, day - 30) as usize] + costs[2]);
+                min = std::cmp::min(
+                    min,
+                    Solution::dp(day + 1, last, days, costs, memo) + costs[0],
+                );
+                min = std::cmp::min(
+                    min,
+                    Solution::dp(day + 7, last, days, costs, memo) + costs[1],
+                );
+                min = std::cmp::min(
+                    min,
+                    Solution::dp(day + 30, last, days, costs, memo) + costs[2],
+                );
                 min
             } else {
-                dp[day as usize - 1]
-            }
+                Solution::dp(day + 1, last, days, costs, memo)
+            };
+            memo.insert(day, ret);
+            ret
         }
-        *dp.last().unwrap()
     }
 }
 
