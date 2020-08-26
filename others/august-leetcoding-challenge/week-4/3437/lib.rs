@@ -3,16 +3,11 @@ pub struct Solution {}
 impl Solution {
     pub fn fizz_buzz(n: i32) -> Vec<String> {
         (1..=n)
-            .map(|i| {
-                if i % 15 == 0 {
-                    "FizzBuzz".to_string()
-                } else if i % 3 == 0 {
-                    "Fizz".to_string()
-                } else if i % 5 == 0 {
-                    "Buzz".to_string()
-                } else {
-                    i.to_string()
-                }
+            .map(|i| match i {
+                i if i % 15 == 0 => String::from("FizzBuzz"),
+                i if i % 3 == 0 => String::from("Fizz"),
+                i if i % 5 == 0 => String::from("Buzz"),
+                _ => i.to_string(),
             })
             .collect()
     }
