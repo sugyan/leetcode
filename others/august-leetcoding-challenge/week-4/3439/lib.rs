@@ -14,7 +14,14 @@ pub struct Solution {}
 
 impl Solution {
     pub fn rand10() -> i32 {
-        (0..10).fold(0, |acc, _| acc + rand7()) % 10 + 1
+        loop {
+            let r = rand7();
+            let c = rand7();
+            let i = c + (r - 1) * 7;
+            if i <= 40 {
+                return (i - 1) % 10 + 1;
+            }
+        }
     }
 }
 
