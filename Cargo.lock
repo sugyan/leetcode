@@ -270,6 +270,13 @@ name = "august-leetcoding-challenge_week-4_3438"
 version = "0.1.0"
 
 [[package]]
+name = "august-leetcoding-challenge_week-4_3439"
+version = "0.1.0"
+dependencies = [
+ "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "basic-calculator-ii"
 version = "0.1.0"
 
