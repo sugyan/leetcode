@@ -15,30 +15,17 @@ impl Solution {
         Solution::dfs(&root2, &mut v2);
         let mut answer: Vec<i32> = Vec::new();
         let (mut i1, mut i2) = (0, 0);
-        loop {
-            let n1 = v1.get(i1);
-            let n2 = v2.get(i2);
-            if n1.is_none() && n2.is_none() {
-                break;
-            }
-            if n1.is_none() {
-                answer.push(*n2.unwrap());
-                i2 += 1;
-                continue;
-            }
-            if n2.is_none() {
-                answer.push(*n1.unwrap());
-                i1 += 1;
-                continue;
-            }
-            if n1.unwrap() < n2.unwrap() {
-                answer.push(*n1.unwrap());
+        while i1 < v1.len() && i2 < v2.len() {
+            if v1[i1] < v2[i2] {
+                answer.push(v1[i1]);
                 i1 += 1;
             } else {
-                answer.push(*n2.unwrap());
+                answer.push(v2[i2]);
                 i2 += 1;
             }
         }
+        answer.extend(&v1[i1..]);
+        answer.extend(&v2[i2..]);
         answer
     }
     fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, v: &mut Vec<i32>) {
