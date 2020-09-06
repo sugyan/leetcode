@@ -2,24 +2,29 @@ pub struct Solution {}
 
 impl Solution {
     pub fn largest_overlap(a: Vec<Vec<i32>>, b: Vec<Vec<i32>>) -> i32 {
+        let size = a.len();
+        let mut padded = vec![vec![0; size * 3 - 2]; size * 3 - 2];
+        for i in 0..size {
+            for j in 0..size {
+                padded[i + size - 1][j + size - 1] = b[i][j];
+            }
+        }
         let mut answer = 0;
-        let size = a.len() as i32;
-        for i in -size + 1..size {
-            for j in -size + 1..size {
-                let mut overlap = 0;
-                for k in std::cmp::max(0, i)..std::cmp::min(size, size + i) {
-                    for l in std::cmp::max(0, j)..std::cmp::min(size, size + j) {
-                        if a[k as usize][l as usize] == 1
-                            && b[(k - i) as usize][(l - j) as usize] == 1
-                        {
-                            overlap += 1;
-                        }
-                    }
-                }
-                answer = std::cmp::max(answer, overlap);
+        for i in 0..size * 2 - 1 {
+            for j in 0..size * 2 - 1 {
+                answer = std::cmp::max(answer, Solution::convolution(&a, &padded, (i, j)));
             }
         }
         answer
+    }
+    fn convolution(a: &[Vec<i32>], p: &[Vec<i32>], shift: (usize, usize)) -> i32 {
+        let mut ret = 0;
+        for i in 0..a.len() {
+            for j in 0..a.len() {
+                ret += a[i][j] * p[i + shift.0][j + shift.1];
+            }
+        }
+        ret
     }
 }
 
