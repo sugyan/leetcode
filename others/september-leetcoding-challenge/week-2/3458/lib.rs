@@ -2,17 +2,22 @@ pub struct Solution {}
 
 impl Solution {
     pub fn insert(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
-        let mut answer: Vec<Vec<i32>> = Vec::with_capacity(intervals.len());
-        let mut intervals = intervals;
-        intervals.push(new_interval);
-        intervals.sort();
-        for interval in intervals.iter() {
-            answer.push(interval.clone());
-            let len = answer.len();
-            if len > 1 && answer[len - 2][1] >= answer[len - 1][0] {
-                answer[len - 2][1] = std::cmp::max(answer[len - 2][1], answer[len - 1][1]);
-                answer.pop();
-            }
+        let mut answer: Vec<Vec<i32>> = Vec::with_capacity(intervals.len() + 1);
+        let mut i = 0;
+        while i < intervals.len() && intervals[i][1] < new_interval[0] {
+            answer.push(intervals[i].clone());
+            i += 1;
+        }
+        let mut new_interval = new_interval;
+        while i < intervals.len() && intervals[i][0] <= new_interval[1] {
+            new_interval[0] = std::cmp::min(new_interval[0], intervals[i][0]);
+            new_interval[1] = std::cmp::max(new_interval[1], intervals[i][1]);
+            i += 1;
+        }
+        answer.push(new_interval);
+        while i < intervals.len() {
+            answer.push(intervals[i].clone());
+            i += 1;
         }
         answer
     }
