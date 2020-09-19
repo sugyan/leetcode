@@ -1,24 +1,21 @@
+use std::collections::VecDeque;
+
 pub struct Solution {}
 
 impl Solution {
     pub fn sequential_digits(low: i32, high: i32) -> Vec<i32> {
-        let mut v: Vec<String> = vec![String::from("12")];
-        while let Some(n) = v.last() {
-            if n.len() >= 9 {
-                break;
+        let mut vd: VecDeque<i32> = (1..=9).collect::<VecDeque<i32>>();
+        let mut answer: Vec<i32> = Vec::new();
+        while let Some(front) = vd.pop_front() {
+            if low <= front && front <= high {
+                answer.push(front);
             }
-            if let Some(last) = n.chars().last() {
-                let next = match last {
-                    '9' => (0..=n.len()).map(|i| (b'1' + i as u8) as char).collect(),
-                    _ => n.chars().map(|c| (c as u8 + 1) as char).collect(),
-                };
-                v.push(next);
+            let d = front % 10;
+            if d < 9 {
+                vd.push_back(front * 10 + d + 1);
             }
         }
-        v.iter()
-            .map(|s| s.parse().unwrap())
-            .filter(|&n| low <= n && n <= high)
-            .collect()
+        answer
     }
 }
 
