@@ -2,20 +2,19 @@ pub struct Solution {}
 
 impl Solution {
     pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
-        let mut v: Vec<i32> = Vec::with_capacity(gas.len());
-        v.push(gas[0] - cost[0]);
-        let (mut idx, mut min) = (0, v[0]);
-        for i in 1..gas.len() {
-            v.push(v[i - 1] + gas[i] - cost[i]);
-            if v[i] < min {
-                idx = i;
-                min = v[i];
+        let mut sum = 0;
+        let (mut idx, mut min) = (0, 0);
+        for i in 0..gas.len() {
+            sum += gas[i] - cost[i];
+            if sum < min {
+                min = sum;
+                idx = i + 1;
             }
         }
-        if v[v.len() - 1] < 0 {
+        if sum < 0 {
             -1
         } else {
-            ((idx + 1) % v.len()) as i32
+            idx as i32
         }
     }
 }
