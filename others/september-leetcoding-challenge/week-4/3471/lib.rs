@@ -2,14 +2,10 @@ pub struct Solution {}
 
 impl Solution {
     pub fn find_the_difference(s: String, t: String) -> char {
-        let mut answer = 0;
-        for c in s.as_bytes() {
-            answer ^= c;
-        }
-        for c in t.as_bytes() {
-            answer ^= c;
-        }
-        answer as char
+        s.as_bytes()
+            .iter()
+            .chain(t.as_bytes())
+            .fold(0, |acc, &x| acc ^ x) as char
     }
 }
 
