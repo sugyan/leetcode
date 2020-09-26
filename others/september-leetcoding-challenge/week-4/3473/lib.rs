@@ -2,16 +2,14 @@ pub struct Solution {}
 
 impl Solution {
     pub fn find_poisoned_duration(time_series: Vec<i32>, duration: i32) -> i32 {
-        let mut answer = 0;
-        let mut until = -1;
-        for &s in time_series.iter() {
-            answer += duration;
-            if until >= s {
-                answer -= until - s + 1;
-            }
-            until = s + duration - 1;
+        if time_series.is_empty() {
+            return 0;
         }
-        answer
+        let mut answer = 0;
+        for i in 1..time_series.len() {
+            answer += std::cmp::min(time_series[i] - time_series[i - 1], duration);
+        }
+        answer + duration
     }
 }
 
