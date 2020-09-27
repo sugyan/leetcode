@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 pub struct Solution {}
 
@@ -19,9 +19,9 @@ impl Solution {
         }
         let mut answer = Vec::with_capacity(queries.len());
         for query in queries.iter() {
-            let mut v: Vec<String> = Vec::new();
+            let mut hs: HashSet<String> = HashSet::new();
             answer.push(
-                if let Some(ret) = Solution::dfs(&hm, &query[0], &query[1], &mut v) {
+                if let Some(ret) = Solution::dfs(&hm, &query[0], &query[1], &mut hs) {
                     ret
                 } else {
                     -1.0
@@ -34,21 +34,21 @@ impl Solution {
         hm: &HashMap<&str, HashMap<&str, f64>>,
         src: &str,
         dst: &str,
-        v: &mut Vec<String>,
+        hs: &mut HashSet<String>,
     ) -> Option<f64> {
         if let Some(m) = hm.get(src) {
             for e in m.iter() {
                 if e.0 == &dst {
                     return Some(*e.1);
                 }
-                if v.iter().any(|s| s == e.0) {
+                if hs.contains(&e.0.to_string()) {
                     continue;
                 }
-                v.push(src.to_string());
-                if let Some(ret) = Solution::dfs(hm, &e.0, dst, v) {
+                hs.insert(src.to_string());
+                if let Some(ret) = Solution::dfs(hm, &e.0, dst, hs) {
                     return Some(*e.1 * ret);
                 }
-                v.pop();
+                hs.remove(src);
             }
         }
         None
