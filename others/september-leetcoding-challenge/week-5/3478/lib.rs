@@ -4,15 +4,17 @@ impl Solution {
     pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
         let mut nums = nums;
         for i in 0..nums.len() {
-            let mut num = nums[i];
-            while num > 0 && num <= nums.len() as i32 {
-                let tmp = nums[num as usize - 1];
-                nums[num as usize - 1] = std::i32::MIN;
-                num = tmp;
+            loop {
+                let num = nums[i];
+                if num > 0 && num <= nums.len() as i32 && nums[i] != nums[num as usize - 1] {
+                    nums.swap(i, num as usize - 1);
+                } else {
+                    break;
+                }
             }
         }
         for (i, &num) in nums.iter().enumerate() {
-            if num != std::i32::MIN {
+            if num != i as i32 + 1 {
                 return i as i32 + 1;
             }
         }
