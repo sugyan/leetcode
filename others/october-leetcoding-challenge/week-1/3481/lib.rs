@@ -4,24 +4,23 @@ impl Solution {
     pub fn combination_sum(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let mut answer = Vec::new();
         let mut v: Vec<i32> = Vec::new();
-        Solution::helper(&candidates, target, 0, &mut v, &mut answer);
+        Solution::helper(&candidates, target, &mut v, &mut answer);
         answer
     }
-    fn helper(
-        candidates: &[i32],
-        target: i32,
-        i: usize,
-        v: &mut Vec<i32>,
-        answer: &mut Vec<Vec<i32>>,
-    ) {
+    fn helper(candidates: &[i32], target: i32, v: &mut Vec<i32>, answer: &mut Vec<Vec<i32>>) {
         if target == 0 {
             answer.push(v.clone());
             return;
         }
-        for j in i..candidates.len() {
-            if candidates[j] <= target {
-                v.push(candidates[j]);
-                Solution::helper(candidates, target - candidates[j], j, v, answer);
+        for &candidate in candidates.iter() {
+            if let Some(&last) = v.last() {
+                if candidate < last {
+                    continue;
+                }
+            }
+            if candidate <= target {
+                v.push(candidate);
+                Solution::helper(candidates, target - candidate, v, answer);
                 v.pop();
             }
         }
