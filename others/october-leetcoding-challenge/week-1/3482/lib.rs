@@ -8,17 +8,16 @@ impl Solution {
         for &num in nums.iter() {
             *hm.entry(num).or_insert(0) += 1;
         }
-        let mut answer = 0;
-        for entry in hm.iter() {
-            if k == 0 {
-                if *entry.1 > 1 {
-                    answer += 1;
+        hm.iter()
+            .filter(|entry| {
+                if let Some(&val) = hm.get(&(entry.0 + k)) {
+                    if k != 0 || val > 1 {
+                        return true;
+                    }
                 }
-            } else if hm.contains_key(&(entry.0 + k)) {
-                answer += 1;
-            }
-        }
-        answer
+                false
+            })
+            .count() as i32
     }
 }
 
