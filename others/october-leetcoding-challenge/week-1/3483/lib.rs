@@ -3,18 +3,13 @@ pub struct Solution {}
 impl Solution {
     pub fn remove_covered_intervals(intervals: Vec<Vec<i32>>) -> i32 {
         let mut intervals = intervals;
-        intervals.sort_by(|a: &Vec<i32>, b: &Vec<i32>| match a[0].cmp(&b[0]) {
-            std::cmp::Ordering::Equal => b[1].cmp(&a[1]),
-            ne => ne,
-        });
-        let mut answer = intervals.len() as i32;
-        let mut i = 0;
-        while i < intervals.len() {
-            let end = intervals[i][1];
-            i += 1;
-            while i < intervals.len() && intervals[i][1] <= end {
-                answer -= 1;
-                i += 1;
+        intervals.sort_unstable_by_key(|v: &Vec<i32>| (v[0], -v[1]));
+        let mut answer = 0;
+        let mut end = 0;
+        for interval in intervals.iter() {
+            if interval[1] > end {
+                answer += 1;
+                end = interval[1];
             }
         }
         answer
