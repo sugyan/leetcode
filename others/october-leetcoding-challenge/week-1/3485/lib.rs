@@ -9,21 +9,19 @@ impl Solution {
         root: Option<Rc<RefCell<TreeNode>>>,
         val: i32,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        Solution::helper(&root, val)
-    }
-    fn helper(node: &Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<RefCell<TreeNode>>> {
-        if let Some(n) = node {
-            if n.borrow().val < val {
-                let node = Solution::helper(&n.borrow().right, val);
-                n.borrow_mut().right = node
-            } else {
-                let node = Solution::helper(&n.borrow().left, val);
-                n.borrow_mut().left = node;
+        Some(match root {
+            None => Rc::new(RefCell::new(TreeNode::new(val))),
+            Some(r) => {
+                if r.borrow().val > val {
+                    let node = Solution::insert_into_bst(r.borrow().left.clone(), val);
+                    r.borrow_mut().left = node;
+                } else {
+                    let node = Solution::insert_into_bst(r.borrow().right.clone(), val);
+                    r.borrow_mut().right = node
+                }
+                r
             }
-        } else {
-            return Some(Rc::new(RefCell::new(TreeNode::new(val))));
-        }
-        node.clone()
+        })
     }
 }
 
