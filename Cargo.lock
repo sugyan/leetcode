@@ -1000,6 +1000,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "october-leetcoding-challenge_week-1_3486"
+version = "0.1.0"
+dependencies = [
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "palindrome-partitioning"
 version = "0.1.0"
 
