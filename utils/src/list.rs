@@ -21,17 +21,6 @@ pub fn to_list(v: Vec<i32>) -> Option<Box<ListNode>> {
     current
 }
 
-pub fn list_to_vec(l: Option<Box<ListNode>>) -> Vec<i32> {
-    let mut v: Vec<i32> = Vec::new();
-    let mut l: Option<Box<ListNode>> = l;
-    let mut node = &mut l;
-    while let Some(n) = node {
-        v.push(n.val);
-        node = &mut n.next;
-    }
-    v
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
