@@ -14,10 +14,11 @@ class Codec {
    public:
     // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
-        vector<int> v = to_vec(root);
-        ostringstream oss;
-        copy(v.begin(), v.end(), ostream_iterator<int>(oss, ","));
-        return oss.str();
+        if (root == nullptr) {
+            return "";
+        }
+        return to_string(root->val) + "," + serialize(root->left) +
+               serialize(root->right);
     }
 
     // Decodes your encoded data to tree.
@@ -32,17 +33,6 @@ class Codec {
     }
 
    private:
-    vector<int> to_vec(TreeNode* node) {
-        if (node == nullptr) {
-            return vector<int>();
-        }
-        vector<int> v = {node->val};
-        vector<int> vl = to_vec(node->left);
-        vector<int> vr = to_vec(node->right);
-        v.insert(v.end(), vl.begin(), vl.end());
-        v.insert(v.end(), vr.begin(), vr.end());
-        return v;
-    }
     TreeNode* to_tree(vector<int>& v, int i, int j) {
         if (i == j) {
             return nullptr;
