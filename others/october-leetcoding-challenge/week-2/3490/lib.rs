@@ -6,19 +6,15 @@ impl Solution {
             return 0;
         }
         let mut points = points;
-        points.sort();
+        points.sort_unstable_by_key(|p| p[1]);
         let mut answer = 1;
-        let mut range = (points[0][0], points[0][1]);
+        let mut max = points[0][1];
         for point in points.iter().skip(1) {
-            range = if point[0] > range.1 {
-                answer += 1;
-                (point[0], point[1])
-            } else {
-                (
-                    std::cmp::max(range.0, point[0]),
-                    std::cmp::min(range.1, point[1]),
-                )
-            };
+            if point[0] <= max {
+                continue;
+            }
+            answer += 1;
+            max = point[1];
         }
         answer
     }
