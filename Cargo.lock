@@ -8,7 +8,7 @@ version = "0.1.0"
 name = "add-two-numbers"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -47,7 +47,7 @@ version = "0.1.0"
 name = "april-leetcoding-challenge_week-2_3290"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -62,7 +62,7 @@ version = "0.1.0"
 name = "april-leetcoding-challenge_week-2_3293"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -101,7 +101,7 @@ version = "0.1.0"
 name = "april-leetcoding-challenge_week-3_3305"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -136,14 +136,14 @@ version = "0.1.0"
 name = "april-leetcoding-challenge_week-5_3314"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "april-leetcoding-challenge_week-5_3315"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -174,14 +174,14 @@ version = "0.1.0"
 name = "august-leetcoding-challenge_week-1_3415"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "august-leetcoding-challenge_week-2_3417"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -232,7 +232,7 @@ version = "0.1.0"
 name = "august-leetcoding-challenge_week-3_3430"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -243,7 +243,7 @@ version = "0.1.0"
 name = "august-leetcoding-challenge_week-4_3433"
 version = "0.1.0"
 dependencies = [
- "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand",
 ]
 
 [[package]]
@@ -254,7 +254,7 @@ version = "0.1.0"
 name = "august-leetcoding-challenge_week-4_3435"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -273,7 +273,7 @@ version = "0.1.0"
 name = "august-leetcoding-challenge_week-4_3439"
 version = "0.1.0"
 dependencies = [
- "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand",
 ]
 
 [[package]]
@@ -288,7 +288,7 @@ version = "0.1.0"
 name = "august-leetcoding-challenge_week-5_3443"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -303,42 +303,42 @@ version = "0.1.0"
 name = "binary-search-tree-iterator"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "binary-tree-inorder-traversal"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "binary-tree-level-order-traversal"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "binary-tree-preorder-traversal"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "binary-tree-right-side-view"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "binary-tree-zigzag-level-order-traversal"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -349,6 +349,7 @@ version = "0.1.0"
 name = "cfg-if"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
 
 [[package]]
 name = "combination-sum"
@@ -370,14 +371,14 @@ version = "0.1.0"
 name = "construct-binary-tree-from-inorder-and-postorder-traversal"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "construct-binary-tree-from-preorder-and-inorder-traversal"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -392,14 +393,14 @@ version = "0.1.0"
 name = "convert-sorted-list-to-binary-search-tree"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "count-complete-tree-nodes"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -442,7 +443,7 @@ version = "0.1.0"
 name = "flatten-binary-tree-to-linked-list"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -465,10 +466,11 @@ version = "0.1.0"
 name = "getrandom"
 version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7abc8dd8451921606d809ba32e95b6111925cd2906060d2dcc29c070220503eb"
 dependencies = [
- "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
- "libc 0.2.71 (registry+https://github.com/rust-lang/crates.io-index)",
- "wasi 0.9.0+wasi-snapshot-preview1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "cfg-if",
+ "libc",
+ "wasi",
 ]
 
 [[package]]
@@ -503,7 +505,7 @@ version = "0.1.0"
 name = "july-leetcoding-challenge_week-1_3378"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -534,7 +536,7 @@ version = "0.1.0"
 name = "july-leetcoding-challenge_week-2_3385"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -545,7 +547,7 @@ version = "0.1.0"
 name = "july-leetcoding-challenge_week-2_3389"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -576,7 +578,7 @@ version = "0.1.0"
 name = "july-leetcoding-challenge_week-3_3396"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -587,7 +589,7 @@ version = "0.1.0"
 name = "july-leetcoding-challenge_week-4_3398"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -610,7 +612,7 @@ version = "0.1.0"
 name = "july-leetcoding-challenge_week-4_3403"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -637,7 +639,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-1_3347"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -652,7 +654,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-1_3351"
 version = "0.1.0"
 dependencies = [
- "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand",
 ]
 
 [[package]]
@@ -683,7 +685,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-2_3358"
 version = "0.1.0"
 dependencies = [
- "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand",
 ]
 
 [[package]]
@@ -698,7 +700,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-3_3361"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -733,7 +735,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-4_3369"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -748,7 +750,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-4_3372"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -775,7 +777,7 @@ version = "0.1.0"
 name = "kth-smallest-element-in-a-bst"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -790,6 +792,7 @@ version = "0.1.0"
 name = "libc"
 version = "0.2.71"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9457b06509d27052635f90d6466700c65095fdf75409b3fbdd903e988b886f49"
 
 [[package]]
 name = "longest-increasing-subsequence"
@@ -843,7 +846,7 @@ version = "0.1.0"
 name = "may-leetcoding-challenge_week-1_3322"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -894,7 +897,7 @@ version = "0.1.0"
 name = "may-leetcoding-challenge_week-3_3335"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -913,7 +916,7 @@ version = "0.1.0"
 name = "may-leetcoding-challenge_week-4_3339"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -996,14 +999,14 @@ version = "0.1.0"
 name = "october-leetcoding-challenge_week-1_3485"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "october-leetcoding-challenge_week-1_3486"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1026,7 +1029,7 @@ version = "0.1.0"
 name = "october-leetcoding-challenge_week-2_3493"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1037,14 +1040,14 @@ version = "0.1.0"
 name = "partition-list"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "path-sum-ii"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1071,6 +1074,7 @@ version = "0.1.0"
 name = "ppv-lite86"
 version = "0.2.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "237a5ed80e274dbc66f86bd59c1e25edc039660be53194b5fe0a482e0f2612ea"
 
 [[package]]
 name = "product-of-array-except-self"
@@ -1080,37 +1084,41 @@ version = "0.1.0"
 name = "rand"
 version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a6b1679d49b24bbfe0c803429aa1874472f50d9b363131f0e89fc356b544d03"
 dependencies = [
- "getrandom 0.1.14 (registry+https://github.com/rust-lang/crates.io-index)",
- "libc 0.2.71 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand_chacha 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand_core 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand_hc 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "getrandom",
+ "libc",
+ "rand_chacha",
+ "rand_core",
+ "rand_hc",
 ]
 
 [[package]]
 name = "rand_chacha"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f4c8ed856279c9737206bf725bf36935d8666ead7aa69b52be55af369d193402"
 dependencies = [
- "ppv-lite86 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand_core 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ppv-lite86",
+ "rand_core",
 ]
 
 [[package]]
 name = "rand_core"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "90bde5296fc891b0cef12a6d03ddccc162ce7b2aff54160af9338f8d40df6d19"
 dependencies = [
- "getrandom 0.1.14 (registry+https://github.com/rust-lang/crates.io-index)",
+ "getrandom",
 ]
 
 [[package]]
 name = "rand_hc"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca3129af7b92a17112d59ad498c6f81eaf463253766b90396d39ea7a39d6613c"
 dependencies = [
- "rand_core 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand_core",
 ]
 
 [[package]]
@@ -1133,14 +1141,14 @@ version = "0.1.0"
 name = "remove-duplicates-from-sorted-list-ii"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "remove-nth-node-from-end-of-list"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1155,7 +1163,7 @@ version = "0.1.0"
 name = "reverse-linked-list-ii"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1170,7 +1178,7 @@ version = "0.1.0"
 name = "rotate-list"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1209,7 +1217,7 @@ version = "0.1.0"
 name = "september-leetcoding-challenge_week-1_3449"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1224,7 +1232,7 @@ version = "0.1.0"
 name = "september-leetcoding-challenge_week-2_3453"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1355,7 +1363,7 @@ version = "0.1.0"
 name = "sum-root-to-leaf-numbers"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1390,7 +1398,7 @@ version = "0.1.0"
 name = "unique-binary-search-trees-ii"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
@@ -1409,13 +1417,14 @@ version = "0.1.0"
 name = "validate-binary-search-tree"
 version = "0.1.0"
 dependencies = [
- "utils 0.1.0",
+ "utils",
 ]
 
 [[package]]
 name = "wasi"
 version = "0.9.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cccddf32554fecc6acb585f82a32a72e28b48f8c4c1883ddfeeeaa96f7d8e519"
 
 [[package]]
 name = "word-break"
@@ -1428,14 +1437,3 @@ version = "0.1.0"
 [[package]]
 name = "word-search"
 version = "0.1.0"
-
-[metadata]
-"checksum cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)" = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
-"checksum getrandom 0.1.14 (registry+https://github.com/rust-lang/crates.io-index)" = "7abc8dd8451921606d809ba32e95b6111925cd2906060d2dcc29c070220503eb"
-"checksum libc 0.2.71 (registry+https://github.com/rust-lang/crates.io-index)" = "9457b06509d27052635f90d6466700c65095fdf75409b3fbdd903e988b886f49"
-"checksum ppv-lite86 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)" = "237a5ed80e274dbc66f86bd59c1e25edc039660be53194b5fe0a482e0f2612ea"
-"checksum rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)" = "6a6b1679d49b24bbfe0c803429aa1874472f50d9b363131f0e89fc356b544d03"
-"checksum rand_chacha 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "f4c8ed856279c9737206bf725bf36935d8666ead7aa69b52be55af369d193402"
-"checksum rand_core 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "90bde5296fc891b0cef12a6d03ddccc162ce7b2aff54160af9338f8d40df6d19"
-"checksum rand_hc 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ca3129af7b92a17112d59ad498c6f81eaf463253766b90396d39ea7a39d6613c"
-"checksum wasi 0.9.0+wasi-snapshot-preview1 (registry+https://github.com/rust-lang/crates.io-index)" = "cccddf32554fecc6acb585f82a32a72e28b48f8c4c1883ddfeeeaa96f7d8e519"
