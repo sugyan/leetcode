@@ -2,17 +2,10 @@ pub struct Solution {}
 
 impl Solution {
     pub fn rotate(nums: &mut Vec<i32>, k: i32) {
-        let len = nums.len();
-        for i in 0..nums.len() / 2 {
-            nums.swap(i, len - 1 - i);
-        }
-        let k = k as usize % len;
-        for i in 0..k / 2 {
-            nums.swap(i, k - 1 - i);
-        }
-        for i in k..(len + k) / 2 {
-            nums.swap(i, len - 1 - i + k);
-        }
+        let k = k as usize % nums.len();
+        nums.reverse();
+        nums[..k].reverse();
+        nums[k..].reverse();
     }
 }
 
