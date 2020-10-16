@@ -7,7 +7,7 @@ impl Solution {
         }
         match matrix.binary_search_by(|row: &Vec<i32>| row[0].cmp(&target)) {
             Ok(_) => true,
-            Err(i) => (0..i).any(|i: usize| matrix[i].binary_search(&target).is_ok()),
+            Err(i) => i > 0 && matrix[i - 1].binary_search(&target).is_ok(),
         }
     }
 }
