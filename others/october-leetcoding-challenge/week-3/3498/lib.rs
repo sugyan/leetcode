@@ -5,11 +5,8 @@ pub struct Solution {}
 impl Solution {
     pub fn find_repeated_dna_sequences(s: String) -> Vec<String> {
         let mut hm: HashMap<&str, usize> = HashMap::new();
-        if s.len() < 10 {
-            return Vec::new();
-        }
-        for i in 0..s.len() - 9 {
-            *hm.entry(&s[i..i + 10]).or_insert(0) += 1;
+        if s.len() >= 10 {
+            (0..s.len() - 9).for_each(|i| *hm.entry(&s[i..i + 10]).or_insert(0) += 1);
         }
         hm.iter()
             .filter(|&x| *x.1 > 1)
