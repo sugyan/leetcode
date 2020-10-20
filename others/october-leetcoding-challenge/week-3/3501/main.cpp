@@ -30,15 +30,13 @@ class Solution {
         if (node == nullptr) {
             return nullptr;
         }
-        if (um.find(node->val) != um.end()) {
-            return um[node->val];
+        if (um.find(node->val) == um.end()) {
+            um[node->val] = new Node(node->val);
+            for (Node* neighbor : node->neighbors) {
+                um[node->val]->neighbors.push_back(cloneGraph(neighbor));
+            }
         }
-        Node* ret = new Node(node->val);
-        um[node->val] = ret;
-        for (Node* neighbor : node->neighbors) {
-            ret->neighbors.push_back(cloneGraph(neighbor));
-        }
-        return ret;
+        return um[node->val];
     }
 
    private:
