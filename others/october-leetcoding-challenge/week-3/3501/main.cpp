@@ -27,18 +27,22 @@ class Node {
 class Solution {
    public:
     Node* cloneGraph(Node* node) {
-        if (node == nullptr) {
-            return nullptr;
-        }
-        if (um.find(node->val) == um.end()) {
-            um[node->val] = new Node(node->val);
-            for (Node* neighbor : node->neighbors) {
-                um[node->val]->neighbors.push_back(cloneGraph(neighbor));
-            }
-        }
-        return um[node->val];
+        unordered_map<int, Node*> um;
+        return cloneGraph(node, um);
     }
 
    private:
-    unordered_map<int, Node*> um;
+    Node* cloneGraph(Node* node, unordered_map<int, Node*>& memo) {
+        if (node == nullptr) {
+            return nullptr;
+        }
+        if (memo.find(node->val) == memo.end()) {
+            memo[node->val] = new Node(node->val);
+            for (Node* neighbor : node->neighbors) {
+                memo[node->val]->neighbors.push_back(
+                    cloneGraph(neighbor, memo));
+            }
+        }
+        return memo[node->val];
+    }
 };
