@@ -6,18 +6,17 @@ pub struct Solution {}
 
 impl Solution {
     pub fn min_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        Solution::helper(&root)
+        Solution::dfs(&root)
     }
-    fn helper(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
         if let Some(n) = node {
-            1 + match (n.borrow().left.is_some(), n.borrow().right.is_some()) {
-                (true, true) => std::cmp::min(
-                    Solution::helper(&n.borrow().left),
-                    Solution::helper(&n.borrow().right),
-                ),
-                (true, false) => Solution::helper(&n.borrow().left),
-                (false, true) => Solution::helper(&n.borrow().right),
-                (false, false) => 0,
+            1 + if n.borrow().left.is_none() || n.borrow().right.is_none() {
+                Solution::dfs(&n.borrow().left) + Solution::dfs(&n.borrow().right)
+            } else {
+                std::cmp::min(
+                    Solution::dfs(&n.borrow().left),
+                    Solution::dfs(&n.borrow().right),
+                )
             }
         } else {
             0
