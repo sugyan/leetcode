@@ -2,21 +2,27 @@ pub struct Solution {}
 
 impl Solution {
     pub fn find132pattern(nums: Vec<i32>) -> bool {
-        let mut v: Vec<(i32, i32)> = Vec::new();
-        let mut min: Option<i32> = None;
+        let mut stack: Vec<i32> = Vec::new();
+        let mut min: Vec<i32> = vec![0; nums.len()];
+        min[0] = nums[0];
         for i in 1..nums.len() {
-            if let Some(m) = min {
-                if nums[i] < nums[i - 1] {
-                    v.push((m, nums[i - 1]));
-                    min = None;
+            min[i] = std::cmp::min(min[i - 1], nums[i]);
+        }
+        for (i, &num) in nums.iter().enumerate().rev() {
+            if num > min[i] {
+                while let Some(&last) = stack.last() {
+                    if last <= min[i] {
+                        stack.pop();
+                    } else {
+                        break;
+                    }
                 }
-            } else if nums[i] > nums[i - 1] {
-                min = Some(nums[i - 1]);
-            }
-            for &range in v.iter() {
-                if range.0 < nums[i] && nums[i] < range.1 {
-                    return true;
+                if let Some(&last) = stack.last() {
+                    if last < num {
+                        return true;
+                    }
                 }
+                stack.push(num);
             }
         }
         false
