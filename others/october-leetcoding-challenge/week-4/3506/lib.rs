@@ -7,29 +7,24 @@ impl Solution {
         }
         let mut tokens = tokens;
         tokens.sort_unstable();
-        let mut sum = vec![0; tokens.len() + 1];
-        for i in 0..tokens.len() {
-            sum[i + 1] = sum[i] + tokens[i];
-        }
         let (mut l, mut r) = (0, tokens.len() - 1);
         let mut p = p;
+        let mut score = 0;
         let mut answer = 0;
-        while l <= r {
-            if p < tokens[l] {
-                break;
+        while l <= r && (p >= tokens[l] || score > 0) {
+            while l <= r && p >= tokens[l] {
+                p -= tokens[l];
+                l += 1;
+                score += 1;
             }
-            let i = match sum.binary_search(&(p + sum[l])) {
-                Ok(i) => i,
-                Err(i) => i - 1,
-            } - 1;
-            answer = std::cmp::max(answer, std::cmp::min(r, i) - l + 1);
-            p += tokens[r] - tokens[l];
-            l += 1;
-            if r > 0 {
+            answer = std::cmp::max(answer, score);
+            if l <= r && score > 0 {
+                p += tokens[r];
                 r -= 1;
+                score -= 1;
             }
         }
-        answer as i32
+        answer
     }
 }
 
