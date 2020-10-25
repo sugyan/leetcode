@@ -4,14 +4,11 @@ impl Solution {
     pub fn winner_square_game(n: i32) -> bool {
         let mut v = vec![false; n as usize + 1];
         for i in 0..=n as usize {
-            if v[i] {
-                continue;
-            }
-            for j in 1.. {
-                if i + j * j > n as usize {
-                    break;
-                }
-                v[i + j * j] = true;
+            if !v[i] {
+                (1..)
+                    .map(|j| i + j * j)
+                    .take_while(|&k| k <= n as usize)
+                    .for_each(|k| v[k] = true);
             }
         }
         v[n as usize]
