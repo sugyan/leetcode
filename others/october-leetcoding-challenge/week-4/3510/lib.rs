@@ -3,29 +3,20 @@ pub struct Solution {}
 impl Solution {
     pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
         let mut answer = Vec::new();
-        if nums.is_empty() {
-            return answer;
-        }
-        let mut min = nums[0];
-        let mut s = min.to_string();
-        for i in 1..nums.len() {
-            if nums[i] > nums[i - 1] + 1 {
-                if nums[i - 1] != min {
-                    s += "->";
-                    s += &nums[i - 1].to_string();
-                }
-                answer.push(s.clone());
-                min = nums[i];
-                s = min.to_string();
+        let mut i = 0;
+        while i < nums.len() {
+            let min = nums[i];
+            while i < nums.len() - 1 && nums[i] + 1 == nums[i + 1] {
+                i += 1;
             }
-        }
-        if let Some(&last) = nums.last() {
-            if last != min {
+            let mut s = min.to_string();
+            if nums[i] != min {
                 s += "->";
-                s += &last.to_string();
+                s += &nums[i].to_string();
             }
+            answer.push(s);
+            i += 1;
         }
-        answer.push(s);
         answer
     }
 }
