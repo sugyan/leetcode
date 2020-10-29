@@ -2,24 +2,25 @@ pub struct Solution {}
 
 impl Solution {
     pub fn max_dist_to_closest(seats: Vec<i32>) -> i32 {
-        let mut answer = None;
+        let mut answer = 0;
         let mut d = 0;
-        for i in 0..=seats.len() {
-            if i < seats.len() && seats[i] == 0 {
+        for &seat in seats.iter() {
+            if seat == 0 {
                 d += 1;
             } else {
-                if let Some(a) = answer {
-                    answer = Some(std::cmp::max(
-                        a,
-                        if i == seats.len() { d } else { (d + 1) / 2 },
-                    ));
-                } else {
-                    answer = Some(d);
-                }
+                answer = std::cmp::max(answer, (d + 1) / 2);
                 d = 0;
             }
         }
-        answer.unwrap()
+        answer = std::cmp::max(
+            answer,
+            seats.iter().take_while(|&seat| *seat == 0).count() as i32,
+        );
+        answer = std::cmp::max(
+            answer,
+            seats.iter().rev().take_while(|&seat| *seat == 0).count() as i32,
+        );
+        answer
     }
 }
 
