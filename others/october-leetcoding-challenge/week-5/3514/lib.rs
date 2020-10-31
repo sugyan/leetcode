@@ -7,29 +7,31 @@ pub struct Solution {}
 impl Solution {
     pub fn recover_tree(root: &mut Option<Rc<RefCell<TreeNode>>>) {
         let mut prev: Option<i32> = None;
-        let mut v: Vec<(i32, i32)> = Vec::new();
-        Solution::find_targets(root, &mut prev, &mut v);
-        match v.len() {
-            1 => Solution::swap(root, &v[0]),
-            2 => Solution::swap(root, &(v[0].0, v[1].1)),
-            _ => {}
+        let mut swapped: Option<(i32, i32)> = None;
+        Solution::find_targets(root, &mut prev, &mut swapped);
+        if let Some(s) = &swapped {
+            Solution::swap(root, s);
         }
     }
     fn find_targets(
         node: &mut Option<Rc<RefCell<TreeNode>>>,
         prev: &mut Option<i32>,
-        v: &mut Vec<(i32, i32)>,
+        swapped: &mut Option<(i32, i32)>,
     ) {
         if let Some(n) = node {
-            Solution::find_targets(&mut n.borrow_mut().left, prev, v);
+            Solution::find_targets(&mut n.borrow_mut().left, prev, swapped);
             let val = n.borrow().val;
             if let Some(p) = *prev {
                 if p > val {
-                    v.push((p, val));
+                    if let Some(s) = swapped {
+                        (*s).1 = val;
+                    } else {
+                        *swapped = Some((p, val));
+                    }
                 }
             }
             *prev = Some(val);
-            Solution::find_targets(&mut n.borrow_mut().right, prev, v);
+            Solution::find_targets(&mut n.borrow_mut().right, prev, swapped);
         }
     }
     fn swap(node: &mut Option<Rc<RefCell<TreeNode>>>, target: &(i32, i32)) {
