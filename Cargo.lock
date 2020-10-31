@@ -1096,6 +1096,13 @@ name = "october-leetcoding-challenge_week-5_3513"
 version = "0.1.0"
 
 [[package]]
+name = "october-leetcoding-challenge_week-5_3514"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "palindrome-partitioning"
 version = "0.1.0"
 
