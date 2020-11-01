@@ -972,6 +972,13 @@ name = "next-permutation"
 version = "0.1.0"
 
 [[package]]
+name = "november-leetcoding-challenge_week-1_3516"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "number-of-islands"
 version = "0.1.0"
 
