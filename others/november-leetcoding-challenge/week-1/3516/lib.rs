@@ -7,10 +7,8 @@ impl Solution {
         let mut answer = 0;
         let mut node = &head;
         while let Some(n) = node {
-            answer *= 2;
-            if n.val == 1 {
-                answer += 1;
-            }
+            answer <<= 1;
+            answer |= n.val;
             node = &n.next;
         }
         answer
