@@ -4,12 +4,13 @@ impl Solution {
     pub fn max_power(s: String) -> i32 {
         let mut answer = 1;
         let mut power = 1;
-        let s = s.as_bytes();
-        for i in 1..s.len() {
-            if s[i] == s[i - 1] {
+        let mut prev = 0u8;
+        for &b in s.as_bytes() {
+            if b == prev {
                 power += 1;
                 answer = std::cmp::max(answer, power);
             } else {
+                prev = b;
                 power = 1;
             }
         }
