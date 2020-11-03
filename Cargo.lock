@@ -986,6 +986,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "november-leetcoding-challenge_week-1_3518"
+version = "0.1.0"
+
+[[package]]
 name = "number-of-islands"
 version = "0.1.0"
 
