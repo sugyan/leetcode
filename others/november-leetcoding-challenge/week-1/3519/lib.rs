@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::VecDeque;
 
 pub struct Solution {}
 
@@ -7,35 +7,31 @@ impl Solution {
         if n == 1 {
             return vec![0];
         }
-        let mut graph: HashMap<i32, HashSet<i32>> = HashMap::with_capacity(n as usize);
+        let mut graph: Vec<Vec<usize>> = vec![Vec::new(); n as usize];
+        let mut neighbors: Vec<usize> = vec![0; n as usize];
         for edge in edges.iter() {
-            graph
-                .entry(edge[0])
-                .or_insert_with(HashSet::new)
-                .insert(edge[1]);
-            graph
-                .entry(edge[1])
-                .or_insert_with(HashSet::new)
-                .insert(edge[0]);
+            graph[edge[0] as usize].push(edge[1] as usize);
+            graph[edge[1] as usize].push(edge[0] as usize);
+            neighbors[edge[0] as usize] += 1;
+            neighbors[edge[1] as usize] += 1;
         }
-        while graph.len() > 2 {
-            let leaves: Vec<i32> = graph
-                .iter()
-                .filter(|(_, dsts)| dsts.len() == 1)
-                .map(|(&src, _)| src)
-                .collect();
-            for leaf in leaves.iter() {
-                if let Some(dsts) = graph.get(&leaf) {
-                    for &i in dsts.clone().iter() {
-                        if let Some(d) = graph.get_mut(&i) {
-                            d.remove(leaf);
+        let mut n = n;
+        let mut vd: VecDeque<usize> = (0..n as usize).filter(|&i| neighbors[i] == 1).collect();
+        while n > 2 {
+            for _ in 0..vd.len() {
+                if let Some(front) = vd.pop_front() {
+                    n -= 1;
+                    neighbors[front] -= 1;
+                    for &node in graph[front].iter() {
+                        neighbors[node] -= 1;
+                        if neighbors[node] == 1 {
+                            vd.push_back(node);
                         }
                     }
                 }
-                graph.remove(&leaf);
             }
         }
-        graph.iter().map(|(&src, _)| src).collect()
+        vd.iter().map(|&i| i as i32).collect()
     }
 }
 
