@@ -1,45 +1,41 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 pub struct Solution {}
 
 impl Solution {
     pub fn find_min_height_trees(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
-        let mut graph: HashMap<i32, Vec<i32>> = HashMap::new();
+        if n == 1 {
+            return vec![0];
+        }
+        let mut graph: HashMap<i32, HashSet<i32>> = HashMap::with_capacity(n as usize);
         for edge in edges.iter() {
-            graph.entry(edge[0]).or_insert_with(Vec::new).push(edge[1]);
-            graph.entry(edge[1]).or_insert_with(Vec::new).push(edge[0]);
+            graph
+                .entry(edge[0])
+                .or_insert_with(HashSet::new)
+                .insert(edge[1]);
+            graph
+                .entry(edge[1])
+                .or_insert_with(HashSet::new)
+                .insert(edge[0]);
         }
-        let mut max = Vec::new();
-        let mut v: Vec<i32> = Vec::new();
-        Solution::dfs(0, &mut v, &mut max, &graph);
-        let mut answer = Vec::new();
-        if let Some(&last) = max.last() {
-            max.clear();
-            v.clear();
-            Solution::dfs(last, &mut v, &mut max, &graph);
-            answer.extend(max[(max.len() - 1) / 2..=max.len() / 2].iter())
-        }
-        answer
-    }
-    fn dfs(src: i32, v: &mut Vec<i32>, max: &mut Vec<i32>, graph: &HashMap<i32, Vec<i32>>) {
-        let mut leaf = true;
-        if let Some(dsts) = graph.get(&src) {
-            for &dst in dsts.iter() {
-                if let Some(&prev) = v.last() {
-                    if prev == dst {
-                        continue;
+        while graph.len() > 2 {
+            let leaves: Vec<i32> = graph
+                .iter()
+                .filter(|(_, dsts)| dsts.len() == 1)
+                .map(|(&src, _)| src)
+                .collect();
+            for leaf in leaves.iter() {
+                if let Some(dsts) = graph.get(&leaf) {
+                    for &i in dsts.clone().iter() {
+                        if let Some(d) = graph.get_mut(&i) {
+                            d.remove(leaf);
+                        }
                     }
                 }
-                v.push(src);
-                Solution::dfs(dst, v, max, graph);
-                v.pop();
-                leaf = false;
+                graph.remove(&leaf);
             }
         }
-        if leaf && v.len() >= max.len() {
-            *max = v.clone();
-            max.push(src);
-        }
+        graph.iter().map(|(&src, _)| src).collect()
     }
 }
 
