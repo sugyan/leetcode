@@ -6,21 +6,24 @@ pub struct Solution {}
 
 impl Solution {
     pub fn max_ancestor_diff(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        Solution::dfs(&root, None)
+        if let Some(r) = &root {
+            Solution::dfs(&root, r.borrow().val, r.borrow().val)
+        } else {
+            0
+        }
     }
-    pub fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, minmax: Option<(i32, i32)>) -> i32 {
-        let mut ret = if let Some(m) = minmax { m.1 - m.0 } else { 0 };
+    pub fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, min: i32, max: i32) -> i32 {
         if let Some(n) = node {
             let val = n.borrow().val;
-            let next = Some(if let Some(m) = minmax {
-                (std::cmp::min(m.0, val), std::cmp::max(m.1, val))
-            } else {
-                (val, val)
-            });
-            ret = std::cmp::max(ret, Solution::dfs(&n.borrow().left, next));
-            ret = std::cmp::max(ret, Solution::dfs(&n.borrow().right, next));
+            let min = std::cmp::min(min, val);
+            let max = std::cmp::max(max, val);
+            std::cmp::max(
+                Solution::dfs(&n.borrow().left, min, max),
+                Solution::dfs(&n.borrow().right, min, max),
+            )
+        } else {
+            max - min
         }
-        ret
     }
 }
 
