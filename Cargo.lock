@@ -1035,6 +1035,10 @@ name = "november-leetcoding-challenge_week-2_3528"
 version = "0.1.0"
 
 [[package]]
+name = "november-leetcoding-challenge_week-2_3530"
+version = "0.1.0"
+
+[[package]]
 name = "number-of-islands"
 version = "0.1.0"
 
