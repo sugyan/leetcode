@@ -3,36 +3,25 @@ pub struct Solution {}
 impl Solution {
     pub fn longest_mountain(a: Vec<i32>) -> i32 {
         let mut answer = 0;
-        let mut state = 0;
-        let mut start = 0;
-        for i in 1..a.len() {
-            match a[i - 1].cmp(&a[i]) {
-                std::cmp::Ordering::Less => {
-                    if state == 2 {
-                        answer = std::cmp::max(answer, i - start);
-                    }
-                    if state != 1 {
-                        state = 1;
-                        start = i - 1;
-                    }
-                }
-                std::cmp::Ordering::Equal => {
-                    if state == 2 {
-                        answer = std::cmp::max(answer, i - start);
-                    }
-                    state = 0;
-                }
-                std::cmp::Ordering::Greater => {
-                    if state == 1 {
-                        state = 2;
-                    }
-                }
+        let mut i = 1;
+        while i < a.len() {
+            let (mut inc, mut dec) = (0, 0);
+            while i < a.len() && a[i - 1] < a[i] {
+                i += 1;
+                inc += 1;
+            }
+            while i < a.len() && a[i - 1] > a[i] {
+                i += 1;
+                dec += 1;
+            }
+            if inc > 0 && dec > 0 {
+                answer = std::cmp::max(answer, inc + dec + 1);
+            }
+            while i < a.len() && a[i - 1] == a[i] {
+                i += 1;
             }
         }
-        if state == 2 {
-            answer = std::cmp::max(answer, a.len() - start);
-        }
-        answer as i32
+        answer
     }
 }
 
