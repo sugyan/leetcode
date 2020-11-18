@@ -5,16 +5,16 @@ impl Solution {
         let mut intervals = intervals;
         intervals.sort_unstable();
         let mut answer = Vec::new();
-        let mut v: Vec<i32> = intervals[0].clone();
+        answer.push(intervals[0].clone());
         for interval in intervals.iter() {
-            if interval[0] > v[1] {
-                answer.push(v);
-                v = interval.clone();
-            } else {
-                v[1] = std::cmp::max(v[1], interval[1]);
+            if let Some(last) = answer.last_mut() {
+                if last[1] < interval[0] {
+                    answer.push(interval.clone());
+                } else {
+                    last[1] = std::cmp::max(last[1], interval[1]);
+                }
             }
         }
-        answer.push(v);
         answer
     }
 }
