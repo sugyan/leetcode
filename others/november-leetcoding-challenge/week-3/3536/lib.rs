@@ -2,41 +2,25 @@ pub struct Solution {}
 
 impl Solution {
     pub fn decode_string(s: String) -> String {
-        Solution::helper(&s)
-    }
-    fn helper(s: &str) -> String {
-        let mut ret = String::new();
-        let mut m = 0;
-        let mut l = 0;
-        let mut depth = 0;
-        for (i, &b) in s.as_bytes().iter().enumerate() {
-            match b {
-                b'[' => {
-                    if depth == 0 {
-                        l = i + 1;
-                    }
-                    depth += 1;
+        let mut stack: Vec<(usize, String)> = Vec::new();
+        let (mut n, mut str) = (0, String::new());
+        for c in s.chars() {
+            match c {
+                '[' => {
+                    stack.push((n, str.clone()));
+                    n = 0;
+                    str.clear();
                 }
-                b']' => {
-                    depth -= 1;
-                    if depth == 0 {
-                        ret += Solution::helper(&s[l..i]).repeat(m).as_str();
-                        m = 0;
+                ']' => {
+                    if let Some(last) = stack.pop() {
+                        str = last.1 + str.repeat(last.0).as_str();
                     }
                 }
-                b'0'..=b'9' => {
-                    if depth == 0 {
-                        m = m * 10 + (b - b'0') as usize;
-                    }
-                }
-                b => {
-                    if depth == 0 {
-                        ret.push(b as char);
-                    }
-                }
+                '0'..='9' => n = n * 10 + (c as u8 - b'0') as usize,
+                c => str.push(c),
             }
         }
-        ret
+        str
     }
 }
 
