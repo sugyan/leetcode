@@ -13,17 +13,13 @@ impl Solution {
             match digits.binary_search(&c) {
                 Ok(j) => {
                     answer += (j * digits.len().pow((n.len() - i - 1) as u32)) as i32;
-                    if i == n.len() - 1 {
-                        answer += 1;
-                    }
                 }
                 Err(j) => {
-                    answer += (j * digits.len().pow((n.len() - i - 1) as u32)) as i32;
-                    break;
+                    return answer + (j * digits.len().pow((n.len() - i - 1) as u32)) as i32;
                 }
             }
         }
-        answer
+        answer + 1
     }
 }
 
