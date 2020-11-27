@@ -1,26 +1,19 @@
-use std::collections::HashSet;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn can_partition(nums: Vec<i32>) -> bool {
-        let sum: i32 = nums.iter().sum();
+        let sum = nums.iter().sum::<i32>() as usize;
         if sum % 2 != 0 {
             return false;
         }
-        let mut hs: HashSet<i32> = HashSet::new();
-        hs.insert(0);
+        let mut v: Vec<bool> = vec![false; sum / 2 + 1];
+        v[0] = true;
         for &num in nums.iter() {
-            for n in hs
-                .iter()
-                .map(|&n| n + num)
-                .filter(|&n| n <= sum / 2)
-                .collect::<Vec<i32>>()
-            {
-                if n == sum / 2 {
-                    return true;
-                }
-                hs.insert(n);
+            for i in (num as usize..=sum / 2).rev() {
+                v[i] |= v[i - num as usize];
+            }
+            if v[sum / 2] {
+                return true;
             }
         }
         false
