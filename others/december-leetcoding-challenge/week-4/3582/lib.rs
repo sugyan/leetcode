@@ -1,43 +1,37 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 pub struct Solution {}
 
 impl Solution {
     pub fn min_jumps(arr: Vec<i32>) -> i32 {
-        if arr.len() == 1 {
-            return 0;
-        }
-        let mut same_values: HashMap<i32, Vec<usize>> = HashMap::new();
+        let mut same_values = HashMap::new();
         arr.iter()
             .enumerate()
             .for_each(|(i, &n)| same_values.entry(n).or_insert_with(Vec::new).push(i));
-        let mut mins: Vec<usize> = vec![0; arr.len()];
-        let mut nodes: HashSet<usize> = HashSet::new();
-        nodes.insert(0);
-        for jumps in 1.. {
-            let mut next: HashSet<usize> = HashSet::new();
-            for &i in nodes.iter() {
-                let mut v: Vec<usize> = Vec::new();
+        let mut v = vec![false; arr.len()];
+        let mut targets = vec![0];
+        for jumps in 0.. {
+            let mut next = Vec::new();
+            for &i in targets.iter() {
+                if i == arr.len() - 1 {
+                    return jumps;
+                }
+                if v[i] {
+                    continue;
+                }
+                v[i] = true;
                 if let Some(indices) = same_values.get(&arr[i]) {
-                    v.extend(indices);
+                    next.extend(indices);
                 }
+                same_values.remove(&arr[i]);
                 if i > 0 {
-                    v.push(i - 1)
+                    next.push(i - 1);
                 }
-                if i < arr.len() - 1 {
-                    v.push(i + 1);
-                }
-                for &dst in v.iter() {
-                    if dst == arr.len() - 1 {
-                        return jumps as i32;
-                    }
-                    if mins[dst] == 0 {
-                        mins[dst] = jumps;
-                    }
-                    next.insert(dst);
+                if i < arr.len() {
+                    next.push(i + 1);
                 }
             }
-            nodes = next;
+            targets = next;
         }
         unreachable!();
     }
