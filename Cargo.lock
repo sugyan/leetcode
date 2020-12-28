@@ -416,6 +416,10 @@ name = "december-leetcoding-challenge_week-4_3582"
 version = "0.1.0"
 
 [[package]]
+name = "december-leetcoding-challenge_week-4_3583"
+version = "0.1.0"
+
+[[package]]
 name = "decode-ways"
 version = "0.1.0"
 
