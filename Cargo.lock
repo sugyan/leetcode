@@ -420,6 +420,13 @@ name = "december-leetcoding-challenge_week-4_3583"
 version = "0.1.0"
 
 [[package]]
+name = "december-leetcoding-challenge_week-5_3585"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "decode-ways"
 version = "0.1.0"
 
