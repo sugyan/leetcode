@@ -20,13 +20,10 @@ class Solution {
         }
         if (original == target) {
             return cloned;
-        }
-        TreeNode* l = getTargetCopy(original->left, cloned->left, target);
-        if (l != nullptr) {
+        };
+        if (TreeNode* l = getTargetCopy(original->left, cloned->left, target)) {
             return l;
-        } else {
-            return getTargetCopy(original->right, cloned->right, target);
         }
-        return nullptr;
+        return getTargetCopy(original->right, cloned->right, target);
     }
 };
