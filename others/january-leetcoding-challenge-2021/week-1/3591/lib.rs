@@ -1,27 +1,22 @@
-use std::collections::HashSet;
-
 pub struct Solution {}
 
 impl Solution {
     pub fn count_arrangement(n: i32) -> i32 {
-        let mut hs = (1..=n as usize).collect::<HashSet<_>>();
-        Self::backtrack(&mut hs)
+        let mut v = (1..=n as usize).collect::<Vec<_>>();
+        Self::backtrack(&mut v, n as usize)
     }
-    fn backtrack(hs: &mut HashSet<usize>) -> i32 {
-        let len = hs.len();
-        if len <= 1 {
+    fn backtrack(v: &mut Vec<usize>, i: usize) -> i32 {
+        if i < 2 {
             return 1;
         } else {
             let mut ret = 0;
-            for c in hs
-                .iter()
-                .filter(|&m| m % len == 0 || len % m == 0)
-                .map(|&m| m)
-                .collect::<Vec<usize>>()
-            {
-                hs.remove(&c);
-                ret += Solution::backtrack(hs);
-                hs.insert(c);
+            let candidates = (0..i)
+                .filter(|&j| v[j] % i == 0 || i % v[j] == 0)
+                .collect::<Vec<usize>>();
+            for &j in candidates.iter() {
+                v.swap(j, i - 1);
+                ret += Solution::backtrack(v, i - 1);
+                v.swap(j, i - 1);
             }
             ret
         }
