@@ -1,32 +1,30 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 pub struct Solution {}
 
 impl Solution {
     pub fn count_arrangement(n: i32) -> i32 {
-        let mut hm = HashMap::new();
-        let mut v = vec![false; n as usize];
-        Solution::dfs(&mut v, &mut hm, 1, n as usize)
+        let mut hs = (1..=n as usize).collect::<HashSet<_>>();
+        Self::backtrack(&mut hs)
     }
-    fn dfs(v: &mut Vec<bool>, memo: &mut HashMap<Vec<bool>, i32>, i: usize, n: usize) -> i32 {
-        if i > n {
+    fn backtrack(hs: &mut HashSet<usize>) -> i32 {
+        let len = hs.len();
+        if len <= 1 {
             return 1;
+        } else {
+            let mut ret = 0;
+            for c in hs
+                .iter()
+                .filter(|&m| m % len == 0 || len % m == 0)
+                .map(|&m| m)
+                .collect::<Vec<usize>>()
+            {
+                hs.remove(&c);
+                ret += Solution::backtrack(hs);
+                hs.insert(c);
+            }
+            ret
         }
-        if let Some(&ret) = memo.get(v) {
-            return ret;
-        }
-        let mut ret = 0;
-        for &j in (0..n)
-            .filter(|&e| !v[e] && ((e + 1) % i == 0 || i % (e + 1) == 0))
-            .collect::<Vec<usize>>()
-            .iter()
-        {
-            v[j] = true;
-            ret += Solution::dfs(v, memo, i + 1, n);
-            v[j] = false;
-        }
-        memo.insert(v.clone(), ret);
-        ret
     }
 }
 
