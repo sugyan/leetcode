@@ -4,23 +4,24 @@ pub struct Solution {}
 
 impl Solution {
     pub fn delete_duplicates(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut dummy = Some(Box::new(ListNode { val: 0, next: head }));
-        let mut node = &mut dummy.as_mut().unwrap().next;
-        let mut remove = None;
-        loop {
-            match node {
-                Some(n) if Some(n.val) == remove => {
-                    *node = n.next.take();
+        let mut dummy = Box::new(ListNode { val: 0, next: head });
+        Self::recursive(&mut dummy);
+        dummy.next
+    }
+    fn recursive(node: &mut Box<ListNode>) {
+        if let Some(mut n) = node.next.take() {
+            let mut removed = false;
+            while let Some(next) = n.next.take() {
+                if next.val == n.val {
+                    removed = true;
+                    n = next;
+                } else {
+                    n.next = Some(next);
+                    break;
                 }
-                Some(n) if n.next.is_some() && n.next.as_ref().unwrap().val == n.val => {
-                    remove = Some(n.val);
-                }
-                Some(n) => {
-                    remove = None;
-                    node = &mut n.next;
-                }
-                None => return dummy.unwrap().next,
             }
+            Self::recursive(&mut n);
+            node.next = if removed { n.next } else { Some(n) };
         }
     }
 }
