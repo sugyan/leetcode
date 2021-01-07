@@ -2,15 +2,15 @@ pub struct Solution {}
 
 impl Solution {
     pub fn length_of_longest_substring(s: String) -> i32 {
-        let mut p = [-1; 128];
-        let mut l = -1;
+        let mut p = [0; 128];
+        let mut l = 0;
         let mut answer = 0;
         for (i, &b) in s.as_bytes().iter().enumerate() {
             l = std::cmp::max(l, p[b as usize]);
-            answer = std::cmp::max(answer, i as i32 - l);
-            p[b as usize] = i as i32;
+            answer = std::cmp::max(answer, i - l + 1);
+            p[b as usize] = i + 1;
         }
-        answer
+        answer as i32
     }
 }
 
