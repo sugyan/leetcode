@@ -1,35 +1,34 @@
+use std::collections::{HashMap, HashSet, VecDeque};
+
 pub struct Solution;
 
 impl Solution {
     pub fn ladder_length(begin_word: String, end_word: String, word_list: Vec<String>) -> i32 {
-        let mut v = vec![0; word_list.len()];
-        let mut srcs = vec![&begin_word];
-        for i in 1.. {
-            let mut dsts = Vec::new();
-            for &src in srcs.iter() {
-                for j in (0..word_list.len())
-                    .filter(|&j| {
-                        v[j] == 0
-                            && word_list[j]
-                                .chars()
-                                .zip(src.chars())
-                                .filter(|&cs| cs.0 != cs.1)
-                                .count()
-                                == 1
-                    })
-                    .collect::<Vec<_>>()
-                {
-                    if word_list[j] == end_word {
-                        return i + 1;
+        let mut hm = HashMap::new();
+        for word in word_list.iter() {
+            for i in 0..word.len() {
+                hm.entry((word[0..i].to_string()) + "*" + &word[i + 1..])
+                    .or_insert_with(Vec::new)
+                    .push(word);
+            }
+        }
+        let mut hs = HashSet::new();
+        let mut vd = VecDeque::new();
+        vd.push_back((&begin_word, 1));
+        while let Some((word, len)) = vd.pop_front() {
+            if *word == end_word {
+                return len;
+            }
+            for i in 0..word.len() {
+                if let Some(v) = hm.get(&((word[0..i].to_string()) + "*" + &word[i + 1..])) {
+                    for &s in v.iter() {
+                        if !hs.contains(s) {
+                            hs.insert(s);
+                            vd.push_back((s, len + 1));
+                        }
                     }
-                    v[j] = i;
-                    dsts.push(&word_list[j]);
                 }
             }
-            if dsts.is_empty() {
-                break;
-            }
-            srcs = dsts;
         }
         0
     }
