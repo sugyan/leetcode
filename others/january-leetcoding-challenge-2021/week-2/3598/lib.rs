@@ -5,26 +5,26 @@ pub struct Solution;
 impl Solution {
     pub fn ladder_length(begin_word: String, end_word: String, word_list: Vec<String>) -> i32 {
         let mut hm = HashMap::new();
-        for word in word_list.iter() {
-            for i in 0..word.len() {
-                hm.entry((word[0..i].to_string()) + "*" + &word[i + 1..])
+        for (i, word) in word_list.iter().enumerate() {
+            for j in 0..word.len() {
+                hm.entry((&word[0..j], &word[j + 1..]))
                     .or_insert_with(Vec::new)
-                    .push(word);
+                    .push(i);
             }
         }
         let mut hs = HashSet::new();
         let mut vd = VecDeque::new();
         vd.push_back((&begin_word, 1));
-        while let Some((word, len)) = vd.pop_front() {
+        while let Some((word, i)) = vd.pop_front() {
             if *word == end_word {
-                return len;
+                return i;
             }
-            for i in 0..word.len() {
-                if let Some(v) = hm.get(&((word[0..i].to_string()) + "*" + &word[i + 1..])) {
-                    for &s in v.iter() {
-                        if !hs.contains(s) {
-                            hs.insert(s);
-                            vd.push_back((s, len + 1));
+            for j in 0..word.len() {
+                if let Some(v) = hm.get(&(&word[0..j], &word[j + 1..])) {
+                    for &k in v.iter() {
+                        if !hs.contains(&k) {
+                            hs.insert(k);
+                            vd.push_back((&word_list[k], i + 1));
                         }
                     }
                 }
