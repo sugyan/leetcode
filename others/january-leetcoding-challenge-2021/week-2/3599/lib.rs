@@ -6,32 +6,29 @@ const DIV: i32 = 1_000_000_007;
 impl Solution {
     pub fn create_sorted_array(instructions: Vec<i32>) -> i32 {
         let mut bit = vec![0; SIZE];
+        fn sum_bit(n: i32, bit: &[i32]) -> i32 {
+            let mut n = n;
+            let mut ret = 0;
+            while n > 0 {
+                ret += bit[n as usize];
+                n -= n & -n;
+            }
+            ret
+        }
         let mut answer = 0;
         for (i, &instruction) in instructions.iter().enumerate() {
-            answer += std::cmp::min(
-                Self::sum_bit(instruction - 1, &bit),
-                i as i32 - Self::sum_bit(instruction, &bit),
+            let cost = std::cmp::min(
+                sum_bit(instruction - 1, &bit),
+                i as i32 - sum_bit(instruction, &bit),
             );
-            answer %= DIV;
-            Self::add_bit(instruction, &mut bit);
+            answer = (answer + cost) % DIV;
+            let mut n = instruction;
+            while n < SIZE as i32 {
+                bit[n as usize] += 1;
+                n += n & -n;
+            }
         }
         answer
-    }
-    fn add_bit(n: i32, bit: &mut [i32]) {
-        let mut n = n;
-        while n < SIZE as i32 {
-            bit[n as usize] += 1;
-            n += n & -n;
-        }
-    }
-    fn sum_bit(n: i32, bit: &[i32]) -> i32 {
-        let mut n = n;
-        let mut ret = 0;
-        while n > 0 {
-            ret += bit[n as usize];
-            n -= n & -n;
-        }
-        ret
     }
 }
 
