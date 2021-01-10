@@ -1,28 +1,37 @@
 pub struct Solution;
 
-const DIV: usize = 1_000_000_007;
+const SIZE: usize = 100_001;
+const DIV: i32 = 1_000_000_007;
 
 impl Solution {
     pub fn create_sorted_array(instructions: Vec<i32>) -> i32 {
+        let mut bit = vec![0; SIZE];
         let mut answer = 0;
-        let mut v = Vec::new();
-        for &instruction in instructions.iter() {
-            let i = match v.binary_search(&(instruction - 1)) {
-                Ok(i) => i + 1,
-                Err(i) => i,
-            };
-            let j = match v.binary_search(&(instruction)) {
-                Ok(j) => j + 1,
-                Err(j) => j,
-            };
-            answer = (answer + std::cmp::min(i, v.len() - j)) % DIV;
-            if i < v.len() {
-                v.insert(i, instruction);
-            } else {
-                v.push(instruction);
-            }
+        for (i, &instruction) in instructions.iter().enumerate() {
+            answer += std::cmp::min(
+                Self::sum_bit(instruction - 1, &bit),
+                i as i32 - Self::sum_bit(instruction, &bit),
+            );
+            answer %= DIV;
+            Self::add_bit(instruction, &mut bit);
         }
-        answer as i32
+        answer
+    }
+    fn add_bit(n: i32, bit: &mut [i32]) {
+        let mut n = n;
+        while n < SIZE as i32 {
+            bit[n as usize] += 1;
+            n += n & -n;
+        }
+    }
+    fn sum_bit(n: i32, bit: &[i32]) -> i32 {
+        let mut n = n;
+        let mut ret = 0;
+        while n > 0 {
+            ret += bit[n as usize];
+            n -= n & -n;
+        }
+        ret
     }
 }
 
