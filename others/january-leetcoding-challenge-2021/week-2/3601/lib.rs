@@ -9,35 +9,25 @@ impl Solution {
     ) -> Option<Box<ListNode>> {
         let mut n1 = &l1;
         let mut n2 = &l2;
-        let mut ret = None;
-        let mut p = &mut ret;
+        let mut dummy = ListNode::new(0);
+        let mut p = &mut dummy;
         let mut carry = false;
         while n1.is_some() || n2.is_some() || carry {
-            let v1 = if let Some(n) = n1 {
+            let mut d = 0;
+            if let Some(n) = n1 {
+                d += n.val;
                 n1 = &n.next;
-                n.val
-            } else {
-                0
-            };
-            let v2 = if let Some(n) = n2 {
-                n2 = &n.next;
-                n.val
-            } else {
-                0
-            };
-            let mut v = v1 + v2 + if carry { 1 } else { 0 };
-            carry = if v > 9 {
-                v -= 10;
-                true
-            } else {
-                false
-            };
-            *p = Some(Box::new(ListNode::new(v)));
-            if let Some(pp) = p {
-                p = &mut pp.next;
             }
+            if let Some(n) = n2 {
+                d += n.val;
+                n2 = &n.next;
+            }
+            d += if carry { 1 } else { 0 };
+            carry = d >= 10;
+            p.next = Some(Box::new(ListNode::new(d % 10)));
+            p = p.next.as_mut().unwrap();
         }
-        ret
+        dummy.next
     }
 }
 
