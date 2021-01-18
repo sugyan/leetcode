@@ -5,16 +5,17 @@ pub struct Solution;
 impl Solution {
     pub fn max_operations(nums: Vec<i32>, k: i32) -> i32 {
         let mut hm = HashMap::new();
-        let mut answer = 0;
         for &num in nums.iter() {
-            if let Some(v) = hm.get_mut(&(k - num)) {
-                answer += 1;
-                *v -= 1;
-                if *v == 0 {
-                    hm.remove(&(k - num));
-                }
+            *hm.entry(num).or_insert(0) += 1;
+        }
+        let mut answer = 0;
+        for (&key, &value) in hm.iter().filter(|(&key, _)| key * 2 <= k) {
+            if key * 2 == k {
+                answer += value / 2;
             } else {
-                *hm.entry(num).or_insert(0) += 1;
+                if let Some(&v) = hm.get(&(k - key)) {
+                    answer += std::cmp::min(value, v);
+                }
             }
         }
         answer
