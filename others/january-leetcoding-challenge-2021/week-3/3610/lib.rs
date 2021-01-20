@@ -2,7 +2,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn is_valid(s: String) -> bool {
-        let mut stack = Vec::with_capacity(s.len() / 2);
+        let mut stack = Vec::with_capacity(s.len());
         for c in s.chars() {
             match c {
                 '(' | '{' | '[' => stack.push(c),
