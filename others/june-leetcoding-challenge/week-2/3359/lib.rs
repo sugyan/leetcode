@@ -3,7 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn largest_divisible_subset(nums: Vec<i32>) -> Vec<i32> {
         let mut nums: Vec<i32> = nums;
-        nums.sort();
+        nums.sort_unstable();
         let mut dp: Vec<usize> = vec![1; nums.len()];
         let mut prev: Vec<Option<usize>> = vec![None; nums.len()];
         let (mut max, mut pos): (usize, Option<usize>) = (0, None);

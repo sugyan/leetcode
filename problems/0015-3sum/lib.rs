@@ -3,7 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut nums = nums;
-        nums.sort();
+        nums.sort_unstable();
         let mut answer = Vec::new();
         let mut prev = None;
         for i in 0..nums.len() {

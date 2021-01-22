@@ -4,7 +4,7 @@ impl Solution {
     pub fn distribute_candies(candies: i32, num_people: i32) -> Vec<i32> {
         let mut candies = candies;
         let mut answer = vec![0; num_people as usize];
-        for i in 0 as i32.. {
+        for i in 0.. {
             answer[(i % num_people) as usize] += std::cmp::min(candies, i + 1);
             candies -= i + 1;
             if candies <= 0 {

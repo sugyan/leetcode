@@ -5,7 +5,7 @@ impl Solution {
         let (mut l, mut r) = (0, arr.len());
         while l < r {
             let m = l + (r - l) / 2;
-            if arr[m] - m as i32 - 1 >= k {
+            if arr[m] - m as i32 - 1 > k {
                 r = m;
             } else {
                 l = m + 1;

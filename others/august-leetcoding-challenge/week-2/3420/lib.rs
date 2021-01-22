@@ -3,7 +3,7 @@ pub struct Solution {}
 impl Solution {
     pub fn h_index(citations: Vec<i32>) -> i32 {
         let mut citations = citations;
-        citations.sort();
+        citations.sort_unstable();
         for i in (0..citations.len()).rev() {
             if citations[citations.len() - i - 1] > i as i32 {
                 return i as i32 + 1;

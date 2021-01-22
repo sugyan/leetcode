@@ -5,7 +5,7 @@ impl Solution {
         let mut board = board;
         for i in 0..board.len() {
             for j in 0..board[0].len() {
-                if board[i][j] == word.chars().nth(0).unwrap()
+                if board[i][j] == word.chars().next().unwrap()
                     && Solution::dfs(&mut board, i, j, word.as_str())
                 {
                     return true;

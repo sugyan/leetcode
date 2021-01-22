@@ -8,7 +8,7 @@ impl Solution {
             for m in answer.iter() {
                 for d in if k == 0 { vec![0] } else { vec![-k, k] }.iter() {
                     let j = (m % 10) + d;
-                    if j >= 0 && j < 10 {
+                    if (0..10).contains(&j) {
                         v.push(m * 10 + j);
                     }
                 }
@@ -29,14 +29,14 @@ mod tests {
     #[test]
     fn example_1() {
         let mut ret = Solution::nums_same_consec_diff(3, 7);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![181, 292, 707, 818, 929], ret);
     }
 
     #[test]
     fn example_2() {
         let mut ret = Solution::nums_same_consec_diff(2, 1);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(
             vec![10, 12, 21, 23, 32, 34, 43, 45, 54, 56, 65, 67, 76, 78, 87, 89, 98],
             ret

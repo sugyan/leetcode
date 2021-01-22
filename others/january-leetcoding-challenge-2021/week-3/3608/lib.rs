@@ -12,10 +12,8 @@ impl Solution {
         for (&key, &value) in hm.iter().filter(|(&key, _)| key * 2 <= k) {
             if key * 2 == k {
                 answer += value / 2;
-            } else {
-                if let Some(&v) = hm.get(&(k - key)) {
-                    answer += std::cmp::min(value, v);
-                }
+            } else if let Some(&v) = hm.get(&(k - key)) {
+                answer += std::cmp::min(value, v);
             }
         }
         answer

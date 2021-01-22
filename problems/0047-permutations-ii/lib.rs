@@ -4,7 +4,7 @@ impl Solution {
     pub fn permute_unique(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut answer: Vec<Vec<i32>> = Vec::new();
         let mut nums = nums;
-        nums.sort();
+        nums.sort_unstable();
         Solution::helper(nums, 0, &mut answer);
         answer
     }

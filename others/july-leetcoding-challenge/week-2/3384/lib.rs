@@ -6,7 +6,7 @@ impl Solution {
             return Vec::new();
         }
         let mut nums = nums;
-        nums.sort();
+        nums.sort_unstable();
         let mut answer: Vec<Vec<i32>> = Vec::new();
         let mut i = 0;
         while i < nums.len() - 2 {
@@ -45,7 +45,7 @@ mod tests {
     fn example_1() {
         let mut ret = Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         assert_eq!(vec![vec![-1, -1, 2], vec![-1, 0, 1]], ret);

@@ -5,7 +5,7 @@ impl Solution {
         let mut answer: Vec<Vec<i32>> = Vec::new();
         let mut nums = nums;
         let mut v: Vec<i32> = Vec::new();
-        nums.sort();
+        nums.sort_unstable();
         Solution::dfs(&mut answer, &nums, &mut v, 0);
         answer
     }

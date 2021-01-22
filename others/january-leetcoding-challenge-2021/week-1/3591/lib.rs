@@ -7,7 +7,7 @@ impl Solution {
     }
     fn backtrack(v: &mut Vec<usize>, i: usize) -> i32 {
         if i < 2 {
-            return 1;
+            1
         } else {
             let mut ret = 0;
             let candidates = (0..i)
