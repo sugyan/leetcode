@@ -10,9 +10,7 @@ impl Solution {
         for &b in word2.as_bytes() {
             counts2[(b - b'a') as usize] += 1;
         }
-        let keys1 = (0..26).filter(|&i| counts1[i] > 0).collect::<Vec<_>>();
-        let keys2 = (0..26).filter(|&i| counts2[i] > 0).collect::<Vec<_>>();
-        if keys1 != keys2 {
+        if (0..26).any(|i| (counts1[i] > 0) != (counts2[i] > 0)) {
             return false;
         }
         counts1.sort_unstable();
