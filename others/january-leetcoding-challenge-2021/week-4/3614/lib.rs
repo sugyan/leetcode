@@ -1,23 +1,23 @@
+use std::cmp::Reverse;
+use std::collections::BinaryHeap;
+
 pub struct Solution;
 
 impl Solution {
     pub fn diagonal_sort(mat: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut ret = vec![vec![0; mat[0].len()]; mat.len()];
         let (r, c) = (mat.len(), mat[0].len());
-        for n in 1..r + c {
-            let mut values = Vec::new();
-            let mut positions = Vec::new();
-            for (i, row) in mat.iter().enumerate() {
-                for (j, col) in row.iter().enumerate() {
-                    if i + c == n + j {
-                        values.push(*col);
-                        positions.push((i, j));
-                    }
-                }
+        let mut groups = vec![BinaryHeap::new(); r + c - 1];
+        for (i, row) in mat.iter().enumerate() {
+            for (j, col) in row.iter().enumerate() {
+                groups[c + i - j - 1].push(Reverse(*col));
             }
-            values.sort_unstable();
-            for (k, &(i, j)) in positions.iter().enumerate() {
-                ret[i][j] = values[k];
+        }
+        for (i, row) in ret.iter_mut().enumerate() {
+            for (j, col) in row.iter_mut().enumerate() {
+                if let Some(val) = groups[c + i - j - 1].pop() {
+                    *col = val.0;
+                }
             }
         }
         ret
