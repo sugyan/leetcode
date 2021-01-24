@@ -14,19 +14,17 @@ impl Solution {
                 *node = &n.next;
             }
         }
-        let mut v = Vec::new();
-        while let Some(min) = bh.pop() {
-            v.push(min.0 .0);
-            if let Some(n) = nodes[min.1] {
-                bh.push((Reverse(n.val), min.1));
-                nodes[min.1] = &n.next;
+        let mut dummy = ListNode::new(0);
+        let mut p = &mut dummy;
+        while let Some((minval, i)) = bh.pop() {
+            p.next = Some(Box::new(ListNode::new(minval.0)));
+            p = p.next.as_mut().unwrap();
+            if let Some(n) = nodes[i] {
+                bh.push((Reverse(n.val), i));
+                nodes[i] = &n.next;
             }
         }
-        let mut answer = None;
-        for &val in v.iter().rev() {
-            answer = Some(Box::new(ListNode { val, next: answer }));
-        }
-        answer
+        dummy.next
     }
 }
 
