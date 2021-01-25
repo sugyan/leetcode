@@ -2,16 +2,17 @@ pub struct Solution;
 
 impl Solution {
     pub fn k_length_apart(nums: Vec<i32>, k: i32) -> bool {
-        let mut prev = None;
-        for i in (0..nums.len()).filter(|&i| nums[i] == 1) {
-            if let Some(p) = prev {
-                if i - p <= k as usize {
-                    return false;
+        (0..nums.len())
+            .filter(|&i| nums[i] == 1)
+            .try_fold(None, |prev, i| {
+                if let Some(p) = prev {
+                    if i - p <= k as usize {
+                        return None;
+                    }
                 }
-            }
-            prev = Some(i);
-        }
-        true
+                Some(Some(i))
+            })
+            .is_some()
     }
 }
 
