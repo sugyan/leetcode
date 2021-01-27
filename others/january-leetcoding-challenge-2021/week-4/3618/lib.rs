@@ -4,13 +4,9 @@ const DIV: u64 = 1_000_000_007;
 
 impl Solution {
     pub fn concatenated_binary(n: i32) -> i32 {
-        let mut answer = 0_u64;
-        for i in 1..=n as u64 {
-            answer <<= 64 - i.leading_zeros();
-            answer += i;
-            answer %= DIV;
-        }
-        answer as i32
+        (2..=n).fold(1_u64, |acc, x| {
+            ((acc << (32 - x.leading_zeros())) + x as u64) % DIV
+        }) as i32
     }
 }
 
