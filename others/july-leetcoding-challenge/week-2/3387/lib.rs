@@ -24,7 +24,7 @@ mod tests {
     fn example_1() {
         let mut ret: Vec<Vec<i32>> = Solution::subsets(vec![1, 2, 3]);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         assert_eq!(

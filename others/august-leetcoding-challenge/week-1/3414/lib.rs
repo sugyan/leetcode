@@ -23,7 +23,7 @@ mod tests {
     #[test]
     fn example_1() {
         let mut ret = Solution::find_duplicates(vec![4, 3, 2, 7, 8, 2, 3, 1]);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![2, 3], ret);
     }
 }

@@ -35,14 +35,14 @@ mod tests {
     #[test]
     fn example_1() {
         let mut ret = Solution::largest_divisible_subset(vec![1, 2, 3]);
-        ret.sort();
+        ret.sort_unstable();
         assert!(ret == vec![1, 2] || ret == vec![1, 3]);
     }
 
     #[test]
     fn example_2() {
         let mut ret = Solution::largest_divisible_subset(vec![1, 2, 4, 8]);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![1, 2, 4, 8], ret);
     }
 }

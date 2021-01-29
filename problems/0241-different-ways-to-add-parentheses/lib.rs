@@ -33,14 +33,14 @@ mod tests {
     #[test]
     fn example_1() {
         let mut ret = Solution::diff_ways_to_compute("2-1-1".to_string());
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![0, 2], ret);
     }
 
     #[test]
     fn example_2() {
         let mut ret = Solution::diff_ways_to_compute("2*3-4*5".to_string());
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![-34, -14, -10, -10, 10], ret);
     }
 }

@@ -35,7 +35,7 @@ mod tests {
     fn example_1() {
         let mut ret = Solution::combination_sum(vec![2, 3, 6, 7], 7);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         assert_eq!(vec![vec![2, 2, 3], vec![7]], ret);
@@ -45,7 +45,7 @@ mod tests {
     fn example_2() {
         let mut ret = Solution::combination_sum(vec![2, 3, 5], 8);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         assert_eq!(vec![vec![2, 2, 2, 2], vec![2, 3, 3], vec![3, 5]], ret);
@@ -55,7 +55,7 @@ mod tests {
     fn example_3() {
         let mut ret = Solution::combination_sum(vec![2], 1);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         let v: Vec<Vec<i32>> = Vec::new();
@@ -66,7 +66,7 @@ mod tests {
     fn example_4() {
         let mut ret = Solution::combination_sum(vec![1], 1);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         assert_eq!(vec![vec![1]], ret);
@@ -76,7 +76,7 @@ mod tests {
     fn example_5() {
         let mut ret = Solution::combination_sum(vec![1], 2);
         for v in ret.iter_mut() {
-            v.sort();
+            v.sort_unstable();
         }
         ret.sort();
         assert_eq!(vec![vec![1, 1]], ret);

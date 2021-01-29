@@ -13,26 +13,26 @@ mod tests {
 
     #[test]
     fn example_1() {
-        assert_eq!(165.0, Solution::angle_clock(12, 30));
+        assert!((165.0 - Solution::angle_clock(12, 30)).abs() < f64::EPSILON);
     }
 
     #[test]
     fn example_2() {
-        assert_eq!(75.0, Solution::angle_clock(3, 30));
+        assert!((75.0 - Solution::angle_clock(3, 30)).abs() < f64::EPSILON);
     }
 
     #[test]
     fn example_3() {
-        assert_eq!(7.5, Solution::angle_clock(3, 15));
+        assert!((7.5 - Solution::angle_clock(3, 15)).abs() < f64::EPSILON);
     }
 
     #[test]
     fn example_4() {
-        assert_eq!(155.0, Solution::angle_clock(4, 50));
+        assert!((155.0 - Solution::angle_clock(4, 50)).abs() < f64::EPSILON);
     }
 
     #[test]
     fn example_5() {
-        assert_eq!(0.0, Solution::angle_clock(12, 0));
+        assert!((0.0 - Solution::angle_clock(12, 0)).abs() < f64::EPSILON);
     }
 }

@@ -31,7 +31,7 @@ mod tests {
     #[test]
     fn example_1() {
         let mut ret = Solution::find_min_height_trees(4, vec![vec![1, 0], vec![1, 2], vec![1, 3]]);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![1], ret);
     }
 
@@ -41,7 +41,7 @@ mod tests {
             6,
             vec![vec![0, 3], vec![1, 3], vec![2, 3], vec![4, 3], vec![5, 4]],
         );
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![3, 4], ret);
     }
 }

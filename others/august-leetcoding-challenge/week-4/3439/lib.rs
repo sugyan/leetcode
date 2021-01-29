@@ -34,11 +34,11 @@ mod tests {
         let mut counts = [0; 10];
         for _ in 0..10_000 {
             let ret: i32 = Solution::rand10();
-            assert!(1 <= ret && ret <= 10);
+            assert!((1..=10).contains(&ret));
             counts[ret as usize - 1] += 1;
         }
         for &count in counts.iter() {
-            assert!(900 <= count && count <= 1100);
+            assert!((900..=1100).contains(&count));
         }
     }
 }

@@ -38,14 +38,14 @@ mod tests {
     #[test]
     fn example_1() {
         let mut ret = Solution::majority_element(vec![3, 2, 3]);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![3], ret);
     }
 
     #[test]
     fn example_2() {
         let mut ret = Solution::majority_element(vec![1, 1, 1, 3, 3, 2, 2, 2]);
-        ret.sort();
+        ret.sort_unstable();
         assert_eq!(vec![1, 2], ret);
     }
 }
