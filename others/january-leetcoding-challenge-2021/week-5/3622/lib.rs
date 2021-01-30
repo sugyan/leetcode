@@ -4,25 +4,17 @@ pub struct Solution;
 
 impl Solution {
     pub fn minimum_deviation(nums: Vec<i32>) -> i32 {
-        let mut bts = nums.into_iter().collect::<BTreeSet<_>>();
+        let mut bts = nums
+            .iter()
+            .map(|&num| if num & 1 == 0 { num } else { num << 1 })
+            .collect::<BTreeSet<_>>();
         let mut answer = std::i32::MAX;
         loop {
             if let (Some(&min), Some(&max)) = (bts.iter().next(), bts.iter().next_back()) {
                 answer = std::cmp::min(answer, max - min);
-                if min % 2 == 1 && max - min > (min * 2 - max).abs() {
-                    bts.remove(&min);
-                    bts.insert(min * 2);
-                } else {
-                    break;
-                }
-            }
-        }
-        loop {
-            if let (Some(&min), Some(&max)) = (bts.iter().next(), bts.iter().next_back()) {
-                answer = std::cmp::min(answer, max - min);
-                if max % 2 == 0 && max - min > (max / 2 - min).abs() {
+                if max & 1 == 0 && max - min > ((max >> 1) - min).abs() {
                     bts.remove(&max);
-                    bts.insert(max / 2);
+                    bts.insert(max >> 1);
                 } else {
                     break;
                 }
