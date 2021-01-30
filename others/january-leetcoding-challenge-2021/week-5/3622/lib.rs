@@ -1,23 +1,22 @@
-use std::collections::BTreeSet;
+use std::collections::BinaryHeap;
 
 pub struct Solution;
 
 impl Solution {
     pub fn minimum_deviation(nums: Vec<i32>) -> i32 {
-        let mut bts = nums
+        let mut bh = nums
             .iter()
             .map(|&num| if num & 1 == 0 { num } else { num << 1 })
-            .collect::<BTreeSet<_>>();
+            .collect::<BinaryHeap<_>>();
+        let mut min = *bh.iter().min().unwrap();
         let mut answer = std::i32::MAX;
-        loop {
-            if let (Some(&min), Some(&max)) = (bts.iter().next(), bts.iter().next_back()) {
-                answer = std::cmp::min(answer, max - min);
-                if max & 1 == 0 && max - min > ((max >> 1) - min).abs() {
-                    bts.remove(&max);
-                    bts.insert(max >> 1);
-                } else {
-                    break;
-                }
+        while let Some(max) = bh.pop() {
+            answer = std::cmp::min(answer, max - min);
+            if max & 1 == 0 {
+                min = std::cmp::min(min, max >> 1);
+                bh.push(max >> 1);
+            } else {
+                break;
             }
         }
         answer
