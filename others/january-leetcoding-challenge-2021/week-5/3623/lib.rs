@@ -6,7 +6,7 @@ impl Solution {
             let j = (i..nums.len())
                 .rev()
                 .find(|&j| nums[j] > nums[i - 1])
-                .unwrap_or(nums.len() - 1);
+                .unwrap();
             nums.swap(i - 1, j);
             nums[i..].reverse();
         } else {
