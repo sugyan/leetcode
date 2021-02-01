@@ -3,11 +3,11 @@ pub struct Solution;
 impl Solution {
     pub fn hammingWeight(n: u32) -> i32 {
         let mut n = n;
-        n = (n & 0x5555_5555) + ((n & 0xAAAA_AAAA) >> 1);
-        n = (n & 0x3333_3333) + ((n & 0xCCCC_CCCC) >> 2);
-        n = (n & 0x0F0F_0F0F) + ((n & 0xF0F0_F0F0) >> 4);
-        n = (n & 0x00FF_00FF) + ((n & 0xFF00_FF00) >> 8);
-        n = (n & 0x0000_FFFF) + ((n & 0xFFFF_0000) >> 16);
+        n = (n & 0x5555_5555) + (n >> 1 & 0x5555_5555);
+        n = (n & 0x3333_3333) + (n >> 2 & 0x3333_3333);
+        n = (n & 0x0F0F_0F0F) + (n >> 4 & 0x0F0F_0F0F);
+        n = (n & 0x00FF_00FF) + (n >> 8 & 0x00FF_00FF);
+        n = (n & 0x0000_FFFF) + (n >> 16 & 0x0000_FFFF);
         n as i32
     }
 }
