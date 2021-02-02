@@ -10,18 +10,18 @@ impl Solution {
         low: i32,
         high: i32,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        if let Some(node) = &root {
-            let val = node.borrow().val;
-            if val < low {
-                return Self::trim_bst(node.borrow().right.clone(), low, high);
+        if let Some(node) = root {
+            let mut n = node.borrow_mut();
+            if n.val < low {
+                return Self::trim_bst(n.right.take(), low, high);
             }
-            if val > high {
-                return Self::trim_bst(node.borrow().left.clone(), low, high);
+            if n.val > high {
+                return Self::trim_bst(n.left.take(), low, high);
             }
             Some(Rc::new(RefCell::new(TreeNode {
-                val,
-                left: Self::trim_bst(node.borrow().left.clone(), low, high),
-                right: Self::trim_bst(node.borrow().right.clone(), low, high),
+                val: n.val,
+                left: Self::trim_bst(n.left.take(), low, high),
+                right: Self::trim_bst(n.right.take(), low, high),
             })))
         } else {
             None
