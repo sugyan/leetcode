@@ -13,18 +13,12 @@ struct ListNode {
 class Solution {
    public:
     bool hasCycle(ListNode *head) {
-        ListNode *node1 = head;
-        ListNode *node2 = head;
-        while (node1 != nullptr) {
-            if (node2 != nullptr) node2 = node2->next;
-            if (node2 != nullptr) node2 = node2->next;
-            if (node1 == node2) return true;
-            node1 = node1->next;
+        for (ListNode *slow = head, *fast = head; slow != nullptr;
+             slow = slow->next) {
+            if (fast != nullptr) fast = fast->next;
+            if (fast != nullptr) fast = fast->next;
+            if (slow == fast) return true;
         }
         return false;
     }
 };
-
-int main() {
-    return 1;
-}
