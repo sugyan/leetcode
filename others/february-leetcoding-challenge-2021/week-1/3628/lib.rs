@@ -7,13 +7,9 @@ impl Solution {
         let mut hm = HashMap::new();
         nums.iter()
             .for_each(|&num| *hm.entry(num).or_insert(0) += 1);
-        let mut answer = 0;
-        for (&num, &count) in &hm {
-            if let Some(c) = hm.get(&(num + 1)) {
-                answer = std::cmp::max(answer, count + c);
-            }
-        }
-        answer
+        hm.iter().fold(0, |acc, (&num, &count)| {
+            hm.get(&(num + 1)).map_or(acc, |c| acc.max(count + c))
+        })
     }
 }
 
