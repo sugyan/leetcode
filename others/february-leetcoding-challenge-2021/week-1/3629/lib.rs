@@ -2,17 +2,21 @@ pub struct Solution;
 
 impl Solution {
     pub fn simplify_path(path: String) -> String {
-        let mut stack = Vec::new();
-        for directory in path.split('/').filter(|&s| !s.is_empty()) {
-            match directory {
-                "." => {}
-                ".." => {
-                    stack.pop();
-                }
-                d => stack.push(d),
-            }
-        }
-        String::from("/") + &stack.join("/")
+        String::from("/")
+            + &path
+                .split('/')
+                .filter(|&s| !s.is_empty())
+                .fold(Vec::new(), |mut stack, directory| {
+                    match directory {
+                        "." => {}
+                        ".." => {
+                            stack.pop();
+                        }
+                        d => stack.push(d),
+                    }
+                    stack
+                })
+                .join("/")
     }
 }
 
