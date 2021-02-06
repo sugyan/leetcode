@@ -14,11 +14,9 @@ impl Solution {
         if let Some(n) = node {
             if depth >= answer.len() {
                 answer.push(n.borrow().val);
-            } else {
-                answer[depth] = n.borrow().val;
             }
-            Self::dfs(&n.borrow().left, answer, depth + 1);
             Self::dfs(&n.borrow().right, answer, depth + 1);
+            Self::dfs(&n.borrow().left, answer, depth + 1);
         }
     }
 }
