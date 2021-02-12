@@ -2,7 +2,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn number_of_steps(num: i32) -> i32 {
-        (31 + std::cmp::max(1, num.count_ones()) - num.leading_zeros()) as i32
+        (31 + num.count_ones()).saturating_sub(num.leading_zeros()) as i32
     }
 }
 
