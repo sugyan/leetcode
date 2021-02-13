@@ -27,11 +27,7 @@ impl Solution {
                 }
             }
         }
-        if let Some(len) = answer[r - 1][c - 1] {
-            len
-        } else {
-            -1
-        }
+        answer[r - 1][c - 1].unwrap_or(-1)
     }
 }
 
