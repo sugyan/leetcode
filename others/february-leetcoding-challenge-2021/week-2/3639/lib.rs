@@ -1,3 +1,5 @@
+use std::collections::VecDeque;
+
 pub struct Solution;
 
 impl Solution {
@@ -8,18 +10,16 @@ impl Solution {
                 continue;
             }
             ab[i] = Some(true);
-            let mut stack = vec![(i, true)];
-            while let Some((j, b)) = stack.pop() {
-                for &k in &graph[j] {
-                    match &mut ab[k as usize] {
-                        Some(bb) if *bb == b => {
-                            return false;
-                        }
-                        Some(_) => {}
-                        None => {
-                            ab[k as usize] = Some(!b);
-                            stack.push((k as usize, !b));
-                        }
+            let mut vd = VecDeque::new();
+            vd.push_back(i);
+            while let Some(j) = vd.pop_front() {
+                for k in graph[j].iter().map(|&k| k as usize) {
+                    if ab[k] == ab[j] {
+                        return false;
+                    }
+                    if ab[k].is_none() {
+                        ab[k] = ab[j].map(|b| !b);
+                        vd.push_back(k);
                     }
                 }
             }
