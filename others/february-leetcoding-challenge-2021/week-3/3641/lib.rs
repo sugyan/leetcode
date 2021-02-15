@@ -1,29 +1,21 @@
+use std::cmp::Reverse;
+use std::collections::BinaryHeap;
+
 pub struct Solution;
 
 impl Solution {
     pub fn k_weakest_rows(mat: Vec<Vec<i32>>, k: i32) -> Vec<i32> {
-        let n = mat[0].len();
-        let mut added = vec![false; mat.len()];
-        let mut answer = Vec::new();
-        for i in 0..n {
-            for (j, row) in mat.iter().enumerate() {
-                if row[i] == 0 && !added[j] {
-                    answer.push(j as i32);
-                    if answer.len() == k as usize {
-                        return answer;
-                    }
-                    added[j] = true;
-                }
-            }
+        let mut bh = BinaryHeap::with_capacity(k as usize);
+        for (i, row) in mat.iter().enumerate() {
+            let count = match row.binary_search_by(|val| 1.cmp(val)) {
+                Ok(i) => i + 1,
+                Err(_) => 0,
+            };
+            bh.push(Reverse((count, i as i32)));
         }
-        answer.extend(
-            added
-                .iter()
-                .enumerate()
-                .filter_map(|(i, &b)| if b { None } else { Some(i as i32) })
-                .take(k as usize - answer.len()),
-        );
-        answer
+        (0..k)
+            .filter_map(|_| bh.pop().map(|Reverse((_, i))| i))
+            .collect::<Vec<_>>()
     }
 }
 
