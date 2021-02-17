@@ -2,16 +2,14 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_area(height: Vec<i32>) -> i32 {
-        let mut v: Vec<(i32, usize)> = Vec::new();
         let mut answer = 0;
-        for (i, &h) in height.iter().enumerate() {
-            for e in &v {
-                answer = std::cmp::max(answer, std::cmp::min(h, e.0) * (i - e.1) as i32);
-            }
-            if let Some(&(last, _)) = v.last().or(Some(&(0, 0))) {
-                if h > last {
-                    v.push((h, i));
-                }
+        let (mut l, mut r) = (0, height.len() - 1);
+        while l < r {
+            answer = std::cmp::max(answer, std::cmp::min(height[l], height[r]) * (r - l) as i32);
+            if height[l] < height[r] {
+                l += 1;
+            } else {
+                r -= 1;
             }
         }
         answer
