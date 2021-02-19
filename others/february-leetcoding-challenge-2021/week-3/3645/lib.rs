@@ -2,33 +2,30 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_remove_to_make_valid(s: String) -> String {
-        let mut v = vec![true; s.len()];
+        let mut v = s.chars().map(Option::Some).collect::<Vec<_>>();
         {
-            let mut count = 0;
+            let mut depth = 0;
             for (i, &b) in s.as_bytes().iter().enumerate() {
                 match b {
-                    b')' if count > 0 => count -= 1,
-                    b')' => v[i] = false,
-                    b'(' => count += 1,
+                    b')' if depth == 0 => v[i] = None,
+                    b')' => depth -= 1,
+                    b'(' => depth += 1,
                     _ => {}
                 }
             }
         }
         {
-            let mut count = 0;
+            let mut depth = 0;
             for (i, &b) in s.as_bytes().iter().enumerate().rev() {
                 match b {
-                    b'(' if count > 0 => count -= 1,
-                    b'(' => v[i] = false,
-                    b')' => count += 1,
+                    b'(' if depth == 0 => v[i] = None,
+                    b'(' => depth -= 1,
+                    b')' => depth += 1,
                     _ => {}
                 }
             }
         }
-        s.chars()
-            .enumerate()
-            .filter_map(|(i, c)| if v[i] { Some(c) } else { None })
-            .collect()
+        v.into_iter().filter_map(|e| e).collect()
     }
 }
 
