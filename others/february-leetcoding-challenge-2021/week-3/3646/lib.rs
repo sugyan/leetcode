@@ -7,19 +7,18 @@ impl Solution {
         for c in s.chars() {
             answer += match c {
                 'I' => 1,
-                'V' if prev == Some('I') => 3,
                 'V' => 5,
-                'X' if prev == Some('I') => 8,
                 'X' => 10,
-                'L' if prev == Some('X') => 30,
                 'L' => 50,
-                'C' if prev == Some('X') => 80,
                 'C' => 100,
-                'D' if prev == Some('C') => 300,
                 'D' => 500,
-                'M' if prev == Some('C') => 800,
                 'M' => 1000,
-                _ => unreachable!(),
+                _ => 0,
+            } - match c {
+                'V' | 'X' if prev == Some('I') => 2,
+                'L' | 'C' if prev == Some('X') => 20,
+                'D' | 'M' if prev == Some('C') => 200,
+                _ => 0,
             };
             prev = Some(c);
         }
