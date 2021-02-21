@@ -3,17 +3,16 @@ pub struct Solution;
 impl Solution {
     pub fn broken_calc(x: i32, y: i32) -> i32 {
         let mut y = y;
-        for i in 0.. {
-            if x == y {
-                return i;
-            }
-            if y > x && y & 1 == 0 {
+        let mut answer = 0;
+        while y > x {
+            if y & 1 == 0 {
                 y >>= 1;
             } else {
                 y += 1;
             }
+            answer += 1;
         }
-        unreachable!();
+        answer + x - y
     }
 }
 
