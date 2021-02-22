@@ -3,10 +3,7 @@ pub struct Solution;
 impl Solution {
     pub fn find_longest_word(s: String, d: Vec<String>) -> String {
         let mut d = d;
-        d.sort_unstable_by(|a, b| match b.len().cmp(&a.len()) {
-            std::cmp::Ordering::Equal => a.cmp(&b),
-            o => o,
-        });
+        d.sort_unstable_by(|a, b| b.len().cmp(&a.len()).then(a.cmp(&b)));
         let s = s.as_bytes();
         let can_be_formed = |word: &String| -> bool {
             let mut i = 0;
