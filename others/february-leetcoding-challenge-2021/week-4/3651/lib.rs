@@ -2,21 +2,22 @@ pub struct Solution;
 
 impl Solution {
     pub fn score_of_parentheses(s: String) -> i32 {
-        let mut stack = vec![0; 1];
+        let mut answer = 0;
+        let (mut count, mut prev) = (0, None);
         for c in s.chars() {
             match c {
-                '(' => stack.push(0),
+                '(' => count += 1,
                 ')' => {
-                    if let Some(popped) = stack.pop() {
-                        if let Some(last) = stack.last_mut() {
-                            *last += std::cmp::max(popped * 2, 1);
-                        }
+                    count -= 1;
+                    if prev == Some('(') {
+                        answer += 1 << count;
                     }
                 }
                 _ => unreachable!(),
             }
+            prev = Some(c);
         }
-        stack[0]
+        answer
     }
 }
 
