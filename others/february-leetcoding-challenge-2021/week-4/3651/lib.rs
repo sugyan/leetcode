@@ -2,26 +2,21 @@ pub struct Solution;
 
 impl Solution {
     pub fn score_of_parentheses(s: String) -> i32 {
-        let mut v = vec![0; 1];
-        let mut i = 1;
+        let mut stack = vec![0; 1];
         for c in s.chars() {
             match c {
-                '(' => {
-                    if i >= v.len() {
-                        v.push(0);
-                    } else {
-                        v[i] = 0;
-                    }
-                    i += 1;
-                }
+                '(' => stack.push(0),
                 ')' => {
-                    i -= 1;
-                    v[i - 1] += if v[i] == 0 { 1 } else { v[i] * 2 };
+                    if let Some(popped) = stack.pop() {
+                        if let Some(last) = stack.last_mut() {
+                            *last += std::cmp::max(popped * 2, 1);
+                        }
+                    }
                 }
                 _ => unreachable!(),
             }
         }
-        v[0]
+        stack[0]
     }
 }
 
