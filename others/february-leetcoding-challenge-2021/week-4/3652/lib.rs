@@ -2,28 +2,27 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_unsorted_subarray(nums: Vec<i32>) -> i32 {
-        let (mut l, mut r) = (0, nums.len() - 1);
-        while l < r && nums[l] <= nums[l + 1] {
-            l += 1;
+        let (mut l, mut r) = (nums.len() - 1, 0);
+        let mut minmax = (nums[l], nums[r]);
+        for i in (0..nums.len() - 1).rev() {
+            if nums[i] <= minmax.0 && nums[i] <= nums[i + 1] {
+                minmax.0 = nums[i];
+            } else {
+                l = i;
+            }
         }
-        if l == r {
-            return 0;
+        for i in 1..nums.len() {
+            if nums[i] >= minmax.1 && nums[i] >= nums[i - 1] {
+                minmax.1 = nums[i];
+            } else {
+                r = i;
+            }
         }
-        while l < r && nums[r - 1] <= nums[r] {
-            r -= 1;
+        if l >= r {
+            0
+        } else {
+            (r - l + 1) as i32
         }
-        let mut minmax = (std::i32::MAX, std::i32::MIN);
-        for &num in nums.iter().skip(l).take(r - l + 1) {
-            minmax.0 = std::cmp::min(minmax.0, num);
-            minmax.1 = std::cmp::max(minmax.1, num);
-        }
-        while l > 0 && nums[l - 1] > minmax.0 {
-            l -= 1;
-        }
-        while r < nums.len() - 1 && nums[r + 1] < minmax.1 {
-            r += 1;
-        }
-        (r - l + 1) as i32
     }
 }
 
