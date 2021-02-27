@@ -18,8 +18,11 @@ impl Solution {
             divisor >>= 1;
             n >>= 1;
         }
-        let answer = if negative { -ret } else { ret };
-        answer.min(i64::from(std::i32::MAX)) as i32
+        (if negative {
+            -ret
+        } else {
+            ret.min(i64::from(std::i32::MAX))
+        }) as i32
     }
 }
 
