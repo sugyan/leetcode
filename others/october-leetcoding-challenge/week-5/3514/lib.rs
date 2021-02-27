@@ -10,7 +10,7 @@ impl Solution {
         let mut swapped: Option<(i32, i32)> = None;
         Solution::find_targets(root, &mut prev, &mut swapped);
         if let Some(s) = &swapped {
-            Solution::swap(root, s);
+            Solution::swap(root, *s);
         }
     }
     fn find_targets(
@@ -34,7 +34,7 @@ impl Solution {
             Solution::find_targets(&mut n.borrow_mut().right, prev, swapped);
         }
     }
-    fn swap(node: &mut Option<Rc<RefCell<TreeNode>>>, target: &(i32, i32)) {
+    fn swap(node: &mut Option<Rc<RefCell<TreeNode>>>, target: (i32, i32)) {
         if let Some(n) = node {
             let val = n.borrow().val;
             if val == target.0 {

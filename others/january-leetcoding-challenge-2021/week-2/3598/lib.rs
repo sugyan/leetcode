@@ -47,7 +47,7 @@ mod tests {
                 String::from("cog"),
                 ["hot", "dot", "dog", "lot", "log", "cog"]
                     .iter()
-                    .map(|s| s.to_string())
+                    .map(|&s| s.to_string())
                     .collect()
             )
         );
@@ -62,7 +62,7 @@ mod tests {
                 String::from("cog"),
                 ["hot", "dot", "dog", "lot", "log"]
                     .iter()
-                    .map(|s| s.to_string())
+                    .map(|&s| s.to_string())
                     .collect()
             )
         );

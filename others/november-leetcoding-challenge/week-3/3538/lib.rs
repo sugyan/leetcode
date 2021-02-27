@@ -48,7 +48,7 @@ mod tests {
             29523,
             Solution::at_most_n_given_digit_set(
                 vec![String::from("1"), String::from("4"), String::from("9")],
-                1000000000
+                1_000_000_000
             )
         );
     }

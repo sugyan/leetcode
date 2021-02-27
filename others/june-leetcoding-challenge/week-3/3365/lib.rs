@@ -35,7 +35,7 @@ impl Solution {
     fn helper(s: &[u8], len: usize, hashs: &[u64]) -> Option<usize> {
         let b = (0..len as u64).fold(1, |acc, _| (acc * B) % M);
         let mut hm: HashMap<u64, usize> = HashMap::new();
-        for i in 0..s.len() - len + 1 {
+        for i in 0..=s.len() - len {
             let h = (hashs[i + len] + M - hashs[i] * b % M) % M;
             if let Some(j) = hm.get(&h) {
                 if (0..len).all(|k| s[i + k] == s[j + k]) {

@@ -8,9 +8,8 @@ impl Solution {
         if s.len() >= 10 {
             (0..s.len() - 9).for_each(|i| *hm.entry(&s[i..i + 10]).or_insert(0) += 1);
         }
-        hm.iter()
-            .filter(|&x| *x.1 > 1)
-            .map(|x| x.0.to_string())
+        hm.into_iter()
+            .filter_map(|(k, v)| if v > 1 { Some(k.to_string()) } else { None })
             .collect()
     }
 }

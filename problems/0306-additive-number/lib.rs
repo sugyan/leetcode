@@ -7,7 +7,7 @@ impl Solution {
                 continue;
             }
             for j in i + 1..num.len() {
-                if j - i > 1 && &num[i..i + 1] == "0" {
+                if j - i > 1 && &num[i..=i] == "0" {
                     continue;
                 }
                 let mut n1 = (&num[0..i]).parse::<u64>().unwrap();

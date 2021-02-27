@@ -8,7 +8,7 @@ impl Solution {
         Self::recursive(&mut dummy);
         dummy.next
     }
-    fn recursive(node: &mut Box<ListNode>) {
+    fn recursive(node: &mut ListNode) {
         if let Some(mut n) = node.next.take() {
             let mut removed = false;
             while let Some(next) = n.next.take() {

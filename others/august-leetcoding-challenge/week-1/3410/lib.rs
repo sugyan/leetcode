@@ -11,7 +11,7 @@ impl MyHashSet {
     /** Initialize your data structure here. */
     pub fn new() -> Self {
         Self {
-            v: vec![0; 1000000 / 32 + 1],
+            v: vec![0; 1_000_000 / 32 + 1],
         }
     }
     pub fn add(&mut self, key: i32) {

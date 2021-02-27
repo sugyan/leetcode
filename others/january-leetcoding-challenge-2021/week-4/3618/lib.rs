@@ -26,6 +26,6 @@ mod tests {
 
     #[test]
     fn example_3() {
-        assert_eq!(505379714, Solution::concatenated_binary(12));
+        assert_eq!(505_379_714, Solution::concatenated_binary(12));
     }
 }

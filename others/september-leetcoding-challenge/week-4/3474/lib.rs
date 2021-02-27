@@ -37,16 +37,16 @@ impl Solution {
         hs: &mut HashSet<String>,
     ) -> Option<f64> {
         if let Some(m) = hm.get(src) {
-            for e in m.iter() {
-                if e.0 == &dst {
-                    return Some(*e.1);
+            for (&k, &v) in m.iter() {
+                if k == dst {
+                    return Some(v);
                 }
-                if hs.contains(&e.0.to_string()) {
+                if hs.contains(k) {
                     continue;
                 }
                 hs.insert(src.to_string());
-                if let Some(ret) = Solution::dfs(hm, &e.0, dst, hs) {
-                    return Some(*e.1 * ret);
+                if let Some(ret) = Solution::dfs(hm, k, dst, hs) {
+                    return Some(v * ret);
                 }
                 hs.remove(src);
             }

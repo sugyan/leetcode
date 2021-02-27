@@ -1,7 +1,7 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn hammingWeight(n: u32) -> i32 {
+    pub fn hamming_weight(n: u32) -> i32 {
         let mut n = n;
         n = (n & 0x5555_5555) + (n >> 1 & 0x5555_5555);
         n = (n & 0x3333_3333) + (n >> 2 & 0x3333_3333);
@@ -20,7 +20,7 @@ mod tests {
     fn example_1() {
         assert_eq!(
             3,
-            Solution::hammingWeight(0b0000_0000_0000_0000_0000_0000_0000_1011)
+            Solution::hamming_weight(0b0000_0000_0000_0000_0000_0000_0000_1011)
         );
     }
 
@@ -28,7 +28,7 @@ mod tests {
     fn example_2() {
         assert_eq!(
             1,
-            Solution::hammingWeight(0b0000_0000_0000_0000_0000_0000_1000_0000)
+            Solution::hamming_weight(0b0000_0000_0000_0000_0000_0000_1000_0000)
         );
     }
 
@@ -36,7 +36,7 @@ mod tests {
     fn example_3() {
         assert_eq!(
             31,
-            Solution::hammingWeight(0b1111_1111_1111_1111_1111_1111_1111_1101)
+            Solution::hamming_weight(0b1111_1111_1111_1111_1111_1111_1111_1101)
         );
     }
 }

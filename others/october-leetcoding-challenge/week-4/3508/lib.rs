@@ -20,16 +20,16 @@ mod tests {
 
     #[test]
     fn example_1() {
-        assert!((0.0 - Solution::champagne_tower(1, 1, 1)).abs() < f64::EPSILON);
+        assert!((0.0 - Solution::champagne_tower(1, 1, 1)).abs() < std::f64::EPSILON);
     }
 
     #[test]
     fn example_2() {
-        assert!((0.5 - Solution::champagne_tower(2, 1, 1)).abs() < f64::EPSILON);
+        assert!((0.5 - Solution::champagne_tower(2, 1, 1)).abs() < std::f64::EPSILON);
     }
 
     #[test]
     fn example_3() {
-        assert!((1.0 - Solution::champagne_tower(100000009, 33, 17)).abs() < f64::EPSILON);
+        assert!((1.0 - Solution::champagne_tower(100_000_009, 33, 17)).abs() < std::f64::EPSILON);
     }
 }
