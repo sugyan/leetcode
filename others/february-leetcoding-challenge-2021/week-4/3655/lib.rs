@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 #[derive(Default)]
 pub struct FreqStack {
-    v: Vec<i32>,
-    hm: HashMap<i32, usize>,
+    freq: HashMap<i32, usize>,
+    group: Vec<Vec<i32>>,
 }
 
 /**
@@ -16,15 +16,22 @@ impl FreqStack {
     }
 
     pub fn push(&mut self, x: i32) {
-        self.v.push(x);
-        *self.hm.entry(x).or_insert(0) += 1;
+        let entry = self.freq.entry(x).or_insert(0);
+        if *entry >= self.group.len() {
+            self.group.push(Vec::new());
+        }
+        self.group[*entry].push(x);
+        *entry += 1;
     }
 
     pub fn pop(&mut self) -> i32 {
-        if let Some(&max) = self.hm.values().max() {
-            if let Some(i) = self.v.iter().rposition(|x| self.hm.get(x) == Some(&max)) {
-                *self.hm.entry(self.v[i]).or_default() -= 1;
-                return self.v.remove(i);
+        if let Some(maxfreq) = self.group.last_mut() {
+            if let Some(ret) = maxfreq.pop() {
+                *self.freq.entry(ret).or_default() -= 1;
+                if maxfreq.is_empty() {
+                    self.group.pop();
+                }
+                return ret;
             }
         }
         unreachable!()
