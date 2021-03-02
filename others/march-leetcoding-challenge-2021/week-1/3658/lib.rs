@@ -2,18 +2,35 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_error_nums(nums: Vec<i32>) -> Vec<i32> {
-        let mut nums = nums;
-        let mut duplicated = 0;
-        let mut xor = 0;
-        for i in 0..nums.len() {
-            let n = nums[i].abs();
-            xor ^= n ^ ((i as i32) + 1);
-            if nums[n as usize - 1] < 0 {
-                duplicated = n;
+        let mut xor = nums
+            .iter()
+            .zip(1..=nums.len() as i32)
+            .fold(0, |acc, (&num, i)| acc ^ num ^ i);
+        xor &= -xor;
+        let (mut n0, mut n1) = (0, 0);
+        for &num in &nums {
+            if num & xor == 0 {
+                n0 ^= num;
+            } else {
+                n1 ^= num;
             }
-            nums[n as usize - 1] *= -1;
         }
-        vec![duplicated, duplicated ^ xor]
+        for i in 1..=nums.len() as i32 {
+            if i & xor == 0 {
+                n0 ^= i;
+            } else {
+                n1 ^= i;
+            }
+        }
+        for &num in &nums {
+            if num == n0 {
+                return vec![n0, n1];
+            }
+            if num == n1 {
+                return vec![n1, n0];
+            }
+        }
+        unreachable!()
     }
 }
 
