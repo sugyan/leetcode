@@ -1,4 +1,5 @@
 use std::cell::RefCell;
+use std::collections::VecDeque;
 use std::rc::Rc;
 use utils::TreeNode;
 
@@ -6,21 +7,28 @@ pub struct Solution;
 
 impl Solution {
     pub fn average_of_levels(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<f64> {
-        let mut v = Vec::new();
-        Self::dfs(&root, 0, &mut v);
-        v.iter()
-            .map(|v| v.iter().sum::<i64>() as f64 / v.len() as f64)
-            .collect()
-    }
-    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, level: usize, v: &mut Vec<Vec<i64>>) {
-        if let Some(n) = node {
-            if level >= v.len() {
-                v.push(Vec::new());
-            }
-            v[level].push(i64::from(n.borrow().val));
-            Self::dfs(&n.borrow().left, level + 1, v);
-            Self::dfs(&n.borrow().right, level + 1, v);
+        let mut vd = VecDeque::new();
+        if let Some(r) = root {
+            vd.push_back(r);
         }
+        let mut answer = Vec::new();
+        while !vd.is_empty() {
+            let len = vd.len();
+            let mut sum = 0;
+            for _ in 0..vd.len() {
+                if let Some(node) = vd.pop_front() {
+                    sum += i64::from(node.borrow().val);
+                    if let Some(n) = node.borrow_mut().left.take() {
+                        vd.push_back(n);
+                    }
+                    if let Some(n) = node.borrow_mut().right.take() {
+                        vd.push_back(n);
+                    }
+                }
+            }
+            answer.push(sum as f64 / len as f64);
+        }
+        answer
     }
 }
 
@@ -40,6 +48,7 @@ mod tests {
             Some(15),
             Some(7),
         ]));
+        assert_eq!(3, ret.len());
         assert!(vec![3.0, 14.5, 11.0]
             .iter()
             .zip(ret.iter())
