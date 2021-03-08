@@ -2,10 +2,10 @@ pub struct Solution;
 
 impl Solution {
     pub fn remove_palindrome_sub(s: String) -> i32 {
+        let (s, len) = (s.as_bytes(), s.len());
         if s.is_empty() {
-            return 0;
-        }
-        if (0..s.len() / 2).all(|i| s.as_bytes()[i] == s.as_bytes()[s.len() - 1 - i]) {
+            0
+        } else if (0..len / 2).all(|i| s[i] == s[len - 1 - i]) {
             1
         } else {
             2
