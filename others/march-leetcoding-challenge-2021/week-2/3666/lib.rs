@@ -1,5 +1,4 @@
 use std::cell::RefCell;
-use std::cmp::Ordering;
 use std::rc::Rc;
 use utils::TreeNode;
 
@@ -24,27 +23,21 @@ impl Solution {
     }
     fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, v: i32, d: i32) {
         if let Some(n) = node {
-            match d.cmp(&0) {
-                Ordering::Less => {}
-                Ordering::Equal => {
-                    let left = n.borrow().left.clone();
-                    let right = n.borrow().right.clone();
-                    let mut n = n.borrow_mut();
-                    n.left = Some(Rc::new(RefCell::new(TreeNode {
-                        val: v,
-                        left,
-                        right: None,
-                    })));
-                    n.right = Some(Rc::new(RefCell::new(TreeNode {
-                        val: v,
-                        left: None,
-                        right,
-                    })));
-                }
-                Ordering::Greater => {
-                    Self::dfs(&n.borrow().left, v, d - 1);
-                    Self::dfs(&n.borrow().right, v, d - 1);
-                }
+            if d > 0 {
+                Self::dfs(&n.borrow().left, v, d - 1);
+                Self::dfs(&n.borrow().right, v, d - 1);
+            } else {
+                let mut n = n.borrow_mut();
+                n.left = Some(Rc::new(RefCell::new(TreeNode {
+                    val: v,
+                    left: n.left.take(),
+                    right: None,
+                })));
+                n.right = Some(Rc::new(RefCell::new(TreeNode {
+                    val: v,
+                    left: None,
+                    right: n.right.take(),
+                })));
             }
         }
     }
