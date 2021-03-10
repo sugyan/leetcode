@@ -1124,6 +1124,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "march-leetcoding-challenge-2021_week-2_3667"
+version = "0.1.0"
+
+[[package]]
 name = "maximal-square"
 version = "0.1.0"
 
