@@ -1,19 +1,29 @@
 pub struct Solution;
 
+const DICT: [(i32, &str); 13] = [
+    (1000, "M"),
+    (900, "CM"),
+    (500, "D"),
+    (400, "CD"),
+    (100, "C"),
+    (90, "XC"),
+    (50, "L"),
+    (40, "XL"),
+    (10, "X"),
+    (9, "IX"),
+    (5, "V"),
+    (4, "IV"),
+    (1, "I"),
+];
+
 impl Solution {
     pub fn int_to_roman(num: i32) -> String {
         let mut answer = String::new();
-        let chars = [vec!['I', 'V'], vec!['X', 'L'], vec!['C', 'D'], vec!['M']];
-        for i in (0..4).rev() {
-            let d = (num / 10_i32.pow(i as u32)) % 10;
-            if d % 5 == 4 {
-                answer.push(chars[i][0]);
-                answer.push(if d == 4 { chars[i][1] } else { chars[i + 1][0] });
-            } else {
-                if d >= 5 {
-                    answer.push(chars[i][1]);
-                }
-                (0..d % 5).for_each(|_| answer.push(chars[i][0]));
+        let mut num = num;
+        while num > 0 {
+            if let Some(&(n, s)) = DICT.iter().find(|(n, _)| *n <= num) {
+                answer += s;
+                num -= n;
             }
         }
         answer
