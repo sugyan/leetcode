@@ -2,19 +2,23 @@ pub struct Solution;
 
 impl Solution {
     pub fn coin_change(coins: Vec<i32>, amount: i32) -> i32 {
-        let mut dp = vec![None; amount as usize + 1];
+        let amount = amount as usize;
+        let mut dp = vec![None; amount + 1];
         dp[0] = Some(0);
-        for i in 0..=amount as usize {
-            if let Some(min) = dp[i] {
-                coins.iter().for_each(|&j| {
+        for i in 1..=amount {
+            dp[i] = coins
+                .iter()
+                .filter_map(|&j| {
                     let j = j as usize;
-                    if i + j <= amount as usize {
-                        dp[i + j] = dp[i + j].map(|n| n.min(min + 1)).or(Some(min + 1))
+                    if j <= i {
+                        dp[i - j].map(|n| n + 1)
+                    } else {
+                        None
                     }
-                });
-            }
+                })
+                .min();
         }
-        dp[amount as usize].unwrap_or(-1)
+        dp[amount].unwrap_or(-1)
     }
 }
 
