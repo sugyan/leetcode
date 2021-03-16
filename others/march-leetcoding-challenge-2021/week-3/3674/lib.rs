@@ -2,10 +2,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_profit(prices: Vec<i32>, fee: i32) -> i32 {
-        let dp = prices.iter().skip(1).fold((-prices[0], 0), |acc, &x| {
-            (acc.0.max(acc.1 - x), acc.1.max(acc.0 + x - fee))
-        });
-        dp.0.max(dp.1)
+        prices
+            .iter()
+            .fold((None, 0), |(hold, cash): (Option<i32>, _), &price| {
+                (
+                    hold.map(|h| h.max(cash - price)).or(Some(-price)),
+                    hold.map_or(0, |h| cash.max(h + price - fee)),
+                )
+            })
+            .1
     }
 }
 
