@@ -23,13 +23,13 @@ impl Solution {
     }
 
     pub fn rand_point(&mut self) -> Vec<f64> {
-        loop {
-            let rx = self.rng.gen_range(-self.radius, self.radius);
-            let ry = self.rng.gen_range(-self.radius, self.radius);
-            if rx * rx + ry * ry <= self.radius * self.radius {
-                return [self.x_center + rx, self.y_center + ry].to_vec();
-            }
-        }
+        let r = self.rng.gen::<f64>().sqrt() * self.radius;
+        let theta = self.rng.gen::<f64>() * 2.0 * std::f64::consts::PI;
+        [
+            self.x_center + r * theta.cos(),
+            self.y_center + r * theta.sin(),
+        ]
+        .to_vec()
     }
 }
 
