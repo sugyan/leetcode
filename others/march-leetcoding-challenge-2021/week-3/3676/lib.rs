@@ -1,22 +1,17 @@
-use std::cmp::Ordering;
-
 pub struct Solution;
 
 impl Solution {
     pub fn wiggle_max_length(nums: Vec<i32>) -> i32 {
-        let mut prev = None;
-        let mut answer = 1;
-        for i in 1..nums.len() {
-            let o = (nums[i] - nums[i - 1]).cmp(&0);
-            if o == Ordering::Equal {
-                continue;
-            }
-            if Some(o) != prev {
-                answer += 1
-            }
-            prev = Some(o);
-        }
-        answer
+        (1..nums.len())
+            .fold((1, None), |(len, prev), i| {
+                let o = (nums[i] - nums[i - 1]).cmp(&0);
+                if o == std::cmp::Ordering::Equal || Some(o) == prev {
+                    (len, prev)
+                } else {
+                    (len + 1, Some(o))
+                }
+            })
+            .0
     }
 }
 
