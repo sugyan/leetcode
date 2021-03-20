@@ -3,7 +3,7 @@ use std::collections::HashMap;
 #[derive(Default)]
 pub struct UndergroundSystem {
     checkins: HashMap<i32, (String, i32)>,
-    times: HashMap<(String, String), Vec<i32>>,
+    travels: HashMap<(String, String), (i32, usize)>,
 }
 
 /**
@@ -21,16 +21,18 @@ impl UndergroundSystem {
 
     pub fn check_out(&mut self, id: i32, station_name: String, t: i32) {
         if let Some((start_station, start_t)) = self.checkins.get(&id) {
-            self.times
+            let travel = self
+                .travels
                 .entry((start_station.clone(), station_name))
-                .or_default()
-                .push(t - start_t);
+                .or_default();
+            travel.0 += t - start_t;
+            travel.1 += 1;
         }
     }
 
     pub fn get_average_time(&self, start_station: String, end_station: String) -> f64 {
-        if let Some(times) = self.times.get(&(start_station, end_station)) {
-            return f64::from(times.iter().sum::<i32>()) / times.len() as f64;
+        if let Some(&(total, len)) = self.travels.get(&(start_station, end_station)) {
+            return f64::from(total) / len as f64;
         }
         unreachable!()
     }
