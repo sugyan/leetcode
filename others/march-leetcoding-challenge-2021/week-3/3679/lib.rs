@@ -1,22 +1,18 @@
-use std::collections::HashSet;
-
 pub struct Solution;
 
 impl Solution {
     pub fn reordered_power_of2(n: i32) -> bool {
         let digit_counts = |n: i32| -> [usize; 10] {
+            let mut n = n;
             let mut d = [0; 10];
-            for &u in n.to_string().as_bytes() {
-                d[(u - b'0') as usize] += 1;
+            while n > 0 {
+                d[(n % 10) as usize] += 1;
+                n /= 10;
             }
             d
         };
-        let hs = (0..)
-            .map(|i| 1 << i)
-            .take_while(|&n| n <= 10_i32.pow(9))
-            .map(digit_counts)
-            .collect::<HashSet<_>>();
-        hs.contains(&digit_counts(n))
+        let counts = digit_counts(n);
+        (0..31).any(|i| digit_counts(1 << i) == counts)
     }
 }
 
