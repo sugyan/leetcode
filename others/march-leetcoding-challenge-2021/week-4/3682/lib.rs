@@ -1,45 +1,28 @@
-use std::cmp::Ordering;
-use std::collections::HashMap;
-
-const MOD: usize = 1_000_000_007;
+const MOD: i64 = 1_000_000_007;
 
 pub struct Solution;
 
 impl Solution {
     pub fn three_sum_multi(arr: Vec<i32>, target: i32) -> i32 {
-        let counts = arr
-            .iter()
-            .fold(HashMap::new(), |mut acc: HashMap<i32, usize>, &x| {
-                *acc.entry(x).or_default() += 1;
-                acc
-            });
+        let mut counts = vec![0_i64; 101];
+        arr.iter().for_each(|&n| counts[n as usize] += 1);
         let mut answer = 0;
-        for (&k1, &v1) in counts.iter() {
-            if k1 * 3 == target && v1 >= 3 {
-                answer += v1 * (v1 - 1) * (v1 - 2) / 6;
-            }
-            if target - k1 * 2 > k1 && v1 >= 2 {
-                if let Some(&v2) = counts.get(&(target - k1 * 2)) {
-                    answer += v1 * (v1 - 1) / 2 * v2;
-                }
-            }
-            for (&k2, &v2) in counts.iter().filter(|(&k, _)| k > k1) {
-                match (target - k1 - k2).cmp(&k2) {
-                    Ordering::Less => {}
-                    Ordering::Equal => {
-                        if v2 >= 2 {
-                            answer += v1 * v2 * (v2 - 1) / 2;
-                        }
-                    }
-                    Ordering::Greater => {
-                        if let Some(&v3) = counts.get(&(target - k1 - k2)) {
-                            answer += v1 * v2 * v3;
-                        }
-                    }
+        for i in 0..=100 {
+            for j in i..=100 {
+                let k = target - i - j;
+                if (j..=100).contains(&k) {
+                    let (ci, cj, ck) = (counts[i as usize], counts[j as usize], counts[k as usize]);
+                    answer += match (i == j, j == k) {
+                        (false, false) => ci * cj * ck,
+                        (false, true) => ci * cj * (cj - 1) / 2,
+                        (true, false) => ci * (ci - 1) / 2 * ck,
+                        (true, true) => ci * (ci - 1) * (ci - 2) / 6,
+                    };
+                    answer %= MOD;
                 }
             }
         }
-        (answer % MOD) as i32
+        answer as i32
     }
 }
 
