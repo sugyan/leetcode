@@ -1,5 +1,3 @@
-use std::collections::VecDeque;
-
 pub struct Solution;
 
 impl Solution {
@@ -8,64 +6,39 @@ impl Solution {
             return Vec::new();
         }
         let (m, n) = (matrix.len(), matrix[0].len());
-        let mut reachable = vec![vec![(false, false); n]; m];
-        {
-            let mut vd = VecDeque::new();
-            vd.push_back((0, 0));
-            (1..m).for_each(|i| vd.push_back((i, 0)));
-            (1..n).for_each(|j| vd.push_back((0, j)));
-            while let Some((i, j)) = vd.pop_front() {
-                if reachable[i][j].0 {
-                    continue;
-                }
-                reachable[i][j].0 = true;
-                if i > 0 && matrix[i - 1][j] >= matrix[i][j] {
-                    vd.push_back((i - 1, j));
-                }
-                if j > 0 && matrix[i][j - 1] >= matrix[i][j] {
-                    vd.push_back((i, j - 1));
-                }
-                if i < m - 1 && matrix[i + 1][j] >= matrix[i][j] {
-                    vd.push_back((i + 1, j));
-                }
-                if j < n - 1 && matrix[i][j + 1] >= matrix[i][j] {
-                    vd.push_back((i, j + 1));
-                }
-            }
+        let mut p_reacheable = vec![vec![false; n]; m];
+        let mut a_reacheable = vec![vec![false; n]; m];
+        for i in 0..m {
+            Self::dfs(&mut p_reacheable, &matrix, (i, 0));
+            Self::dfs(&mut a_reacheable, &matrix, (i, n - 1));
         }
-        {
-            let mut vd = VecDeque::new();
-            vd.push_back((m - 1, n - 1));
-            (0..m - 1).for_each(|i| vd.push_back((i, n - 1)));
-            (0..n - 1).for_each(|j| vd.push_back((m - 1, j)));
-            while let Some((i, j)) = vd.pop_front() {
-                if reachable[i][j].1 {
-                    continue;
-                }
-                reachable[i][j].1 = true;
-                if i > 0 && matrix[i - 1][j] >= matrix[i][j] {
-                    vd.push_back((i - 1, j));
-                }
-                if j > 0 && matrix[i][j - 1] >= matrix[i][j] {
-                    vd.push_back((i, j - 1));
-                }
-                if i < m - 1 && matrix[i + 1][j] >= matrix[i][j] {
-                    vd.push_back((i + 1, j));
-                }
-                if j < n - 1 && matrix[i][j + 1] >= matrix[i][j] {
-                    vd.push_back((i, j + 1));
-                }
-            }
+        for j in 0..n {
+            Self::dfs(&mut p_reacheable, &matrix, (0, j));
+            Self::dfs(&mut a_reacheable, &matrix, (m - 1, j));
         }
         let mut answer = Vec::new();
-        for (i, row) in reachable.iter().enumerate() {
-            for (j, &(pacific, atlantic)) in row.iter().enumerate() {
-                if pacific && atlantic {
+        for i in 0..m {
+            for j in 0..n {
+                if p_reacheable[i][j] && a_reacheable[i][j] {
                     answer.push([i as i32, j as i32].to_vec());
                 }
             }
         }
         answer
+    }
+    fn dfs(reachable: &mut Vec<Vec<bool>>, matrix: &[Vec<i32>], (i, j): (usize, usize)) {
+        reachable[i][j] = true;
+        for &(di, dj) in &[(-1, 0), (0, -1), (0, 1), (1, 0)] {
+            let ni = i as i32 + di;
+            let nj = j as i32 + dj;
+            if (0..matrix.len() as i32).contains(&ni)
+                && (0..matrix[0].len() as i32).contains(&nj)
+                && !reachable[ni as usize][nj as usize]
+                && matrix[ni as usize][nj as usize] >= matrix[i][j]
+            {
+                Self::dfs(reachable, matrix, (ni as usize, nj as usize));
+            }
+        }
     }
 }
 
