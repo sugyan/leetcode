@@ -4,15 +4,14 @@ impl Solution {
     pub fn count_substrings(s: String) -> i32 {
         let s = s.as_bytes();
         (0..s.len())
-            .map(|i| Self::count_parindrome(&s, i, false) + Self::count_parindrome(&s, i, true))
+            .map(|i| Self::count_parindrome(&s, i, i) + Self::count_parindrome(&s, i, i + 1))
             .sum()
     }
-    fn count_parindrome(s: &[u8], i: usize, center: bool) -> i32 {
-        let mut i = i;
-        let mut j = if center { i } else { i + 1 };
+    fn count_parindrome(s: &[u8], i: usize, j: usize) -> i32 {
         if j == s.len() || s[i] != s[j] {
             return 0;
         }
+        let (mut i, mut j) = (i, j);
         let mut ret = 1;
         while i > 0 && j < s.len() - 1 && s[i - 1] == s[j + 1] {
             ret += 1;
