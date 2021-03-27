@@ -1198,6 +1198,10 @@ name = "march-leetcoding-challenge-2021_week-4_3685"
 version = "0.1.0"
 
 [[package]]
+name = "march-leetcoding-challenge-2021_week-4_3686"
+version = "0.1.0"
+
+[[package]]
 name = "maximal-square"
 version = "0.1.0"
 
