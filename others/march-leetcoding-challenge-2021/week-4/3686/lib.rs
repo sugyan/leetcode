@@ -8,13 +8,13 @@ impl Solution {
             .sum()
     }
     fn count_parindrome(s: &[u8], i: usize, j: usize) -> i32 {
-        if j == s.len() || s[i] != s[j] {
-            return 0;
-        }
         let (mut i, mut j) = (i, j);
-        let mut ret = 1;
-        while i > 0 && j < s.len() - 1 && s[i - 1] == s[j + 1] {
+        let mut ret = 0;
+        while j < s.len() && s[i] == s[j] {
             ret += 1;
+            if i == 0 {
+                break;
+            }
             i -= 1;
             j += 1;
         }
