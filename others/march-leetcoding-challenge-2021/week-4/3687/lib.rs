@@ -2,38 +2,24 @@ pub struct Solution;
 
 impl Solution {
     pub fn original_digits(s: String) -> String {
-        let char_counts = |s: &&str| -> [usize; 26] {
-            s.as_bytes().iter().fold([0; 26], |mut acc, x| {
-                acc[(x - b'a') as usize] += 1;
-                acc
-            })
-        };
-        let mut counts = char_counts(&s.as_str());
-        let numbers = [
-            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        ]
-        .iter()
-        .map(char_counts)
-        .collect::<Vec<_>>();
-        let mut answer = Vec::new();
-        for &(i, b) in &[
-            (0, b'z'),
-            (2, b'w'),
-            (4, b'u'),
-            (5, b'f'),
-            (6, b'x'),
-            (7, b'v'),
-            (8, b'g'),
-            (9, b'i'),
-            (1, b'n'),
-            (3, b't'),
-        ] {
-            let n = counts[(b - b'a') as usize];
-            (0..n).for_each(|_| answer.push((b'0' + i) as char));
-            (0..26).for_each(|j| counts[j] -= n * numbers[i as usize][j]);
-        }
-        answer.sort_unstable();
-        answer.iter().collect()
+        let counts = s.as_bytes().iter().fold([0; 26], |mut acc, x| {
+            acc[(x - b'a') as usize] += 1;
+            acc
+        });
+        let mut answer = [0; 10];
+        answer[0] = counts[(b'z' - b'a') as usize];
+        answer[2] = counts[(b'w' - b'a') as usize];
+        answer[4] = counts[(b'u' - b'a') as usize];
+        answer[6] = counts[(b'x' - b'a') as usize];
+        answer[8] = counts[(b'g' - b'a') as usize];
+        answer[3] = counts[(b'h' - b'a') as usize] - answer[8];
+        answer[5] = counts[(b'f' - b'a') as usize] - answer[4];
+        answer[7] = counts[(b's' - b'a') as usize] - answer[6];
+        answer[1] = counts[(b'o' - b'a') as usize] - answer[0] - answer[2] - answer[4];
+        answer[9] = counts[(b'i' - b'a') as usize] - answer[5] - answer[6] - answer[8];
+        (0..10)
+            .flat_map(|i| std::iter::repeat((i as u8 + b'0') as char).take(answer[i]))
+            .collect()
     }
 }
 
