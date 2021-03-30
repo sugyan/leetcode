@@ -11,13 +11,12 @@ impl Solution {
         envelopes.sort_unstable();
         let mut dp = Vec::new();
         for &(_, Reverse(h)) in &envelopes {
-            let i = match dp.binary_search(&h) {
-                Ok(i) | Err(i) => i,
-            };
-            if i == dp.len() {
-                dp.push(h);
-            } else {
-                dp[i] = h;
+            if let Some(i) = dp.binary_search(&h).err() {
+                if i < dp.len() {
+                    dp[i] = h;
+                } else {
+                    dp.push(h);
+                }
             }
         }
         dp.len() as i32
