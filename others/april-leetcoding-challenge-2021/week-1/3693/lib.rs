@@ -4,13 +4,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn is_palindrome(head: Option<Box<ListNode>>) -> bool {
+        let mut len = 0;
         let mut node = &head;
-        let mut v = Vec::new();
         while let Some(n) = node {
-            v.push(n.val);
+            len += 1;
             node = &n.next;
         }
-        (0..v.len() / 2).all(|i| v[i] == v[v.len() - 1 - i])
+        let mut head = head;
+        let second = {
+            let mut node = &mut head;
+            for _ in 0..len / 2 + len % 2 {
+                if let Some(n) = node {
+                    node = &mut n.next;
+                }
+            }
+            node.take()
+        };
+        let mut first = None;
+        for _ in 0..len / 2 {
+            if let Some(mut node) = head.take() {
+                let next = node.next.take();
+                node.next = first.take();
+                first = Some(node);
+                head = next;
+            }
+        }
+        first == second
     }
 }
 
