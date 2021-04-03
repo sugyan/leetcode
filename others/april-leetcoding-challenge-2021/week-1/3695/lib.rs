@@ -2,26 +2,19 @@ pub struct Solution;
 
 impl Solution {
     pub fn longest_valid_parentheses(s: String) -> i32 {
-        let mut v = Vec::new();
+        let mut stack = vec![0];
         let mut answer = 0;
-        let mut depth = 0;
         for (i, &b) in s.as_bytes().iter().enumerate() {
             match b {
                 b'(' => {
-                    if depth >= v.len() {
-                        v.push(i);
-                    }
-                    depth += 1;
+                    stack.push(i + 1);
                 }
                 b')' => {
-                    if depth > 0 {
-                        depth -= 1;
-                        answer = answer.max(i - v[depth] + 1);
-                        if depth < v.len() - 1 {
-                            v.pop();
-                        }
-                    } else {
-                        v.clear();
+                    stack.pop();
+                    if stack.is_empty() {
+                        stack.push(i + 1);
+                    } else if let Some(&last) = stack.last() {
+                        answer = answer.max(i - last + 1);
                     }
                 }
                 _ => unreachable!(),
