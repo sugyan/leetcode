@@ -2,11 +2,9 @@ pub struct Solution;
 
 impl Solution {
     pub fn is_ideal_permutation(a: Vec<i32>) -> bool {
-        a.windows(3).all(|w| {
-            (w[0] < w[1] && w[1] < w[2])
-                || (w[0] - w[1] == 1 && w[1] < w[2])
-                || (w[0] < w[1] && w[1] - w[2] == 1)
-        })
+        a.iter()
+            .enumerate()
+            .all(|(i, &n)| (n - i as i32).abs() <= 1)
     }
 }
 
