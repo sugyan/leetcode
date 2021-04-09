@@ -22,9 +22,9 @@ impl Solution {
             |acc, &x| {
                 acc.iter()
                     .flat_map(|s| {
-                        std::iter::repeat(s)
-                            .zip(MAPPING[(x - b'2') as usize].clone())
-                            .map(|(s, b)| s.chars().chain(std::iter::once(b as char)).collect())
+                        MAPPING[(x - b'2') as usize]
+                            .clone()
+                            .map(|b| s.chars().chain(std::iter::once(b as char)).collect())
                             .collect::<Vec<_>>()
                     })
                     .collect()
