@@ -5,7 +5,7 @@ pub struct Solution;
 impl Solution {
     pub fn longest_increasing_path(matrix: Vec<Vec<i32>>) -> i32 {
         let (m, n) = (matrix.len(), matrix[0].len());
-        let mut roots = vec![vec![true; n]; m];
+        let mut cache = vec![vec![None; n]; m];
         let mut graph = HashMap::new();
         for i in 0..m {
             for j in 0..n {
@@ -15,29 +15,35 @@ impl Solution {
                         let (ni, nj) = (ni as usize, nj as usize);
                         if matrix[ni][nj] > matrix[i][j] {
                             graph.entry((i, j)).or_insert_with(Vec::new).push((ni, nj));
-                            roots[ni][nj] = false;
                         }
                     }
                 }
             }
         }
         let mut answer = 0;
-        for (i, row) in roots.iter().enumerate() {
-            for (j, &col) in row.iter().enumerate() {
-                if col {
-                    answer = answer.max(Self::dfs(&graph, (i, j)));
-                }
+        for i in 0..m {
+            for j in 0..n {
+                answer = answer.max(Self::dfs(&graph, &mut cache, i, j));
             }
         }
         answer
     }
-    fn dfs(graph: &HashMap<(usize, usize), Vec<(usize, usize)>>, p: (usize, usize)) -> i32 {
+    fn dfs(
+        graph: &HashMap<(usize, usize), Vec<(usize, usize)>>,
+        cache: &mut Vec<Vec<Option<i32>>>,
+        i: usize,
+        j: usize,
+    ) -> i32 {
+        if let Some(c) = cache[i][j] {
+            return c;
+        }
         let mut ret = 1;
-        if let Some(v) = graph.get(&p) {
+        if let Some(v) = graph.get(&(i, j)) {
             for &p in v {
-                ret = ret.max(Self::dfs(graph, p) + 1);
+                ret = ret.max(Self::dfs(graph, cache, p.0, p.1) + 1);
             }
         }
+        cache[i][j] = Some(ret);
         ret
     }
 }
