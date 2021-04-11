@@ -9,20 +9,21 @@ impl Solution {
     pub fn deepest_leaves_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         let mut vd = VecDeque::new();
         if let Some(r) = root {
-            vd.push_back((r, 0));
+            vd.push_back(r);
         }
-        let (mut answer, mut prevdepth) = (0, None);
-        while let Some((node, depth)) = vd.pop_front() {
-            if Some(depth) != prevdepth {
-                answer = 0;
-            }
-            answer += node.borrow().val;
-            prevdepth = Some(depth);
-            if let Some(l) = node.borrow_mut().left.take() {
-                vd.push_back((l, depth + 1));
-            }
-            if let Some(r) = node.borrow_mut().right.take() {
-                vd.push_back((r, depth + 1));
+        let mut answer = 0;
+        while !vd.is_empty() {
+            answer = 0;
+            for _ in 0..vd.len() {
+                if let Some(n) = vd.pop_front() {
+                    answer += n.borrow().val;
+                    if let Some(l) = n.borrow_mut().left.take() {
+                        vd.push_back(l);
+                    }
+                    if let Some(r) = n.borrow_mut().right.take() {
+                        vd.push_back(r);
+                    }
+                }
             }
         }
         answer
