@@ -2,11 +2,19 @@ pub struct Solution;
 
 impl Solution {
     pub fn construct_array(n: i32, k: i32) -> Vec<i32> {
-        let mut answer = (1..=n).collect::<Vec<_>>();
-        for i in 1..=k {
-            answer[i as usize] = if i % 2 == 0 { i / 2 } else { k - i / 2 } + 1;
-        }
-        answer
+        (0..n)
+            .map(|i| {
+                1 + if (1..=k).contains(&i) {
+                    if i % 2 == 0 {
+                        i / 2
+                    } else {
+                        k - i / 2
+                    }
+                } else {
+                    i
+                }
+            })
+            .collect()
     }
 }
 
