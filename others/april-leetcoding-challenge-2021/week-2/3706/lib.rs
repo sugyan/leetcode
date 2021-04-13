@@ -5,8 +5,8 @@ pub enum NestedInteger {
 }
 
 pub struct NestedIterator {
-    v: Vec<i32>,
-    i: usize,
+    stack: Vec<NestedInteger>,
+    next: Option<i32>,
 }
 
 /**
@@ -15,30 +15,38 @@ pub struct NestedIterator {
  */
 impl NestedIterator {
     pub fn new(nested_list: Vec<NestedInteger>) -> Self {
-        let mut v = Vec::new();
-        for nested_integer in nested_list.into_iter() {
-            match nested_integer {
-                NestedInteger::Int(n) => v.push(n),
-                NestedInteger::List(nested_list) => {
-                    let mut iter = Self::new(nested_list);
-                    while iter.has_next() {
-                        v.push(iter.next())
-                    }
-                }
-            }
-        }
-        Self { v, i: 0 }
+        let mut s = Self {
+            stack: nested_list.into_iter().rev().collect::<Vec<_>>(),
+            next: None,
+        };
+        s.advance_next();
+        s
     }
 
     #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> i32 {
-        let ret = self.v[self.i];
-        self.i += 1;
+        let ret = self.next.unwrap();
+        self.advance_next();
         ret
     }
 
     pub fn has_next(&self) -> bool {
-        self.i < self.v.len()
+        self.next.is_some()
+    }
+
+    fn advance_next(&mut self) {
+        while let Some(last) = self.stack.pop() {
+            match last {
+                NestedInteger::Int(n) => {
+                    self.next = Some(n);
+                    return;
+                }
+                NestedInteger::List(list) => {
+                    self.stack.extend(list.into_iter().rev());
+                }
+            }
+        }
+        self.next = None;
     }
 }
 
