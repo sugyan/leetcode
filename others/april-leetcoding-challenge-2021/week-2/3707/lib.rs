@@ -4,24 +4,23 @@ pub struct Solution;
 
 impl Solution {
     pub fn partition(head: Option<Box<ListNode>>, x: i32) -> Option<Box<ListNode>> {
-        let (mut lt, mut gt) = (Vec::new(), Vec::new());
-        let mut node = &head;
-        while let Some(n) = node {
-            if n.val < x {
-                lt.push(n.val);
+        let mut lt = Box::new(ListNode::new(0));
+        let mut ge = Box::new(ListNode::new(0));
+        let mut plt = &mut lt;
+        let mut pge = &mut ge;
+        let mut head = head;
+        while let Some(mut node) = head {
+            head = node.next.take();
+            if node.val < x {
+                plt.next = Some(node);
+                plt = plt.next.as_mut().unwrap();
             } else {
-                gt.push(n.val);
+                pge.next = Some(node);
+                pge = pge.next.as_mut().unwrap();
             }
-            node = &n.next;
         }
-        let mut answer = None;
-        for &n in gt.iter().rev().chain(lt.iter().rev()) {
-            answer = Some(Box::new(ListNode {
-                val: n,
-                next: answer,
-            }));
-        }
-        answer
+        plt.next = ge.next;
+        lt.next
     }
 }
 
