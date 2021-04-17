@@ -1,31 +1,34 @@
+use std::collections::HashMap;
+
 pub struct Solution;
 
 impl Solution {
     pub fn num_submatrix_sum_target(matrix: Vec<Vec<i32>>, target: i32) -> i32 {
-        let (r, c) = (matrix.len(), matrix[0].len());
-        let mut sum = vec![vec![0; c]; r];
-        for i in 0..r {
-            for j in 0..c {
-                sum[i][j] = matrix[i][j]
-                    + if i > 0 { sum[i - 1][j] } else { 0 }
-                    + if j > 0 { sum[i][j - 1] } else { 0 }
-                    - if i > 0 && j > 0 { sum[i - 1][j - 1] } else { 0 };
-            }
-        }
+        let sums = matrix
+            .iter()
+            .map(|row| {
+                row.iter()
+                    .scan(0, |sum, &x| {
+                        *sum += x;
+                        Some(*sum)
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+        let len = matrix[0].len();
         let mut answer = 0;
-        for i in 0..r {
-            for j in 0..c {
-                for k in 0..=i {
-                    for l in 0..=j {
-                        if target
-                            == sum[i][j]
-                                - if k > 0 { sum[k - 1][j] } else { 0 }
-                                - if l > 0 { sum[i][l - 1] } else { 0 }
-                                + if k > 0 && l > 0 { sum[k - 1][l - 1] } else { 0 }
-                        {
-                            answer += 1;
-                        }
+        let mut hm = HashMap::new();
+        for i in 0..len {
+            for j in i..len {
+                hm.clear();
+                hm.insert(0, 1);
+                let mut sum = 0;
+                for row in &sums {
+                    sum += row[j] - if i > 0 { row[i - 1] } else { 0 };
+                    if let Some(&count) = hm.get(&(sum - target)) {
+                        answer += count;
                     }
+                    *hm.entry(sum).or_default() += 1;
                 }
             }
         }
