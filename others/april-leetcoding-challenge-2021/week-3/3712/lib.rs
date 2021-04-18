@@ -1,30 +1,32 @@
+use std::cmp::Ordering;
 use utils::ListNode;
 
 pub struct Solution;
 
 impl Solution {
     pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-        let len = {
-            let mut ret = 0;
-            let mut node = &head;
-            while let Some(n) = node {
-                ret += 1;
-                node = &n.next;
-            }
-            ret
-        };
-        let mut i = 0;
         let mut head = head;
+        let mut n = n;
         let mut dummy = ListNode::new(0);
-        let mut p = &mut dummy;
-        while let Some(mut h) = head.take() {
-            let next = h.next.take();
-            if i != len - n {
-                p.next = Some(h);
-                p = p.next.as_mut().unwrap();
+        let mut p1 = &head.clone();
+        let mut p2 = &mut dummy;
+        while let Some(p) = p1 {
+            p1 = &p.next;
+            match n.cmp(&0) {
+                Ordering::Less => {}
+                Ordering::Equal => {
+                    if let Some(mut h) = head.take() {
+                        let next = h.next.take();
+                        p2.next = Some(h);
+                        p2 = p2.next.as_mut().unwrap();
+                        head = next;
+                    }
+                }
+                Ordering::Greater => n -= 1,
             }
-            head = next;
-            i += 1;
+        }
+        if let Some(h) = head {
+            p2.next = h.next;
         }
         dummy.next
     }
