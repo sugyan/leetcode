@@ -2,16 +2,20 @@ pub struct Solution;
 
 impl Solution {
     pub fn combination_sum4(nums: Vec<i32>, target: i32) -> i32 {
-        let mut dp = vec![0; target as usize + 1];
-        dp[0] = 1;
-        for i in 1..=target as usize {
-            for &n in &nums {
-                if i >= n as usize {
-                    dp[i] += dp[i - n as usize];
-                }
-            }
-        }
-        dp[target as usize]
+        (1..=target).fold(vec![1], |mut v, x| {
+            v.push(
+                nums.iter()
+                    .filter_map(|&n| {
+                        if n <= x {
+                            Some(v[(x - n) as usize])
+                        } else {
+                            None
+                        }
+                    })
+                    .sum(),
+            );
+            v
+        })[target as usize]
     }
 }
 
