@@ -2,14 +2,12 @@ pub struct Solution;
 
 impl Solution {
     pub fn minimum_total(triangle: Vec<Vec<i32>>) -> i32 {
-        let mut v = vec![std::i32::MAX; triangle.len()];
-        v[0] = 0;
-        for row in &triangle {
-            for (i, &x) in row.iter().enumerate().rev() {
-                v[i] = (if i > 0 { v[i].min(v[i - 1]) } else { v[i] }) + x;
-            }
-        }
-        *v.iter().min().unwrap()
+        (0..triangle.len() - 1)
+            .rev()
+            .fold(triangle[triangle.len() - 1].clone(), |mut acc, i| {
+                (0..=i).for_each(|j| acc[j] = triangle[i][j] + acc[j].min(acc[j + 1]));
+                acc
+            })[0]
     }
 }
 
