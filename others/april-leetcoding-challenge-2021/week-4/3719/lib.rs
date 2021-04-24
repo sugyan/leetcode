@@ -1,13 +1,5 @@
 pub struct Solution;
 
-struct Params {
-    time: usize,
-    visited: Vec<bool>,
-    discovered: Vec<usize>,
-    low: Vec<usize>,
-    parent: Vec<Option<usize>>,
-}
-
 impl Solution {
     pub fn critical_connections(n: i32, connections: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let mut graph = vec![Vec::new(); n as usize];
@@ -16,36 +8,32 @@ impl Solution {
             graph[c[1] as usize].push(c[0] as usize);
         }
         let mut answer = Vec::new();
-        let mut params = Params {
-            time: 0,
-            visited: vec![false; n as usize],
-            discovered: vec![0; n as usize],
-            low: vec![0; n as usize],
-            parent: vec![None; n as usize],
-        };
-        for i in 0..n as usize {
-            if !params.visited[i] {
-                Self::dfs(&graph, i, &mut answer, &mut params);
-            }
-        }
+        let mut pre = vec![None; n as usize];
+        let mut low = vec![None; n as usize];
+        Self::dfs(&graph, 0, 0, 0, &mut answer, &mut pre, &mut low);
         answer
     }
-    fn dfs(graph: &[Vec<usize>], i: usize, answer: &mut Vec<Vec<i32>>, params: &mut Params) {
-        params.visited[i] = true;
-        params.time += 1;
-        params.discovered[i] = params.time;
-        params.low[i] = params.time;
+    fn dfs(
+        graph: &[Vec<usize>],
+        i: usize,
+        prev: usize,
+        time: usize,
+        answer: &mut Vec<Vec<i32>>,
+        pre: &mut Vec<Option<usize>>,
+        low: &mut Vec<Option<usize>>,
+    ) {
+        pre[i] = Some(time);
+        low[i] = Some(time);
         for &j in &graph[i] {
-            if params.visited[j] {
-                if Some(j) != params.parent[i] {
-                    params.low[i] = params.low[i].min(params.discovered[j]);
-                }
-            } else {
-                params.parent[j] = Some(i);
-                Self::dfs(graph, j, answer, params);
-                params.low[i] = params.low[i].min(params.low[j]);
-                if params.low[j] > params.discovered[i] {
+            if pre[j].is_none() {
+                Self::dfs(graph, j, i, time + 1, answer, pre, low);
+                if pre[j] == low[j] {
                     answer.push([i as i32, j as i32].to_vec());
+                }
+            }
+            if j != prev {
+                if let Some(l) = low[j] {
+                    low[i] = low[i].map(|m| m.min(l));
                 }
             }
         }
