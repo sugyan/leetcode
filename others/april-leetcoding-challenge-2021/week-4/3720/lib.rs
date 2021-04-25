@@ -2,14 +2,11 @@ pub struct Solution;
 
 impl Solution {
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
-        let (r, c) = (matrix.len(), matrix[0].len());
-        for i in 0..r {
-            for j in i..c - i - 1 {
-                let tmp = matrix[i][j];
-                matrix[i][j] = matrix[r - 1 - j][i];
-                matrix[r - 1 - j][i] = matrix[c - 1 - i][r - 1 - j];
-                matrix[c - 1 - i][r - 1 - j] = matrix[j][c - 1 - i];
-                matrix[j][c - 1 - i] = tmp;
+        matrix.reverse();
+        for i in 0..matrix.len() {
+            let (lo, hi) = matrix.split_at_mut(i);
+            for (j, row) in lo.iter_mut().enumerate() {
+                std::mem::swap(&mut row[i], &mut hi[0][j]);
             }
         }
     }
