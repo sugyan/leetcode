@@ -1,4 +1,3 @@
-use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
 pub struct Solution;
@@ -9,10 +8,10 @@ impl Solution {
         let mut bh = BinaryHeap::new();
         for i in 1..heights.len() {
             if heights[i] > heights[i - 1] {
-                bh.push(Reverse(heights[i] - heights[i - 1]));
+                bh.push(heights[i - 1] - heights[i]);
                 if bh.len() > ladders as usize {
-                    if let Some(Reverse(min)) = bh.pop() {
-                        bricks -= min;
+                    if let Some(min) = bh.pop() {
+                        bricks += min;
                         if bricks < 0 {
                             return i as i32 - 1;
                         }
