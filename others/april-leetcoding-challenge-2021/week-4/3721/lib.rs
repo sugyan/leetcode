@@ -6,24 +6,21 @@ pub struct Solution;
 impl Solution {
     pub fn furthest_building(heights: Vec<i32>, bricks: i32, ladders: i32) -> i32 {
         let mut bricks = bricks;
-        let mut ladders = ladders;
         let mut bh = BinaryHeap::new();
-        let mut i = 1;
-        while i < heights.len() {
+        for i in 1..heights.len() {
             if heights[i] > heights[i - 1] {
                 bh.push(Reverse(heights[i] - heights[i - 1]));
-                if ladders > 0 {
-                    ladders -= 1;
-                } else if let Some(Reverse(min)) = bh.pop() {
-                    bricks -= min;
-                    if bricks < 0 {
-                        break;
+                if bh.len() > ladders as usize {
+                    if let Some(Reverse(min)) = bh.pop() {
+                        bricks -= min;
+                        if bricks < 0 {
+                            return i as i32 - 1;
+                        }
                     }
                 }
             }
-            i += 1;
         }
-        i as i32 - 1
+        heights.len() as i32 - 1
     }
 }
 
