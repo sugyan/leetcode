@@ -1,36 +1,23 @@
+use std::cmp::Ordering;
+
 pub struct Solution;
 
 impl Solution {
     pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
-        let lower = {
-            let (mut lo, mut hi) = (0, nums.len());
-            while lo < hi {
-                let m = (lo + hi) / 2;
-                if nums[m] < target {
-                    lo = m + 1
-                } else {
-                    hi = m
-                }
+        let lower = nums.binary_search_by(|p| match p.cmp(&target) {
+            Ordering::Equal => Ordering::Greater,
+            o => o,
+        });
+        let upper = nums.binary_search_by(|p| match p.cmp(&target) {
+            Ordering::Equal => Ordering::Less,
+            o => o,
+        });
+        if let (Err(l), Err(u)) = (lower, upper) {
+            if l < u {
+                return [l as i32, u as i32 - 1].to_vec();
             }
-            lo as i32
-        };
-        let upper = {
-            let (mut lo, mut hi) = (0, nums.len());
-            while lo < hi {
-                let m = (lo + hi) / 2;
-                if nums[m] <= target {
-                    lo = m + 1
-                } else {
-                    hi = m
-                }
-            }
-            lo as i32 - 1
-        };
-        if lower > upper {
-            [-1, -1].to_vec()
-        } else {
-            [lower, upper].to_vec()
         }
+        [-1, -1].to_vec()
     }
 }
 
