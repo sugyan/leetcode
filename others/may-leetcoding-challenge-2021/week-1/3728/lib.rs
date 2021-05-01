@@ -16,10 +16,10 @@ impl WordFilter {
     pub fn new(words: Vec<String>) -> Self {
         let mut trie = Trie::default();
         for (i, word) in words.iter().enumerate() {
+            let s = String::new() + &word + "{" + &word;
             for j in 0..word.len() {
-                let s = String::new() + &word[word.len() - 1 - j..] + "{" + &word;
                 let mut node = &mut trie;
-                for &b in s.as_bytes() {
+                for &b in &s.as_bytes()[j..] {
                     node = node.childlen[(b - b'a') as usize].get_or_insert_with(Default::default);
                     node.index = i as i32;
                 }
