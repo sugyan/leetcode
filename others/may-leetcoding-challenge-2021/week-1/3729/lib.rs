@@ -5,17 +5,16 @@ pub struct Solution;
 impl Solution {
     pub fn schedule_course(courses: Vec<Vec<i32>>) -> i32 {
         let mut courses = courses;
-        let mut bh = BinaryHeap::new();
         courses.sort_by_cached_key(|v| v[1]);
+        let mut bh = BinaryHeap::new();
         let mut total = 0;
         for course in &courses {
-            if total + course[0] <= course[1] {
-                total += course[0];
-                bh.push(course[0]);
-            } else if let Some(max) = bh.pop() {
-                let min = max.min(course[0]);
-                total += min - max;
-                bh.push(min);
+            bh.push(course[0]);
+            total += course[0];
+            if total > course[1] {
+                if let Some(max) = bh.pop() {
+                    total -= max;
+                }
             }
         }
         bh.len() as i32
