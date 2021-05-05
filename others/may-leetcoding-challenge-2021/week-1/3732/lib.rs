@@ -2,13 +2,14 @@ pub struct Solution;
 
 impl Solution {
     pub fn jump(nums: Vec<i32>) -> i32 {
-        let mut target = nums.len() - 1;
         let mut answer = 0;
-        while let Some(i) = (0..target).position(|i| nums[i] as usize > target - 1 - i) {
+        let (mut current, mut farthest) = (0, nums[0] as usize);
+        while current < nums.len() - 1 {
             answer += 1;
-            target = i;
-            if target == 0 {
-                break;
+            let range = current..=farthest.min(nums.len() - 1);
+            current = farthest;
+            for i in range {
+                farthest = farthest.max(i + nums[i] as usize);
             }
         }
         answer
