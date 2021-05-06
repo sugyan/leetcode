@@ -12,26 +12,20 @@ impl Solution {
             len += 1;
             node = &n.next;
         }
-        Solution::helper(head, len)
+        let mut head = head;
+        Solution::helper(&mut head, len)
     }
-    fn helper(mut head: Option<Box<ListNode>>, len: usize) -> Option<Rc<RefCell<TreeNode>>> {
-        let second = {
-            let mut node = &mut head;
-            for _ in 0..len / 2 {
-                if let Some(n) = node {
-                    node = &mut n.next;
-                }
-            }
-            node.take()
-        };
-        if let Some(mut s) = second {
-            let right = Self::helper(s.next.take(), len - len / 2 - 1);
-            let tree_node = TreeNode {
-                val: s.val,
-                left: Self::helper(head, len / 2),
-                right,
-            };
-            Some(Rc::new(RefCell::new(tree_node)))
+    fn helper(list: &mut Option<Box<ListNode>>, len: usize) -> Option<Rc<RefCell<TreeNode>>> {
+        if len == 0 {
+            return None;
+        }
+        let left = Solution::helper(list, len / 2);
+        if let Some(head) = list {
+            let mut node = TreeNode::new(head.val);
+            *list = head.next.take();
+            node.left = left;
+            node.right = Self::helper(list, len - len / 2 - 1);
+            Some(Rc::new(RefCell::new(node)))
         } else {
             None
         }
