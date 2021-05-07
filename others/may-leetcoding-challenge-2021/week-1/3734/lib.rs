@@ -7,9 +7,10 @@ impl Solution {
         let mut dp = vec![vec![0; s2.len() + 1]; s1.len() + 1];
         for (i, b1) in s1.iter().enumerate() {
             for (j, b2) in s2.iter().enumerate() {
-                dp[i + 1][j + 1] = dp[i + 1][j].max(dp[i][j + 1]);
-                if b1 == b2 {
-                    dp[i + 1][j + 1] = dp[i + 1][j + 1].max(dp[i][j] + 1);
+                dp[i + 1][j + 1] = if b1 == b2 {
+                    dp[i + 1][j + 1].max(dp[i][j] + 1)
+                } else {
+                    dp[i + 1][j].max(dp[i][j + 1])
                 }
             }
         }
