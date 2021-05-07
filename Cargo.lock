@@ -1384,6 +1384,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "may-leetcoding-challenge-2021_week-1_3734"
+version = "0.1.0"
+
+[[package]]
 name = "may-leetcoding-challenge_week-1_3317"
 version = "0.1.0"
 
