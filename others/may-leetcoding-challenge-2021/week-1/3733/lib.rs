@@ -13,13 +13,13 @@ impl Solution {
             node = &n.next;
         }
         let mut head = head;
-        Solution::helper(&mut head, len)
+        Self::helper(&mut head, len)
     }
     fn helper(list: &mut Option<Box<ListNode>>, len: usize) -> Option<Rc<RefCell<TreeNode>>> {
         if len == 0 {
             return None;
         }
-        let left = Solution::helper(list, len / 2);
+        let left = Self::helper(list, len / 2);
         if let Some(head) = list {
             let mut node = TreeNode::new(head.val);
             *list = head.next.take();
