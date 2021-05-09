@@ -1,23 +1,30 @@
+use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 
 pub struct Solution;
 
 impl Solution {
     pub fn is_possible(target: Vec<i32>) -> bool {
-        let mut sum = target.iter().sum::<i32>();
-        let mut bh = target.iter().cloned().collect::<BinaryHeap<_>>();
-        while let Some(max) = bh.pop() {
-            if max == 1 && sum == target.len() as i32 {
-                return true;
-            }
-            if max >= sum {
-                return false;
-            }
-            let sub = (sum - max) * (max / (sum - max) - 1).max(1);
-            bh.push(max - sub);
-            sum -= sub;
+        let mut bh = BinaryHeap::new();
+        let mut sum = 0;
+        for n64 in target.iter().map(|&n| n as i64) {
+            bh.push(n64);
+            sum += n64;
         }
-        unreachable!()
+        while let Some(max) = bh.pop() {
+            if sum <= 1 || max * 2 <= sum {
+                break;
+            }
+            sum -= max;
+            match sum.cmp(&1) {
+                Ordering::Less => return false,
+                Ordering::Equal => return true,
+                Ordering::Greater => {}
+            }
+            bh.push(max % sum);
+            sum += max % sum;
+        }
+        sum == target.len() as i64
     }
 }
 
