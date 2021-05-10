@@ -2,20 +2,29 @@ pub struct Solution;
 
 impl Solution {
     pub fn count_primes(n: i32) -> i32 {
-        if n < 2 {
-            return 0;
+        let n = n as usize;
+        if n < 8 {
+            return [0, 0, 0, 1, 2, 2, 3, 3][n];
         }
-        let mut sieve = vec![true; n as usize];
-        sieve[0] = false;
-        sieve[1] = false;
-        for i in 2..n as usize {
-            if sieve[i] {
-                for j in (2..).map(|j| j * i).take_while(|&j| j < n as usize) {
-                    sieve[j] = false;
+        let mut sieve = vec![0_u8; ((n - 1) >> 3) + 1];
+        let inc = [6, 4, 2, 4, 2, 4, 6, 2];
+        let mut i = 1;
+        let mut answer = 3;
+        for k in 0.. {
+            i += inc[k & 7];
+            if i >= n {
+                break;
+            }
+            if sieve[i >> 3] & 1 << (i & 7) == 0 {
+                answer += 1;
+                let mut j = i * i;
+                while j < n {
+                    sieve[j >> 3] |= 1 << (j & 7);
+                    j += i;
                 }
             }
         }
-        sieve.iter().filter(|&b| *b).count() as i32
+        answer
     }
 }
 
