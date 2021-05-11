@@ -2,14 +2,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_score(card_points: Vec<i32>, k: i32) -> i32 {
-        let mut sum = card_points[0..k as usize].iter().sum::<i32>();
-        let mut answer = sum;
-        for i in 0..k as usize {
-            sum -= card_points[k as usize - 1 - i];
-            sum += card_points[card_points.len() - 1 - i];
-            answer = answer.max(sum);
-        }
-        answer
+        (0..=k as usize)
+            .scan(card_points[0..k as usize].iter().sum(), |state, i| {
+                if i > 0 {
+                    *state += card_points[card_points.len() - i] - card_points[k as usize - i];
+                }
+                Some(*state)
+            })
+            .max()
+            .unwrap()
     }
 }
 
