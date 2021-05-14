@@ -11,12 +11,11 @@ impl Solution {
             Self::flatten(&mut bm.left);
             if let Some(left) = bm.left.take() {
                 let val = left.borrow().val;
-                let right = Some(Rc::new(RefCell::new(TreeNode {
+                bm.right = Some(Rc::new(RefCell::new(TreeNode {
                     val,
                     left: left.borrow_mut().right.take(),
                     right: bm.right.take(),
                 })));
-                bm.right = right;
             }
             Self::flatten(&mut bm.right);
         }
