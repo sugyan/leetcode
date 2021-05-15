@@ -9,9 +9,6 @@ impl Solution {
         }
     }
     fn is_decimal(s: &str) -> bool {
-        if Self::is_integer(s) {
-            return true;
-        }
         let (mut num, mut dot) = (false, false);
         for (i, c) in s.chars().enumerate() {
             match c {
