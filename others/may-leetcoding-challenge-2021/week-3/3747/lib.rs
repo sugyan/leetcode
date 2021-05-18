@@ -15,7 +15,9 @@ impl Solution {
                 }
             }
         }
-        hm.values().filter(|&v| v.len() > 1).cloned().collect()
+        hm.into_iter()
+            .filter_map(|(_, v)| if v.len() > 1 { Some(v) } else { None })
+            .collect()
     }
 }
 
