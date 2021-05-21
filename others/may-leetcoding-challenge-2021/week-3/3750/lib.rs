@@ -2,24 +2,32 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_and_replace_pattern(words: Vec<String>, pattern: String) -> Vec<String> {
-        let to_pattern = |s: &str| {
-            let mut ret = Vec::with_capacity(s.len());
+        let pattern = pattern
+            .as_bytes()
+            .iter()
+            .map(|b| (b - b'a') as usize)
+            .collect::<Vec<_>>();
+        let filter = |word: &String| {
             let mut d = [None; 26];
-            for (i, b) in s.as_bytes().iter().enumerate() {
-                ret.push(if let Some(j) = d[(b - b'a') as usize] {
-                    j
+            for (w, &i) in word.as_bytes().iter().zip(&pattern) {
+                if let Some(b) = d[i] {
+                    if b != w {
+                        return false;
+                    }
                 } else {
-                    d[(b - b'a') as usize] = Some(i);
-                    i
-                });
+                    d[i] = Some(w);
+                }
             }
-            ret
+            let mut seen = [false; 26];
+            for i in d.iter().filter_map(|o| o.map(|u| (u - b'a') as usize)) {
+                if seen[i] {
+                    return false;
+                }
+                seen[i] = true;
+            }
+            true
         };
-        let target = to_pattern(&pattern);
-        words
-            .into_iter()
-            .filter(|word| to_pattern(word) == target)
-            .collect()
+        words.into_iter().filter(filter).collect()
     }
 }
 
