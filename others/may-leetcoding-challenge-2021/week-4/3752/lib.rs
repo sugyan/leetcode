@@ -7,23 +7,23 @@ impl Solution {
         Self::backtrack(n, &mut v, &mut answer);
         answer
     }
-    fn backtrack(n: i32, v: &mut Vec<(i32, i32)>, answer: &mut Vec<Vec<String>>) {
+    fn backtrack(n: i32, v: &mut Vec<i32>, answer: &mut Vec<Vec<String>>) {
         if v.len() == n as usize {
             answer.push(
                 v.iter()
-                    .map(|p| (0..n).map(|i| if i == p.1 { 'Q' } else { '.' }).collect())
+                    .map(|&p| (0..n).map(|i| if i == p { 'Q' } else { '.' }).collect())
                     .collect(),
             );
             return;
         }
-        let i = v.len() as i32;
-        for j in 0..n {
+        for i in 0..n {
             if v.iter()
-                .any(|p| p.1 == j || (p.0 - i).abs() == (p.1 - j).abs())
+                .enumerate()
+                .any(|(j, &p)| p == i || (v.len() - j) as i32 == (p - i).abs())
             {
                 continue;
             }
-            v.push((i, j));
+            v.push(i);
             Self::backtrack(n, v, answer);
             v.pop();
         }
