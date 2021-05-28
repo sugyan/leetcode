@@ -1,20 +1,21 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 pub struct Solution;
 
 impl Solution {
     pub fn maximum_unique_subarray(nums: Vec<i32>) -> i32 {
-        let mut hm = HashMap::new();
-        let mut sums = vec![0; nums.len() + 1];
-        let mut j = 0;
-        let mut answer = 0;
-        for (i, num) in nums.iter().enumerate() {
-            sums[i + 1] = sums[i] + num;
-            if let Some(&k) = hm.get(num) {
-                j = j.max(k);
+        let mut hs = HashSet::new();
+        let (mut answer, mut sum) = (0, 0);
+        let mut lo = 0;
+        for hi in 0..nums.len() {
+            while hs.contains(&nums[hi]) {
+                sum -= nums[lo];
+                hs.remove(&nums[lo]);
+                lo += 1
             }
-            hm.insert(num, i + 1);
-            answer = answer.max(sums[i + 1] - sums[j]);
+            sum += nums[hi];
+            answer = answer.max(sum);
+            hs.insert(nums[hi]);
         }
         answer
     }
