@@ -1035,6 +1035,10 @@ name = "jump-game"
 version = "0.1.0"
 
 [[package]]
+name = "june-leetcoding-challenge-2021_week-1_3764"
+version = "0.1.0"
+
+[[package]]
 name = "june-leetcoding-challenge_week-1_3347"
 version = "0.1.0"
 dependencies = [
