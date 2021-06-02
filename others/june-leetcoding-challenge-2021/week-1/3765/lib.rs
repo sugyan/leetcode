@@ -8,21 +8,19 @@ impl Solution {
         let s1 = s1.as_bytes();
         let s2 = s2.as_bytes();
         let s3 = s3.as_bytes();
-        let mut dp = vec![vec![false; s2.len() + 1]; s1.len() + 1];
+        let mut dp = vec![false; s2.len() + 1];
         for i in 0..=s1.len() {
             for j in 0..=s2.len() {
-                dp[i][j] = match (i == 0, j == 0) {
-                    (true, true) => true,
-                    (true, false) => dp[i][j - 1] && s2[j - 1] == s3[i + j - 1],
-                    (false, true) => dp[i - 1][j] && s1[i - 1] == s3[i + j - 1],
-                    (false, false) => {
-                        (dp[i][j - 1] && s2[j - 1] == s3[i + j - 1])
-                            || (dp[i - 1][j] && s1[i - 1] == s3[i + j - 1])
-                    }
+                let u = if i + j > 0 { s3[i + j - 1] } else { 0 };
+                dp[j] = match (i, j) {
+                    (0, 0) => true,
+                    (0, _) => dp[j - 1] && s2[j - 1] == u,
+                    (_, 0) => dp[j] && s1[i - 1] == u,
+                    _ => (dp[j - 1] && s2[j - 1] == u) || (dp[j] && s1[i - 1] == u),
                 }
             }
         }
-        dp[s1.len()][s2.len()]
+        dp[s2.len()]
     }
 }
 
