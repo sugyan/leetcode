@@ -1,38 +1,33 @@
-use std::cmp::Reverse;
-use std::collections::BinaryHeap;
+use std::collections::VecDeque;
 
 pub struct Solution;
 
 impl Solution {
     pub fn open_lock(deadends: Vec<String>, target: String) -> i32 {
         let mut dead = vec![false; 10_000];
-        deadends.iter().for_each(|d| {
-            if let Ok(i) = d.parse::<usize>() {
-                dead[i] = true
-            }
-        });
+        deadends
+            .iter()
+            .filter_map(|d| d.parse::<usize>().ok())
+            .for_each(|i| dead[i] = true);
         let target = target.parse::<usize>().unwrap();
-        let mut min = vec![None; 10_000];
-        let mut bh = BinaryHeap::new();
+        let mut visited = vec![false; 10_000];
+        let mut vd = VecDeque::new();
         if !dead[0] {
-            bh.push((Reverse(0), 0));
+            vd.push_back((0, 0));
         }
-        while let Some((Reverse(d), n)) = bh.pop() {
-            if n == target {
-                return d;
+        while let Some((state, moves)) = vd.pop_front() {
+            if state == target {
+                return moves;
             }
-            for i in 0..4 {
-                let j = 10_usize.pow(i + 1);
-                for &k in &[
-                    n / j * j + (n + 10_usize.pow(i)) % j,
-                    n / j * j + (n + j - 10_usize.pow(i)) % j,
+            for i in &[1, 10, 100, 1000] {
+                let w = (state / i) % 10;
+                for &j in &[
+                    (state - i * w) + i * ((w + 1) % 10),
+                    (state - i * w) + i * ((w + 9) % 10),
                 ] {
-                    if dead[k] {
-                        continue;
-                    }
-                    if min[k].is_none() {
-                        min[k] = Some(d);
-                        bh.push((Reverse(d + 1), k));
+                    if !dead[j] && !visited[j] {
+                        visited[j] = true;
+                        vd.push_back((j, moves + 1));
                     }
                 }
             }
