@@ -7,22 +7,27 @@ pub struct Solution;
 
 impl Solution {
     pub fn max_performance(n: i32, speed: Vec<i32>, efficiency: Vec<i32>, k: i32) -> i32 {
-        let mut e = (0..n as usize).collect::<Vec<_>>();
-        e.sort_by_key(|&i| Reverse(efficiency[i]));
+        let mut v = efficiency
+            .iter()
+            .zip(speed.iter())
+            .map(|(&e, &s)| (Reverse(e as i64), s as i64))
+            .collect::<Vec<_>>();
+        v.sort_unstable();
         let mut bh = BinaryHeap::with_capacity(k as usize);
-        let mut sum = 0;
-        let mut answer = 0;
-        for i in 0..n as usize {
-            sum += speed[e[i]] as i64;
-            bh.push(Reverse(speed[e[i]] as i64));
-            if bh.len() > k as usize {
-                if let Some(Reverse(min)) = bh.pop() {
-                    sum -= min;
+        (v.iter()
+            .scan(0, |sum, (Reverse(e), s)| {
+                *sum += s;
+                bh.push(Reverse(s));
+                if bh.len() > k as usize {
+                    if let Some(Reverse(min)) = bh.pop() {
+                        *sum -= min;
+                    }
                 }
-            }
-            answer = answer.max(sum * efficiency[e[i]] as i64);
-        }
-        (answer % DIV) as i32
+                Some(*sum * e)
+            })
+            .max()
+            .unwrap()
+            % DIV) as i32
     }
 }
 
