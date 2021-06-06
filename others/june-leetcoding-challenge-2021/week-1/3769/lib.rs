@@ -1,20 +1,17 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 pub struct Solution;
 
 impl Solution {
     pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
-        let mut hm = HashMap::new();
-        for num in &nums {
-            if !hm.contains_key(num) {
-                let lt = *hm.get(&(num - 1)).unwrap_or(&0);
-                let gt = *hm.get(&(num + 1)).unwrap_or(&0);
-                hm.insert(num - lt, lt + gt + 1);
-                hm.insert(num + gt, lt + gt + 1);
-                hm.insert(*num, lt + gt + 1);
+        let hs = nums.iter().collect::<HashSet<_>>();
+        let mut answer = 0;
+        for &num in &hs {
+            if !hs.contains(&(num - 1)) {
+                answer = answer.max((*num..).take_while(|x| hs.contains(x)).count());
             }
         }
-        *hm.values().max().unwrap_or(&0)
+        answer as i32
     }
 }
 
