@@ -4,15 +4,14 @@ pub struct Solution;
 
 impl Solution {
     pub fn open_lock(deadends: Vec<String>, target: String) -> i32 {
-        let mut dead = vec![false; 10_000];
+        let mut banned = vec![false; 10_000];
         deadends
             .iter()
             .filter_map(|d| d.parse::<usize>().ok())
-            .for_each(|i| dead[i] = true);
+            .for_each(|i| banned[i] = true);
         let target = target.parse::<usize>().unwrap();
-        let mut visited = vec![false; 10_000];
         let mut vd = VecDeque::new();
-        if !dead[0] {
+        if !banned[0] {
             vd.push_back((0, 0));
         }
         while let Some((state, moves)) = vd.pop_front() {
@@ -25,8 +24,8 @@ impl Solution {
                     (state - i * w) + i * ((w + 1) % 10),
                     (state - i * w) + i * ((w + 9) % 10),
                 ] {
-                    if !dead[j] && !visited[j] {
-                        visited[j] = true;
+                    if !banned[j] {
+                        banned[j] = true;
                         vd.push_back((j, moves + 1));
                     }
                 }
