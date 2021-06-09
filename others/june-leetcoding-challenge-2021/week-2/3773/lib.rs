@@ -1,29 +1,30 @@
-use std::collections::BinaryHeap;
+use std::collections::VecDeque;
 
 pub struct Solution;
 
 impl Solution {
     pub fn max_result(nums: Vec<i32>, k: i32) -> i32 {
-        let mut bh = BinaryHeap::new();
-        bh.push((nums[nums.len() - 1], nums.len() - 1));
-        for i in (0..nums.len() - 1).rev() {
-            while let Some(&(max, j)) = bh.peek() {
-                if j - i > k as usize {
-                    bh.pop();
-                } else {
-                    bh.push((nums[i] + max, i));
-                    break;
+        let mut dp = vec![0; nums.len()];
+        let mut vd = VecDeque::new();
+        for i in (0..nums.len()).rev() {
+            dp[i] = nums[i] + vd.front().map_or(0, |&f| dp[f]);
+            while !vd.is_empty() {
+                if let Some(&b) = vd.back() {
+                    if dp[i] > dp[b] {
+                        vd.pop_back();
+                    } else {
+                        break;
+                    }
+                }
+            }
+            vd.push_back(i);
+            if let Some(&f) = vd.front() {
+                if f == i + k as usize {
+                    vd.pop_front();
                 }
             }
         }
-        while let Some(&(_, i)) = bh.peek() {
-            if i != 0 {
-                bh.pop();
-            } else {
-                break;
-            }
-        }
-        bh.peek().unwrap().0
+        dp[0]
     }
 }
 
