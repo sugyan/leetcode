@@ -1,6 +1,8 @@
+use std::collections::BTreeMap;
+
 #[derive(Default)]
 pub struct MyCalendar {
-    events: Vec<(i32, i32)>,
+    events: BTreeMap<i32, i32>,
 }
 
 /**
@@ -13,23 +15,21 @@ impl MyCalendar {
     }
 
     pub fn book(&mut self, start: i32, end: i32) -> bool {
-        if let Err(i) = self.events.binary_search_by_key(&start, |&(s, _)| s) {
-            if (i == 0 || self.events[i - 1].1 <= start)
-                && (i == self.events.len() || end <= self.events[i].0)
-            {
-                self.events.insert(i, (start, end));
-                return true;
+        if let Some(prev) = self.events.range(..start).last() {
+            if *prev.1 > start {
+                return false;
             }
         }
-        false
+        if let Some(next) = self.events.range(start..).next() {
+            if *next.0 < end {
+                return false;
+            }
+        }
+        self.events.insert(start, end);
+        true
     }
 }
 
-/**
- * Your MyCalendar object will be instantiated and called as such:
- * let obj = MyCalendar::new();
- * let ret_1: bool = obj.book(start, end);
- */
 #[cfg(test)]
 mod tests {
     use super::*;
