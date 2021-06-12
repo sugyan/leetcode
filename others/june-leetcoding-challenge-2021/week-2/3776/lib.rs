@@ -5,23 +5,18 @@ pub struct Solution;
 impl Solution {
     pub fn min_refuel_stops(target: i32, start_fuel: i32, stations: Vec<Vec<i32>>) -> i32 {
         let mut bh = BinaryHeap::new();
+        let mut tank = start_fuel;
         let mut answer = 0;
-        let (mut tank, mut prev) = (start_fuel, 0);
         for station in stations.iter().chain(&vec![vec![target, 0]]) {
-            tank -= station[0] - prev;
-            while tank < 0 {
+            while tank < station[0] {
                 if let Some(max) = bh.pop() {
                     tank += max;
                     answer += 1;
                 } else {
-                    break;
+                    return -1;
                 }
             }
-            if tank < 0 {
-                return -1;
-            }
             bh.push(station[1]);
-            prev = station[0];
         }
         answer
     }
