@@ -1,22 +1,29 @@
+use std::collections::BinaryHeap;
+
 pub struct Solution;
 
 impl Solution {
     pub fn min_refuel_stops(target: i32, start_fuel: i32, stations: Vec<Vec<i32>>) -> i32 {
-        let mut dp = vec![0; stations.len() + 1];
-        dp[0] = start_fuel;
-        for (i, station) in stations.iter().enumerate() {
-            for j in (0..=i).rev() {
-                if dp[j] >= station[0] {
-                    dp[j + 1] = dp[j + 1].max(dp[j] + station[1]);
+        let mut bh = BinaryHeap::new();
+        let mut answer = 0;
+        let (mut tank, mut prev) = (start_fuel, 0);
+        for station in stations.iter().chain(&vec![vec![target, 0]]) {
+            tank -= station[0] - prev;
+            while tank < 0 {
+                if let Some(max) = bh.pop() {
+                    tank += max;
+                    answer += 1;
+                } else {
+                    break;
                 }
             }
-        }
-        for (i, &d) in dp.iter().enumerate() {
-            if d >= target {
-                return i as i32;
+            if tank < 0 {
+                return -1;
             }
+            bh.push(station[1]);
+            prev = station[0];
         }
-        -1
+        answer
     }
 }
 
