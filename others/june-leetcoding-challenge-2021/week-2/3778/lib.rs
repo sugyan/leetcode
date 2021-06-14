@@ -1,21 +1,17 @@
-use std::cmp::Reverse;
-
 pub struct Solution;
 
 impl Solution {
     pub fn maximum_units(box_types: Vec<Vec<i32>>, truck_size: i32) -> i32 {
         let mut box_types = box_types;
-        let mut truck_size = truck_size;
-        box_types.sort_unstable_by_key(|bt| Reverse(bt[1]));
-        let mut answer = 0;
-        let mut i = 0;
-        while i < box_types.len() && truck_size > 0 {
-            let num = box_types[i][0].min(truck_size);
-            answer += num * box_types[i][1];
-            truck_size -= num;
-            i += 1;
-        }
-        answer
+        box_types.sort_unstable_by_key(|bt| bt[1]);
+        box_types
+            .iter()
+            .rev()
+            .fold((0, truck_size), |(units, remaining), box_type| {
+                let num = box_type[0].min(remaining);
+                (units + num * box_type[1], remaining - num)
+            })
+            .0
     }
 }
 
