@@ -25,7 +25,6 @@ impl Solution {
         target: i64,
     ) -> bool {
         if target == 0 {
-            println!("{:?}", v);
             v.iter().for_each(|&i| used[i] = true);
             return true;
         }
