@@ -1102,6 +1102,10 @@ name = "june-leetcoding-challenge-2021_week-3_3781"
 version = "0.1.0"
 
 [[package]]
+name = "june-leetcoding-challenge-2021_week-3_3782"
+version = "0.1.0"
+
+[[package]]
 name = "june-leetcoding-challenge_week-1_3347"
 version = "0.1.0"
 dependencies = [
