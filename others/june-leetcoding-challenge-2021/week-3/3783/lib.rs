@@ -1,5 +1,5 @@
 pub struct NumArray {
-    v: Vec<i32>,
+    segtree: Vec<i32>,
 }
 
 /**
@@ -8,47 +8,43 @@ pub struct NumArray {
  */
 impl NumArray {
     pub fn new(nums: Vec<i32>) -> Self {
-        let mut size = 1;
-        while size <= nums.len() {
-            size <<= 1;
-        }
-        let mut v = vec![0; size << 1];
+        let mut segtree = vec![0; nums.len() << 1];
         for (i, &num) in nums.iter().enumerate() {
-            v[size + i] = num;
+            segtree[nums.len() + i] = num;
         }
-        for i in (1..size).rev() {
-            v[i] = v[i * 2] + v[i * 2 + 1];
+        for i in (1..nums.len()).rev() {
+            segtree[i] = segtree[i << 1] + segtree[(i << 1) + 1];
         }
-        Self { v }
+        Self { segtree }
     }
 
     pub fn update(&mut self, index: i32, val: i32) {
-        let offset = self.v.len() >> 1;
-        let mut i = index as usize + offset;
-        self.v[i] = val;
+        let mut i = index as usize + (self.segtree.len() >> 1);
+        self.segtree[i] = val;
         while i > 0 {
-            self.v[i / 2] = self.v[i / 2 * 2] + self.v[i / 2 * 2 + 1];
-            i /= 2;
+            self.segtree[i >> 1] = self.segtree[i] + self.segtree[i ^ 1];
+            i >>= 1;
         }
     }
 
     pub fn sum_range(&self, left: i32, right: i32) -> i32 {
-        let sum = |i: i32| -> i32 {
-            if i < 0 {
-                return 0;
+        let (mut l, mut r) = (left as usize, right as usize);
+        l += self.segtree.len() >> 1;
+        r += self.segtree.len() >> 1;
+        let mut sum = 0;
+        while l <= r {
+            if l & 1 == 1 {
+                sum += self.segtree[l];
+                l += 1;
             }
-            let mut ret = 0;
-            let mut j = 1;
-            for k in (0..self.v.len().trailing_zeros() - 1).rev() {
-                j <<= 1;
-                if i >> k & 1 > 0 {
-                    ret += self.v[j];
-                    j += 1;
-                }
+            if r & 1 == 0 {
+                sum += self.segtree[r];
+                r -= 1;
             }
-            ret + self.v[j]
-        };
-        sum(right) - sum(left - 1)
+            l >>= 1;
+            r >>= 1;
+        }
+        sum
     }
 }
 
