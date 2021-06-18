@@ -28,4 +28,17 @@ mod tests {
             Solution::num_subarray_bounded_max(vec![2, 1, 4, 3], 2, 3)
         );
     }
+
+    #[test]
+    fn wa_1() {
+        assert_eq!(
+            7,
+            Solution::num_subarray_bounded_max(vec![2, 9, 2, 5, 6], 2, 8)
+        );
+    }
+
+    #[test]
+    fn wa_2() {
+        assert_eq!(0, Solution::num_subarray_bounded_max(vec![20], 2, 3));
+    }
 }
