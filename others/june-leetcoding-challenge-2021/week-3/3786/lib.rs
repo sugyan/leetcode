@@ -4,9 +4,9 @@ impl Solution {
     pub fn generate(num_rows: i32) -> Vec<Vec<i32>> {
         (0..num_rows)
             .scan(Vec::with_capacity(num_rows as usize), |state, _| {
-                for i in (1..state.len()).rev() {
-                    state[i] += state[i - 1];
-                }
+                (1..state.len())
+                    .rev()
+                    .for_each(|i| state[i] += state[i - 1]);
                 state.push(1);
                 Some(state.clone())
             })
