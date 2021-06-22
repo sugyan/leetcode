@@ -2,22 +2,18 @@ pub struct Solution;
 
 impl Solution {
     pub fn num_matching_subseq(s: String, words: Vec<String>) -> i32 {
-        let s = s.as_bytes();
-        let words = words.iter().map(|w| w.as_bytes()).collect::<Vec<_>>();
-        let mut nexts = vec![Vec::new(); 26];
-        let mut index = vec![0; words.len()];
-        for (i, w) in words.iter().enumerate() {
-            nexts[(w[0] - b'a') as usize].push(i);
+        let mut waiting = vec![Vec::new(); 26];
+        for w in &words {
+            let w = w.as_bytes();
+            waiting[(w[0] - b'a') as usize].push(&w[1..]);
         }
         let mut answer = 0;
-        for u in s {
-            let v = nexts[(u - b'a') as usize].drain(..).collect::<Vec<_>>();
-            for &i in &v {
-                index[i] += 1;
-                if index[i] == words[i].len() {
+        for &u in s.as_bytes() {
+            for w in &waiting[(u - b'a') as usize].drain(..).collect::<Vec<_>>() {
+                if w.is_empty() {
                     answer += 1;
                 } else {
-                    nexts[(words[i][index[i]] - b'a') as usize].push(i);
+                    waiting[(w[0] - b'a') as usize].push(&w[1..]);
                 }
             }
         }
