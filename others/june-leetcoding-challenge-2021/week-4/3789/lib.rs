@@ -14,9 +14,7 @@ impl Solution {
             v.push(n.val);
             node = &n.next;
         }
-        for i in 0..=(right - left) as usize / 2 {
-            v.swap(left as usize - 1 + i, right as usize - 1 - i);
-        }
+        v[left as usize - 1..right as usize].reverse();
         let mut answer = None;
         for &val in v.iter().rev() {
             answer = Some(Box::new(ListNode { val, next: answer }));
