@@ -1,5 +1,3 @@
-use std::cmp::Ordering;
-
 pub struct Solution;
 
 struct UnionFind {
@@ -12,33 +10,28 @@ impl UnionFind {
             parent: (0..n).collect(),
         }
     }
-    fn union(&mut self, x: i32, y: i32) {
+    fn union(&mut self, x: usize, y: usize) {
         let x = self.find(x);
         let y = self.find(y);
-        match x.cmp(&y) {
-            Ordering::Less => self.parent[y as usize] = x as usize,
-            Ordering::Equal => {}
-            Ordering::Greater => self.union(y, x),
-        }
+        self.parent[y] = x
     }
-    fn find(&mut self, x: i32) -> i32 {
-        let mut x = x as usize;
-        while self.parent[x] != x {
-            self.parent[x] = self.parent[self.parent[x] as usize] as usize;
-            x = self.parent[x] as usize;
+    fn find(&mut self, x: usize) -> usize {
+        if x != self.parent[x] {
+            self.parent[x] = self.find(self.parent[x]);
         }
-        x as i32
+        self.parent[x]
     }
 }
 
 impl Solution {
     pub fn find_redundant_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
         let mut uf = UnionFind::new(edges.len());
-        for edge in &edges {
-            if uf.find(edge[0] - 1) == uf.find(edge[1] - 1) {
-                return edge.clone();
+        for edge in edges {
+            let (e0, e1) = (edge[0] as usize - 1, edge[1] as usize - 1);
+            if uf.find(e0) == uf.find(e1) {
+                return edge;
             }
-            uf.union(edge[0] - 1, edge[1] - 1);
+            uf.union(e0, e1);
         }
         unreachable!()
     }
