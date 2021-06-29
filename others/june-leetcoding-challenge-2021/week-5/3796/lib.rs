@@ -2,24 +2,17 @@ pub struct Solution;
 
 impl Solution {
     pub fn longest_ones(nums: Vec<i32>, k: i32) -> i32 {
-        let (mut lo, mut hi) = (0, 0);
-        let mut flip = 0;
-        let mut answer = 0;
-        while lo < nums.len() {
-            while hi < nums.len() && (nums[hi] == 1 || flip < k) {
-                if nums[hi] == 0 {
-                    flip += 1;
-                }
-                hi += 1;
+        let (mut i, mut flip) = (0, 0);
+        for &num in &nums {
+            if num == 0 {
+                flip += 1;
             }
-            answer = answer.max(hi - lo);
-            while lo < nums.len() && nums[lo] == 1 {
-                lo += 1;
+            if flip > k {
+                flip -= 1 - nums[i];
+                i += 1;
             }
-            flip -= 1;
-            lo += 1;
         }
-        answer as i32
+        (nums.len() - i) as i32
     }
 }
 
