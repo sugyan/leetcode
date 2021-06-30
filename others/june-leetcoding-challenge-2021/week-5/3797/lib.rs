@@ -10,46 +10,26 @@ impl Solution {
         p: Option<Rc<RefCell<TreeNode>>>,
         q: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        let (mut l, mut r) = (Vec::new(), Vec::new());
-        if let Some(p) = p {
-            Self::dfs(&root, p.borrow().val, &mut l);
-        }
-        if let Some(q) = q {
-            Self::dfs(&root, q.borrow().val, &mut r);
-        }
-        let mut answer = 0;
-        for i in 0..l.len().min(r.len()) {
-            if l[i] == r[i] {
-                answer = l[i];
-            }
-        }
-        Self::search(&root, answer)
+        Self::helper(&root, &p, &q)
     }
-    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, target: i32, ret: &mut Vec<i32>) -> bool {
-        if let Some(n) = node {
-            ret.push(n.borrow().val);
-            if n.borrow().val == target {
-                return true;
-            }
-            if Self::dfs(&n.borrow().left, target, ret) {
-                return true;
-            }
-            if Self::dfs(&n.borrow().right, target, ret) {
-                return true;
-            }
-            ret.pop();
+    fn helper(
+        root: &Option<Rc<RefCell<TreeNode>>>,
+        p: &Option<Rc<RefCell<TreeNode>>>,
+        q: &Option<Rc<RefCell<TreeNode>>>,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
+        if p == root || q == root {
+            return root.clone();
         }
-        false
-    }
-    fn search(node: &Option<Rc<RefCell<TreeNode>>>, target: i32) -> Option<Rc<RefCell<TreeNode>>> {
-        if let Some(n) = node {
-            if n.borrow().val == target {
-                return Some(n.clone());
+        if let Some(n) = root {
+            let l = Self::helper(&n.borrow().left, p, q);
+            let r = Self::helper(&n.borrow().right, p, q);
+            match (l.is_some(), r.is_some()) {
+                (false, _) => r,
+                (true, false) => l,
+                (true, true) => Some(n.clone()),
             }
-            Self::search(&n.borrow().left, target)
-                .or_else(|| Self::search(&n.borrow().right, target))
         } else {
-            None
+            root.clone()
         }
     }
 }
