@@ -2,16 +2,16 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_closest_elements(arr: Vec<i32>, k: i32, x: i32) -> Vec<i32> {
-        let mut sum = (0..k as usize).map(|i| (arr[i] - x).abs()).sum::<i32>();
-        let (mut minsum, mut minidx) = (sum, 0);
-        for i in 0..arr.len() - k as usize {
-            sum += (arr[i + k as usize] - x).abs() - (arr[i] - x).abs();
-            if sum < minsum {
-                minsum = sum;
-                minidx = i + 1;
+        let (mut lo, mut hi) = (0, arr.len() - k as usize);
+        while lo < hi {
+            let m = (lo + hi) / 2;
+            if x - arr[m] > arr[m + k as usize] - x {
+                lo = m + 1
+            } else {
+                hi = m;
             }
         }
-        arr[minidx..minidx + k as usize].to_vec()
+        arr[lo..lo + k as usize].to_vec()
     }
 }
 
