@@ -7,9 +7,9 @@ impl Solution {
         }
         let mut answer = vec![vec![0; c as usize]; r as usize];
         let mut values = mat.iter().flat_map(|row| row.iter());
-        for row in answer.iter_mut() {
-            for col in row.iter_mut() {
-                *col = *values.next().unwrap();
+        for col in answer.iter_mut().flat_map(|row| row.iter_mut()) {
+            if let Some(&val) = values.next() {
+                *col = val;
             }
         }
         answer
