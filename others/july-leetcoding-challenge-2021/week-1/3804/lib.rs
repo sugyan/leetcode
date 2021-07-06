@@ -1,27 +1,20 @@
-use std::collections::HashMap;
-
 pub struct Solution;
 
 impl Solution {
     pub fn min_set_size(arr: Vec<i32>) -> i32 {
-        let mut hm = HashMap::new();
-        for &a in &arr {
-            *hm.entry(a).or_default() += 1;
+        let mut counts = arr.iter().fold(vec![0; 100_001], |mut acc, &x| {
+            acc[x as usize] += 1;
+            acc
+        });
+        counts.sort_unstable();
+        let mut sum = 0;
+        for (i, &c) in counts.iter().rev().enumerate() {
+            sum += c;
+            if sum * 2 >= arr.len() {
+                return i as i32 + 1;
+            }
         }
-        let mut v = hm.values().collect::<Vec<_>>();
-        v.sort_unstable();
-        v.iter()
-            .rev()
-            .scan(0, |state, &x| {
-                *state += x;
-                if *state * 2 < arr.len() {
-                    Some(*state)
-                } else {
-                    None
-                }
-            })
-            .count() as i32
-            + 1
+        unreachable!()
     }
 }
 
