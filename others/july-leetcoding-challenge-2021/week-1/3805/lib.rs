@@ -1,27 +1,31 @@
-use std::cmp::Reverse;
-use std::collections::BinaryHeap;
-
 pub struct Solution;
 
 impl Solution {
     pub fn kth_smallest(matrix: Vec<Vec<i32>>, k: i32) -> i32 {
-        let mut bh = BinaryHeap::new();
-        for (i, row) in matrix.iter().enumerate() {
-            bh.push((Reverse(row[0]), i));
-        }
-        let mut idx = vec![0; matrix.len()];
-        let mut k = k;
-        while let Some((Reverse(val), i)) = bh.pop() {
-            k -= 1;
-            if k == 0 {
-                return val;
+        let n = matrix.len();
+        let (mut lo, mut hi) = (matrix[0][0], matrix[n - 1][n - 1]);
+        while lo < hi {
+            let mid = (lo + hi) / 2;
+            let mut count = 0;
+            let (mut i, mut j) = (n - 1, 0);
+            while j < n {
+                if matrix[i][j] > mid {
+                    if i == 0 {
+                        break;
+                    }
+                    i -= 1;
+                } else {
+                    count += i as i32 + 1;
+                    j += 1;
+                }
             }
-            idx[i] += 1;
-            if idx[i] < matrix[i].len() {
-                bh.push((Reverse(matrix[i][idx[i]]), i));
+            if count < k {
+                lo = mid + 1;
+            } else {
+                hi = mid;
             }
         }
-        unreachable!()
+        lo as i32
     }
 }
 
