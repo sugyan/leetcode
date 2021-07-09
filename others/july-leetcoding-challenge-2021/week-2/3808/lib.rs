@@ -4,10 +4,12 @@ impl Solution {
     pub fn length_of_lis(nums: Vec<i32>) -> i32 {
         nums.iter()
             .fold(Vec::new(), |mut v, x| {
-                match v.binary_search(x) {
-                    Ok(i) => v[i] = *x,
-                    Err(i) if i < v.len() => v[i] = *x,
-                    Err(_) => v.push(*x),
+                if let Err(i) = v.binary_search(x) {
+                    if i < v.len() {
+                        v[i] = *x
+                    } else {
+                        v.push(*x)
+                    }
                 };
                 v
             })
