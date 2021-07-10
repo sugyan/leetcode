@@ -4,33 +4,34 @@ const MOD: i64 = 1_000_000_007;
 
 impl Solution {
     pub fn num_decodings(s: String) -> i32 {
-        let s = s.as_bytes();
-        let mut dp = vec![0; s.len() + 1];
-        dp[0] = 1;
-        for i in 0..s.len() {
-            dp[i + 1] += dp[i]
-                * match s[i] {
-                    b'*' => 9,
-                    b'0' => 0,
-                    _ => 1,
-                };
-            if i > 0 {
-                dp[i + 1] += dp[i - 1]
-                    * match (s[i - 1], s[i]) {
-                        (b'*', b'*') => 15,
-                        (b'*', b'0'..=b'6') => 2,
-                        (b'*', _) => 1,
-                        (b'1', b'*') => 9,
-                        (b'1', _) => 1,
-                        (b'2', b'*') => 6,
-                        (b'2', b'0'..=b'6') => 1,
-                        _ => 0,
-                    };
-            }
-            dp[i + 1] %= MOD;
+        let s = s.chars().collect::<Vec<_>>();
+        let mut dp = (
+            1,
+            match s[0] {
+                '*' => 9,
+                '0' => 0,
+                _ => 1,
+            },
+        );
+        for i in 1..s.len() {
+            let n = if s[i] == '*' {
+                dp.0 * match s[i - 1] {
+                    '*' => 15,
+                    '1' => 9,
+                    '2' => 6,
+                    _ => 0,
+                } + dp.1 * 9
+            } else {
+                dp.0 * match s[i - 1] {
+                    '*' if s[i] <= '6' => 2,
+                    '2' if s[i] <= '6' => 1,
+                    '*' | '1' => 1,
+                    _ => 0,
+                } + if s[i] == '0' { 0 } else { dp.1 }
+            };
+            dp = (dp.1, n % MOD);
         }
-        println!("{:?}", dp);
-        dp[s.len()] as i32
+        dp.1 as i32
     }
 }
 
