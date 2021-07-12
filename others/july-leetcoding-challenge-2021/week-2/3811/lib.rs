@@ -2,21 +2,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn is_isomorphic(s: String, t: String) -> bool {
-        let mut dict = vec![None; 128];
-        for (&s, t) in s.as_bytes().iter().zip(t.as_bytes()) {
-            dict[s as usize] = match dict[s as usize].take() {
-                Some(u) if u != t => return false,
-                _ => Some(t),
+        let (mut ds, mut dt) = (vec![0; 128], vec![0; 128]);
+        for (i, (&s, &t)) in s.as_bytes().iter().zip(t.as_bytes()).enumerate() {
+            if ds[s as usize] != dt[t as usize] {
+                return false;
             }
+            ds[s as usize] = i + 1;
+            dt[t as usize] = i + 1;
         }
-        dict.iter()
-            .filter_map(|&o| o)
-            .fold([0; 128], |mut acc, &x| {
-                acc[x as usize] += 1;
-                acc
-            })
-            .iter()
-            .all(|&c| c < 2)
+        true
     }
 }
 
