@@ -2,12 +2,16 @@ pub struct Solution;
 
 impl Solution {
     pub fn find_peak_element(nums: Vec<i32>) -> i32 {
-        for i in 0..nums.len() {
-            if (i == 0 || nums[i - 1] < nums[i]) && (i == nums.len() - 1 || nums[i] > nums[i + 1]) {
-                return i as i32;
+        let (mut lo, mut hi) = (0, nums.len() - 1);
+        while lo < hi {
+            let mid = (lo + hi) / 2;
+            if nums[mid] > nums[mid + 1] {
+                hi = mid;
+            } else {
+                lo = mid + 1;
             }
         }
-        unreachable!()
+        lo as i32
     }
 }
 
@@ -22,6 +26,6 @@ mod tests {
 
     #[test]
     fn example_2() {
-        assert_eq!(1, Solution::find_peak_element(vec![1, 2, 1, 3, 5, 6, 4]));
+        assert_eq!(5, Solution::find_peak_element(vec![1, 2, 1, 3, 5, 6, 4]));
     }
 }
