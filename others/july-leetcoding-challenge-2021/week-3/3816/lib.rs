@@ -4,39 +4,48 @@ pub struct Solution;
 
 impl Solution {
     pub fn four_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
-        if nums.len() < 4 {
-            return Vec::new();
+        let mut answer = Vec::new();
+        let len = nums.len();
+        if len < 4 {
+            return answer;
         }
         let mut nums = nums;
         nums.sort_unstable();
-        let mut answer = Vec::new();
-        let mut i = 0;
-        while i < nums.len() - 3 {
-            let mut j = i + 1;
-            while j < nums.len() - 2 {
-                let (mut k, mut l) = (j + 1, nums.len() - 1);
+        for i in 0..len - 3 {
+            if i > 0 && nums[i] == nums[i - 1] {
+                continue;
+            }
+            for j in i + 1..len - 2 {
+                if j > i + 1 && nums[j] == nums[j - 1] {
+                    continue;
+                }
+                let sum_ij = nums[i] + nums[j];
+                if sum_ij + nums[j + 1] + nums[j + 2] > target
+                    || sum_ij + nums[len - 2] + nums[len - 1] < target
+                {
+                    continue;
+                }
+                let (mut k, mut l) = (j + 1, len - 1);
                 while k < l {
-                    match (nums[i] + nums[j] + nums[k] + nums[l]).cmp(&target) {
+                    if k > j + 1 && nums[k] == nums[k - 1] {
+                        k += 1;
+                        continue;
+                    }
+                    if l < len - 1 && nums[l] == nums[l + 1] {
+                        l -= 1;
+                        continue;
+                    }
+                    match (sum_ij + nums[k] + nums[l]).cmp(&target) {
                         Ordering::Less => k += 1,
                         Ordering::Equal => {
                             answer.push(vec![nums[i], nums[j], nums[k], nums[l]]);
-                            while k + 1 < nums.len() && nums[k + 1] == nums[k] {
-                                k += 1;
-                            }
                             k += 1;
+                            l -= 1;
                         }
                         Ordering::Greater => l -= 1,
                     }
                 }
-                while j + 1 < nums.len() && nums[j + 1] == nums[j] {
-                    j += 1;
-                }
-                j += 1;
             }
-            while i + 1 < nums.len() && nums[i + 1] == nums[i] {
-                i += 1;
-            }
-            i += 1;
         }
         answer
     }
