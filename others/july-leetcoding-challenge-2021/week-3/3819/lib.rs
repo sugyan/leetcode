@@ -10,27 +10,26 @@ impl Solution {
         p: Option<Rc<RefCell<TreeNode>>>,
         q: Option<Rc<RefCell<TreeNode>>>,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        Self::helper(&root, &p, &q)
+        if let (Some(pnode), Some(qnode)) = (p, q) {
+            Self::helper(&root, pnode.borrow().val, qnode.borrow().val)
+        } else {
+            None
+        }
     }
     pub fn helper(
         root: &Option<Rc<RefCell<TreeNode>>>,
-        p: &Option<Rc<RefCell<TreeNode>>>,
-        q: &Option<Rc<RefCell<TreeNode>>>,
+        pval: i32,
+        qval: i32,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        if root == p || root == q {
-            return root.clone();
-        }
-        if let Some(node) = root {
-            let l = Self::helper(&node.borrow().left, p, q);
-            let r = Self::helper(&node.borrow().right, p, q);
-            if l.is_some() && r.is_some() {
-                return root.clone();
+        if let Some(r) = root {
+            let val = r.borrow().val;
+            if val > pval && val > qval {
+                return Self::helper(&r.borrow().left, pval, qval);
             }
-            if l.is_none() {
-                r
-            } else {
-                l
+            if val < pval && val < qval {
+                return Self::helper(&r.borrow().right, pval, qval);
             }
+            root.clone()
         } else {
             None
         }
