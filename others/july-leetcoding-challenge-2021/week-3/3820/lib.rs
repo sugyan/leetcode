@@ -1,9 +1,8 @@
-use rand::prelude::SliceRandom;
-use rand::rngs::ThreadRng;
+use rand::{rngs::ThreadRng, Rng};
 
 pub struct Solution {
     nums: Vec<i32>,
-    prev: Vec<i32>,
+    arr: Vec<i32>,
     rng: ThreadRng,
 }
 
@@ -13,31 +12,24 @@ pub struct Solution {
  */
 impl Solution {
     pub fn new(nums: Vec<i32>) -> Self {
-        let mut prev = nums.clone();
-        let mut rng = rand::thread_rng();
-        prev.shuffle(&mut rng);
-        Self { nums, prev, rng }
+        let arr = nums.clone();
+        let rng = rand::thread_rng();
+        Self { nums, arr, rng }
     }
 
     /** Resets the array to its original configuration and return it. */
     pub fn reset(&mut self) -> Vec<i32> {
-        self.prev.shuffle(&mut self.rng);
-        self.nums.clone()
+        self.arr = self.nums.clone();
+        self.arr.clone()
     }
 
     /** Returns a random shuffling of the array. */
     pub fn shuffle(&mut self) -> Vec<i32> {
-        let len = self.prev.len();
-        if let Some(i) = self.prev.windows(2).rev().position(|w| w[0] < w[1]) {
-            let m = self.prev[len - 2 - i];
-            if let Some(j) = (0..=i).find(|&j| self.prev[len - 1 - j] > m) {
-                self.prev.swap(len - 2 - i, len - 1 - j);
-                self.prev[len - 1 - i..].reverse();
-            }
-        } else {
-            self.prev.reverse();
+        for i in (0..self.arr.len()).rev() {
+            let j = self.rng.gen_range(0, i + 1);
+            self.arr.swap(i, j);
         }
-        self.prev.clone()
+        self.arr.clone()
     }
 }
 
