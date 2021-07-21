@@ -1,42 +1,36 @@
+use std::cmp::Ordering;
+
 pub struct Solution;
 
 impl Solution {
     pub fn push_dominoes(dominoes: String) -> String {
         let len = dominoes.len();
-        let mut chars = dominoes.chars().collect::<Vec<_>>();
-        let mut v = vec![(None, None); len];
-        let (mut l, mut r) = (None, None);
+        let bytes = dominoes.as_bytes();
+        let mut v = vec![0; len];
+        let mut f = None;
         for i in 0..len {
-            r = match chars[i] {
-                'R' => Some(0),
-                '.' => r.map(|j| j + 1),
+            f = match bytes[i] {
+                b'R' => Some(0),
+                b'.' => f.map(|j| j + 1),
                 _ => None,
             };
-            v[i].1 = r;
-            l = match chars[len - 1 - i] {
-                'L' => Some(0),
-                '.' => l.map(|j| j + 1),
+            v[i] -= f.unwrap_or(len as i32);
+        }
+        for i in (0..len).rev() {
+            f = match bytes[i] {
+                b'L' => Some(0),
+                b'.' => f.map(|j| j + 1),
                 _ => None,
             };
-            v[len - 1 - i].0 = l;
+            v[i] += f.unwrap_or(len as i32);
         }
-        for (i, c) in chars.iter_mut().enumerate() {
-            if *c == '.' {
-                *c = match v[i] {
-                    (Some(_), None) => 'L',
-                    (None, Some(_)) => 'R',
-                    (Some(l), Some(r)) if l != r => {
-                        if l > r {
-                            'R'
-                        } else {
-                            'L'
-                        }
-                    }
-                    _ => *c,
-                }
-            }
-        }
-        chars.iter().collect()
+        v.iter()
+            .map(|f| match f.cmp(&0) {
+                Ordering::Less => 'L',
+                Ordering::Equal => '.',
+                Ordering::Greater => 'R',
+            })
+            .collect()
     }
 }
 
