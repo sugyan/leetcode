@@ -2,18 +2,26 @@ pub struct Solution;
 
 impl Solution {
     pub fn partition_disjoint(nums: Vec<i32>) -> i32 {
-        let mut v = nums.clone();
-        for i in (0..v.len() - 1).rev() {
-            v[i] = v[i].min(v[i + 1]);
-        }
-        let mut max = 0;
-        for i in 0..nums.len() - 1 {
-            max = max.max(nums[i]);
-            if max <= v[i + 1] {
-                return i as i32 + 1;
-            }
-        }
-        unreachable!()
+        let mins = nums
+            .iter()
+            .rev()
+            .scan(i32::MAX, |state, &x| {
+                *state = x.min(*state);
+                Some(*state)
+            })
+            .collect::<Vec<_>>();
+        nums.iter()
+            .zip(mins.iter().rev().skip(1))
+            .scan(0, |state, (&x, &min)| {
+                *state = x.max(*state);
+                if *state > min {
+                    Some(*state)
+                } else {
+                    None
+                }
+            })
+            .count() as i32
+            + 1
     }
 }
 
