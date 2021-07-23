@@ -6,27 +6,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn prune_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        if Self::dfs(&root) == 0 {
-            return None;
-        }
         if let Some(r) = root {
-            Some(Rc::new(RefCell::new(TreeNode {
-                val: r.borrow().val,
-                left: Self::prune_tree(r.borrow().left.clone()),
-                right: Self::prune_tree(r.borrow().right.clone()),
-            })))
-        } else {
-            None
+            let val = r.borrow().val;
+            let left = Self::prune_tree(r.borrow().left.clone());
+            let right = Self::prune_tree(r.borrow().right.clone());
+            if val != 0 || left.is_some() || right.is_some() {
+                return Some(Rc::new(RefCell::new(TreeNode { val, left, right })));
+            }
         }
-    }
-    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        let mut ret = 0;
-        if let Some(n) = node {
-            ret += n.borrow().val;
-            ret += Self::dfs(&n.borrow().left);
-            ret += Self::dfs(&n.borrow().right);
-        }
-        ret
+        None
     }
 }
 
