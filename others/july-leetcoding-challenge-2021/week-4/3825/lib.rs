@@ -20,7 +20,7 @@ impl Solution {
         let graph = Self::bfs(&dict, &begin_word, &word_list);
         let mut answers = Vec::new();
         let mut v = Vec::new();
-        Self::dfs(&graph, &mut v, &begin_word, &end_word, &mut answers);
+        Self::backtrack(&graph, &mut v, &begin_word, &end_word, &mut answers);
         answers
     }
     fn bfs(
@@ -61,7 +61,7 @@ impl Solution {
         }
         graph
     }
-    fn dfs(
+    fn backtrack(
         graph: &HashMap<String, HashSet<String>>,
         v: &mut Vec<String>,
         begin: &str,
@@ -76,11 +76,8 @@ impl Solution {
         }
         if let Some(s) = graph.get(begin) {
             for word in s {
-                if v.contains(&word.to_string()) {
-                    continue;
-                }
                 v.push(begin.to_string());
-                Self::dfs(graph, v, &word, end, answers);
+                Self::backtrack(graph, v, &word, end, answers);
                 v.pop();
             }
         }
