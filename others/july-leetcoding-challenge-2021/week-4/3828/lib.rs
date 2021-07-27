@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 pub struct Solution;
 
 impl Solution {
@@ -5,19 +7,24 @@ impl Solution {
         let mut nums = nums;
         nums.sort_unstable();
         let mut answer = nums.iter().take(3).sum::<i32>();
-        for i in 0..nums.len() {
+        let mut i = 0;
+        while i < nums.len() - 2 {
             let (mut j, mut k) = (i + 1, nums.len() - 1);
             while j < k {
                 let sum = nums[i] + nums[j] + nums[k];
-                if sum > target {
-                    k -= 1;
-                } else {
-                    j += 1;
+                match sum.cmp(&target) {
+                    Ordering::Less => j += 1,
+                    Ordering::Equal => return sum,
+                    Ordering::Greater => k -= 1,
                 }
                 if (sum - target).abs() < (answer - target).abs() {
                     answer = sum;
                 }
             }
+            while i + 1 < nums.len() && nums[i + 1] == nums[i] {
+                i += 1;
+            }
+            i += 1;
         }
         answer
     }
