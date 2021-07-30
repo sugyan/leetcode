@@ -9,7 +9,7 @@ struct Trie {
 #[derive(Default)]
 pub struct MapSum {
     trie: Trie,
-    history: HashMap<String, i32>,
+    values: HashMap<String, i32>,
 }
 
 /**
@@ -23,14 +23,14 @@ impl MapSum {
     }
 
     pub fn insert(&mut self, key: String, val: i32) {
-        let prev = self.history.get(&key).unwrap_or(&0);
+        let delta = val - self.values.get(&key).unwrap_or(&0);
         let mut node = &mut self.trie;
+        node.sum += delta;
         for &u in key.as_bytes() {
-            node.sum += val - prev;
-            node = node.children[(u - b'a') as usize].get_or_insert_with(Default::default)
+            node = node.children[(u - b'a') as usize].get_or_insert_with(Default::default);
+            node.sum += delta;
         }
-        node.sum += val - prev;
-        self.history.insert(key, val);
+        self.values.insert(key, val);
     }
 
     pub fn sum(&self, prefix: String) -> i32 {
