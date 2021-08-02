@@ -1,62 +1,30 @@
-struct UnionFind {
-    parent: Vec<usize>,
-}
-
-impl UnionFind {
-    fn new(n: usize) -> Self {
-        Self {
-            parent: (0..n).collect(),
-        }
-    }
-    fn union(&mut self, x: usize, y: usize) {
-        let x = self.find(x);
-        let y = self.find(y);
-        self.parent[y] = x;
-    }
-    fn find(&mut self, x: usize) -> usize {
-        if x != self.parent[x] {
-            self.parent[x] = self.find(self.parent[x]);
-        }
-        self.parent[x]
-    }
-}
-
 pub struct Solution;
 
 impl Solution {
     pub fn largest_island(grid: Vec<Vec<i32>>) -> i32 {
         let n = grid.len();
-        let mut uf = UnionFind::new(n * n);
+        let mut ids = vec![vec![None; n]; n];
+        let mut sizes = Vec::new();
         for i in 0..n {
             for j in 0..n {
-                if grid[i][j] == 1 {
-                    if i > 0 && grid[i - 1][j] == 1 {
-                        uf.union((i - 1) * n + j, i * n + j);
-                    }
-                    if j > 0 && grid[i][j - 1] == 1 {
-                        uf.union(i * n + j - 1, i * n + j);
-                    }
-                }
-            }
-        }
-        let mut sizes = vec![0; n * n];
-        for i in 0..n {
-            for j in 0..n {
-                if grid[i][j] == 1 {
-                    sizes[uf.find(i * n + j)] += 1;
+                if grid[i][j] == 1 && ids[i][j].is_none() {
+                    let size = Self::dfs(&grid, &mut ids, (i, j), sizes.len());
+                    sizes.push(size);
                 }
             }
         }
         let mut answer = *sizes.iter().max().unwrap_or(&0);
-        for i in 0..n {
-            for j in 0..n {
+        for (i, row) in grid.iter().enumerate() {
+            for (j, col) in row.iter().enumerate() {
                 let mut v = Vec::new();
-                if grid[i][j] == 0 {
+                if *col == 0 {
                     for d in [0, 1, 0, !0, 0].windows(2) {
                         let i = i.wrapping_add(d[0]);
                         let j = j.wrapping_add(d[1]);
-                        if i < n && j < n && grid[i][j] == 1 {
-                            v.push(uf.find(i * n + j));
+                        if i < n && j < n {
+                            if let Some(idx) = ids[i][j] {
+                                v.push(idx);
+                            }
                         }
                     }
                 }
@@ -66,6 +34,23 @@ impl Solution {
             }
         }
         answer
+    }
+    fn dfs(
+        grid: &[Vec<i32>],
+        ids: &mut Vec<Vec<Option<usize>>>,
+        p: (usize, usize),
+        idx: usize,
+    ) -> i32 {
+        ids[p.0][p.1] = Some(idx);
+        let mut ret = 1;
+        for d in [0, 1, 0, !0, 0].windows(2) {
+            let i = p.0.wrapping_add(d[0]);
+            let j = p.1.wrapping_add(d[1]);
+            if i < grid.len() && j < grid.len() && grid[i][j] == 1 && ids[i][j].is_none() {
+                ret += Self::dfs(grid, ids, (i, j), idx);
+            }
+        }
+        ret
     }
 }
 
