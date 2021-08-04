@@ -6,9 +6,8 @@ pub struct Solution;
 
 impl Solution {
     pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> Vec<Vec<i32>> {
-        let mut v = Vec::new();
         let mut answer = Vec::new();
-        Self::dfs(&root, target_sum, &mut v, &mut answer);
+        Self::dfs(&root, target_sum, &mut Vec::new(), &mut answer);
         answer
     }
     fn dfs(
@@ -21,7 +20,7 @@ impl Solution {
             let val = n.borrow().val;
             let l = &n.borrow().left;
             let r = &n.borrow().right;
-            v.push(n.borrow().val);
+            v.push(val);
             if target_sum == val && l.is_none() && r.is_none() {
                 answer.push(v.clone());
             }
