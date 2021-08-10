@@ -2,26 +2,15 @@ pub struct Solution;
 
 impl Solution {
     pub fn min_flips_mono_incr(s: String) -> i32 {
+        let s = s.as_bytes();
         let mut v = vec![0; s.len() + 1];
-        {
-            let mut c0 = 0;
-            for (i, &u) in s.as_bytes().iter().enumerate() {
-                if u == b'1' {
-                    c0 += 1;
-                }
-                v[i + 1] += c0;
-            }
+        for i in 0..s.len() {
+            v[i + 1] = v[i] + if s[i] == b'1' { 1 } else { 0 };
         }
-        {
-            let mut c1 = 0;
-            for (i, &u) in s.as_bytes().iter().enumerate().rev() {
-                if u == b'0' {
-                    c1 += 1;
-                }
-                v[i] += c1;
-            }
-        }
-        *v.iter().min().unwrap()
+        (0..v.len())
+            .map(|i| v[i] + s.len() - i - (v[s.len()] - v[i]))
+            .min()
+            .unwrap() as i32
     }
 }
 
