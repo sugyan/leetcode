@@ -20,13 +20,13 @@ impl Solution {
             }
         }
         if matrix[0][0] == 0 {
-            for j in 0..c {
+            for j in 1..c {
                 matrix[0][j] = 0;
             }
         }
         if first {
-            for i in 0..r {
-                matrix[i][0] = 0;
+            for row in matrix.iter_mut() {
+                row[0] = 0;
             }
         }
     }
