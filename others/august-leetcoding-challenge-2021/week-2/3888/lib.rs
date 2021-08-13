@@ -2,21 +2,31 @@ pub struct Solution;
 
 impl Solution {
     pub fn set_zeroes(matrix: &mut Vec<Vec<i32>>) {
-        let mut r = vec![false; matrix.len()];
-        let mut c = vec![false; matrix[0].len()];
-        for (i, row) in matrix.iter().enumerate() {
-            for (j, col) in row.iter().enumerate() {
-                if *col == 0 {
-                    r[i] = true;
-                    c[j] = true;
+        let (r, c) = (matrix.len(), matrix[0].len());
+        let first = (0..r).any(|i| matrix[i][0] == 0);
+        for i in 0..r {
+            for j in 1..c {
+                if matrix[i][j] == 0 {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
-        for (i, row) in matrix.iter_mut().enumerate() {
-            for (j, col) in row.iter_mut().enumerate() {
-                if r[i] || c[j] {
-                    *col = 0;
+        for i in 1..r {
+            for j in 1..c {
+                if matrix[i][0] == 0 || matrix[0][j] == 0 {
+                    matrix[i][j] = 0;
                 }
+            }
+        }
+        if matrix[0][0] == 0 {
+            for j in 0..c {
+                matrix[0][j] = 0;
+            }
+        }
+        if first {
+            for i in 0..r {
+                matrix[i][0] = 0;
             }
         }
     }
