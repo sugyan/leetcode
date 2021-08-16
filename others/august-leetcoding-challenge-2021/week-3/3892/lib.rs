@@ -8,24 +8,16 @@ pub struct NumArray {
  */
 impl NumArray {
     pub fn new(nums: Vec<i32>) -> Self {
-        Self {
-            sums: nums
-                .iter()
-                .scan(0, |state, &x| {
-                    *state += x;
-                    Some(*state)
-                })
-                .collect(),
-        }
+        let mut sums = Vec::with_capacity(nums.len() + 1);
+        sums.push(0);
+        nums.iter()
+            .enumerate()
+            .for_each(|(i, num)| sums.push(sums[i] + num));
+        Self { sums }
     }
 
     pub fn sum_range(&self, left: i32, right: i32) -> i32 {
-        self.sums[right as usize]
-            - if left > 0 {
-                self.sums[left as usize - 1]
-            } else {
-                0
-            }
+        self.sums[right as usize + 1] - self.sums[left as usize]
     }
 }
 
