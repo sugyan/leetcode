@@ -3,34 +3,25 @@ pub struct Solution;
 impl Solution {
     pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
         (0..9).all(|i| {
-            (0..9)
-                .filter_map(|j| Some(board[i][j] as u8).filter(|&c| c != b'.'))
-                .fold([0; 9], |mut acc, u| {
-                    acc[(u - b'1') as usize] += 1;
-                    acc
-                })
-                .iter()
-                .all(|&n| n < 2)
-        }) && (0..9).all(|i| {
-            (0..9)
-                .filter_map(|j| Some(board[j][i] as u8).filter(|&c| c != b'.'))
-                .fold([0; 9], |mut acc, u| {
-                    acc[(u - b'1') as usize] += 1;
-                    acc
-                })
-                .iter()
-                .all(|&n| n < 2)
-        }) && (0..9).all(|i| {
-            (0..9)
-                .filter_map(|j| {
-                    Some(board[i / 3 * 3 + j / 3][(i % 3) * 3 + j % 3] as u8).filter(|&c| c != b'.')
-                })
-                .fold([0; 9], |mut acc, u| {
-                    acc[(u - b'1') as usize] += 1;
-                    acc
-                })
-                .iter()
-                .all(|&n| n < 2)
+            [
+                (0..9).map(|j| board[i][j] as u8).collect::<Vec<_>>(),
+                (0..9).map(|j| board[j][i] as u8).collect::<Vec<_>>(),
+                (0..9)
+                    .map(|j| board[i / 3 * 3 + j / 3][(i % 3) * 3 + j % 3] as u8)
+                    .collect::<Vec<_>>(),
+            ]
+            .iter()
+            .all(|v| {
+                v.iter()
+                    .fold([0; 9], |mut acc, &u| {
+                        if u != b'.' {
+                            acc[(u - b'1') as usize] += 1;
+                        }
+                        acc
+                    })
+                    .iter()
+                    .all(|&n| n < 2)
+            })
         })
     }
 }
