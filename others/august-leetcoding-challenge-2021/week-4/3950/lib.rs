@@ -1,22 +1,21 @@
-use std::collections::BTreeMap;
-
 pub struct Solution;
 
 impl Solution {
     pub fn job_scheduling(start_time: Vec<i32>, end_time: Vec<i32>, profit: Vec<i32>) -> i32 {
         let len = profit.len();
         let mut index = (0..len).collect::<Vec<_>>();
-        index.sort_by_cached_key(|&i| end_time[i]);
-        let mut btm = BTreeMap::new();
-        btm.insert(0, 0);
-        for &i in &index {
-            if let Some((_, &p)) = btm.range(..=start_time[i]).last() {
-                if p + profit[i] > *btm.iter().last().unwrap().1 {
-                    btm.insert(end_time[i], p + profit[i]);
-                }
-            }
+        index.sort_unstable_by_key(|&i| end_time[i]);
+        let mut dp = vec![0; len];
+        for i in 0..len {
+            let profit = profit[index[i]]
+                + match index[..i].binary_search_by_key(&start_time[index[i]], |&j| end_time[j]) {
+                    Ok(j) => dp[j],
+                    Err(j) if j == 0 => 0,
+                    Err(j) => dp[j - 1],
+                };
+            dp[i] = (if i > 0 { dp[i - 1] } else { 0 }).max(profit);
         }
-        *btm.iter().last().unwrap().1
+        dp[len - 1]
     }
 }
 
