@@ -5,7 +5,7 @@ impl Solution {
         let (mut lo, mut hi) = (0, nums.len() - 1);
         while lo < hi {
             let m = (lo + hi) / 2;
-            if nums[lo] <= nums[m] && nums[m] >= nums[hi] {
+            if nums[m] > nums[hi] {
                 lo = m + 1;
             } else {
                 hi = m
