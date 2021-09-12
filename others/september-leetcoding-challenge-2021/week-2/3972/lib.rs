@@ -10,7 +10,7 @@ impl Solution {
             graph[edge[0] as usize].push((edge[1] as usize, edge[2]));
             graph[edge[1] as usize].push((edge[0] as usize, edge[2]));
         }
-        let mut mins = vec![None; n as usize];
+        let mut remains = vec![None; n as usize];
         let mut bh = BinaryHeap::new();
         bh.push((Reverse(0), 0));
         let mut answer = 0;
@@ -18,24 +18,19 @@ impl Solution {
             if min > max_moves {
                 break;
             }
-            if mins[u].is_some() {
+            if remains[u].is_some() {
                 continue;
             }
             answer += 1;
-            mins[u] = Some(min);
-            for &(v, c) in graph[u].iter().filter(|(v, _)| mins[*v].is_none()) {
+            remains[u] = Some(max_moves - min);
+            for &(v, c) in graph[u].iter().filter(|(v, _)| remains[*v].is_none()) {
                 bh.push((Reverse(min + c + 1), v));
             }
         }
         for edge in &edges {
-            let mut min = 0;
-            if let Some(m) = mins[edge[0] as usize] {
-                min += max_moves - m
-            }
-            if let Some(m) = mins[edge[1] as usize] {
-                min += max_moves - m
-            }
-            answer += edge[2].min(min);
+            answer += edge[2].min(
+                remains[edge[0] as usize].unwrap_or(0) + remains[edge[1] as usize].unwrap_or(0),
+            );
         }
         answer
     }
