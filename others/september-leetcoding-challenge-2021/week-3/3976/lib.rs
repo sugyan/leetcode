@@ -1,16 +1,17 @@
-use std::cmp::Ordering;
-
 pub struct Solution;
 
 impl Solution {
     pub fn max_turbulence_size(arr: Vec<i32>) -> i32 {
-        let v = arr.windows(2).map(|w| w[0].cmp(&w[1])).collect::<Vec<_>>();
+        let v = arr
+            .windows(2)
+            .map(|w| (w[0] - w[1]).signum())
+            .collect::<Vec<_>>();
         let mut anchor = 0;
         let mut answer = 1;
         for i in 0..v.len() {
-            if v[i] == Ordering::Equal {
+            if v[i] == 0 {
                 anchor = i + 1;
-            } else if i == v.len() - 1 || v[i] as i32 * v[i + 1] as i32 != -1 {
+            } else if i == v.len() - 1 || v[i] * v[i + 1] != -1 {
                 answer = answer.max(i - anchor + 2);
                 anchor = i + 1;
             }
