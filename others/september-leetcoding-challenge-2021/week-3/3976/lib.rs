@@ -5,27 +5,17 @@ pub struct Solution;
 impl Solution {
     pub fn max_turbulence_size(arr: Vec<i32>) -> i32 {
         let v = arr.windows(2).map(|w| w[0].cmp(&w[1])).collect::<Vec<_>>();
-        let mut max = 1;
-        let mut len = 1;
+        let mut anchor = 0;
+        let mut answer = 1;
         for i in 0..v.len() {
-            len = if i == 0 {
-                if v[0] == Ordering::Equal {
-                    1
-                } else {
-                    2
-                }
-            } else {
-                match (v[i], v[i - 1]) {
-                    (Ordering::Less, Ordering::Greater) | (Ordering::Greater, Ordering::Less) => {
-                        len + 1
-                    }
-                    (Ordering::Equal, _) => 1,
-                    _ => 2,
-                }
-            };
-            max = max.max(len);
+            if v[i] == Ordering::Equal {
+                anchor = i + 1;
+            } else if i == v.len() - 1 || v[i] as i32 * v[i + 1] as i32 != -1 {
+                answer = answer.max(i - anchor + 2);
+                anchor = i + 1;
+            }
         }
-        max
+        answer as i32
     }
 }
 
