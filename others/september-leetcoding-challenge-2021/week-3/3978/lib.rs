@@ -1,16 +1,22 @@
+use std::collections::HashMap;
+
 pub struct Solution;
 
 impl Solution {
     pub fn intersect(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
-        let mut v = vec![0; 1001];
-        for &num in &nums1 {
-            v[num as usize] += 1;
-        }
+        let mut hm = HashMap::<i32, u32>::new();
+        nums1
+            .iter()
+            .for_each(|&num| *hm.entry(num).or_default() += 1);
         nums2
             .into_iter()
-            .filter(|&num| {
-                v[num as usize] -= 1;
-                v[num as usize] >= 0
+            .filter(|num| {
+                if let Some(v) = hm.get_mut(num).filter(|c| **c > 0) {
+                    *v -= 1;
+                    true
+                } else {
+                    false
+                }
             })
             .collect()
     }
