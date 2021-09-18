@@ -22,21 +22,16 @@ impl Solution {
             return;
         }
         let mut n = 0;
+        let len = ops.len();
         for (i, &d) in v.iter().enumerate() {
             n = n * 10 + d;
             ops.push(String::from("+"));
             ops.push(n.to_string());
             Self::backtrack(answer, ops, &v[i + 1..], val + n, n, target);
-            ops.pop();
-            ops.pop();
-            if !ops.is_empty() {
-                ops.push(String::from("-"));
-                ops.push(n.to_string());
+            if ops.len() > 2 {
+                ops[len] = String::from("-");
                 Self::backtrack(answer, ops, &v[i + 1..], val - n, -n, target);
-                ops.pop();
-                ops.pop();
-                ops.push(String::from("*"));
-                ops.push(n.to_string());
+                ops[len] = String::from("*");
                 Self::backtrack(
                     answer,
                     ops,
@@ -45,9 +40,9 @@ impl Solution {
                     last * n,
                     target,
                 );
-                ops.pop();
-                ops.pop();
             }
+            ops.pop();
+            ops.pop();
             if v[0] == 0 {
                 break;
             }
