@@ -4,53 +4,51 @@ impl Solution {
     pub fn add_operators(num: String, target: i32) -> Vec<String> {
         let v = num.bytes().map(|u| (u - b'0') as i64).collect::<Vec<_>>();
         let mut answer = Vec::new();
-        Self::helper("", &v, 0, 0, target, &mut answer);
+        Self::backtrack(&mut answer, &mut Vec::new(), &v, 0, 0, target as i64);
         answer
     }
-    fn helper(
-        prev: &str,
-        remain: &[i64],
+    fn backtrack(
+        answer: &mut Vec<String>,
+        ops: &mut Vec<String>,
+        v: &[i64],
         val: i64,
         last: i64,
-        target: i32,
-        answer: &mut Vec<String>,
+        target: i64,
     ) {
-        if remain.is_empty() {
-            if val == target as i64 {
-                answer.push(prev[1..].to_string());
+        if v.is_empty() {
+            if val == target {
+                answer.push(ops[1..].join(""));
             }
             return;
         }
         let mut n = 0;
-        for (i, &r) in remain.iter().enumerate() {
-            n = n * 10 + r;
-            Self::helper(
-                &(prev.to_string() + "+" + &n.to_string()),
-                &remain[i + 1..],
-                val + n,
-                n,
-                target,
-                answer,
-            );
-            if !prev.is_empty() {
-                Self::helper(
-                    &(prev.to_string() + "-" + &n.to_string()),
-                    &remain[i + 1..],
-                    val - n,
-                    -n,
-                    target,
+        for (i, &d) in v.iter().enumerate() {
+            n = n * 10 + d;
+            ops.push(String::from("+"));
+            ops.push(n.to_string());
+            Self::backtrack(answer, ops, &v[i + 1..], val + n, n, target);
+            ops.pop();
+            ops.pop();
+            if !ops.is_empty() {
+                ops.push(String::from("-"));
+                ops.push(n.to_string());
+                Self::backtrack(answer, ops, &v[i + 1..], val - n, -n, target);
+                ops.pop();
+                ops.pop();
+                ops.push(String::from("*"));
+                ops.push(n.to_string());
+                Self::backtrack(
                     answer,
-                );
-                Self::helper(
-                    &(prev.to_string() + "*" + &n.to_string()),
-                    &remain[i + 1..],
+                    ops,
+                    &v[i + 1..],
                     val - last + last * n,
                     last * n,
                     target,
-                    answer,
                 );
+                ops.pop();
+                ops.pop();
             }
-            if remain[0] == 0 {
+            if v[0] == 0 {
                 break;
             }
         }
