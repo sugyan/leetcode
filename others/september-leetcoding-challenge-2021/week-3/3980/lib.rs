@@ -2,16 +2,14 @@ pub struct Solution;
 
 impl Solution {
     pub fn num_distinct(s: String, t: String) -> i32 {
-        let s = s.bytes().collect::<Vec<_>>();
-        let t = t.bytes().collect::<Vec<_>>();
-        let mut dp = vec![vec![0; s.len() + 1]; t.len() + 1];
-        (0..s.len()).for_each(|i| dp[0][i] = 1);
-        for i in 0..t.len() {
-            for j in 0..s.len() {
-                dp[i + 1][j + 1] = dp[i + 1][j] + if s[j] == t[i] { dp[i][j] } else { 0 };
+        let mut dp = vec![0; t.len() + 1];
+        dp[0] = 1;
+        for s in s.bytes() {
+            for (i, t) in t.bytes().enumerate().rev() {
+                dp[i + 1] += if s == t { dp[i] } else { 0 };
             }
         }
-        dp[t.len()][s.len()]
+        dp[t.len()]
     }
 }
 
