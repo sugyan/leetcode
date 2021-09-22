@@ -5,16 +5,9 @@ impl Solution {
         let arr = arr
             .iter()
             .filter_map(|s| {
-                let counts = s.bytes().fold([0; 26], |mut acc, u| {
-                    acc[(u - b'a') as usize] += 1;
-                    acc
-                });
-                if *counts.iter().max().unwrap_or(&0) < 2 {
-                    Some(
-                        (0..26)
-                            .map(|i| if counts[i] > 0 { 1 } else { 0 } << i)
-                            .sum::<u32>(),
-                    )
+                let u = s.bytes().map(|u| 1 << (u - b'a')).sum::<u32>();
+                if u.count_ones() == s.len() as u32 {
+                    Some(u)
                 } else {
                     None
                 }
@@ -23,7 +16,7 @@ impl Solution {
         (0..1 << arr.len())
             .filter_map(|i| {
                 (0..arr.len())
-                    .filter(|&j| i & 1 << j > 0)
+                    .filter(|&j| i & 1 << j != 0)
                     .try_fold(0, |acc, j| {
                         if acc & arr[j] == 0 {
                             Some(acc | arr[j])
