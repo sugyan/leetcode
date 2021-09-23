@@ -6,13 +6,13 @@ impl Solution {
         if v.len() == 1 {
             return String::new();
         }
-        if let Some(i) =
-            (0..v.len()).position(|i| v[i] != 'a' && (v.len() % 2 == 0 || i != v.len() / 2))
-        {
-            v[i] = 'a';
-        } else {
-            *v.last_mut().unwrap() = 'b'
+        for i in 0..v.len() / 2 {
+            if v[i] != 'a' {
+                v[i] = 'a';
+                return v.iter().collect();
+            }
         }
+        *v.last_mut().unwrap() = 'b';
         v.iter().collect()
     }
 }
