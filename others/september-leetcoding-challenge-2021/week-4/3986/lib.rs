@@ -2,17 +2,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn tribonacci(n: i32) -> i32 {
-        match n {
-            0 | 1 => n,
-            2 => 1,
-            _ => *(3..=n as usize)
-                .fold(vec![0, 1, 1], |mut v, i| {
-                    v.push(v[i - 1] + v[i - 2] + v[i - 3]);
-                    v
-                })
-                .last()
-                .unwrap(),
-        }
+        (0..n).fold([0, 1, 1], |v, _| [v[1], v[2], v[0] + v[1] + v[2]])[0]
     }
 }
 
