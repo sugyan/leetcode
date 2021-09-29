@@ -2731,6 +2731,13 @@ name = "september-leetcoding-challenge-2021_week-4_3990"
 version = "0.1.0"
 
 [[package]]
+name = "september-leetcoding-challenge-2021_week-5_3992"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "september-leetcoding-challenge_week-1_3445"
 version = "0.1.0"
 
