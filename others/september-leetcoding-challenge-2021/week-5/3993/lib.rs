@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 pub struct Solution;
 
 impl Solution {
@@ -8,32 +6,23 @@ impl Solution {
         if sum % k != 0 {
             return false;
         }
-        Self::backtrack(&nums, 0, sum / k, &mut 0, &mut HashSet::new())
+        Self::backtrack(&nums, 0, sum / k, 0, &mut vec![false; nums.len()])
     }
-    fn backtrack(
-        nums: &[i32],
-        sum: i32,
-        target: i32,
-        used: &mut u32,
-        memo: &mut HashSet<u32>,
-    ) -> bool {
-        if memo.contains(&used) {
-            return false;
-        }
-        if used.count_ones() == nums.len() as u32 {
+    fn backtrack(nums: &[i32], curr: i32, target: i32, i: usize, used: &mut Vec<bool>) -> bool {
+        if used.iter().all(|&b| b) {
             return true;
         }
-        for i in 0..nums.len() {
-            let mask = 1 << i;
-            if (*used & mask == 0) && sum + nums[i] <= target {
-                *used |= mask;
-                if Self::backtrack(nums, (sum + nums[i]) % target, target, used, memo) {
-                    return true;
-                }
-                *used &= !mask;
+        for j in i..nums.len() {
+            if used[j] || curr + nums[j] > target {
+                continue;
             }
+            let next = (curr + nums[j]) % target;
+            used[j] = true;
+            if Self::backtrack(nums, next, target, if next == 0 { 0 } else { j + 1 }, used) {
+                return true;
+            }
+            used[j] = false;
         }
-        memo.insert(*used);
         false
     }
 }
