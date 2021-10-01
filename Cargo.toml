@@ -112,6 +112,7 @@ members = [
     "problems/0310-minimum-height-trees",
     "problems/0843-guess-the-word",
     "problems/0994-rotting-oranges",
+    "problems/1143-longest-common-subsequence",
     "others/30-day-leetcoding-challenge/week-1/3283",
     "others/30-day-leetcoding-challenge/week-1/3284",
     "others/30-day-leetcoding-challenge/week-1/3285",
