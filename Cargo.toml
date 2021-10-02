@@ -74,6 +74,7 @@ members = [
     "problems/0165-compare-version-numbers",
     "problems/0166-fraction-to-recurring-decimal",
     "problems/0173-binary-search-tree-iterator",
+    "problems/0174-dungeon-game",
     "problems/0179-largest-number",
     "problems/0187-repeated-dna-sequences",
     "problems/0199-binary-tree-right-side-view",
