@@ -1,15 +1,12 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn can_jump(nums: Vec<i32>) -> bool {
-        let mut n = 0;
+        let mut n = 1;
         for i in (0..nums.len() - 1).rev() {
-            n += 1;
-            if nums[i] >= n {
-                n = 0;
-            }
+            n = if nums[i] < n { n + 1 } else { 1 };
         }
-        nums.len() == 1 || n < nums[0]
+        n == 1
     }
 }
 
