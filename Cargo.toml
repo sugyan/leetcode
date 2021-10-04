@@ -111,6 +111,7 @@ members = [
     "problems/0307-range-sum-query-mutable",
     "problems/0309-best-time-to-buy-and-sell-stock-with-cooldown",
     "problems/0310-minimum-height-trees",
+    "problems/0463-island-perimeter",
     "problems/0843-guess-the-word",
     "problems/0994-rotting-oranges",
     "problems/1143-longest-common-subsequence",
