@@ -29,6 +29,7 @@ members = [
     "problems/0062-unique-paths",
     "problems/0063-unique-paths-ii",
     "problems/0064-minimum-path-sum",
+    "problems/0070-climbing-stairs",
     "problems/0071-simplify-path",
     "problems/0073-set-matrix-zeroes",
     "problems/0074-search-a-2d-matrix",
