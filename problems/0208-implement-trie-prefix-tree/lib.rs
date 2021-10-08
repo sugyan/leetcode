@@ -11,26 +11,24 @@ pub struct Trie {
 impl Trie {
     /** Initialize your data structure here. */
     pub fn new() -> Self {
-        Trie {
-            is_end: false,
-            children: Default::default(),
-        }
+        Default::default()
     }
     /** Inserts a word into the trie. */
     pub fn insert(&mut self, word: String) {
         let mut node = self;
-        for i in word.chars().map(|c| c as u8 - b'a') {
-            node = node.children[i as usize].get_or_insert(Box::new(Trie::new()));
+        for i in word.bytes().map(|u| (u - b'a') as usize) {
+            node = node.children[i].get_or_insert(Default::default());
         }
         node.is_end = true;
     }
     /** Returns if the word is in the trie. */
     pub fn search(&self, word: String) -> bool {
         let mut node = self;
-        for i in word.chars().map(|c| c as u8 - b'a') {
-            node = match node.children[i as usize].as_ref() {
-                Some(n) => n,
-                None => return false,
+        for i in word.bytes().map(|u| (u - b'a') as usize) {
+            if let Some(n) = &node.children[i] {
+                node = n;
+            } else {
+                return false;
             }
         }
         node.is_end
@@ -38,10 +36,11 @@ impl Trie {
     /** Returns if there is any word in the trie that starts with the given prefix. */
     pub fn starts_with(&self, prefix: String) -> bool {
         let mut node = self;
-        for i in prefix.chars().map(|c| c as u8 - b'a') {
-            node = match node.children[i as usize].as_ref() {
-                Some(n) => n,
-                None => return false,
+        for i in prefix.bytes().map(|u| (u - b'a') as usize) {
+            if let Some(n) = &node.children[i] {
+                node = n;
+            } else {
+                return false;
             }
         }
         true
