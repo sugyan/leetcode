@@ -86,6 +86,7 @@ members = [
     "problems/0209-minimum-size-subarray-sum",
     "problems/0210-course-schedule-ii",
     "problems/0211-add-and-search-word-data-structure-design",
+    "problems/0212-word-search-ii",
     "problems/0213-house-robber-ii",
     "problems/0215-kth-largest-element-in-an-array",
     "problems/0216-combination-sum-iii",

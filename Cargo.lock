@@ -3023,3 +3023,7 @@ version = "0.1.0"
 [[package]]
 name = "word-search"
 version = "0.1.0"
+
+[[package]]
+name = "word-search-ii"
+version = "0.1.0"
