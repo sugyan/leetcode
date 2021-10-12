@@ -916,6 +916,10 @@ name = "group-anagrams"
 version = "0.1.0"
 
 [[package]]
+name = "guess-number-higher-or-lower"
+version = "0.1.0"
+
+[[package]]
 name = "guess-the-word"
 version = "0.1.0"
 

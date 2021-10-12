@@ -1,0 +1,13 @@
+[package]
+name = "guess-number-higher-or-lower"
+version = "0.1.0"
+authors = ["sugyan <sugi1982@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "guess_number_higher_or_lower"
+path = "lib.rs"
