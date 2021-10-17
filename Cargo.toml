@@ -115,6 +115,7 @@ members = [
     "problems/0309-best-time-to-buy-and-sell-stock-with-cooldown",
     "problems/0310-minimum-height-trees",
     "problems/0374-guess-number-higher-or-lower",
+    "problems/0437-path-sum-iii",
     "problems/0442-find-all-duplicates-in-an-array",
     "problems/0463-island-perimeter",
     "problems/0543-diameter-of-binary-tree",
