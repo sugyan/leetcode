@@ -704,6 +704,13 @@ name = "course-schedule-ii"
 version = "0.1.0"
 
 [[package]]
+name = "cousins-in-binary-tree"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "december-leetcoding-challenge_week-4_3582"
 version = "0.1.0"
 

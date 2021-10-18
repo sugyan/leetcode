@@ -120,6 +120,7 @@ members = [
     "problems/0463-island-perimeter",
     "problems/0543-diameter-of-binary-tree",
     "problems/0843-guess-the-word",
+    "problems/0993-cousins-in-binary-tree",
     "problems/0994-rotting-oranges",
     "problems/1008-construct-binary-search-tree-from-preorder-traversal",
     "problems/1143-longest-common-subsequence",
