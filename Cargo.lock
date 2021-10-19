@@ -2110,6 +2110,10 @@ name = "multiply-strings"
 version = "0.1.0"
 
 [[package]]
+name = "next-greater-element-i"
+version = "0.1.0"
+
+[[package]]
 name = "next-permutation"
 version = "0.1.0"
 

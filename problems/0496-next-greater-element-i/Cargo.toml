@@ -1,0 +1,13 @@
+[package]
+name = "next-greater-element-i"
+version = "0.1.0"
+authors = ["sugyan <sugi1982@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "next_greater_element_i"
+path = "lib.rs"
