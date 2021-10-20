@@ -1,30 +1,11 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn reverse_words(s: String) -> String {
-        let mut v: Vec<char> = Vec::new();
-        let mut flg = false;
-        let mut answer: String = String::new();
-        for c in s.chars().rev().chain(" ".chars()) {
-            match c {
-                ' ' => {
-                    if flg {
-                        if !answer.is_empty() {
-                            answer.push(' ');
-                        }
-                        for c in v.iter().rev() {
-                            answer.push(*c);
-                        }
-                        v.clear();
-                    }
-                }
-                c => {
-                    v.push(c);
-                }
-            }
-            flg = c != ' ';
-        }
-        answer
+        s.split_ascii_whitespace()
+            .rev()
+            .collect::<Vec<_>>()
+            .join(" ")
     }
 }
 
@@ -36,7 +17,7 @@ mod tests {
     fn example_1() {
         assert_eq!(
             "blue is sky the",
-            Solution::reverse_words("the sky is blue".to_string())
+            Solution::reverse_words(String::from("the sky is blue"))
         );
     }
 
@@ -44,7 +25,7 @@ mod tests {
     fn example_2() {
         assert_eq!(
             "world! hello",
-            Solution::reverse_words("  hello world!  ".to_string())
+            Solution::reverse_words(String::from("  hello world!  "))
         );
     }
 
@@ -52,7 +33,23 @@ mod tests {
     fn example_3() {
         assert_eq!(
             "example good a",
-            Solution::reverse_words("a good   example".to_string())
+            Solution::reverse_words(String::from("a good   example"))
+        );
+    }
+
+    #[test]
+    fn example_4() {
+        assert_eq!(
+            "Alice Loves Bob",
+            Solution::reverse_words(String::from("  Bob    Loves  Alice   "))
+        );
+    }
+
+    #[test]
+    fn example_5() {
+        assert_eq!(
+            "bob like even not does Alice",
+            Solution::reverse_words(String::from("Alice does not even like bob"))
         );
     }
 }
