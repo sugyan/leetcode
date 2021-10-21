@@ -1,5 +1,5 @@
 [package]
-name = "june-leetcoding-challenge_week-2_3358"
+name = "insert-delete-getrandom-o1"
 version = "0.1.0"
 authors = ["sugyan <sugi1982@gmail.com>"]
 edition = "2018"
@@ -10,5 +10,5 @@ edition = "2018"
 rand = "0.6"
 
 [lib]
-name = "week2_3358"
+name = "insert_delete_getrandom_o1"
 path = "lib.rs"

@@ -958,6 +958,13 @@ name = "implement-trie-prefix-tree"
 version = "0.1.0"
 
 [[package]]
+name = "insert-delete-getrandom-o1"
+version = "0.1.0"
+dependencies = [
+ "rand 0.6.5",
+]
+
+[[package]]
 name = "island-perimeter"
 version = "0.1.0"
 
@@ -1552,7 +1559,7 @@ version = "0.1.0"
 name = "june-leetcoding-challenge_week-2_3358"
 version = "0.1.0"
 dependencies = [
- "rand 0.7.3",
+ "rand 0.6.5",
 ]
 
 [[package]]
