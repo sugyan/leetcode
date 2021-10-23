@@ -1,0 +1,13 @@
+[package]
+name = "find-minimum-in-rotated-sorted-array-ii"
+version = "0.1.0"
+authors = ["sugyan <sugi1982@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "find_minimum_in_rotated_sorted_array_ii"
+path = "lib.rs"

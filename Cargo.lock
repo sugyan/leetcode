@@ -878,6 +878,10 @@ name = "find-minimum-in-rotated-sorted-array"
 version = "0.1.0"
 
 [[package]]
+name = "find-minimum-in-rotated-sorted-array-ii"
+version = "0.1.0"
+
+[[package]]
 name = "find-peak-element"
 version = "0.1.0"
 
