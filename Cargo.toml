@@ -73,6 +73,7 @@ members = [
     "problems/0152-maximum-product-subarray",
     "problems/0153-find-minimum-in-rotated-sorted-array",
     "problems/0154-find-minimum-in-rotated-sorted-array-ii",
+    "problems/0155-min-stack",
     "problems/0162-find-peak-element",
     "problems/0165-compare-version-numbers",
     "problems/0166-fraction-to-recurring-decimal",
