@@ -1,45 +1,37 @@
 use std::collections::VecDeque;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
-        let mut grid: Vec<Vec<i32>> = grid;
-        let mut vd: VecDeque<((usize, usize), i32)> = VecDeque::new();
-        for i in 0..grid.len() {
-            for j in 0..grid[0].len() {
-                if grid[i][j] == 2 {
-                    vd.push_back(((i, j), 2));
-                    grid[i][j] = 1;
+        let (rows, cols) = (grid.len(), grid[0].len());
+        let mut grid = grid;
+        let mut vd = VecDeque::new();
+        for (i, row) in grid.iter().enumerate() {
+            for (j, &col) in row.iter().enumerate() {
+                if col == 2 {
+                    vd.push_back((i, j));
                 }
             }
         }
-        while let Some(front) = vd.pop_front() {
-            let p = front.0;
-            if grid[p.0][p.1] != 1 {
-                continue;
-            }
-            grid[p.0][p.1] = front.1;
-            if p.0 > 0 {
-                vd.push_back(((p.0 - 1, p.1), front.1 + 1));
-            }
-            if p.1 > 0 {
-                vd.push_back(((p.0, p.1 - 1), front.1 + 1));
-            }
-            if p.0 < grid.len() - 1 {
-                vd.push_back(((p.0 + 1, p.1), front.1 + 1));
-            }
-            if p.1 < grid[0].len() - 1 {
-                vd.push_back(((p.0, p.1 + 1), front.1 + 1));
+        while let Some((i, j)) = vd.pop_front() {
+            let val = grid[i][j];
+            for d in [0, 1, 0, !0, 0].windows(2) {
+                let i = i.wrapping_add(d[0]);
+                let j = j.wrapping_add(d[1]);
+                if (0..rows).contains(&i) && (0..cols).contains(&j) && grid[i][j] == 1 {
+                    grid[i][j] = val + 1;
+                    vd.push_back((i, j));
+                }
             }
         }
         let mut max = 2;
-        for row in grid.iter() {
-            for col in row.iter() {
-                if *col == 1 {
+        for row in &grid {
+            for &col in row {
+                if col == 1 {
                     return -1;
                 }
-                max = std::cmp::max(max, *col);
+                max = max.max(col);
             }
         }
         max - 2
