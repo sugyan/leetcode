@@ -19,7 +19,7 @@ impl Solution {
         let (mut lo, mut hi) = (0, s.len());
         while lo < hi {
             let mid = (lo + hi) / 2;
-            if let Some(i) = Self::search(&s, &v, pows[mid], mid) {
+            if let Some(i) = Self::search(s.as_bytes(), &v, pows[mid], mid) {
                 answer = i;
                 lo = mid + 1;
             } else {
@@ -28,12 +28,12 @@ impl Solution {
         }
         s[answer..answer + lo - 1].to_string()
     }
-    fn search(s: &str, v: &[i64], pow: i64, len: usize) -> Option<usize> {
+    fn search(s: &[u8], v: &[i64], pow: i64, len: usize) -> Option<usize> {
         let mut hm = HashMap::new();
         for i in 0..=s.len() - len {
             let hash = (v[i + len] - v[i] * pow).rem_euclid(MOD);
             if let Some(&j) = hm.get(&hash) {
-                if s[i..i + len] == s[j..j + len] {
+                if (0..len).all(|k| s[i + k] == s[j + k]) {
                     return Some(i);
                 }
             }
