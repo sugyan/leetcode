@@ -1,54 +1,34 @@
-use std::collections::{HashSet, VecDeque};
+use std::collections::VecDeque;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn solve(board: &mut Vec<Vec<char>>) {
-        if board.is_empty() || board[0].is_empty() {
-            return;
-        }
-        let (row, col) = (board.len(), board[0].len());
-        let mut hs: HashSet<(usize, usize)> = HashSet::new();
-        let mut vd: VecDeque<(usize, usize)> = VecDeque::new();
-        for (i, r) in (0..).zip(board.iter()) {
-            if r[0] == 'O' {
-                vd.push_back((i, 0));
-            }
-            if r[col - 1] == 'O' {
-                vd.push_back((i, col - 1));
+        let (m, n) = (board.len(), board[0].len());
+        let mut vd = VecDeque::new();
+        for (i, row) in board.iter_mut().enumerate() {
+            for (j, col) in row.iter_mut().enumerate() {
+                if (i == 0 || i == m - 1 || j == 0 || j == n - 1) && *col == 'O' {
+                    vd.push_back((i, j));
+                }
             }
         }
-        for j in 0..col {
-            if board[0][j] == 'O' {
-                vd.push_back((0, j));
-            }
-            if board[row - 1][j] == 'O' {
-                vd.push_back((row - 1, j));
-            }
-        }
-        while let Some(front) = vd.pop_front() {
-            hs.insert(front);
-            let (i, j) = front;
-            board[i][j] = '*';
-            if i > 0 && board[i - 1][j] == 'O' && !hs.contains(&(i - 1, j)) {
-                vd.push_back((i - 1, j));
-            }
-            if j > 0 && board[i][j - 1] == 'O' && !hs.contains(&(i, j - 1)) {
-                vd.push_back((i, j - 1));
-            }
-            if i < row - 1 && board[i + 1][j] == 'O' && !hs.contains(&(i + 1, j)) {
-                vd.push_back((i + 1, j));
-            }
-            if j < col - 1 && board[i][j + 1] == 'O' && !hs.contains(&(i, j + 1)) {
-                vd.push_back((i, j + 1));
+        while let Some((i, j)) = vd.pop_front() {
+            board[i][j] = '#';
+            for d in [0, 1, 0, !0, 0].windows(2) {
+                let i = i.wrapping_add(d[0]);
+                let j = j.wrapping_add(d[1]);
+                if (0..m).contains(&i) && (0..n).contains(&j) && board[i][j] == 'O' {
+                    vd.push_back((i, j));
+                }
             }
         }
-        for r in board.iter_mut() {
-            for c in r.iter_mut() {
-                *c = match *c {
-                    'O' => 'X',
-                    '*' => 'O',
-                    c => c,
+        for row in board {
+            for col in row {
+                match *col {
+                    'O' => *col = 'X',
+                    '#' => *col = 'O',
+                    _ => {}
                 }
             }
         }
@@ -77,5 +57,12 @@ mod tests {
             ],
             board
         );
+    }
+
+    #[test]
+    fn example_2() {
+        let mut board: Vec<Vec<char>> = vec![vec!['X']];
+        Solution::solve(&mut board);
+        assert_eq!(vec![vec!['X']], board);
     }
 }
