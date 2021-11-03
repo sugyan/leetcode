@@ -2,11 +2,11 @@ use std::cell::RefCell;
 use std::rc::Rc;
 use utils::TreeNode;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn sum_numbers(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        Solution::dfs(&root, 0)
+        Self::dfs(&root, 0)
     }
     fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, prev: i32) -> i32 {
         if let Some(n) = node {
@@ -14,14 +14,13 @@ impl Solution {
             if n.borrow().left.is_none() && n.borrow().right.is_none() {
                 val
             } else {
-                Solution::dfs(&n.borrow().left, val) + Solution::dfs(&n.borrow().right, val)
+                Self::dfs(&n.borrow().left, val) + Self::dfs(&n.borrow().right, val)
             }
         } else {
             0
         }
     }
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
