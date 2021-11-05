@@ -275,6 +275,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "arranging-coins"
+version = "0.1.0"
+
+[[package]]
 name = "august-leetcoding-challenge-2021_week-1_3835"
 version = "0.1.0"
 
