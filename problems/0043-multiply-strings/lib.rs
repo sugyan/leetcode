@@ -1,30 +1,23 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn multiply(num1: String, num2: String) -> String {
-        let mut answer = vec![0; num1.len() + num2.len()];
-        let v1: Vec<u8> = num1.bytes().rev().map(|b| b as u8 - b'0').collect();
-        let v2: Vec<u8> = num2.bytes().rev().map(|b| b as u8 - b'0').collect();
-        for (i, d1) in (0..).zip(v1.iter()) {
+        let num1 = num1.bytes().rev().map(|u| u - b'0').collect::<Vec<_>>();
+        let num2 = num2.bytes().rev().map(|u| u - b'0').collect::<Vec<_>>();
+        let mut v = vec![0; num1.len() + num2.len()];
+        for (i, &d1) in num1.iter().enumerate() {
             let mut carry = 0;
-            for (j, d2) in (0..).zip(v2.iter()) {
-                let m = d1 * d2 + carry;
-                carry = m / 10;
-                answer[i + j] += m % 10;
-                if answer[i + j] > 9 {
-                    carry += 1;
-                    answer[i + j] -= 10;
-                }
+            for (j, &d2) in num2.iter().enumerate() {
+                v[i + j] += d1 * d2 + carry;
+                carry = v[i + j] / 10;
+                v[i + j] %= 10;
             }
-            if carry > 0 {
-                answer[i + v2.len()] += carry;
-            }
+            v[i + num2.len()] += carry;
         }
-        answer.reverse();
-        while answer.len() > 1 && answer[0] == 0 {
-            answer.remove(0);
+        while v.last() == Some(&0) && v.len() > 1 {
+            v.pop();
         }
-        answer.iter().map(|u| (b'0' + u) as char).collect()
+        v.iter().rev().map(|&u| (b'0' + u) as char).collect()
     }
 }
 
@@ -35,16 +28,16 @@ mod tests {
     #[test]
     fn example_1() {
         assert_eq!(
-            "6".to_string(),
-            Solution::multiply("2".to_string(), "3".to_string())
+            "6",
+            Solution::multiply(String::from("2"), String::from("3"))
         );
     }
 
     #[test]
     fn example_2() {
         assert_eq!(
-            "56088".to_string(),
-            Solution::multiply("123".to_string(), "456".to_string())
+            "56088",
+            Solution::multiply(String::from("123"), String::from("456"))
         );
     }
 }
