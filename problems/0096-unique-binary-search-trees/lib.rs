@@ -1,4 +1,4 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn num_trees(n: i32) -> i32 {
@@ -18,5 +18,10 @@ mod tests {
     #[test]
     fn example_1() {
         assert_eq!(5, Solution::num_trees(3));
+    }
+
+    #[test]
+    fn example_2() {
+        assert_eq!(1, Solution::num_trees(1));
     }
 }
