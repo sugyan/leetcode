@@ -6,13 +6,24 @@ impl Solution {
             .iter()
             .map(|w| w.bytes().fold(0_u32, |acc, u| acc | 1 << (u - b'a')))
             .collect::<Vec<_>>();
+        let groups = v
+            .iter()
+            .enumerate()
+            .fold(vec![Vec::new(); 26], |mut acc, (i, u)| {
+                (0..26).for_each(|j| {
+                    if u & (1 << j) != 0 {
+                        acc[j].push(i);
+                    }
+                });
+                acc
+            });
         puzzles
             .iter()
             .map(|p| {
                 let mask = p.bytes().fold(0_u32, |acc, u| acc | 1 << (u - b'a'));
-                let first = 1_u32 << (p.as_bytes()[0] as u8 - b'a');
-                v.iter()
-                    .filter(|&w| first & w > 0 && mask & w == *w)
+                groups[(p.as_bytes()[0] - b'a') as usize]
+                    .iter()
+                    .filter(|&i| v[*i] & mask == v[*i])
                     .count() as i32
             })
             .collect()
