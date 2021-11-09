@@ -134,6 +134,7 @@ members = [
     "problems/1008-construct-binary-search-tree-from-preorder-traversal",
     "problems/1044-longest-duplicate-substring",
     "problems/1143-longest-common-subsequence",
+    "problems/1178-number-of-valid-words-for-each-puzzle",
     "others/30-day-leetcoding-challenge/week-1/3283",
     "others/30-day-leetcoding-challenge/week-1/3284",
     "others/30-day-leetcoding-challenge/week-1/3285",

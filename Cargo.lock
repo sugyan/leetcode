@@ -2289,6 +2289,10 @@ name = "number-of-islands"
 version = "0.1.0"
 
 [[package]]
+name = "number-of-valid-words-for-each-puzzle"
+version = "0.1.0"
+
+[[package]]
 name = "october-leetcoding-challenge_week-1_3480"
 version = "0.1.0"
 

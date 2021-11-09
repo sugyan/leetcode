@@ -1,0 +1,13 @@
+[package]
+name = "number-of-valid-words-for-each-puzzle"
+version = "0.1.0"
+authors = ["sugyan <sugi1982@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "number_of_valid_words_for_each_puzzle"
+path = "lib.rs"
