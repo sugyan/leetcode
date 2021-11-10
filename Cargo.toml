@@ -58,6 +58,7 @@ members = [
     "problems/0113-path-sum-ii",
     "problems/0114-flatten-binary-tree-to-linked-list",
     "problems/0120-triangle",
+    "problems/0122-best-time-to-buy-and-sell-stock-ii",
     "problems/0123-best-time-to-buy-and-sell-stock-iii",
     "problems/0127-word-ladder",
     "problems/0129-sum-root-to-leaf-numbers",
