@@ -1,0 +1,13 @@
+[package]
+name = "minimum-value-to-get-positive-step-by-step-sum"
+version = "0.1.0"
+authors = ["sugyan <sugi1982@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "minimum_value_to_get_positive_step_by_step_sum"
+path = "lib.rs"

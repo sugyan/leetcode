@@ -2140,6 +2140,10 @@ name = "minimum-size-subarray-sum"
 version = "0.1.0"
 
 [[package]]
+name = "minimum-value-to-get-positive-step-by-step-sum"
+version = "0.1.0"
+
+[[package]]
 name = "multiply-strings"
 version = "0.1.0"
 
