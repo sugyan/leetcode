@@ -2662,6 +2662,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "remove-linked-list-elements"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "remove-nth-node-from-end-of-list"
 version = "0.1.0"
 dependencies = [
