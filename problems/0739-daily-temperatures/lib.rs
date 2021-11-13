@@ -3,12 +3,17 @@ pub struct Solution;
 impl Solution {
     pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
         let mut answer = vec![0; temperatures.len()];
-        let mut index = vec![None; 101];
+        let mut hottest = 0;
         for (i, &t) in temperatures.iter().enumerate().rev() {
-            if let Some(min) = (t as usize + 1..=100).filter_map(|j| index[j]).min() {
-                answer[i] = (min - i) as i32;
+            if t >= hottest {
+                hottest = t;
+                continue;
             }
-            index[t as usize] = Some(i);
+            let mut days = 1;
+            while temperatures[i + days] <= t {
+                days += answer[i + days] as usize;
+            }
+            answer[i] = days as i32;
         }
         answer
     }
