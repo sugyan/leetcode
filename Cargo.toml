@@ -138,6 +138,7 @@ members = [
     "problems/1044-longest-duplicate-substring",
     "problems/1143-longest-common-subsequence",
     "problems/1178-number-of-valid-words-for-each-puzzle",
+    "problems/1286-iterator-for-combination",
     "problems/1413-minimum-value-to-get-positive-step-by-step-sum",
     "others/30-day-leetcoding-challenge/week-1/3283",
     "others/30-day-leetcoding-challenge/week-1/3284",
