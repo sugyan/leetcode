@@ -1,14 +1,14 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn unique_paths(m: i32, n: i32) -> i32 {
-        let mut matrix = vec![vec![1; m as usize]; n as usize];
-        for i in 1..n as usize {
-            for j in 1..m as usize {
-                matrix[i][j] = matrix[i - 1][j] + matrix[i][j - 1];
+        let mut dp = vec![1; n as usize];
+        for _ in 1..m {
+            for j in 1..n as usize {
+                dp[j] += dp[j - 1];
             }
         }
-        matrix[n as usize - 1][m as usize - 1]
+        dp[n as usize - 1]
     }
 }
 
@@ -18,11 +18,21 @@ mod tests {
 
     #[test]
     fn example_1() {
-        assert_eq!(3, Solution::unique_paths(3, 2));
+        assert_eq!(28, Solution::unique_paths(3, 7));
     }
 
     #[test]
     fn example_2() {
+        assert_eq!(3, Solution::unique_paths(3, 2));
+    }
+
+    #[test]
+    fn example_3() {
         assert_eq!(28, Solution::unique_paths(7, 3));
+    }
+
+    #[test]
+    fn example_4() {
+        assert_eq!(6, Solution::unique_paths(3, 3));
     }
 }
