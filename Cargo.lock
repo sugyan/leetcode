@@ -970,6 +970,10 @@ name = "h-index-ii"
 version = "0.1.0"
 
 [[package]]
+name = "hamming-distance"
+version = "0.1.0"
+
+[[package]]
 name = "house-robber-ii"
 version = "0.1.0"
 
