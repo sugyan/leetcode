@@ -127,6 +127,7 @@ members = [
     "problems/0441-arranging-coins",
     "problems/0442-find-all-duplicates-in-an-array",
     "problems/0448-find-all-numbers-disappeared-in-an-array",
+    "problems/0450-delete-node-in-a-bst",
     "problems/0451-sort-characters-by-frequency",
     "problems/0461-hamming-distance",
     "problems/0463-island-perimeter",
