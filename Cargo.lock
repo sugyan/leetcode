@@ -1701,6 +1701,10 @@ name = "kth-smallest-number-in-multiplication-table"
 version = "0.1.0"
 
 [[package]]
+name = "largest-component-size-by-common-factor"
+version = "0.1.0"
+
+[[package]]
 name = "largest-divisible-subset"
 version = "0.1.0"
 
