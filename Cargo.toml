@@ -139,6 +139,7 @@ members = [
     "problems/0843-guess-the-word",
     "problems/0952-largest-component-size-by-common-factor",
     "problems/0980-unique-paths-iii",
+    "problems/0986-interval-list-intersections",
     "problems/0993-cousins-in-binary-tree",
     "problems/0994-rotting-oranges",
     "problems/1008-construct-binary-search-tree-from-preorder-traversal",

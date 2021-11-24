@@ -996,6 +996,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "interval-list-intersections"
+version = "0.1.0"
+
+[[package]]
 name = "invert-binary-tree"
 version = "0.1.0"
 dependencies = [
