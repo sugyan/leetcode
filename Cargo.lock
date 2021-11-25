@@ -1898,6 +1898,10 @@ name = "maximum-product-subarray"
 version = "0.1.0"
 
 [[package]]
+name = "maximum-subarray"
+version = "0.1.0"
+
+[[package]]
 name = "may-leetcoding-challenge-2021_week-1_3728"
 version = "0.1.0"
 
