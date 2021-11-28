@@ -138,6 +138,7 @@ members = [
     "problems/0543-diameter-of-binary-tree",
     "problems/0668-kth-smallest-number-in-multiplication-table",
     "problems/0739-daily-temperatures",
+    "problems/0797-all-paths-from-source-to-target",
     "problems/0843-guess-the-word",
     "problems/0952-largest-component-size-by-common-factor",
     "problems/0980-unique-paths-iii",

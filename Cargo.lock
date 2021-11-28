@@ -16,6 +16,10 @@ name = "additive-number"
 version = "0.1.0"
 
 [[package]]
+name = "all-paths-from-source-to-target"
+version = "0.1.0"
+
+[[package]]
 name = "april-day-leetcoding-challenge_week-1_3284"
 version = "0.1.0"
 
