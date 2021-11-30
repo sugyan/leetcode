@@ -1898,6 +1898,10 @@ name = "march-leetcoding-challenge-2021_week-5_3691"
 version = "0.1.0"
 
 [[package]]
+name = "maximal-rectangle"
+version = "0.1.0"
+
+[[package]]
 name = "maximal-square"
 version = "0.1.0"
 
