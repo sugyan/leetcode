@@ -897,6 +897,10 @@ name = "february-leetcoding-challenge-2021_week-4_3655"
 version = "0.1.0"
 
 [[package]]
+name = "find-all-anagrams-in-a-string"
+version = "0.1.0"
+
+[[package]]
 name = "find-all-duplicates-in-an-array"
 version = "0.1.0"
 

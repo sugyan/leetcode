@@ -128,6 +128,7 @@ members = [
     "problems/0380-insert-delete-getrandom-o1",
     "problems/0404-sum-of-left-leaves",
     "problems/0437-path-sum-iii",
+    "problems/0438-find-all-anagrams-in-a-string",
     "problems/0441-arranging-coins",
     "problems/0442-find-all-duplicates-in-an-array",
     "problems/0448-find-all-numbers-disappeared-in-an-array",
