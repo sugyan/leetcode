@@ -9,20 +9,19 @@ impl Solution {
         nums3: Vec<i32>,
         nums4: Vec<i32>,
     ) -> i32 {
-        let (mut hm12, mut hm34) = (HashMap::new(), HashMap::new());
+        let mut hm = HashMap::new();
         for num1 in &nums1 {
             for num2 in &nums2 {
-                *hm12.entry(num1 + num2).or_insert(0) += 1;
+                *hm.entry(num1 + num2).or_insert(0) += 1;
             }
         }
+        let mut answer = 0;
         for num3 in &nums3 {
             for num4 in &nums4 {
-                *hm34.entry(num3 + num4).or_insert(0) += 1;
+                answer += hm.get(&(-num3 - num4)).unwrap_or(&0);
             }
         }
-        hm12.iter()
-            .map(|(k12, v12)| v12 * hm34.get(&(-k12)).unwrap_or(&0))
-            .sum()
+        answer
     }
 }
 
