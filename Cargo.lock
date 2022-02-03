@@ -936,6 +936,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "four-sum-ii"
+version = "0.1.0"
+
+[[package]]
 name = "fraction-to-recurring-decimal"
 version = "0.1.0"
 
