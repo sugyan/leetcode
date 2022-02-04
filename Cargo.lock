@@ -702,6 +702,10 @@ name = "contains-duplicate-iii"
 version = "0.1.0"
 
 [[package]]
+name = "contiguous-array"
+version = "0.1.0"
+
+[[package]]
 name = "convert-sorted-list-to-binary-search-tree"
 version = "0.1.0"
 dependencies = [
