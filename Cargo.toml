@@ -9,6 +9,7 @@ members = [
     "problems/0017-letter-combinations-of-a-phone-number",
     "problems/0019-remove-nth-node-from-end-of-list",
     "problems/0022-generate-parentheses",
+    "problems/0023-merge-k-sorted-lists",
     "problems/0031-next-permutation",
     "problems/0033-search-in-rotated-sorted-array",
     "problems/0034-find-first-and-last-position-of-element-in-sorted-array",

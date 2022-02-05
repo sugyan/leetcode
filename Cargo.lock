@@ -2195,6 +2195,13 @@ name = "merge-intervals"
 version = "0.1.0"
 
 [[package]]
+name = "merge-k-sorted-lists"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "min-stack"
 version = "0.1.0"
 
