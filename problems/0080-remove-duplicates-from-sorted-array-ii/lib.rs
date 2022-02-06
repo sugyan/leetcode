@@ -1,12 +1,11 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
         let mut idx = 0;
         for i in 0..nums.len() {
-            let n = nums[i];
-            if idx < 2 || n > nums[idx - 2] {
-                nums[idx] = n;
+            if idx < 2 || nums[i] > nums[idx - 2] {
+                nums[idx] = nums[i];
                 idx += 1;
             }
         }
