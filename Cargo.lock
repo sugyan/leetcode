@@ -929,6 +929,10 @@ name = "find-peak-element"
 version = "0.1.0"
 
 [[package]]
+name = "find-the-difference"
+version = "0.1.0"
+
+[[package]]
 name = "find-the-duplicate-number"
 version = "0.1.0"
 

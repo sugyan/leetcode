@@ -127,6 +127,7 @@ members = [
     "problems/0368-largest-divisible-subset",
     "problems/0374-guess-number-higher-or-lower",
     "problems/0380-insert-delete-getrandom-o1",
+    "problems/0389-find-the-difference",
     "problems/0404-sum-of-left-leaves",
     "problems/0437-path-sum-iii",
     "problems/0438-find-all-anagrams-in-a-string",
