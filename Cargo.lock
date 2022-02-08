@@ -9,6 +9,10 @@ name = "add-and-search-word-data-structure-design"
 version = "0.1.0"
 
 [[package]]
+name = "add-digits"
+version = "0.1.0"
+
+[[package]]
 name = "add-two-numbers"
 version = "0.1.0"
 dependencies = [
