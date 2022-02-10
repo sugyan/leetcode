@@ -145,6 +145,7 @@ members = [
     "problems/0532-k-diff-pairs-in-an-array",
     "problems/0540-single-element-in-a-sorted-array",
     "problems/0543-diameter-of-binary-tree",
+    "problems/0560-subarray-sum-equals-k",
     "problems/0668-kth-smallest-number-in-multiplication-table",
     "problems/0721-accounts-merge",
     "problems/0739-daily-temperatures",
