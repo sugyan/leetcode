@@ -1,41 +1,39 @@
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap, VecDeque};
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn ladder_length(begin_word: String, end_word: String, word_list: Vec<String>) -> i32 {
-        let mut hm: HashMap<String, Vec<String>> = HashMap::new();
-        for word in word_list.iter() {
-            for i in 0..word.len() {
-                let s = word.as_str();
-                let key = (&s[0..i]).to_string() + "*" + &s[i + 1..];
-                if let Some(v) = hm.get_mut(&key) {
-                    v.push(s.to_string());
-                } else {
-                    hm.insert(key, vec![s.to_string()]);
-                }
+        let mut hm = HashMap::new();
+        for (i, word) in word_list.iter().enumerate() {
+            for j in 0..word.len() {
+                hm.entry((&word[0..j], &word[j + 1..]))
+                    .or_insert_with(Vec::new)
+                    .push(i);
             }
         }
-        let mut hs: HashSet<String> = HashSet::new();
-        let mut vq: VecDeque<(String, i32)> = VecDeque::new();
-        hs.insert(begin_word.to_string());
-        vq.push_back((begin_word, 1));
-        while let Some(front) = vq.pop_front() {
-            let s = front.0.as_str();
-            for i in 0..s.len() {
-                let key = (&s[0..i]).to_string() + "*" + &s[i + 1..];
-                if let Some(v) = hm.get(&key) {
-                    for next in v.iter() {
-                        if *next == end_word {
-                            return front.1 + 1;
-                        }
-                        if !hs.contains(next) {
-                            hs.insert(next.to_string());
-                            vq.push_back((next.to_string(), front.1 + 1));
+        let mut vd = vec![&begin_word].into_iter().collect::<VecDeque<_>>();
+        let mut seen = vec![false; word_list.len()];
+        let mut answer = 1;
+        while !vd.is_empty() {
+            for _ in 0..vd.len() {
+                if let Some(word) = vd.pop_front() {
+                    if *word == end_word {
+                        return answer;
+                    }
+                    for i in 0..word.len() {
+                        if let Some(v) = hm.get(&(&word[0..i], &word[i + 1..])) {
+                            for &j in v {
+                                if !seen[j] {
+                                    seen[j] = true;
+                                    vd.push_back(&word_list[j]);
+                                }
+                            }
                         }
                     }
                 }
             }
+            answer += 1;
         }
         0
     }
@@ -50,16 +48,12 @@ mod tests {
         assert_eq!(
             5,
             Solution::ladder_length(
-                "hit".to_string(),
-                "cog".to_string(),
-                vec![
-                    "hot".to_string(),
-                    "dot".to_string(),
-                    "dog".to_string(),
-                    "lot".to_string(),
-                    "log".to_string(),
-                    "cog".to_string()
-                ]
+                String::from("hit"),
+                String::from("cog"),
+                vec!["hot", "dot", "dog", "lot", "log", "cog"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect()
             )
         );
     }
@@ -69,15 +63,12 @@ mod tests {
         assert_eq!(
             0,
             Solution::ladder_length(
-                "hit".to_string(),
-                "cog".to_string(),
-                vec![
-                    "hot".to_string(),
-                    "dot".to_string(),
-                    "dog".to_string(),
-                    "lot".to_string(),
-                    "log".to_string(),
-                ]
+                String::from("hit"),
+                String::from("cog"),
+                vec!["hot", "dot", "dog", "lot", "log"]
+                    .into_iter()
+                    .map(String::from)
+                    .collect()
             )
         );
     }
