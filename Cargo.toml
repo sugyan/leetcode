@@ -56,6 +56,7 @@ members = [
     "problems/0098-validate-binary-search-tree",
     "problems/0102-binary-tree-level-order-traversal",
     "problems/0103-binary-tree-zigzag-level-order-traversal",
+    "problems/0104-maximum-depth-of-binary-tree",
     "problems/0105-construct-binary-tree-from-preorder-and-inorder-traversal",
     "problems/0106-construct-binary-tree-from-inorder-and-postorder-traversal",
     "problems/0109-convert-sorted-list-to-binary-search-tree",

@@ -1936,6 +1936,13 @@ name = "maximal-square"
 version = "0.1.0"
 
 [[package]]
+name = "maximum-depth-of-binary-tree"
+version = "0.1.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "maximum-product-subarray"
 version = "0.1.0"
 
