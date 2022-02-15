@@ -3096,6 +3096,10 @@ name = "single-element-in-a-sorted-array"
 version = "0.1.0"
 
 [[package]]
+name = "single-number"
+version = "0.1.0"
+
+[[package]]
 name = "single-number-ii"
 version = "0.1.0"
 

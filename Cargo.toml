@@ -71,6 +71,7 @@ members = [
     "problems/0130-surrounded-regions",
     "problems/0131-palindrome-partitioning",
     "problems/0134-gas-station",
+    "problems/0136-single-number",
     "problems/0137-single-number-ii",
     "problems/0139-word-break",
     "problems/0144-binary-tree-preorder-traversal",
