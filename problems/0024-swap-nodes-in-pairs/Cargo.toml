@@ -1,0 +1,13 @@
+[package]
+name = "swap-nodes-in-pairs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+utils = { path = "../../utils" }
+
+[lib]
+name = "swap_nodes_in_pairs"
+path = "lib.rs"
