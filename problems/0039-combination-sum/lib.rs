@@ -1,28 +1,22 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn combination_sum(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
-        let mut answer: Vec<Vec<i32>> = Vec::new();
-        let mut v = Vec::new();
-        Solution::helper(&candidates, target, &mut answer, &mut v);
+        let mut answer = Vec::new();
+        Self::helper(&candidates, target, &mut Vec::new(), &mut answer);
         answer
     }
-    fn helper(candidates: &[i32], target: i32, answer: &mut Vec<Vec<i32>>, v: &mut Vec<i32>) {
+    fn helper(candidates: &[i32], target: i32, v: &mut Vec<i32>, answer: &mut Vec<Vec<i32>>) {
         if target == 0 {
-            answer.push(v.clone());
-            return;
+            return answer.push(v.clone());
         }
-        for num in candidates {
-            if let Some(last) = v.last() {
-                if num < last {
-                    continue;
-                }
+        for &candidate in candidates {
+            if v.last().map_or(false, |&last| candidate < last) || candidate > target {
+                continue;
             }
-            if target >= *num {
-                v.push(*num);
-                Solution::helper(candidates, target - num, answer, v);
-                v.pop();
-            }
+            v.push(candidate);
+            Self::helper(candidates, target - candidate, v, answer);
+            v.pop();
         }
     }
 }
@@ -43,5 +37,12 @@ mod tests {
         let mut ret = Solution::combination_sum(vec![2, 3, 5], 8);
         ret.sort();
         assert_eq!(vec![vec![2, 2, 2, 2], vec![2, 3, 3], vec![3, 5]], ret);
+    }
+
+    #[test]
+    fn example_3() {
+        let mut ret = Solution::combination_sum(vec![2], 1);
+        ret.sort();
+        assert_eq!(Vec::<Vec<i32>>::new(), ret);
     }
 }
