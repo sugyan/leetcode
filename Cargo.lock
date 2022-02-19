@@ -2227,6 +2227,10 @@ name = "min-stack"
 version = "0.1.0"
 
 [[package]]
+name = "minimize-deviation-in-array"
+version = "0.1.0"
+
+[[package]]
 name = "minimum-height-trees"
 version = "0.1.0"
 
