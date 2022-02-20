@@ -2758,6 +2758,10 @@ name = "rectangle-area"
 version = "0.1.0"
 
 [[package]]
+name = "remove-covered-intervals"
+version = "0.1.0"
+
+[[package]]
 name = "remove-duplicates-from-sorted-array-ii"
 version = "0.1.0"
 
