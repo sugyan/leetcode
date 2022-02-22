@@ -798,6 +798,10 @@ name = "evaluate-reverse-polish-notation"
 version = "0.1.0"
 
 [[package]]
+name = "excel-sheet-column-number"
+version = "0.1.0"
+
+[[package]]
 name = "february-leetcoding-challenge-2021_week-1_3625"
 version = "0.1.0"
 
