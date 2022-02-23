@@ -7,15 +7,17 @@ class Node {
    public:
     int val;
     vector<Node*> neighbors;
-
     Node() {
         val = 0;
         neighbors = vector<Node*>();
     }
-
     Node(int _val) {
         val = _val;
         neighbors = vector<Node*>();
+    }
+    Node(int _val, vector<Node*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
     }
 };
 
@@ -25,33 +27,18 @@ class Solution {
         if (node == nullptr) {
             return node;
         }
-        unordered_map<int, vector<int>> um;
-        deque<Node*> d;
-        d.push_back(node);
-        while (!d.empty()) {
-            Node* f = d.front();
-            d.pop_front();
-            um[f->val] = vector<int>();
-            for (Node* n : f->neighbors) {
-                um[f->val].push_back(n->val);
-                if (um.find(n->val) == um.end()) {
-                    d.push_back(n);
-                    um[n->val] = vector<int>();
-                }
+        unordered_map<Node*, Node*> um;
+        return cloneGraph(node, um);
+    }
+
+   private:
+    Node* cloneGraph(Node* node, unordered_map<Node*, Node*>& memo) {
+        if (memo.find(node) == memo.end()) {
+            memo[node] = new Node(node->val);
+            for (Node* neighbor : node->neighbors) {
+                memo[node]->neighbors.push_back(cloneGraph(neighbor, memo));
             }
         }
-        unordered_map<int, Node*> nodes;
-        for (pair<int, vector<int>> p : um) {
-            if (nodes.find(p.first) == nodes.end()) {
-                nodes[p.first] = new Node(p.first);
-            }
-            for (int n : p.second) {
-                if (nodes.find(n) == nodes.end()) {
-                    nodes[n] = new Node(n);
-                }
-                nodes[p.first]->neighbors.push_back(nodes[n]);
-            }
-        }
-        return nodes[1];
+        return memo[node];
     }
 };
