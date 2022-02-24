@@ -77,6 +77,7 @@ members = [
     "problems/0139-word-break",
     "problems/0144-binary-tree-preorder-traversal",
     "problems/0146-lru-cache",
+    "problems/0148-sort-list",
     "problems/0150-evaluate-reverse-polish-notation",
     "problems/0151-reverse-words-in-a-string",
     "problems/0152-maximum-product-subarray",
