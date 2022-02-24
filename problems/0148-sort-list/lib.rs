@@ -4,52 +4,39 @@ pub struct Solution;
 
 impl Solution {
     pub fn sort_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let len = {
-            let mut ret = 0;
-            let mut node = &head;
-            while let Some(n) = node {
-                ret += 1;
-                node = &n.next;
-            }
-            ret
-        };
-        if len <= 1 {
-            return head;
-        }
-        let mut node = head.as_mut();
-        for _ in 0..len / 2 - 1 {
-            if let Some(n) = node {
-                node = n.next.as_mut();
-            }
-        }
-        let second = node.unwrap().next.take();
-        let first = head;
-        Self::merge(Self::sort_list(first), Self::sort_list(second))
-    }
-    fn merge(
-        mut first: Option<Box<ListNode>>,
-        mut second: Option<Box<ListNode>>,
-    ) -> Option<Box<ListNode>> {
-        let mut dummy = ListNode::new(0);
-        let mut node = &mut dummy;
-        while let (Some(nf), Some(ns)) = (first.as_mut(), second.as_mut()) {
-            if nf.val <= ns.val {
-                let tmp = nf.next.take();
+        let (mut first, mut second) = (None, None);
+        let mut flag = false;
+        while let Some(mut node) = head {
+            let n = node.next.take();
+            if flag {
                 node.next = first.take();
-                first = tmp;
+                first = Some(node);
             } else {
-                let tmp = ns.next.take();
                 node.next = second.take();
-                second = tmp;
+                second = Some(node);
             }
-            node = node.next.as_mut().unwrap();
+            head = n;
+            flag = !flag;
         }
-        node.next = if first.is_some() {
-            first.take()
-        } else {
-            second.take()
-        };
-        dummy.next
+        match (first, second) {
+            (None, None) => None,
+            (node, None) => node,
+            (None, node) => node,
+            (f, s) => Self::merge(Self::sort_list(f), Self::sort_list(s)),
+        }
+    }
+    fn merge(first: Option<Box<ListNode>>, second: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        match (first, second) {
+            (None, None) => None,
+            (node, None) => node,
+            (None, node) => node,
+            (Some(nf), Some(ns)) => {
+                let (mut small, large) = if nf.val < ns.val { (nf, ns) } else { (ns, nf) };
+                let s = small.next.take();
+                small.next = Self::merge(s, Some(large));
+                Some(small)
+            }
+        }
     }
 }
 
