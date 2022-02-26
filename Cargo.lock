@@ -3108,6 +3108,10 @@ name = "set-matrix-zeroes"
 version = "0.1.0"
 
 [[package]]
+name = "shortest-path-visiting-all-nodes"
+version = "0.1.0"
+
+[[package]]
 name = "simplify-path"
 version = "0.1.0"
 
