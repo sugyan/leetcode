@@ -9,12 +9,11 @@ impl Solution {
             while i < nums.len() - 1 && nums[i + 1] == nums[i] + 1 {
                 i += 1;
             }
-            let mut s = n.to_string();
-            if n != nums[i] {
-                s += "->";
-                s += &nums[i].to_string();
-            };
-            answer.push(s);
+            answer.push(if n != nums[i] {
+                format!("{}->{}", n, nums[i])
+            } else {
+                n.to_string()
+            });
             i += 1;
         }
         answer
