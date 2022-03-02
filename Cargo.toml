@@ -136,6 +136,7 @@ members = [
     "problems/0374-guess-number-higher-or-lower",
     "problems/0380-insert-delete-getrandom-o1",
     "problems/0389-find-the-difference",
+    "problems/0392-is-subsequence",
     "problems/0402-remove-k-digits",
     "problems/0404-sum-of-left-leaves",
     "problems/0437-path-sum-iii",

@@ -1049,6 +1049,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "is-subsequence"
+version = "0.1.0"
+
+[[package]]
 name = "island-perimeter"
 version = "0.1.0"
 
