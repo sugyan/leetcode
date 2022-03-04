@@ -162,6 +162,7 @@ members = [
     "problems/0721-accounts-merge",
     "problems/0739-daily-temperatures",
     "problems/0797-all-paths-from-source-to-target",
+    "problems/0799-champagne-tower",
     "problems/0843-guess-the-word",
     "problems/0847-shortest-path-visiting-all-nodes",
     "problems/0952-largest-component-size-by-common-factor",
