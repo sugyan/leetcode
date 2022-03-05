@@ -784,6 +784,10 @@ name = "decode-ways"
 version = "0.1.0"
 
 [[package]]
+name = "delete-and-earn"
+version = "0.1.0"
+
+[[package]]
 name = "delete-node-in-a-bst"
 version = "0.1.0"
 dependencies = [
