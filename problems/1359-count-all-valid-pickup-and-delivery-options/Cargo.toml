@@ -1,0 +1,12 @@
+[package]
+name = "count-all-valid-pickup-and-delivery-options"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "count_all_valid_pickup_and_delivery_options"
+path = "lib.rs"

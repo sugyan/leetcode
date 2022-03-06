@@ -177,6 +177,7 @@ members = [
     "problems/1178-number-of-valid-words-for-each-puzzle",
     "problems/1286-iterator-for-combination",
     "problems/1288-remove-covered-intervals",
+    "problems/1359-count-all-valid-pickup-and-delivery-options",
     "problems/1413-minimum-value-to-get-positive-step-by-step-sum",
     "problems/1675-minimize-deviation-in-array",
     "others/30-day-leetcoding-challenge/week-1/3283",
