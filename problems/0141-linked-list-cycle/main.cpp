@@ -5,15 +5,17 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x) : val(x), next(NULL) {
+    }
 };
 
 class Solution {
-public:
+   public:
     bool hasCycle(ListNode *head) {
-        for (ListNode *slow = head, *fast = head; fast != nullptr && fast->next != nullptr;) {
-            slow = slow->next;
-            fast = fast->next->next;
+        for (ListNode *slow = head, *fast = head; slow != nullptr;
+             slow = slow->next) {
+            if (fast != nullptr) fast = fast->next;
+            if (fast != nullptr) fast = fast->next;
             if (slow == fast) return true;
         }
         return false;
