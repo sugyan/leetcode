@@ -1,33 +1,22 @@
 use utils::ListNode;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn rotate_right(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
-        if head.is_none() || k == 0 {
-            return head;
-        }
-        let mut v: Vec<&Option<Box<ListNode>>> = Vec::new();
+        let mut v = Vec::new();
         let mut node = &head;
         while let Some(n) = node {
-            v.push(node);
+            v.push(n.val);
             node = &n.next;
         }
-        if k as usize % v.len() == 0 {
-            return head;
-        }
-        let mut answer = v[v.len() - (k as usize) % v.len()].clone();
-        let mut node = &mut answer;
-        for _ in 0..v.len() - 1 {
-            if let Some(n) = node {
-                if n.next.is_none() {
-                    n.next = v[0].clone();
-                }
-                node = &mut n.next;
-            }
-        }
-        if let Some(n) = node {
-            n.next = None;
+        let mut answer = None;
+        for i in (0..v.len()).rev() {
+            let j = k as usize % v.len();
+            answer = Some(Box::new(ListNode {
+                val: v[(v.len() + i - j) % v.len()],
+                next: answer,
+            }))
         }
         answer
     }
