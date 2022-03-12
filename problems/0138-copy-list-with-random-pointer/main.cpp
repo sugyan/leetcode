@@ -17,21 +17,19 @@ class Node {
 };
 
 class Solution {
+   private:
+    unordered_map<Node*, Node*> um;
+
    public:
     Node* copyRandomList(Node* head) {
-        Node* node;
-        unordered_map<Node*, Node*> um;
-        node = head;
-        while (node != nullptr) {
-            um[node] = new Node(node->val);
-            node = node->next;
+        if (head == nullptr) return head;
+        if (um.find(head) != um.end()) {
+            return um[head];
         }
-        node = head;
-        while (node != nullptr) {
-            um[node]->next = um[node->next];
-            um[node]->random = um[node->random];
-            node = node->next;
-        }
-        return um[head];
+        Node* node = new Node(head->val);
+        um[head] = node;
+        node->next = copyRandomList(head->next);
+        node->random = copyRandomList(head->random);
+        return node;
     }
 };
