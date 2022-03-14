@@ -1,20 +1,18 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     pub fn simplify_path(path: String) -> String {
-        let mut v: Vec<&str> = Vec::new();
-        for directory in path.split('/').filter(|s| !s.is_empty()) {
-            match directory {
+        let mut v = Vec::new();
+        for d in path.split('/').filter(|s| !s.is_empty()) {
+            match d {
                 "." => {}
                 ".." => {
-                    if !v.is_empty() {
-                        v.pop();
-                    }
+                    v.pop();
                 }
-                _ => v.push(directory),
+                _ => v.push(d),
             }
         }
-        "/".to_string() + &v.join("/")
+        String::from("/") + &v.join("/")
     }
 }
 
@@ -24,40 +22,19 @@ mod tests {
 
     #[test]
     fn example_1() {
-        assert_eq!("/home", Solution::simplify_path("/home/".to_string()));
+        assert_eq!("/home", Solution::simplify_path(String::from("/home/")));
     }
 
     #[test]
     fn example_2() {
-        assert_eq!("/", Solution::simplify_path("/../".to_string()));
+        assert_eq!("/", Solution::simplify_path(String::from("/../")));
     }
 
     #[test]
     fn example_3() {
         assert_eq!(
             "/home/foo",
-            Solution::simplify_path("/home//foo/".to_string())
-        );
-    }
-
-    #[test]
-    fn example_4() {
-        assert_eq!("/c", Solution::simplify_path("/a/./b/../../c/".to_string()));
-    }
-
-    #[test]
-    fn example_5() {
-        assert_eq!(
-            "/c",
-            Solution::simplify_path("/a/../../b/../c//.//".to_string())
-        );
-    }
-
-    #[test]
-    fn example_6() {
-        assert_eq!(
-            "/a/b/c",
-            Solution::simplify_path("/a//b////c/d//././/..".to_string())
+            Solution::simplify_path(String::from("/home//foo/"))
         );
     }
 }
