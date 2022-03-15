@@ -2285,6 +2285,10 @@ name = "minimum-path-sum"
 version = "0.1.0"
 
 [[package]]
+name = "minimum-remove-to-make-valid-parentheses"
+version = "0.1.0"
+
+[[package]]
 name = "minimum-size-subarray-sum"
 version = "0.1.0"
 
