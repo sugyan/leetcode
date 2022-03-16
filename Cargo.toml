@@ -168,6 +168,7 @@ members = [
     "problems/0799-champagne-tower",
     "problems/0843-guess-the-word",
     "problems/0847-shortest-path-visiting-all-nodes",
+    "problems/0946-validate-stack-sequences",
     "problems/0952-largest-component-size-by-common-factor",
     "problems/0980-unique-paths-iii",
     "problems/0986-interval-list-intersections",
