@@ -133,6 +133,7 @@ members = [
     "problems/0307-range-sum-query-mutable",
     "problems/0309-best-time-to-buy-and-sell-stock-with-cooldown",
     "problems/0310-minimum-height-trees",
+    "problems/0316-remove-duplicate-letters",
     "problems/0338-counting-bits",
     "problems/0368-largest-divisible-subset",
     "problems/0374-guess-number-higher-or-lower",
