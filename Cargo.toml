@@ -170,6 +170,7 @@ members = [
     "problems/0843-guess-the-word",
     "problems/0847-shortest-path-visiting-all-nodes",
     "problems/0856-score-of-parentheses",
+    "problems/0895-maximum-frequency-stack",
     "problems/0946-validate-stack-sequences",
     "problems/0952-largest-component-size-by-common-factor",
     "problems/0980-unique-paths-iii",

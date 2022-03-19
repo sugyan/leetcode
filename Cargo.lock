@@ -1975,6 +1975,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "maximum-frequency-stack"
+version = "0.1.0"
+
+[[package]]
 name = "maximum-product-subarray"
 version = "0.1.0"
 
