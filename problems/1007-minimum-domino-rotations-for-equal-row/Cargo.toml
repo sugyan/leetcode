@@ -1,0 +1,12 @@
+[package]
+name = "minimum-domino-rotations-for-equal-row"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[lib]
+name = "minimum_domino_rotations_for_equal_row"
+path = "lib.rs"
