@@ -2593,6 +2593,10 @@ name = "palindrome-partitioning"
 version = "0.1.0"
 
 [[package]]
+name = "partition-labels"
+version = "0.1.0"
+
+[[package]]
 name = "partition-list"
 version = "0.1.0"
 dependencies = [

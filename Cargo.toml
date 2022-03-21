@@ -165,6 +165,7 @@ members = [
     "problems/0721-accounts-merge",
     "problems/0739-daily-temperatures",
     "problems/0740-delete-and-earn",
+    "problems/0763-partition-labels",
     "problems/0797-all-paths-from-source-to-target",
     "problems/0799-champagne-tower",
     "problems/0843-guess-the-word",
