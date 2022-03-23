@@ -176,6 +176,7 @@ members = [
     "problems/0952-largest-component-size-by-common-factor",
     "problems/0980-unique-paths-iii",
     "problems/0986-interval-list-intersections",
+    "problems/0991-broken-calculator",
     "problems/0993-cousins-in-binary-tree",
     "problems/0994-rotting-oranges",
     "problems/1007-minimum-domino-rotations-for-equal-row",
