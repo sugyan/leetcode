@@ -648,6 +648,10 @@ name = "bitwise-and-of-numbers-range"
 version = "0.1.0"
 
 [[package]]
+name = "boats-to-save-people"
+version = "0.1.0"
+
+[[package]]
 name = "broken-calculator"
 version = "0.1.0"
 
