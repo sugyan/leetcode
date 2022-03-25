@@ -182,6 +182,7 @@ members = [
     "problems/0994-rotting-oranges",
     "problems/1007-minimum-domino-rotations-for-equal-row",
     "problems/1008-construct-binary-search-tree-from-preorder-traversal",
+    "problems/1029-two-city-scheduling",
     "problems/1044-longest-duplicate-substring",
     "problems/1143-longest-common-subsequence",
     "problems/1178-number-of-valid-words-for-each-puzzle",
