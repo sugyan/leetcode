@@ -596,6 +596,10 @@ name = "best-time-to-buy-and-sell-stock-with-cooldown"
 version = "0.1.0"
 
 [[package]]
+name = "binary-search"
+version = "0.1.0"
+
+[[package]]
 name = "binary-search-tree-iterator"
 version = "0.1.0"
 dependencies = [
