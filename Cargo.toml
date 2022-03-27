@@ -190,6 +190,7 @@ members = [
     "problems/1249-minimum-remove-to-make-valid-parentheses",
     "problems/1286-iterator-for-combination",
     "problems/1288-remove-covered-intervals",
+    "problems/1337-the-k-weakest-rows-in-a-matrix",
     "problems/1359-count-all-valid-pickup-and-delivery-options",
     "problems/1413-minimum-value-to-get-positive-step-by-step-sum",
     "problems/1663-smallest-string-with-a-given-numeric-value",
