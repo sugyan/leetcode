@@ -142,6 +142,7 @@ members = [
     "problems/0392-is-subsequence",
     "problems/0402-remove-k-digits",
     "problems/0404-sum-of-left-leaves",
+    "problems/0410-split-array-largest-sum",
     "problems/0413-arithmetic-slices",
     "problems/0437-path-sum-iii",
     "problems/0438-find-all-anagrams-in-a-string",
